@@ -106,7 +106,7 @@ function getDate(date, offset) {
 export default function WeatherCard(props) {
     const date = new Date((props.weather.dt + props.offset)*1000);
     return (
-        <Container sx={{color: "white"}} {...props} role="weather card">
+        <Container sx={{color: "white"}} {...props}>
             <Day>{DAYS[date.getUTCDay()]}</Day>
             <ShortDate>{getDate(date, props.offset)}</ShortDate>
             <IconBox fontSize="64px" pt="5px">  
