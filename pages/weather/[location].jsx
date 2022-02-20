@@ -39,9 +39,9 @@ export default function Weather(props) {
     }
 
     // Fetches Weather/Location/Pollution API and updates state
-    useEffect(async () => {
+    useEffect(() => {
         async function getWeather(loc) {
-            searchWeather(loc)
+            await searchWeather(loc)
             .then(payload => {
                 if (payload.response !== 200)
                     throw payload;
@@ -73,7 +73,7 @@ export default function Weather(props) {
             })
         }
         if(!router.isReady) return;
-        await getWeather(router.query.location); 
+        getWeather(router.query.location); 
     }, [router]);
 
     return (
