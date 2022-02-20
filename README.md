@@ -11,7 +11,9 @@
 
 # Demo
 
-There is currently no avaliable Demo.
+Demo Link: [weaget.vercel.app](http://weaget.vercel.app)
+
+This website is currently only for demonstration purposes. Please do not abuse links as there are no API rate limit set.
 
 # About
 This project is a website written primarily in [Javascript][1] using [Nextjs][2] (a react framework) and [Material UI][3] (a UI library). The website allows a user to find <b>minutely, hourly and daily</b> weather information at any location as well as <b>pollution</b> details.
@@ -64,7 +66,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 # Upcoming Features
 
 - Unit Testing
-- Hash Limiting
+- API rate Limiting
 - Login systems for customisation such as local weather location.
 - Dark mode
 - Pollution based on daily weather (currently waiting for pollution API)
