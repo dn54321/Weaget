@@ -49,12 +49,18 @@ function CircularProgressWithLabel(props) {
                     </linearGradient>
                 </defs>
             </svg>
-            <CircularProgress variant={variant} value={100} size={width} sx={{
+            <CircularProgress variant={variant} value={100} role={null} 
+            aria-valuenow={null} size={width} sx={{
                 ...properties,
                 color: "#eee"
             }} thickness={thickness}/>
             <CircularProgress variant={variant} size={width} 
-            value={Math.min(props.value,300)/300*100} thickness={thickness} sx={{
+            value={Math.min(props.value,300)/300*100} thickness={thickness} 
+            aria-valuenow={props.value == "???" ? null : props.value}
+            aria-valuemax={300}
+            aria-valuemin={0}
+            aria-label={"Air Quality Index"}
+            sx={{
                 [`& .${circularProgressClasses.circle}`]: {
                     strokeLinecap: 'round',
                 },
