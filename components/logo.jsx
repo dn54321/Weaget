@@ -67,7 +67,7 @@ const Text = styled(Box) (({ theme }) => ({
 
 export default function Logo(props) {
     return (
-        <Box {...props}>
+        <Box {...props} role="img" aria-label="Weaget Logo">
         <Stack direction="row" alignItems="baseline">
             {!props.textOnly && <Icon/>}
             {!props.iconOnly && <Text/>}
