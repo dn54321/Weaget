@@ -86,4 +86,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 - All API services are called server side.
     - Protects API keys from being stolen but slows down site significantly.
-    - Allows for the implementation of hash limiting to prevent service call abuse.
+    - Allows for the implementation of rate limiting to prevent API abuse.
