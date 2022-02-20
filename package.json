@@ -1,0 +1,33 @@
+{
+  "name": "weather-app",
+  "private": true,
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/cache": "latest",
+    "@emotion/react": "^11.7.1",
+    "@emotion/server": "latest",
+    "@emotion/styled": "^11.6.0",
+    "@mdi/js": "^6.5.95",
+    "@mdi/react": "^1.5.0",
+    "@mui/icons-material": "^5.2.4",
+    "@mui/material": "^5.4.1",
+    "clsx": "latest",
+    "next": "^12.0.10",
+    "prop-types": "^15.8.1",
+    "react": "latest",
+    "react-dom": "latest",
+    "recharts": "^2.1.8",
+    "three-dots": "^0.2.3",
+    "throttle-debounce": "^3.0.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "eslint": "7",
+    "eslint-config-next": "12.0.3"
+  }
+}
