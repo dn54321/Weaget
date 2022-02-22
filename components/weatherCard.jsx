@@ -89,14 +89,15 @@ const IconBox = styled(Box)(({ theme }) => ({
 
 function dateDiffInDays(a, b) {
     const millsInDay = 1000 * 60 * 60 * 24;
-    const millsDiff = a-b;
+    const millsDiff = Math.abs(a-b);
+    console.log(millsDiff);
     return Math.floor(millsDiff /  millsInDay);
 }
 
 function getDate(date, offset) {
     const month = MONTHS[date.getUTCMonth()];
     const day = date.getUTCDate();
-    const today = new Date(Date.now() + offset*1000);
+    const today = new Date(Date.now());
     const diffDays = dateDiffInDays(date,today);
     if (diffDays == 0) return "today";
     if (diffDays == 1) return "tomorrow";
