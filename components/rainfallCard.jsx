@@ -30,12 +30,13 @@ const StyledButton = (props) => {
     const buttonType = {type: "increment", val: 1}
     if (props.decrement) {
         buttonType.type = "decrement"
-        buttonType.val = 3
+        buttonType.val = 2
     }
 
     return (
         <Button component="span"
-        aria-label={`Switch to ${chartLabel[(props.chart.id+buttonType.val)%3]}`} 
+        aria-label={`See to ${chartLabel[(props.chart.id+buttonType.val)%3]} rainfall`} 
+        title={`See to ${chartLabel[(props.chart.id+buttonType.val)%3]} rainfall`} 
         onClick={() => props.dispatch({type: buttonType.type})}
         sx={{
             backgroundColor: "primary.main",
