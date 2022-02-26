@@ -18,7 +18,7 @@ const Container = styled(Box)(({ theme }) => ({
 const Grid = styled('ul')(({ theme }) => ({
     display: "grid",
     justifyContent: "flex-start",
-    gridTemplateColumns: "repeat(auto-fill, 200px)",
+    gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
     width: "100%",
     gap: 3
 }));

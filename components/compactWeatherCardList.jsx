@@ -1,4 +1,4 @@
-import { Button, Card, Chip, Box } from '@mui/material';
+import { Button, Paper, Chip, Box } from '@mui/material';
 import { Icon, Temp} from '@components/lib';
 import styled from '@mui/system/styled';
 import { DAYS } from '@src/constants';
@@ -48,7 +48,7 @@ const Footer = styled(Box)(({ theme }) => ({
 const Main = styled('ol')(({ theme }) => ({
     display: "grid",
     justifyContent: "flex-start",
-    gridTemplateColumns: "repeat(auto-fill, 97px)",
+    gridTemplateColumns: "repeat(auto-fill, minmax(97px, 1fr))",
     width: "100%",
     gap: 3,
 }));
@@ -85,9 +85,10 @@ const Rain = (props) => {
 const CompactWeatherCard = (props) => {
     const date = new Date((props.weather.dt + props.offset)*1000);
     return (
-        <Card component="li"
+        <Paper component="li"
                 sx={{color: "grey.800", display: "flex", flexDirection: "column", 
-                alignItems: "center", py: "4px", px: "9px", position: "relative"}}>
+                alignItems: "center", py: "4px", px: "9px", position: "relative",
+                aspectRatio: "1", justifyContent:"center"}}>
             <Box>{DAYS[date.getUTCDay()].substring(0,3)}</Box>
             <Box fontSize="40px">
             <Icon id={props.weather.weather[0].id}/>
@@ -97,7 +98,7 @@ const CompactWeatherCard = (props) => {
                 <High><Temp label={props.weather.temp.max}/></High>
                 <Low><Temp label={props.weather.temp.min}/></Low>
             </Box>
-        </Card>
+        </Paper>
     )
 }
 

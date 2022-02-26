@@ -90,7 +90,6 @@ const IconBox = styled(Box)(({ theme }) => ({
 function dateDiffInDays(a, b) {
     const millsInDay = 1000 * 60 * 60 * 24;
     const millsDiff = Math.abs(a-b);
-    console.log(millsDiff);
     return Math.floor(millsDiff /  millsInDay);
 }
 

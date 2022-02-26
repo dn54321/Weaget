@@ -35,8 +35,8 @@ const StyledButton = (props) => {
 
     return (
         <Button component="span"
-        aria-label={`See to ${chartLabel[(props.chart.id+buttonType.val)%3]} rainfall`} 
-        title={`See to ${chartLabel[(props.chart.id+buttonType.val)%3]} rainfall`} 
+        aria-label={`See ${chartLabel[(props.chart.id+buttonType.val)%3]} rainfall`} 
+        title={`See ${chartLabel[(props.chart.id+buttonType.val)%3]} rainfall`} 
         onClick={() => props.dispatch({type: buttonType.type})}
         sx={{
             backgroundColor: "primary.main",

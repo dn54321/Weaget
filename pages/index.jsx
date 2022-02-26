@@ -4,7 +4,7 @@ import LocationsGrid from '@components/locationsGrid';
 import Logo from '@components/logo';
 import SearchBar from '@components/search';
 import SettingsFab from '@components/settingsFab';
-import { Button, Container } from '@mui/material';
+import { Divider, Container } from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import styled from '@mui/system/styled';
@@ -29,7 +29,9 @@ const Section = styled(Container)(({theme}) => ({
   display: "flex",
   justifyContent: "center",
   top: "20px",
+  marginBottom: "3  0px",
   position: "relative",
+  gap: "20px",
   [theme.breakpoints.down('md')]: {
       flexDirection: "column",
       gap: "50px",
