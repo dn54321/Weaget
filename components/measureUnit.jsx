@@ -1,7 +1,7 @@
 import {SettingContext} from '@src/settings';
 import {useContext} from 'react';
 import {Box} from '@mui/material';
-import {round} from '@src/math';
+import * as math from '@src/math';
 
 /*
      A React Context for measurement.
@@ -30,17 +30,12 @@ export function getSymbol(tempScale) {
     }
 }
 
-export default function MeasureUnit(props) {
+export default function MeasureUnit({round = 1, symbol = true, label}) {
     const {measurement_system} = useContext(SettingContext);
     return (
     <>
-        {round(convertMeasurement(props.label, measurement_system),props.round)}
-        {props.symbol && getSymbol(measurement_system)}
+        {math.round(convertMeasurement(label, measurement_system), round)}
+        {symbol && getSymbol(measurement_system)}
     </>
     )
 }
-
-MeasureUnit.defaultProps = {
-    round: 1,
-    symbol: true    
-};

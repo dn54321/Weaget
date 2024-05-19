@@ -30,7 +30,7 @@ export default function Weather(props) {
     const [place, setPlace] = useState(false);
     const [ctr, setCtr] = useState(false);
     const [nearbyLocation, setNearbyLocation] = useState(false);
-    const plc = place ? place : location;
+    const plc = place ? place : [router.query.location];
     function getPointer() {
         if (ctr === false) return 0;
         if (ctr == -1) return wtr.current;

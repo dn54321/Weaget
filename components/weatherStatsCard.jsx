@@ -69,11 +69,13 @@ const DotLoader = (props) => { return (
 )}
 
 const IconCard = (props) => {
+    const unit = props.unit ?? "";
+    const pureFunction = (v) => v;
+
     let value;
-    let showContent = true;
     if (props.value !== undefined) {
-        value = props.f(props.value);
-        if (!props.noUnit) value += props.unit;
+        value = props.f ? props.f(props.value) : pureFunction(props.value);
+        if (!props.noUnit) value += unit;
     }
     else if (props.strict)
         return null
@@ -87,11 +89,6 @@ const IconCard = (props) => {
             </Box>
         </Box>
     )
-}
-
-IconCard.defaultProps = {
-    unit: "",
-    f: (v) => v
 }
 
 function getTime(dt, offset) {
@@ -122,15 +119,18 @@ function UVWarning(scale) {
 }
 
 export default function WeatherStatsCard(props) {
+    const weather = props.weather ?? {};
+    const header = props.header ?? true;
+
     return (
         <Container component="section" {...props}>
-            {props.header ? 
+            {header ? 
             <>
                 <Box p="5px" display="flex" justifyContent="space-between" pt="15px" px="15px">
                     <h1>Weather Details</h1>
                     <Box>{  
-                            props.weather ? 
-                            getDate(props.weather.dt, props.weather.offset)
+                            weather ? 
+                            getDate(weather.dt, weather.offset)
                             :null
                     }</Box>
                 </Box>
@@ -141,16 +141,16 @@ export default function WeatherStatsCard(props) {
                 <IconCard strict={props.strict}
                     icon={<AirIcon sx={{fontSize:"1em"}}/>}
                     label="Wind"
-                    value={props.weather.wind_speed}
+                    value={weather.wind_speed}
                     f={(v)=> (
-                        <><MeasureUnit label={props.weather.wind_speed}/>{` / ${props.weather.wind_deg}°`}</>
+                        <><MeasureUnit label={weather.wind_speed}/>{` / ${weather.wind_deg}°`}</>
                     )}
                     noUnit
                 />
                 <IconCard strict={props.strict}
                     icon={<Icon path={mdiWeatherPouring} size="1em"/>}
                     label="Rainfall"
-                    value={props.weather ? (props.weather.rain || 0) : undefined}
+                    value={weather ? (weather.rain || 0) : undefined}
                     f={(v)=> { 
                         if (v["1h"]) return v["1h"];
                         return v;
@@ -160,43 +160,38 @@ export default function WeatherStatsCard(props) {
                 <IconCard strict={props.strict}
                     icon={<Icon path={mdiWaterPercent} size="1em"/>}
                     label="Humidity"
-                    value={props.weather.humidity}
+                    value={weather.humidity}
                     unit="%"
                 />
                 <IconCard strict={props.strict}
                     icon={<Icon path={mdiWeatherSunnyAlert} size="1em"/>}
                     label="Dew Point"
-                    value={props.weather.dew_point}
+                    value={weather.dew_point}
                     f={(v)=>{return (<Temp label={v}/>)}}
                     noUnit
                 />
                 <IconCard strict={props.strict}
                     icon={<Icon path={mdiWeatherSunsetUp} size="1em"/>}
                     label="Sunrise"
-                    value={getTime(props.weather.sunrise, props.weather.offset)}
+                    value={getTime(weather.sunrise, weather.offset)}
                 />
                 <IconCard strict={props.strict}
                     icon={<Icon path={mdiWeatherSunsetDown} size="1em"/>}
                     label="Sunset"
-                    value={getTime(props.weather.sunset, props.weather.offset)}
+                    value={getTime(weather.sunset, weather.offset)}
                 />
                 <IconCard strict={props.strict}
                     icon={<Icon path={mdiWeatherSunnyAlert} size="1em"/>}
                     label="UV Index"
-                    value={UVWarning(props.weather.uvi)}
+                    value={UVWarning(weather.uvi)}
                 />
                 <IconCard strict={props.strict}
                     icon={<Icon path={mdiWeatherCloudy} size="1em"/>}
                     label="Clouds"
-                    value={props.weather.clouds}
+                    value={weather.clouds}
                     unit="%"
                 />
             </ItemContainer>
         </Container>
     )
-}
-
-WeatherStatsCard.defaultProps = {
-    weather: 0,
-    header: 1
 }

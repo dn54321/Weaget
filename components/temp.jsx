@@ -1,6 +1,6 @@
 import {SettingContext} from '@src/settings';
 import {useContext} from 'react';
-import {round} from '@src/math';
+import * as math from '@src/math';
 
 /*
      A React Context for celcius.
@@ -25,17 +25,12 @@ export function getSymbol(tempScale) {
     }
 }
 
-export default function Temp(props) {
+export default function Temp({round = 0, symbol = false, label}) {
     const {temperature_scale} = useContext(SettingContext);
     return (
     <>
-        {round(convertTemperature(props.label, temperature_scale),props.round)+"°"}
-        {props.symbol && getSymbol(temperature_scale)}
+        {math.round(convertTemperature(label, temperature_scale), round)+"°"}
+        {symbol && getSymbol(temperature_scale)}
     </>
     )
 }
-
-Temp.defaultProps = {
-    round: 0,
-    symbol: false    
-};

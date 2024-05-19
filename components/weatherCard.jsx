@@ -52,12 +52,14 @@ const Rain = (props) => {
         "secondary.dark" :
         "primary.main";
     return (
-        <Box width={0} height={0} position="absolute" bottom="80%" right="30%"
-        title="Chance of Rain">
-            <Chip sx={{
-                backgroundColor: color,
-            }} size="small" label={round(props.label*100,0)+"%"}
-        />
+        <Box width="50px" height="0px" position="absolute" bottom="80%" left="70%" title="Chance of Rain">
+            <Chip 
+                size="small" 
+                label={round(props.label*100,0)+"%"}
+                sx={{
+                    backgroundColor: color,
+                }} 
+            />
         </Box>
     )
 }
