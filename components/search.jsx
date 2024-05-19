@@ -3,11 +3,10 @@ import Divider from '@mui/material/Divider';
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useRouter } from 'next/router';
 import searchWeather from '@src/weatherSearch';
-import { useAutocomplete } from '@mui/base/AutocompleteUnstyled';
-import { v4 as uuidv4 } from 'uuid';
+import useAutocomplete from '@mui/material/useAutocomplete';
 import { throttle, debounce } from "throttle-debounce";
 import { SettingContext } from "@src/settings";
-
+import { v4 as uuidv4 } from "uuid";
 
 const throttleFunc = throttle(500, (func, query) => {
     if (query !== undefined) func(query)

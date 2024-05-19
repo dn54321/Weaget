@@ -119,7 +119,7 @@ function getScore(weatherLabel, wtr) {
         case "hourly": arr = wtr.hourly.map(x=>x.rain?x.rain["1h"]:0); break;
         case "daily": arr = wtr.daily.map(x=>x.rain?x.rain:0); break;
     }
-    const score = 0;
+    let score = 0;
     arr.forEach(x => x && ++score);
     return score/arr.length;
 }

@@ -32,7 +32,10 @@ async function getCoordsByLocation(loc, region) {
   return await fetch(GET_COORDS(loc, region))
   .then(res => res.json())
   .then(data => {
-    if (data.status !== "OK") return ({status: data.status});
+    if (data.status !== "OK") {
+      console.log("Failed to fetch coords by location.");
+      return ({status: data.status});
+    }
     return ({
       name: getLocationArray(data.results[0].address_components),
       ...data.results[0].geometry.location,

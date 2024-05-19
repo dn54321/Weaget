@@ -43,21 +43,21 @@ This project is a website written primarily in [Javascript][1] using [Nextjs][2]
 4. Store API keys in .env.local found in the root folder of this project.
 5. Install yarn from the command line 
 ```bash
-npm install --global yarn
+npm install -g pnpm
 ```
 6. Install all yarn dependencies 
 ```bash
-yarn install
+pnpm install
 ```
 7. Build the website
 
 ```bash
-yarn run build
+pnpm run build
 ```
 
 8. Run the website
 ```bash
-yarn run start
+pnpm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
