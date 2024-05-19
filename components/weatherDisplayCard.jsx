@@ -274,7 +274,7 @@ export default function WeatherDisplayCard(props) {
                     {(props.weather) ?
                         <Stack direction="row" height="100%">
                             <Box mt="0.1em">
-                                <Box opacity="0.6" fontSize="0.8em">{`${printDate(props.weather)}`}</Box>
+                                <Box opacity="0.6" fontSize="0.8em" width="200px">{`${printDate(props.weather)}`}</Box>
                                 <Box>
                                     { props.weather.temp.max ?    
                                     <Box fontSize="4em" mt="0.2em">
