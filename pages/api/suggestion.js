@@ -1,5 +1,3 @@
-import { BatchPredictionSharp } from '@mui/icons-material';
-import { useRouter } from 'next/router'
 
 
 // API String Call
@@ -14,6 +12,7 @@ const AUTOCOMPLETE = (input,lat,lng,uuid,offset) => (
 
 // Generates a list of autocomplete queries given a string
 export default async function handler(req, res) {
+    return res.status(200).json({results:[]});
     const {input, lat, lng, uuid, offset} = req.query;
     if (input === "") return res.status(500).json({results:[]})
     return await fetch(AUTOCOMPLETE(input,lat,lng,uuid,offset))
