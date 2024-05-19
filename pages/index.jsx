@@ -4,15 +4,15 @@ import LocationsGrid from '@components/locationsGrid';
 import Logo from '@components/logo';
 import SearchBar from '@components/search';
 import SettingsFab from '@components/settingsFab';
-import { Divider, Container } from '@mui/material';
+import { Container } from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import styled from '@mui/system/styled';
 import searchLocation from '@src/locationSearch';
+import { SettingContext } from "@src/settings";
 import searchWeather from '@src/weatherSearch';
 import Head from 'next/head';
-import { useEffect, useState, useContext } from 'react';
-import { SettingContext } from "@src/settings";
+import { useContext, useEffect, useState } from 'react';
 const Loader = (props) => (
     <Stack alignItems="center" sx={{
         color: "black",
