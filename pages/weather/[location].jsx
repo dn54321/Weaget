@@ -25,7 +25,6 @@ function addOffset(wtr) {
 
 export default function Weather(props) {
     const router = useRouter();
-    const location = [router.query.location];
     const [wtr, setWtr] = useState(false);
     const [pln, setPln] = useState(false);
     const [place, setPlace] = useState(false);
@@ -60,7 +59,7 @@ export default function Weather(props) {
                 if (data.response === 404)
                     router.push({
                         pathname: "/404",
-                        query: {loc: location[0]},
+                        query: {loc: router.query.location},
                     })
                 else 
                 router.push({
@@ -74,7 +73,7 @@ export default function Weather(props) {
         }
         if(!router.isReady) return;
         getWeather(router.query.location); 
-    }, [router, location]);
+    }, [router]);
 
     return (
         <Box>

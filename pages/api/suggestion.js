@@ -12,24 +12,26 @@ const AUTOCOMPLETE = (input,lat,lng,uuid,offset) => (
 
 // Generates a list of autocomplete queries given a string
 export default async function handler(req, res) {
-    return res.status(200).json({results:[]});
     const {input, lat, lng, uuid, offset} = req.query;
-    if (input === "") return res.status(500).json({results:[]})
+    if (input === "") return res.status(500).json({results:[]});
     return await fetch(AUTOCOMPLETE(input,lat,lng,uuid,offset))
-    .then(data => data.json())
     .then(data => {
-        if (data.status === "ZERO_RESULTS") res.status(500).json({results:[]})
-        else if (data.status !== "OK") throw new Error(data)
-        else {
-            const results = data.predictions.map(loc => ({
-                main: loc.structured_formatting.main_text,
-                secondary: loc.structured_formatting.secondary_text
-            }))
-            return res.status(200).json({results: results})
+        if (!data.ok) {
+            throw new Error("Unable to find location suggestions: " + res.status);
         }
+
+        return data.json();
+    })
+    .then(data => {
+        const results = data.predictions.map(loc => ({
+            main: loc.structured_formatting.main_text,
+            secondary: loc.structured_formatting.secondary_text
+        }))
+
+        return res.status(200).json({results: results});
     })
     .catch(err => {
         console.log(err);
         return res.status(500).json({results:[]});
-    })
+    });
 }
