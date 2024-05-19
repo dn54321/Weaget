@@ -56,9 +56,7 @@ const Rain = (props) => {
             <Chip 
                 size="small" 
                 label={round(props.label*100,0)+"%"}
-                sx={{
-                    backgroundColor: color,
-                }} 
+                sx={{bgcolor: color}}
             />
         </Box>
     )
