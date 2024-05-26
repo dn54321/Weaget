@@ -64,7 +64,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 const Rain = (props) => {
     if (!props.label) return null;
     return (
-        <Box width={0} height={0} position="absolute" bottom="75%" right="40%"
+        <Box position="absolute" bottom="10%" right="15%"
              title="Chance of Rain">
             <Chip sx={{
                 backgroundColor: "primary.main",
