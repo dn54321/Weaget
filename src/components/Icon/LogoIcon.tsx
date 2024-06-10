@@ -2,8 +2,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import { BoxProps } from '@mui/system';
-
-
+import { Quicksand } from 'next/font/google';
 /*
     Official Logo of the Weaget Website
 */
@@ -42,11 +41,9 @@ const Icon = styled(Box)(({ theme }) => ({
 }));
 
 const Text = styled(Box) (({ theme }) => ({
-    fontFamily: "'Quicksand', sans-serif",
     fontSize: "1em",
     paddingLeft: "0.1em",
     transform: "translateY(-30%)",
-    fontWeight: "600",
     zIndex: "1",
     textShadow: "-1px 1px 2px rgba(0,0,0,0.2)",
     whiteSpace: "nowrap",
@@ -63,13 +60,18 @@ const Text = styled(Box) (({ theme }) => ({
     }
 }))
 
-
+const quickSandFont = Quicksand({
+    subsets: ['latin'],
+    weight: '600',
+    display: 'swap',
+});
 export default function Logo(props: BoxProps) {
+
     return (
         <Box {...props} role="img" aria-label="Weaget Logo">
             <Stack direction="row" alignItems="baseline">
                 <Icon/>
-                <Text/>
+                <Text className={quickSandFont.className}/>
             </Stack>
         </Box>
     );

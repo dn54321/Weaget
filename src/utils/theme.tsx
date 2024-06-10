@@ -1,15 +1,27 @@
+'use client';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { red } from '@mui/material/colors';
 import NextLink from 'next/link';
 import { forwardRef } from 'react';
+import { Roboto } from 'next/font/google';
+
 
 const LinkBehaviour = forwardRef(function LinkBehaviour(props, ref) {
     // @ts-ignore
     return <NextLink ref={ref as any} {...props} />;
 });
 
+const roboto = Roboto({
+    weight: ['300', '400', '500', '700'],
+    subsets: ['latin'],
+    display: 'swap',
+  });
+
 // Create a theme instance.
 const theme = responsiveFontSizes(createTheme({
+    typography: {
+        fontFamily: roboto.style.fontFamily,
+    },
     components: {
         MuiSkeleton: {
             styleOverrides: {
