@@ -18,7 +18,7 @@ This website is currently only for demonstration purposes. Please do not abuse l
 # About
 This project is a website written primarily in [Javascript][1] using [Nextjs][2] (a react framework) and [Material UI][3] (a UI library). The website allows a user to find <b>minutely, hourly and daily</b> weather information at any location as well as <b>pollution</b> details.
 
-## The website is currently in a stable release and features:
+## Current Features:
 - A search engine with autocomplete.
 - Responsive Design.
 - Temperature & Measurement conversion options.
