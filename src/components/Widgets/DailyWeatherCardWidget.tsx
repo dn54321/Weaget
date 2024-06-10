@@ -132,7 +132,7 @@ export default function DailyWeatherCardList(props: WeeklyWeatherCardWidgetProps
         else {
             setFocusedWeather(undefined);
         }
-    }, [activeCard, hoverCard]);
+    }, [activeCard, hoverCard, setFocusedWeather]);
 
     return (
         <Widget 

@@ -85,7 +85,7 @@ export default function Home() {
         if (currentLocationQuery.isFetching) {
             resetWeather();
         }
-    }, [currentLocationQuery])
+    }, [currentLocationQuery, resetWeather])
 
     return (
         <Box height="100%">
