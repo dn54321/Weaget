@@ -44,7 +44,7 @@ export default function Page({ params }: PageProps) {
                         <Grid container spacing={2} mt="1px">
                             <Grid item xs={12}>
                                 <Stack spacing={2}>
-                                    <WeatherDisplayWidget weatherData={weatherQuery.data}/>
+                                    <WeatherDisplayWidget weatherData={weatherQuery.data} location={locationLongForm}/>
                                     <DailyWeatherCardList weatherData={weatherQuery.data}/>  
                                 </Stack>
                             </Grid>
