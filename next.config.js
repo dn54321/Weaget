@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 // @ts-check
  
 /** @type {import('next').NextConfig} */
