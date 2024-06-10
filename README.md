@@ -75,7 +75,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Smart caching mechanism on both server and client. 
     - Improves the user experience with faster load times.
     - Reduces the odds of hitting the rate limit of API credentials without the need to rate limit.
+ 
 <br> 
+
 - All API services are called server side.
     - Protects API keys from being stolen but slows down site significantly.
     - Allows for the implementation of rate limiting to prevent API abuse.
