@@ -1,33 +1,37 @@
+"use client"
 import { Box, Container, Grid, Stack } from '@mui/material';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 
 import Footer from '@components/Containers/Footer';
 import Navbar from '@components/Containers/Navbar';
+import SettingsFab from '@components/SettingsFab';
+import DailyWeatherCardList from '@components/Widgets/DailyWeatherCardWidget';
+import HourlyWeatherStripWidget from '@components/Widgets/HourlyWeatherStripWidget';
 import LocationListWidget from '@components/Widgets/LocationListWidget';
 import PollutionWidget from '@components/Widgets/PollutionWidget';
 import RainfallWidget from '@components/Widgets/RainfallWidget';
 import WeatherDisplayWidget from '@components/Widgets/WeatherDisplayWidget';
-import HourlyWeatherStripWidget from '../../src/components/Widgets/HourlyWeatherStripWidget';
-import WeatherStatWidget from '../../src/components/Widgets/WeatherStatWidget';
-import { useGetLocation } from '../../src/hooks/useGetLocation';
-import { useGetLocationNearbySearch } from '../../src/hooks/useGetLocationNearbySearch';
-import { useGetPollution } from '../../src/hooks/useGetPollution';
-import { useGetWeather } from '../../src/hooks/useGetWeather';
-import DailyWeatherCardList from '../../src/components/Widgets/DailyWeatherCardWidget';
-import SettingsFab from '../../src/components/SettingsFab';
+import WeatherStatWidget from '@components/Widgets/WeatherStatWidget';
 
+import { useGetLocation } from '../../../src/hooks/useGetLocation';
+import { useGetLocationNearbySearch } from '../../../src/hooks/useGetLocationNearbySearch';
+import { useGetPollution } from '../../../src/hooks/useGetPollution';
+import { useGetWeather } from '../../../src/hooks/useGetWeather';
 
-export default function Weather() {
-    const router = useRouter();
-    const location = router.query.location as string;
+interface PageProps {
+    params: {
+        location: string;
+    };
+}
+
+export default function Page({ params }: PageProps) {
+    const location = params.location;
     const weatherQuery = useGetWeather(location);
     const pollutionQuery = useGetPollution(weatherQuery.data?.lat, weatherQuery.data?.lon);
     const nearbyLocationQuery = useGetLocationNearbySearch(weatherQuery.data?.lat, weatherQuery.data?.lon);
     const locationQuery = useGetLocation(location);
-    const locationShortForm = locationQuery.data?.results[0].addressComponents[0].shortName || location;
-    const locationLongForm = locationQuery.data?.results[0].formattedAddress || location;
-
+    const locationShortForm = locationQuery.data?.results[0].addressComponents[0].shortName;
+    const locationLongForm = locationQuery.data?.results[0].formattedAddress;
     return (
         <Box>
             <Head>
@@ -40,7 +44,7 @@ export default function Weather() {
                         <Grid container spacing={2} mt="1px">
                             <Grid item xs={12}>
                                 <Stack spacing={2}>
-                                    <WeatherDisplayWidget location={locationLongForm} weatherData={weatherQuery.data}/>
+                                    <WeatherDisplayWidget weatherData={weatherQuery.data}/>
                                     <DailyWeatherCardList weatherData={weatherQuery.data}/>  
                                 </Stack>
                             </Grid>

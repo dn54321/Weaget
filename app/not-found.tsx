@@ -1,10 +1,8 @@
+"use client"
 import { Button, Stack, Box, Grid, Container } from '@mui/material';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import CloudIcon from '@mui/icons-material/Cloud';
 import styled from '@mui/system/styled';
-
-const errString = (loc: string) => <Box>Ah! We couldn&apos;t retrieve weather details at <u>{loc}</u>. :/</Box>
 
 function IconBox(props) {
     return (
@@ -44,25 +42,15 @@ function IconBox(props) {
     )
 }
 
-const Page = styled(Box) (({theme}) => ({
+const Page = styled(Box) (() => ({
     height: "100%",
 }));
 
-export default function Home() {
-    const router = useRouter();
-    const err = router.query.err as string;
-    const loc = router.query.loc as string;
-    const desc = loc ? errString(loc) : false;
-    const description = {
-        "404": "The page you have been looking for could not be found.",
-        "500": "Something went wrong with the server :/ Please try again later."
-    }
-    
-    const errorMessage = (err in description) ? description[err] : false;
+export default function NotFound() {
     return (
         <Page>
             <Head>
-                <title>Weaget - {err ?? 404} </title>
+                <title>Weaget - Not Found</title>
             </Head>
             <Container maxWidth="lg" sx={{height:"100%"}} disableGutters>
             <Grid container gap={0} sx={{
@@ -76,10 +64,14 @@ export default function Home() {
                 </IconBox> 
                 </Grid>
                 <Grid item xs={12} md={6}>  
-                <Stack alignItems="center" justifyContent="center" height="100%"
-                sx={{color:"black", px:"10px"}}>
-                    <Box fontSize="min(200px, 30vw)" component="h1" sx={{lineHeight: 1}}>404</Box>
-                    <Box fontSize="16px" sx={{textAlign: "center"}}>{errorMessage || desc}</Box>
+                <Stack 
+                    alignItems="center" 
+                    justifyContent="center" 
+                    height="100%"
+                    sx={{color:"black", px:"10px"}}
+                >
+                    <Box component="h1" sx={{fontSize: "100px"}}>404</Box>
+                    <Box fontSize="16px" sx={{textAlign: "center"}}>{"The page you have been looking for could not be found."}</Box>
                     <Button href="/" variant="outlined" sx={{mt:"40px"}}>Go back to home.</Button>
                 </Stack>
                 </Grid>

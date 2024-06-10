@@ -1,10 +1,11 @@
 
+"use client"
 import { Box, Container, Divider } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Head from 'next/head';
-import Navbar from '../src/components/Containers/Navbar';
-import Footer from '../src/components/Containers/Footer';
-import WeatherIcon from '../src/components/WeatherIcon';
+import Navbar from '../../src/components/Containers/Navbar';
+import Footer from '../../src/components/Containers/Footer';
+import WeatherIcon from '../../src/components/WeatherIcon';
 
 function DisplayIcon(props) {
   return (
@@ -20,7 +21,7 @@ function DisplayIcon(props) {
   )
 }
 
-export default function Home() {
+export default function Page() {
   return (
     <Box height="100%">
         <Head>
