@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import CloudIcon from '@mui/icons-material/Cloud';
 import styled from '@mui/system/styled';
 
-const errString = (loc) => <Box>Ah! We couldn&apos;t retrieve weather details at <u>{loc}</u>. :/</Box>
+const errString = (loc: string) => <Box>Ah! We couldn&apos;t retrieve weather details at <u>{loc}</u>. :/</Box>
 
 function IconBox(props) {
     return (
@@ -48,19 +48,21 @@ const Page = styled(Box) (({theme}) => ({
     height: "100%",
 }));
 
-export default function Home(props) {
+export default function Home() {
     const router = useRouter();
-    let {err, loc} = router.query;
-    err = err || 404;
+    const err = router.query.err as string;
+    const loc = router.query.loc as string;
     const desc = loc ? errString(loc) : false;
     const description = {
-        404: "The page you have been looking for could not be found.",
-        500: "Something went wrong with the server :/ Please try again later."
+        "404": "The page you have been looking for could not be found.",
+        "500": "Something went wrong with the server :/ Please try again later."
     }
+    
+    const errorMessage = (err in description) ? description[err] : false;
     return (
         <Page>
             <Head>
-                <title>Weaget - {err} </title>
+                <title>Weaget - {err ?? 404} </title>
             </Head>
             <Container maxWidth="lg" sx={{height:"100%"}} disableGutters>
             <Grid container gap={0} sx={{
@@ -77,7 +79,7 @@ export default function Home(props) {
                 <Stack alignItems="center" justifyContent="center" height="100%"
                 sx={{color:"black", px:"10px"}}>
                     <Box fontSize="min(200px, 30vw)" component="h1" sx={{lineHeight: 1}}>404</Box>
-                    <Box fontSize="16px" sx={{textAlign: "center"}}>{desc || description[err]}</Box>
+                    <Box fontSize="16px" sx={{textAlign: "center"}}>{errorMessage || desc}</Box>
                     <Button href="/" variant="outlined" sx={{mt:"40px"}}>Go back to home.</Button>
                 </Stack>
                 </Grid>

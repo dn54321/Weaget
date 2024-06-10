@@ -1,19 +1,16 @@
-import Head from 'next/head';
-import SearchBar from '@components/search';
-import Logo from '@components/logo';
+
+import { Box, Container, Divider } from '@mui/material';
 import Stack from '@mui/material/Stack';
-import styled from '@mui/system/styled';
-import Footer from '@components/footer';
-import TBD from '@components/TBD';
-import Navbar from '@components/navbar';
-import Icon from '@components/icon';
-import {Box, Divider, Container} from '@mui/material';
+import Head from 'next/head';
+import Navbar from '../src/components/Containers/Navbar';
+import Footer from '../src/components/Containers/Footer';
+import WeatherIcon from '../src/components/WeatherIcon';
 
 function DisplayIcon(props) {
   return (
-    <Box backgroundColor="lightblue">
+    <Box bgcolor="lightblue">
       <Stack>
-        <Icon id={props.id} />
+        <WeatherIcon id={props.id} />
         <Divider/>
         <Box color="white" fontSize="20px" px="20px" textAlign="center">
           {props.desc}
