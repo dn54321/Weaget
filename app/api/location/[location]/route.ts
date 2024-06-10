@@ -1,4 +1,4 @@
-
+import 'reflect-metadata';
 import { getLocationDetails } from "@services/geolocation.service";
 import { instanceToPlain } from "class-transformer";
 import { NextRequest } from "next/server";

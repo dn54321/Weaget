@@ -1,7 +1,8 @@
+import 'reflect-metadata';
 import { getWeatherByRegion } from "@services/weather.service";
 import { NextRequest } from "next/server";
 import { extractQueryParams } from "@src/utils/url";
-import { classToPlain, instanceToPlain } from "class-transformer";
+import { instanceToPlain } from "class-transformer";
 
 export async function GET(
     req: NextRequest, 

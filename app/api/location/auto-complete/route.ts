@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { NextRequest } from "next/server";
 import { extractQueryParams } from "@src/utils/url";
 import { plainToInstance } from "class-transformer";

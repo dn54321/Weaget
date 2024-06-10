@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { plainToInstance } from "class-transformer";
 import { NextRequest } from "next/server";
 import { getNearbyLocationDetails } from "../../../../src/services/geolocation.service";
