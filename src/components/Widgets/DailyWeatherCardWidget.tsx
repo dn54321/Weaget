@@ -35,10 +35,6 @@ const SkeletonCard = styled(Skeleton)(() => ({
     borderRadius: "10px"
 }));
 
-const ScrollableList = styled(List)(() => ({
-    overflowX: "scroll"
-}));
-
 const StyledWeatherCard = styled(WeatherCard)((props: {active: boolean}) => ({
     "& .MuiPaper-root:hover": {
         ...(props.active && {backgroundColor: "secondary.main"})

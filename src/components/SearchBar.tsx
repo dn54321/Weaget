@@ -2,7 +2,7 @@ import { CircularProgress, IconButton, InputBase, List, ListItem, Paper } from '
 import Divider from '@mui/material/Divider';
 import useAutocomplete from '@mui/material/useAutocomplete';
 import { Box, styled } from '@mui/system';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { debounce, throttle } from "throttle-debounce";
 import { FetchError } from '../errors/FetchError';

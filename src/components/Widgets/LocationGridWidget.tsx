@@ -1,7 +1,7 @@
 import { Card, CardActionArea } from '@mui/material';
 import Box from '@mui/material/Box';
 import styled from '@mui/system/styled';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 /*
     Provides a grid-like list of the nearest suburbs/cities.

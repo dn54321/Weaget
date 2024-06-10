@@ -1,30 +1,29 @@
 import { Card, CardActionArea, Chip } from '@mui/material';
 import Box, { BoxProps } from '@mui/material/Box';
 import styled from '@mui/system/styled';
-import { DAYS, MONTHS } from '@src/utils/constants';
 import { round } from '@src/utils/math';
 import Temp from '../TemperateUnit';
 import WeatherIcon from '../WeatherIcon';
 import { DateTime } from "luxon";
 
-const Day = styled(Box)(({ theme }) => ({
+const Day = styled(Box)(() => ({
     fontWeight: "bold",
 }));
 
-const ShortDate = styled(Box)(({ theme }) => ({
+const ShortDate = styled(Box)(() => ({
     color: "#ddd",
     fontSize: "0.8em"
 }));
 
-const Description = styled(Box)(({ theme }) => ({
+const Description = styled(Box)(() => ({
     fontSize: "0.5em",
 }));
 
-const Temperature = styled(Box)(({ theme }) => ({
+const Temperature = styled(Box)(() => ({
     marginTop: "5px"
 }));
 
-const High = styled(Box)(({ theme }) => ({
+const High = styled(Box)(() => ({
     "--fontSize": "2em",
     display: "inline",
     fontSize: "var(--fontSize)",
@@ -36,7 +35,7 @@ const Low = styled(Box)(({ theme }) => ({
 }));
 
 
-const IconBox = styled(Box)(({ theme }) => ({
+const IconBox = styled(Box)(() => ({
     position: "relative"
 }));
 
