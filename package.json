@@ -3,9 +3,9 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV='development' NODE_OPTIONS='--require reflect-metadata --inspect' next dev",
-    "build": "NODE_OPTIONS=--require reflect-metadata next build",
-    "start": "NODE_OPTIONS=--require reflect-metadata next start",
-    "lint": "NODE_OPTIONS=--require reflect-metadata next lint"
+    "build": "cross-env NODE_OPTIONS='--require reflect-metadata' next build",
+    "start": "cross-env NODE_OPTIONS='--require reflect-metadata' next start",
+    "lint": "cross-env NODE_OPTIONS='--require reflect-metadata' next lint"
   },
   "dependencies": {
     "@emotion/cache": "latest",
