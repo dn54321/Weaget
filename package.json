@@ -2,10 +2,10 @@
   "name": "weather-app",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "cross-env NODE_ENV='development' NODE_OPTIONS='--require reflect-metadata --inspect' next dev",
+    "build": "NODE_OPTIONS=--require reflect-metadata next build",
+    "start": "NODE_OPTIONS=--require reflect-metadata next start",
+    "lint": "NODE_OPTIONS=--require reflect-metadata next lint"
   },
   "dependencies": {
     "@emotion/cache": "latest",
@@ -14,21 +14,38 @@
     "@emotion/styled": "^11.11.5",
     "@mdi/js": "^6.9.96",
     "@mdi/react": "^1.6.1",
-    "@mui/icons-material": "^5.15.18",
-    "@mui/material": "^5.15.18",
+    "@mui/icons-material": "^5.15.19",
+    "@mui/material": "^5.15.19",
+    "@mui/system": "^5.15.15",
+    "@tanstack/react-query": "^5.40.0",
+    "@tanstack/react-query-devtools": "5.0.0-alpha.91",
+    "@types/luxon": "^3.4.2",
+    "@types/react": "^18.3.3",
+    "@types/request-ip": "^0.0.41",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
     "clsx": "latest",
-    "next": "^12.3.4",
+    "luxon": "^3.4.4",
+    "next": "^14.2.3",
     "prop-types": "^15.8.1",
     "react": "latest",
     "react-dom": "latest",
-    "recharts": "^2.12.7",
-    "three-dots": "^0.2.3",
-    "throttle-debounce": "^3.0.1",
-    "uuid": "^9.0.1"
+    "recharts": "2.13.0-alpha.4",
+    "reflect-metadata": "^0.2.2",
+    "request-ip": "^3.3.0",
+    "three-dots": "^0.3.2",
+    "throttle-debounce": "^5.0.0",
+    "uuid": "^9.0.1",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-config-next": "12.0.3"
+    "@types/node": "20.12.13",
+    "@typescript-eslint/eslint-plugin": "^7.11.0",
+    "@typescript-eslint/parser": "^7.11.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.*.*",
+    "eslint-config-next": "14.2.3",
+    "typescript": "^5.4.5"
   },
   "packageManager": "pnpm@9.1.1+sha512.14e915759c11f77eac07faba4d019c193ec8637229e62ec99eefb7cf3c3b75c64447882b7c485142451ee3a6b408059cdfb7b7fa0341b975f12d0f7629c71195"
 }
