@@ -1,16 +1,10 @@
-import { mdiThermometerWater, mdiWaterPercent, mdiWeatherCloudy, mdiWeatherSnowy, mdiWeatherPouring, mdiWeatherSunnyAlert, mdiWeatherSunsetDown, mdiWeatherSunsetUp } from '@mdi/js';
-import Icon from '@mdi/react';
-import AirIcon from '@mui/icons-material/Air';
-import { Box, Card, Divider, Skeleton, Stack } from "@mui/material";
+import { Box, Card, Skeleton, Stack } from "@mui/material";
 import styled from "@mui/system/styled";
 import { DateTime } from 'luxon';
-import { CurrentWeatherDetails, DailyWeatherDetails, HourlyWeatherDetails, OneCallWeatherDetails } from "../../types/models/openWeather/oneCall.model";
-import WeatherStatsCard, { parseWeatherDetailStats } from '../Cards/WeatherStatsCard';
-import SpeedUnit from "../SpeedUnit";
-import { Widget } from '../Containers/Widget';
-import Temp from '../TemperateUnit';
-import VolumeUnit from '../VolumeUnit';
 import { useWidgetStore } from '../../hooks/stores/useWidgetStore';
+import { OneCallWeatherDetails } from "../../types/models/openWeather/oneCall.model";
+import WeatherStatsCard, { parseWeatherDetailStats } from '../Cards/WeatherStatsCard';
+import { Widget } from '../Containers/Widget';
 
 const Container = styled(Card)(() => ({
     width: "100%",
@@ -19,26 +13,33 @@ const Container = styled(Card)(() => ({
 
 export function HourlyWeatherWidgetSkeleton() {
     return (
-        <Box>
-            {[...Array(12)].map((_,i) => (
-                <Box key={i}>
-                    <Box height="66px" my="1px" key={i} display="flex" alignItems="center">
-                        <Skeleton variant="circular" width={40} height={40}/>
-                        <Box ml="10px">
-                        <Skeleton variant="text" width="60px" sx={{lineHeight: 1}}/>
-                        <Skeleton variant="text" width="90px" sx={{lineHeight: 1}}/>
+        <Widget
+            title="Weather Details"
+            rightDecorum={<Skeleton variant="text" width="120px" sx={{lineHeight: 1}}/>}
+
+        >
+            <Box 
+                sx={{
+                    display: "grid",
+                    justifyContent: "space-around",
+                    gridTemplateColumns: "repeat(auto-fill, 170px)",
+                    gap: "10px",
+                    mt: "20px"
+                }}
+            >
+                {[...Array(6)].map((_,i) => (
+                    <Stack direction="row" key={i}>
+                        <Box width="40px" height="40px" ml="20px">
+                            <Skeleton variant="rectangular" width={40} height={40}/>
                         </Box>
-                        {/* <HideBox hidden={400} ml="40px"><Skeleton width="40px" height="66px"/></HideBox>
-                        <HideBox ml="10px" hidden={450}><Skeleton width="40px" height="66px"/></HideBox> */}
-                        <Stack ml="auto" mr="5px" alignItems="flex-end">
-                            <Skeleton variant="text" width="80px" sx={{lineHeight: 1}}/>
+                        <Box ml="10px">
+                            <Skeleton variant="text" width="60px" sx={{lineHeight: 1}}/>
                             <Skeleton variant="text" width="90px" sx={{lineHeight: 1}}/>
-                        </Stack>
-                    </Box>
-                    <Divider/>
-                </Box>
-            ))}
-        </Box>
+                        </Box>
+                    </Stack>
+                ))}
+            </Box>
+        </Widget>
     )
 }
 

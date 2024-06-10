@@ -259,7 +259,7 @@ const Low = styled(Box)(({ theme }) => ({
 
 export interface WeatherDisplayWidgetProps {
     weatherData?: OneCallWeatherDetails;
-    location: string;
+    location?: string;
 }
 
 export interface WeatherTemperatureDisplayProps {
@@ -291,7 +291,7 @@ export default function WeatherDisplayWidget(props: WeatherDisplayWidgetProps) {
 
     const weatherUpdated = focusedWeather 
         ? DateTime.fromJSDate(focusedWeather?.dt, { zone: timezone}).toFormat('LLL d t')
-        : "Fetching data..."
+        : "Fetching Details..."
 
     const weatherCode = focusedWeather?.weather[0]?.id;
     const weatherDescription = focusedWeather?.weather[0]?.description;
@@ -300,7 +300,7 @@ export default function WeatherDisplayWidget(props: WeatherDisplayWidgetProps) {
     return (
         <Container sx={{ background: getBackgroundColor(focusedWeather?.weather[0].id) }}>
             <CardContent sx={{height: "100%"}}>
-                <Location>{props.location}</Location>
+                <Location>{props.location ?? "Fetching Location Details..."}</Location>
                 <Stack direction="row" height="100%">
                     <Box mt="0.1em">
                         <Box fontSize="0.8em" width="200px">Updated At: {weatherUpdated}</Box>

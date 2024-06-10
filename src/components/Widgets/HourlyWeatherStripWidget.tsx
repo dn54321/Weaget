@@ -28,18 +28,46 @@ function UVWarning(scale) {
 
 export function HourlyWeatherWidgetSkeleton() {
     return (
-        <Box>
+        <Widget
+            title="Weather Details"
+            disableChildrenPadding
+        >
             {[...Array(12)].map((_,i) => (
                 <Box key={i}>
                     <Box height="66px" my="1px" key={i} display="flex" alignItems="center">
-                        <Skeleton variant="circular" width={40} height={40}/>
-                        <Box ml="10px">
-                        <Skeleton variant="text" width="60px" sx={{lineHeight: 1}}/>
-                        <Skeleton variant="text" width="90px" sx={{lineHeight: 1}}/>
+                        <Box width="40px" ml="20px">
+                            <Skeleton variant="circular" width={40} height={40}/>
                         </Box>
-                        {/* <HideBox hidden={400} ml="40px"><Skeleton width="40px" height="66px"/></HideBox>
-                        <HideBox ml="10px" hidden={450}><Skeleton width="40px" height="66px"/></HideBox> */}
-                        <Stack ml="auto" mr="5px" alignItems="flex-end">
+                        <Box ml="10px">
+                            <Skeleton variant="text" width="60px" sx={{lineHeight: 1}}/>
+                            <Skeleton variant="text" width="90px" sx={{lineHeight: 1}}/>
+                        </Box>
+                        <Box position="relative" width="100%" height="100%" mx="30px">
+                            <Stack direction="row" gap="20px" sx={{
+                                alignItems: "center",
+                                position: "absolute",
+                                left: "0px",
+                                right: "0px",
+                                top: "0px",
+                                bottom: "0px",
+                            }}>
+                                <Stack direction="row" sx={{
+                                    overflow: "hidden",
+                                    flexWrap: "wrap",
+                                    width: "100%",
+                                    height: "40px",
+                                    gap: "20px"
+                                }}>
+                                    {[...Array(7)].map((_,i) => (
+                                            <Box key={i}>
+                                                <Skeleton variant="rectangular" width={40} height={40}/>
+                                            </Box>
+                                        ))
+                                    }
+                                </Stack>
+                            </Stack>
+                        </Box>
+                        <Stack ml="auto" mr="15px" alignItems="flex-end">
                             <Skeleton variant="text" width="80px" sx={{lineHeight: 1}}/>
                             <Skeleton variant="text" width="90px" sx={{lineHeight: 1}}/>
                         </Stack>
@@ -47,7 +75,7 @@ export function HourlyWeatherWidgetSkeleton() {
                     <Divider/>
                 </Box>
             ))}
-        </Box>
+        </Widget>
     )
 }
 
