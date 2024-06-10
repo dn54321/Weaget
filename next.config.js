@@ -7,6 +7,9 @@ const nextConfig = {
             fullUrl: process.env.NODE_ENV === "development",
         },
     },
+    experimental: {
+        instrumentationHook: true,
+    },
 }
    
 module.exports = nextConfig
