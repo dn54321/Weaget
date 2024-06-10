@@ -8,25 +8,6 @@ import { OneCallWeatherDetails } from '../../types/models/openWeather/oneCall.mo
 import { useWidgetStore } from '../../hooks/stores/useWidgetStore';
 import { Widget } from '../Containers/Widget';
 
-const Container = styled(Card)(() => ({
-    color: "black",
-    padding: "15px 15px 0px 15px",
-    overflow: "visible",
-}));
-
-const List = styled(Box)(() => ({
-    boxSizing: "border-box",
-    position: "absolute",
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    display: "flex",
-    alignItems: "center",
-    gap: "5px",
-    paddingBottom: "10px"
-}));
-
 const SkeletonCard = styled(Skeleton)(() => ({
     width: "100%",
     minWidth: "120px",
@@ -128,7 +109,7 @@ export default function DailyWeatherCardList(props: WeeklyWeatherCardWidgetProps
         else {
             setFocusedWeather(undefined);
         }
-    }, [activeCard, hoverCard, setFocusedWeather]);
+    }, [activeCard, hoverCard, setFocusedWeather, props.weatherData]);
 
     return (
         <Widget 
