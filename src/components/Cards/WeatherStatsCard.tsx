@@ -63,16 +63,16 @@ export function parseWeatherDetailStats(weather: Partial<HourlyWeatherDetails | 
             value: weather.dewPoint ? <Temp value={weather.dewPoint}/> : undefined,
         },
         {
+            name: "Clouds",
+            statIcon: <Icon path={mdiWeatherCloudy} size="1em"/>,
+            value: weather.clouds ?? 0,
+            unit: "%",
+        },
+        {
             name: "UV Index",
             statIcon: <Icon path={mdiWeatherSunnyAlert} size="1em"/>,
             value: weather.uvi ? UVWarning(weather.uvi) : undefined,
             compactValue: weather.uvi,
-        },
-        {
-            name: "Clouds",
-            statIcon: <Icon path={mdiWeatherCloudy} size="1em"/>,
-            value: weather.clouds,
-            unit: "%",
         },
         {
             name: "Sunrise",
