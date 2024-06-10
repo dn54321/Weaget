@@ -1,9 +1,10 @@
-import { NextApiRequest } from "next";
+
 import { getLocationDetails } from "@services/geolocation.service";
 import { instanceToPlain } from "class-transformer";
+import { NextRequest } from "next/server";
 
 export async function GET(
-    req: NextApiRequest, 
+    req: NextRequest, 
     { params }: { params: { location: string } }
 ) {
     const queryParams = new URL(`${req.url}`).searchParams;

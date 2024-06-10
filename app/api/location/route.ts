@@ -1,8 +1,6 @@
 import { getLocationDetailsByIp } from "@services/geolocation.service";
 import { instanceToPlain } from "class-transformer";
-import { NextApiRequest } from "next";
 import { NextRequest } from "next/server";
-import requestIp from "request-ip";
 
 export async function GET(req: NextRequest) {
     // Note - it's possible to spoof this header.

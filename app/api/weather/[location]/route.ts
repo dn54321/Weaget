@@ -1,11 +1,10 @@
 import { getWeatherByRegion } from "@services/weather.service";
-import { NextApiRequest } from "next";
-import { extractQueryParams } from "../../../../src/utils/url";
+import { NextRequest } from "next/server";
+import { extractQueryParams } from "@src/utils/url";
 import { classToPlain, instanceToPlain } from "class-transformer";
-import OneCallWeatherDetailsDto from "../../../../src/types/dtos/openWeather/openCall.dto";
 
 export async function GET(
-    req: NextApiRequest, 
+    req: NextRequest, 
     { params }: { params: { location: string } }
 ) {
     const queryParams = extractQueryParams(`${req.url}`);

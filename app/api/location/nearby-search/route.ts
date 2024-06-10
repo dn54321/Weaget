@@ -1,11 +1,11 @@
 import { plainToInstance } from "class-transformer";
-import { NextApiRequest } from "next";
+import { NextRequest } from "next/server";
 import { getNearbyLocationDetails } from "../../../../src/services/geolocation.service";
 import { CoordsDto } from "../../../../src/types/dtos/google/geocode.dto";
 import { extractQueryParams } from "../../../../src/utils/url";
 
 // Generates a list of autocomplete queries given a string
-export async function GET(req: NextApiRequest) {
+export async function GET(req: NextRequest) {
     const queryParams = extractQueryParams(`${req.url}`);
 
     try {

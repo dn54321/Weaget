@@ -1,10 +1,10 @@
 import { plainToInstance } from "class-transformer";
-import { NextApiRequest } from "next";
+import { NextRequest } from "next/server";
 import { extractQueryParams } from "../../../src/utils/url";
 import { CoordsDto } from "../../../src/types/dtos/google/geocode.dto";
 import { getPollutionByCoord } from "../../../src/services/pollution.service";
 
-export async function GET(req: NextApiRequest) {
+export async function GET(req: NextRequest) {
     const queryParams = extractQueryParams(`${req.url}`);
 
     try {

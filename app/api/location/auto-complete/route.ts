@@ -1,11 +1,11 @@
-import { NextApiRequest } from "next";
+import { NextRequest } from "next/server";
 import { extractQueryParams } from "@src/utils/url";
 import { plainToInstance } from "class-transformer";
 import { getLocationSuggestions } from "@src/services/geolocation.service";
 import { GoogleLocationSuggestionQueryParamsDto } from "../../../../src/types/dtos/google/locationSuggestion.dto";
 
 // Generates a list of autocomplete queries given a string
-export async function GET(req: NextApiRequest) {
+export async function GET(req: NextRequest) {
     const queryParams = extractQueryParams(`${req.url}`);
 
     try {
