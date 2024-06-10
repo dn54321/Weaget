@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { plainToInstance } from "class-transformer";
 import ApicnPollutionModelDto from "../types/dtos/apicn/pollution.dto";
-import ApicnPollutionModel, { Pollution } from "../types/models/apicn/pollution.model";
+import { Pollution } from "../types/models/apicn/pollution.model";
 import { FetchError } from "../errors/FetchError";
 
 async function fetchPollution(lat?: number, lng?: number) {

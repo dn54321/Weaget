@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { GoogleGeocode } from "../types/models/google/geocode.model";
 import { plainToInstance } from "class-transformer";
 import { GoogleGeocodeDto } from "../types/dtos/google/geocode.dto";
-import { queryClient } from "../../pages/_app";
 import { FetchError } from "../errors/FetchError";
+import { queryClient } from "../utils/queryClient";
 
 async function fetchLocation(location?: string, region?: string) {
     const url = `/api/location/${location}`;

@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { NearbySearch } from "../types/geolocation.types";
-import { plainToInstance } from "class-transformer";
 import { FetchError } from "../errors/FetchError";
 
 async function fetchNearbyLocations(lat?: number, lng?: number) {

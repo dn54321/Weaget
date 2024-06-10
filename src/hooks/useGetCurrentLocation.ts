@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import IpinfoGeocode from "../types/models/ipinfo/geocode.model";
-import { queryClient } from "../../pages/_app";
 import IpinfoGeocodeDto from "../types/dtos/ipinfo/geocode.dto";
 import { plainToInstance } from "class-transformer";
 import { FetchError } from "../errors/FetchError";
+import { queryClient } from "../utils/queryClient";
 
 async function fetchCurrentLocation() {
     const url = `/api/location`;
