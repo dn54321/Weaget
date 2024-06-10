@@ -22,7 +22,6 @@ This project is a website written primarily in [Javascript][1] using [Nextjs][2]
 - A search engine with autocomplete.
 - Responsive Design.
 - Temperature & Measurement conversion options.
-- Optimisations that determine what conversion systems to use based on your location.
 - Weather & nearby places at your current location.
 - Rainfall Graph w/ heuristic to show the most meaningful graph.
 - Skeleton framework while weather data is being fetched.
@@ -30,6 +29,8 @@ This project is a website written primarily in [Javascript][1] using [Nextjs][2]
 - The website is mostly web accessible.
 
 ## The API services used in this website:
+In order to reduce costs, this website uses free services from various providers. The following are the APIs used in this project:
+
 - [Google's Geocoding API][4] - To find the latitude (lat) and longitude (lng) of a location.
 - [Google's Places Autocomplete API][5] - To complete and suggest locations you type.
 - [IPinfo API][6] - To get local location details of the user including city/country/lat/lng.
@@ -66,24 +67,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 # Upcoming Features
 
 - Unit Testing
-- API rate Limiting
 - Login systems for customisation such as local weather location.
 - Dark mode
 - Pollution based on daily weather (currently waiting for pollution API)
 
 # Design Considerations
-- All details are stored in Storage rather than in Cookies. 
-    - Storing and retrieving cookies as JWT will consume a large amount of bandwidth. 
-    - Storing cookies as sessions requires a database which is a large overhead for for such a simple project.
-
-<br>
-
-- Weather details are stored client side. 
-    - Caching Server side and distributing to user's client is against the terms and conditions for AQICN API.
-    - Storing on both client/server adds needless complexity.
-
+- Smart caching mechanism on both server and client. 
+    - Improves the user experience with faster load times.
+    - Reduces the odds of hitting the rate limit of API credentials without the need to rate limit.
 <br> 
-
 - All API services are called server side.
     - Protects API keys from being stolen but slows down site significantly.
     - Allows for the implementation of rate limiting to prevent API abuse.
