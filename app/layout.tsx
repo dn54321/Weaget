@@ -1,5 +1,7 @@
 "use client"
-
+import "reflect-metadata";
+import 'three-dots/dist/three-dots.css';
+import '../styles/globals.css';
 import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
@@ -7,9 +9,6 @@ import { queryClient } from '@src/utils/queryClient';
 import theme from '@src/utils/theme';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import "reflect-metadata";
-import 'three-dots/dist/three-dots.css';
-import '../styles/globals.css';
 
 export default function RootLayout(props) {      
     return (
