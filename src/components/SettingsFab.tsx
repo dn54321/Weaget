@@ -42,6 +42,7 @@ export default function SettingsFab(props: SettingFabProps & BoxProps) {
             position: "sticky",
             bottom: "20px",
             display: "flex",
+            pointerEvents: "none",
             gap: "5px",
             mr: "20px",
             mb: "20px",
@@ -50,17 +51,25 @@ export default function SettingsFab(props: SettingFabProps & BoxProps) {
             ...boxProps
         }}>
             { measurement ? 
-            <Fab color="primary" aria-label={"Change to " + altMeasScale(measurementScale) + "system"} 
+            <Fab 
+                color="primary" 
+                aria-label={"Change to " + altMeasScale(measurementScale) + "system"} 
                 size="large" variant="extended"
+                sx={{pointerEvents: "all"}}
                 onClick={() => handleMeasurementScaleChange(measurementScale, setMeasurementScale)}>
-                <SquareFootIcon sx={{ mr: 1 }}/>
+                <SquareFootIcon sx={{ mr: 1 }}
+            />
                 {`${measurementScale} system`}
             </Fab>
             : null}
 
             { temperature ?
-            <Fab color="primary" aria-label={"Change to " + altTempScale(temperatureScale)} 
-                size="large" variant="extended"
+            <Fab 
+                color="primary" 
+                aria-label={"Change to " + altTempScale(temperatureScale)} 
+                size="large" 
+                variant="extended"
+                sx={{pointerEvents: "all"}}
                 onClick={() => handleTemperatureScaleChange(temperatureScale, setTemperatureScale)}>
                 <DeviceThermostatIcon sx={{ mr: 1 }}/>
                 {temperatureScale}
