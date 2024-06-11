@@ -23,7 +23,7 @@ const High = styled(Box)(() => ({
 const Low = styled(Box)(({ theme }) => ({
     fontSize: "0.8em",
     display: "inline",
-    color: theme.palette.grey[500],
+    color: theme.palette.grey[600],
 }));
 
 const PaperContainer = styled(Paper)(({ theme }) => ({
@@ -37,10 +37,6 @@ const PaperContainer = styled(Paper)(({ theme }) => ({
     aspectRatio: "1", 
     justifyContent:"center"
 }));
-
-interface RainProps {
-    label?: number,
-}
 
 export interface CompactWeatherCardProps {
     date: Date,

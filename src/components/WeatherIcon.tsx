@@ -41,14 +41,14 @@ function RainIndicator(props: {rainPercentage: number}) {
     return (
         <Box 
             position="absolute" 
-            bottom="-50%" 
-            right="-10%"
-            title="Chance of Rain"
+            bottom="-30%" 
+            right="-25%"
+            title="Chance of Rain/Snow"
         >
             <Chip 
                 label={round(props.rainPercentage*100,0)+"%"}
                 sx={{
-                    backgroundColor: "primary.main",
+                    backgroundColor: "primary.dark",
                     fontSize: "0.25em",
                     height: "auto",
                     "& .MuiChip-label": {

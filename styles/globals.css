@@ -64,7 +64,18 @@ h1 {
   
 .skinny-scrollbar::-webkit-scrollbar-thumb:window-inactive {
     background: rgba(255, 255, 255, 0.3);
-  }
+}
+
+.absolute-center {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 
 /* Loader from https://loading.io/css/ */

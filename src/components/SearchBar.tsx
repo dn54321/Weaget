@@ -186,12 +186,12 @@ export default function SearchBar(props) {
         await queryLocation(location)
             .then(_ => {
                 router.push(`/weather/${location}`);
-                mounted && setIcon(<MyLocationButton setErrno={setErrno}/>);
             })
             .catch((err: FetchError) => {
                 if (err.res.status === 404) return setErrno(1);
                 if (err.res.status === 500) return setErrno(2);
-            });
+            })
+            .finally(() => mounted && setIcon(<MyLocationButton setErrno={setErrno}/>));
   
     }
 
@@ -222,7 +222,6 @@ export default function SearchBar(props) {
     // Autocomplete Props from MaterialUI
     const {
         getRootProps,
-        getInputLabelProps,
         getInputProps,
         getListboxProps,
         getOptionProps,

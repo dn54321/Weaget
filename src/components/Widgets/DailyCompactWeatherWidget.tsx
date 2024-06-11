@@ -41,7 +41,7 @@ const CardContainer = styled('ol')(() => ({
 }));
 
 const StyledButton = styled(Button)(({ theme }) => ({
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: theme.palette.primary.dark,
     color: "white",
     "&:hover": {
         backgroundColor: theme.palette.primary.main
@@ -70,7 +70,9 @@ export default function DailyCompactWeatherWidget(props: WeeklyCompactWeatherWid
     }));
 
     const cards = weatherDetails?.map((dailyWeather) => (
-        <CompactWeatherCard {...dailyWeather} key={dailyWeather.date.getTime()}/>
+        <Box component="li" key={dailyWeather.date.getTime()} >
+            <CompactWeatherCard {...dailyWeather} />
+        </Box>
     ));
 
     return (

@@ -100,10 +100,6 @@ export default function Home() {
                         <PaddedSearchBar/>
                     </SearchContainer>
                     <PageDivider/>
-                    <Container maxWidth="lg">
-                    <Stack direction="column">   
-                    </Stack>
-                    </Container>
                     <Section maxWidth="md">
                         { weatherQuery.data && locationQuery.data && currentLocationQuery.data ? 
                         <>

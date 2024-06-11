@@ -13,16 +13,16 @@ import { Widget } from '../Containers/Widget';
 const Entry = (props: LinkProps) => {
     return (
         <Box component="li" {...props} sx={{
-            color: theme => theme.palette.primary.main,
+            color: theme => theme.palette.primary.dark,
             padding: "5px",
             borderRadius: "5px",
             margin: "5px",
             bshadow: theme => theme.shadows[1],
             textDecoration: "none",
-            backgroundColor: theme => theme.palette.grey.A100,
+            backgroundColor: theme => theme.palette.grey[100],
             "& div": {
                 display: "inline",
-                opacity: "0.6"
+
             },
             "&:hover": {
                 textDecoration: "underline"

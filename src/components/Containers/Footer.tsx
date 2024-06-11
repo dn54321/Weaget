@@ -6,7 +6,7 @@ import { Box, Container, IconButton, Stack, Tooltip } from '@mui/material';
 import { ContainerProps } from '@mui/system';
 import styled from '@mui/system/styled';
 import theme from '@src/utils/theme';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 /*
     A very simple footer after many attempts of design .

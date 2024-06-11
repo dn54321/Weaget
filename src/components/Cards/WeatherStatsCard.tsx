@@ -25,7 +25,7 @@ const properties = {
     },
     '& div:nth-of-type(2)': {
         gridColumn: "2",
-        color: theme => theme.palette.primary.light,
+        color: theme => theme.palette.primary.dark,
     },
     '& div:nth-of-type(3)': {
         gridColumn: "2",
@@ -122,7 +122,7 @@ function ItemContainer(props: ItemContainerProps) {
             justifyContent: "space-around",
             gridTemplateColumns: "repeat(auto-fill, 170px)",
             py: "10px"
-        }} component="ol">
+        }} component="ul">
             {props.children}
         </Box>
     )

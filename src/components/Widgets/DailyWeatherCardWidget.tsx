@@ -118,13 +118,13 @@ export default function DailyWeatherCardList(props: WeeklyWeatherCardWidgetProps
         >
             <Box position="relative" height="180px">
                 <Stack 
+                    component="ol"
                     onMouseLeave={() => setHoverCard(-1)}
                     sx={{ overflowX: "auto"}}
                     className="skinny-scrollbar"
                     position="absolute"
                     left="0"
                     right="0"
-                    component="ol"
                     direction="row" 
                     gap="5px"  
                     py="5px"

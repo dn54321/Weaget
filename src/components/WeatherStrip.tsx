@@ -28,7 +28,7 @@ const Accordion = (props) => {
         <MuiAccordion disableGutters elevation={0} 
             slotProps={{ transition: {unmountOnExit: true, timeout: 0 }}}
             expanded={props.expanded} onChange={props.onChange}
-            sx={{color: "primary.light"}}
+            sx={{color: "primary.dark"}}
         >
             {props.children}
         </MuiAccordion>
@@ -79,17 +79,27 @@ export default function WeatherStrip(props: WeatherStripProps) {
                                 top: "0px",
                                 bottom: "0px",
                             }}>
-                                <Stack direction="row" sx={{
-                                    height: "40.8px",
-                                    overflow: "hidden",
-                                    flexWrap: "wrap",
-                                    width: "100%"
-                                }}>
+                                <Stack 
+                                    component="ul"
+                                    direction="row" 
+                                    sx={{
+                                        height: "40.8px",
+                                        overflow: "hidden",
+                                        flexWrap: "wrap",
+                                        width: "100%"
+                                    }}
+                                >
                                     {props.stats
                                         .filter(stats => stats.compactValue || stats.value)
                                         .map((stat) => (
-                                            <Stack title={stat.name} key={stat.name} alignItems="center" width="60px">
-                                                <Box>{stat.statIcon}</Box>
+                                            <Stack 
+                                                key={stat.name}
+                                                component="li"
+                                                title={stat.name}  
+                                                alignItems="center" 
+                                                width="60px"
+                                            >
+                                                <Box sx={{color: "primary.light"}}>{stat.statIcon}</Box>
                                                 <Box fontSize="0.7em">{stat.compactValue || stat.value}{stat.unit}</Box>
                                             </Stack>
                                         ))

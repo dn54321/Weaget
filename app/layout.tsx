@@ -11,7 +11,7 @@ import "reflect-metadata";
 import 'three-dots/dist/three-dots.css';
 import '../styles/globals.css';
 
-export default function RootLayout(props) {
+export default function RootLayout(props) {      
     return (
         <html lang="en">
             <head>
@@ -19,6 +19,13 @@ export default function RootLayout(props) {
                 <link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
                 <meta name="viewport" content="initial-scale=1, width=device-width" />
                 <meta name="theme-color" content={theme.palette.primary.main} />
+                <meta
+                    name="description"
+                    content="Get accurate minutely, hourly, and daily weather forecasts 
+                             for any location with our advanced weather website. 
+                             Stay informed about current conditions, temperature, precipitation, wind, and more. 
+                             Plan your day with confidence!"
+                />
             </head>
             <body>
                 <AppRouterCacheProvider options={{ enableCssLayer: true }}>

@@ -77,19 +77,6 @@ export interface RainProps {
     label: number
 }
 
-function Rain(props:RainProps) {
-    if (!props.label) return null;        
-    return (
-        <Box width="50px" height="0px" position="absolute" bottom="80%" left="70%" title="Chance of Rain">
-            <Chip 
-                size="small" 
-                label={round(props.label*100,0)+"%"}
-                sx={{bgcolor: "primary.main"}}
-            />
-        </Box>
-    )
-}
-
 export interface WeatherCardProps {
     date: Date,
     timezone: string,
@@ -107,8 +94,7 @@ export default function WeatherCard(props: WeatherCardProps & BoxProps) {
             <Day>{date.weekdayLong}</Day>
             <ShortDate>{getDateString(date)}</ShortDate>
             <IconBox fontSize="64px" pt="5px">  
-                <WeatherIcon id={props.weatherCode}/>
-                <Rain label={props.rainfallPercentage}/>
+                <WeatherIcon id={props.weatherCode} rainPercentage={props.rainfallPercentage}/>
             </IconBox>
             <Description>{props.weatherDescription}</Description>
             <Temperature>

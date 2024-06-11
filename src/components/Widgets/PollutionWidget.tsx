@@ -20,21 +20,15 @@ import { Widget } from '../Containers/Widget';
     air quality in the searched weather location.
 */
 
-const properties = {
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
-    position: 'absolute',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+interface CircularProgressWithLabelProps {
+    value?: number;
+    loaded: boolean;
 }
-
-function CircularProgressWithLabel(props) {
+function CircularProgressWithLabel(props: CircularProgressWithLabelProps) {
     const width="120px";
     const thickness = 5;
-    const variant = props.load ? "determinate" : "indeterminate"
+    const circularProgressValue = props.value ?? 0;
+    const variant = props.loaded ? "determinate" : "indeterminate"
     return (
         <Box sx={{ position: 'relative'}} width={width} height={width} >
             <svg width={width}>
@@ -45,35 +39,45 @@ function CircularProgressWithLabel(props) {
                     </linearGradient>
                 </defs>
             </svg>
-            <CircularProgress variant={variant} value={100} size={width} sx={{
-                ...properties,
-                color: "#eee"
-            }} thickness={thickness}/>
-            <CircularProgress variant={variant} size={width} 
-            value={Math.min(props.value,300)/300*100} thickness={thickness} 
-            aria-valuenow={props.value == "???" ? null : props.value}
-            aria-valuemax={300}
-            aria-valuemin={0}
-            aria-label={"Air Quality Index"}
-            sx={{
-                [`& .${circularProgressClasses.circle}`]: {
-                    strokeLinecap: 'round',
-                },
-                'svg circle': { 
-                    stroke: 'url(#my_gradient)'
-                },
-                ...properties
-            }}/>
+            <CircularProgress
+                className="absolute-center" 
+                thickness={thickness}
+                variant={variant} 
+                value={100} 
+                size={width} 
+                sx={{ color: "#eee" }} 
+                role="none"
+                aria-valuenow={undefined}
+            /> 
+            <CircularProgress 
+                className="absolute-center" 
+                variant={variant} 
+                size={width} 
+                value={Math.min(circularProgressValue, 300)/300*100} 
+                thickness={thickness} 
+                aria-busy={props.loaded}
+                aria-valuenow={circularProgressValue}
+                aria-valuemax={300}
+                aria-valuemin={0}
+                aria-label={"Air Quality Index"}
+                sx={{
+                    [`& .${circularProgressClasses.circle}`]: {
+                        strokeLinecap: 'round',
+                    },
+                    'svg circle': { 
+                        stroke: 'url(#my_gradient)'
+                    },
+                }}/>
         
-            <Box sx={properties} fontSize="30px">
-                {`${props.value}`}
+            <Box fontSize="30px" className="absolute-center">
+                {`${circularProgressValue}`}
             </Box>
         </Box>
     );
 }
 
 
-const DotLoader = (props) => { return (
+const DotLoader = () => { return (
     <Box className="dot-pulse" sx={{
         left: "-9980px",
         width: "5px",
@@ -194,10 +198,10 @@ export default function PollutionWidget(props: PollutionCardProps) {
                 gap={2} 
             >
                 <Stack direction="row" alignItems="center">
-                    <CircularProgressWithLabel value={props.pollution?.aqi || "-"} load={loaded}/>
+                    <CircularProgressWithLabel value={props.pollution?.aqi} loaded={loaded}/>
                     <Box ml="20px" width="max-content">
                         <Box fontSize="16px">Air Quality Index</Box>
-                        <Box sx={{color: (theme) => theme.palette.primary.light}}>
+                        <Box sx={{color: (theme) => theme.palette.primary.dark}}>
                             {props.pollution?.aqi ? 
                                 aqiStatus[aqRating] : 
                                 <Box ml="20px"><DotLoader/></Box>
@@ -210,7 +214,7 @@ export default function PollutionWidget(props: PollutionCardProps) {
             { loaded ? 
                 <>
                     <Box mt="20px" color="black">{show && <PollutionTable rows={rows}/>}</Box>
-                    <Link mt="10px" component="button" onClick={()=>{setShow(!show)}}>
+                    <Link mt="10px" component="button" onClick={()=>{setShow(!show)}} color="primary.dark">
                         {show ? "Hide Advanced Pollution Details" : "Show Advanced Pollution Details"}
                     </Link>
                 </>

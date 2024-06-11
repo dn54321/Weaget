@@ -1,30 +1,16 @@
-import { mdiThermometerWater, mdiWaterPercent, mdiWeatherCloudy, mdiWeatherPouring, mdiWeatherSnowy, mdiWeatherSunnyAlert } from '@mdi/js';
-import Icon from '@mdi/react';
-import AirIcon from '@mui/icons-material/Air';
 import { Box, Card, Divider, Pagination, Skeleton, Stack } from "@mui/material";
 import styled from "@mui/system/styled";
 import { useState } from "react";
-import { HourlyWeatherDetails, OneCallWeatherDetails } from "../../types/models/openWeather/oneCall.model";
-import SpeedUnit from "../SpeedUnit";
-import WeatherStrip from '../WeatherStrip';
+import { OneCallWeatherDetails } from "../../types/models/openWeather/oneCall.model";
+import { parseWeatherDetailStats } from '../Cards/WeatherStatsCard';
 import { Widget } from '../Containers/Widget';
-import Temp from '../TemperateUnit';
-import { WeatherStats, parseWeatherDetailStats } from '../Cards/WeatherStatsCard';
+import WeatherStrip from '../WeatherStrip';
 
 const Container = styled(Card)(() => ({
     width: "100%",
     color: "black",
     padding: "15px"
 }));
-
-function UVWarning(scale) {
-    if (scale === undefined) return scale;
-    if (scale <= 2) return `Low (${scale})`;
-    else if (scale <= 5) return `Moderate (${scale})`;
-    else if (scale <= 7) return `High (${scale})`;
-    else if (scale <= 10) return `Very High (${scale})`;
-    else return `Extreme (${scale})`;
-}
 
 export function HourlyWeatherWidgetSkeleton() {
     return (
@@ -95,18 +81,19 @@ export default function HourlyWeatherStripWidget(props: WeatherStripProp) {
     const WeatherStrips = weather.hourly.slice((page-1)*12,page*12).map(hourlyWeather => {
         const time = hourlyWeather.dt.getTime();
         return (
-            <WeatherStrip 
-                key={time}
-                date={hourlyWeather.dt}
-                timezone={weather.timezone}
-                weatherCode={hourlyWeather.weather[0].id}
-                weatherDescription={hourlyWeather.weather[0].description}
-                temperature={hourlyWeather.temp}
-                rainPercentage={hourlyWeather.pop}
-                stats={parseWeatherDetailStats(hourlyWeather, weather.timezone)}
-                expanded={activeStrip === time}
-                setExpanded={() => { setActiveStrip((activeStrip === time) ? 0: time) }}
-            />
+            <Box component="li" key={time}>
+                <WeatherStrip 
+                    date={hourlyWeather.dt}
+                    timezone={weather.timezone}
+                    weatherCode={hourlyWeather.weather[0].id}
+                    weatherDescription={hourlyWeather.weather[0].description}
+                    temperature={hourlyWeather.temp}
+                    rainPercentage={hourlyWeather.pop}
+                    stats={parseWeatherDetailStats(hourlyWeather, weather.timezone)}
+                    expanded={activeStrip === time}
+                    setExpanded={() => { setActiveStrip((activeStrip === time) ? 0: time) }}
+                />
+            </Box>
         )
     }
         
@@ -119,7 +106,7 @@ export default function HourlyWeatherStripWidget(props: WeatherStripProp) {
 
     return (
         <Widget title="Hourly Weather Details" disableChildrenPadding>
-            <ul>{WeatherStrips}</ul>
+            <ol>{WeatherStrips}</ol>
             <Box display="flex" justifyContent="center" mt="10px">
                 {props.weatherData ?
                     <Pagination count={4} page={page} onChange={handleChange} color="primary"
