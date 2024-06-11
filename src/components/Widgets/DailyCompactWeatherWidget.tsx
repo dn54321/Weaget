@@ -59,7 +59,7 @@ export interface WeeklyCompactWeatherWidgetProps {
 export default function DailyCompactWeatherWidget(props: WeeklyCompactWeatherWidgetProps) {
     if (!props.weatherData) return null;
 
-    const weatherDetails = props.weatherData?.daily.map(dailyWeather => ({
+    const weatherDetails = props.weatherData?.daily?.map(dailyWeather => ({
         date: dailyWeather.dt,
         timezone: `${props.weatherData?.timezone}`,
         weatherCode: dailyWeather.weather[0].id,

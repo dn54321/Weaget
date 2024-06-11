@@ -13,7 +13,7 @@ export interface GeonamesGeocodeResult {
     countryId: number,
     fcl: string,
     population: number,
-    countryCode: number,
+    countryCode: string,
     name: string,
     fclName: string,
     adminCodes1: AdminCode,

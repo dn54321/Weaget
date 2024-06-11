@@ -73,12 +73,12 @@ export default function HourlyWeatherStripWidget(props: WeatherStripProp) {
     const [page, setPage] = useState(1);
     const [activeStrip, setActiveStrip] = useState<number>(0);
 
-    if (!props.weatherData) {
+    if (!props.weatherData || !props.weatherData.hourly) {
         return <HourlyWeatherWidgetSkeleton/>;
     }
 
     const weather = props.weatherData;
-    const WeatherStrips = weather.hourly.slice((page-1)*12,page*12).map(hourlyWeather => {
+    const WeatherStrips = weather.hourly?.slice((page-1)*12,page*12).map(hourlyWeather => {
         const time = hourlyWeather.dt.getTime();
         return (
             <Box component="li" key={time}>

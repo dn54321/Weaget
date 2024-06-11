@@ -1,10 +1,9 @@
+
+import { apicnPollutionSchema } from "../schemas/apicn/pollution.schema";
 import ApicnPollutionModel from "../types/models/apicn/pollution.model";
 
 // API ENDPOINTS
 const URL_GET_POLLUTION = (lat: number, lng: number) => `https://api.waqi.info/feed/geo:${lat};${lng}/?token=${process.env.POLLUTION_APIKEY}`;
-
-// CONFIGURATIONS
-const POLLUTION_CACHE_SECONDS = 30*60;
 
 export async function getPollutionByCoord(lat: number, lng: number): Promise<ApicnPollutionModel> {
     const pollutionUrl = URL_GET_POLLUTION(lat, lng);
@@ -18,5 +17,6 @@ export async function getPollutionByCoord(lat: number, lng: number): Promise<Api
     }
 
     const data = await response.json();
-    return data;
+    const pollutionModel = apicnPollutionSchema.parse(data);
+    return pollutionModel;
 }

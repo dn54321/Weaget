@@ -1,13 +1,13 @@
-import { plainToInstance } from "class-transformer";
-import { GoogleGeocode } from "../types/models/google/geocode.model";
-import { GoogleGeocodeDto } from "../types/dtos/google/geocode.dto";
-import IpinfoGeocode from "../types/models/ipinfo/geocode.model";
-import IpinfoGeocodeDto from "../types/dtos/ipinfo/geocode.dto";
-import { GeonamesGeocode } from "../types/models/geonames/geocode.model";
-import { GeonamesGeocodeDto } from "../types/dtos/geonames/geocode.dto";
+import { geonamesGeocodeSchema } from "../schemas/geonames/geocode.schema";
+import { googleGeocodeSchema } from "../schemas/google/geocode.schema";
+import { googleLocationSuggestionSchema } from "../schemas/google/locationSuggestion.schema";
+import { ipinfoGeocodeSchema } from "../schemas/ipinfo/geocode.schema";
 import { LocationSuggestionOptional } from "../types/geolocation.types";
+import { GeonamesGeocode } from "../types/models/geonames/geocode.model";
+import { GoogleGeocode } from "../types/models/google/geocode.model";
 import GoogleLocationSuggestion from "../types/models/google/locationSuggestion.model";
-import GoogleLocationSuggestionDto from "../types/dtos/google/locationSuggestion.dto";
+import IpinfoGeocode from "../types/models/ipinfo/geocode.model";
+
 
 // API ENDPOINTS
 const URL_GET_LOCATION = (loc: string, region?: string) => `https://maps.googleapis.com/maps/api/geocode/json?address=${loc}&key=${process.env.GOOGLE_APIKEY}${region ? "&region="+region : ""}`;
@@ -39,7 +39,7 @@ export async function getLocationDetails(location: string, region?: string): Pro
         throw new Error(`[Location Service] Could not fetch location data. Invalid Google Geocode API key.`);
     }
 
-    return plainToInstance(GoogleGeocodeDto, data, { enableImplicitConversion: true });
+    return googleGeocodeSchema.parse(data);
 }
 
 /**
@@ -47,7 +47,7 @@ export async function getLocationDetails(location: string, region?: string): Pro
  * @param ip A string representing the ip address you want to search for.
  * @returns A promise that resolves to an instance of IpinfoGeocode.
  */
-export async function getLocationDetailsByIp(ip: string): Promise<IpinfoGeocode> {
+export async function getLocationDetailsByIp(ip: string, retry=true): Promise<IpinfoGeocode> {
     const ipinfoLocationLookupUrl = URL_GET_LOCATION_BY_IP(ip);
     const response = await fetch(ipinfoLocationLookupUrl, { next: {revalidate: IP_LOOKUP_CACHE_SECONDS }});
 
@@ -56,13 +56,13 @@ export async function getLocationDetailsByIp(ip: string): Promise<IpinfoGeocode>
     }
 
     let data = await response.json();
-    const payload = plainToInstance(IpinfoGeocodeDto, data, { enableImplicitConversion: true });
 
     // Local development
-    if (payload.bogon === true) {
-        return await getLocationDetailsByIp("");
+    if (data.bogon && retry) {
+        return await getLocationDetailsByIp("", false);
     }
 
+    const payload = ipinfoGeocodeSchema.parse(data);
     return payload;
 }
 
@@ -81,7 +81,7 @@ export async function getNearbyLocationDetails(lat: number, lng: number): Promis
     }
 
     const data = await response.json();
-    return plainToInstance(GeonamesGeocodeDto, data, { enableImplicitConversion: true });
+    return geonamesGeocodeSchema.parse(data);
 }
 
 
@@ -109,5 +109,5 @@ export async function getLocationSuggestions(
     }
 
     const data = await response.json();
-    return plainToInstance(GoogleLocationSuggestionDto, data, { enableImplicitConversion: true });
+    return googleLocationSuggestionSchema.parse(data);
 }

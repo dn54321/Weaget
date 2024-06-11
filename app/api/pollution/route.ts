@@ -1,17 +1,17 @@
-import 'reflect-metadata';
-import { plainToInstance } from "class-transformer";
 import { NextRequest } from "next/server";
-import { extractQueryParams } from "../../../src/utils/url";
-import { CoordsDto } from "../../../src/types/dtos/google/geocode.dto";
+import { coordsSchema } from '../../../src/schemas/coords.schema';
 import { getPollutionByCoord } from "../../../src/services/pollution.service";
+import { extractQueryParams } from "../../../src/utils/url";
+import apicnPollutionSchema from "../../../src/schemas/apicn/pollution.schema";
 
 export async function GET(req: NextRequest) {
     const queryParams = extractQueryParams(`${req.url}`);
 
     try {
-        const {lat, lng} = plainToInstance(CoordsDto, queryParams, {excludeExtraneousValues: true});
+        const {lat, lng} = coordsSchema.parse(queryParams);
         const pollutionData = await getPollutionByCoord(lat, lng);
-        return Response.json(pollutionData);
+        const response = apicnPollutionSchema.parse(pollutionData);
+        return Response.json(response);
     }
     catch (err) {
         console.error(err);

@@ -1,6 +1,4 @@
-import 'reflect-metadata';
 import { getLocationDetails } from "@services/geolocation.service";
-import { instanceToPlain } from "class-transformer";
 import { NextRequest } from "next/server";
 
 export async function GET(
@@ -24,8 +22,7 @@ export async function GET(
             }, {status: 404 });
         }
 
-        const response = instanceToPlain(data)
-        return Response.json(response);
+        return Response.json(data);
     }
     catch(err) {
         console.error(err);

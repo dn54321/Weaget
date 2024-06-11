@@ -26,7 +26,7 @@ export interface HourlyWeatherDetails {
     visibility: number,
     windSpeed: number,
     windDeg: number,
-    windGust: number,
+    windGust?: number,
     weather: WeatherDetails[],
     pop: number,
     rain?: HourlyDownpourWeatherDetails,
@@ -35,8 +35,8 @@ export interface HourlyWeatherDetails {
 
 export interface DailyWeatherDetails {
     dt: Date,
-    sunrise: Date,
-    sunset: Date,
+    sunrise?: Date,
+    sunset?: Date,
     moonrise: Date,
     moonset: Date,
     moonPhase: number,
@@ -59,10 +59,9 @@ export interface DailyWeatherDetails {
     dewPoint: number,
     uvi: number,
     clouds: number,
-    visibility: number,
     windSpeed: number,
     windDeg: number,
-    windDust: number,
+    windGust?: number,
     weather: WeatherDetails[],
     pop: number,
     rain?: number,
@@ -72,8 +71,8 @@ export interface DailyWeatherDetails {
 export interface WeatherAlert {
     senderName: string,
     event: string,
-    start: string,
-    end: string,
+    start: Date,
+    end: Date,
     description: string,
     tags: string
 }
@@ -93,7 +92,7 @@ export interface CurrentWeatherDetails {
     visibility: number,
     windSpeed: number,
     windDeg: number,
-    windGust: number,
+    windGust?: number,
     rain?: HourlyDownpourWeatherDetails,
     snow?: HourlyDownpourWeatherDetails;
 }
@@ -103,10 +102,9 @@ export interface OneCallWeatherDetails {
     lon: number,
     timezone: string,
     timezoneOffset: number,
-    current: CurrentWeatherDetails
-    weather: Array<WeatherDetails>
-    minutely: Array<MinutelyWeatherDetails>
-    hourly: Array<HourlyWeatherDetails>,
-    daily: Array<DailyWeatherDetails>,
-    alerts: WeatherAlert
+    current?: CurrentWeatherDetails
+    minutely?: Array<MinutelyWeatherDetails>
+    hourly?: Array<HourlyWeatherDetails>,
+    daily?: Array<DailyWeatherDetails>,
+    alerts?: WeatherAlert
 }   

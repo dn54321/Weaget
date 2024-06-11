@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { OneCallWeatherDetails } from "../types/models/openWeather/oneCall.model";
-import { plainToInstance } from "class-transformer";
-import OneCallWeatherDetailsDto from "../types/dtos/openWeather/openCall.dto";
 import { FetchError } from "../errors/FetchError";
+import { weagetWeatherSchema } from "../schemas/weather.schema";
 
 async function fetchWeather(location?: string, region?: string) {
     const url = `/api/weather/${location}`;
@@ -13,13 +12,14 @@ async function fetchWeather(location?: string, region?: string) {
             if (!data.ok) throw new FetchError(data, result.message);
             return result;
         })
-        .then(data => plainToInstance(OneCallWeatherDetailsDto, data, { enableImplicitConversion: true, groups: ['client'] }))
+        .then(data => weagetWeatherSchema.parse(data))
 }
 
 export function useGetWeather(location?: string, region?: string) {
     return useQuery<OneCallWeatherDetails>({
         queryKey: ['weather', location, {region}], 
         queryFn: () => fetchWeather(location, region),
-        enabled: Boolean(location)
+        enabled: Boolean(location),
+        retry: 0,
     });
 }

@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import IpinfoGeocode from "../types/models/ipinfo/geocode.model";
-import IpinfoGeocodeDto from "../types/dtos/ipinfo/geocode.dto";
-import { plainToInstance } from "class-transformer";
 import { FetchError } from "../errors/FetchError";
+import IpinfoGeocode from "../types/models/ipinfo/geocode.model";
 import { queryClient } from "../utils/queryClient";
+import weagetCurrentLocationSchema from "../schemas/currentLocation.schema";
 
 async function fetchCurrentLocation() {
     const url = `/api/location`;
@@ -13,13 +12,14 @@ async function fetchCurrentLocation() {
             if (!data.ok) throw new FetchError(data, result.message);
             return result;
         })
-        .then(data => plainToInstance(IpinfoGeocodeDto, data, { enableImplicitConversion: true, groups: ['client'] }));
+        .then(data => weagetCurrentLocationSchema.parse(data));
 }
 
 export function useGetCurrentLocation() {
     return useQuery<IpinfoGeocode>({
         queryKey: ['current-location'], 
-        queryFn: () => fetchCurrentLocation()
+        queryFn: () => fetchCurrentLocation(),
+        retry: 0,
     });
 }
 

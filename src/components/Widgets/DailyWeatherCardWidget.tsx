@@ -37,7 +37,7 @@ export interface WeatherListProps {
 }
 
 function WeatherList(props: WeatherListProps) {
-    const weatherDetails = props.weatherData?.daily.map(dailyWeather => ({
+    const weatherDetails = props.weatherData?.daily?.map(dailyWeather => ({
         date: dailyWeather.dt,
         timezone: `${props.weatherData?.timezone}`,
         weatherCode: dailyWeather.weather[0].id,
@@ -101,10 +101,10 @@ export default function DailyWeatherCardList(props: WeeklyWeatherCardWidgetProps
 
     useEffect(() => {
         if (hoverCard >= 0) {
-            setFocusedWeather(props.weatherData?.daily[hoverCard]);
+            setFocusedWeather(props.weatherData?.daily?.[hoverCard]);
         }
         else if (activeCard >= 0) {
-            setFocusedWeather(props.weatherData?.daily[activeCard]);
+            setFocusedWeather(props.weatherData?.daily?.[activeCard]);
         }
         else {
             setFocusedWeather(undefined);

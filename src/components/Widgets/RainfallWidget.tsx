@@ -9,7 +9,6 @@ import * as React from 'react';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
 import { OneCallWeatherDetails } from '../../types/models/openWeather/oneCall.model';
 import { Widget } from '../Containers/Widget';
-import OneCallWeatherDetailsDto from '../../types/dtos/openWeather/openCall.dto';
 import { getVolume, getVolumeSymbol } from '../VolumeUnit';
 import { useSettingStore } from '../../hooks/stores/useSettingStore';
 import { MeasurementScale } from '../../types/measurement.types';
@@ -94,7 +93,7 @@ const Chart = (props: ChartProps) => {
 // A consequence of more points being > 0 is a smoother graph
 // which we prefer over a graph over a chaotic graph or a graph with nothing.
 
-function getScore(weatherLabel: string, wtr: OneCallWeatherDetailsDto) {
+function getScore(weatherLabel: string, wtr: OneCallWeatherDetails) {
     let arr;
     switch (weatherLabel) {
         case "minutely": arr = wtr.minutely?.map(x=>x.precipitation) ?? []; break;

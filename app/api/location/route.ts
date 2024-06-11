@@ -1,6 +1,4 @@
-import 'reflect-metadata';
 import { getLocationDetailsByIp } from "@services/geolocation.service";
-import { instanceToPlain } from "class-transformer";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -18,8 +16,7 @@ export async function GET(req: NextRequest) {
     
     try {
         const data = await getLocationDetailsByIp(ip);
-        const response = instanceToPlain(data);
-        return Response.json(response);
+        return Response.json(data);
     }
     catch(err) {
         console.error(err);

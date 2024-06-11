@@ -1,8 +1,6 @@
-import 'reflect-metadata';
 import { getWeatherByRegion } from "@services/weather.service";
 import { NextRequest } from "next/server";
 import { extractQueryParams } from "@src/utils/url";
-import { instanceToPlain } from "class-transformer";
 
 export async function GET(
     req: NextRequest, 
@@ -17,8 +15,7 @@ export async function GET(
 
     try {
         const weatherData = await getWeatherByRegion(location, region);
-        const response = instanceToPlain(weatherData);
-        return Response.json(response);
+        return Response.json(weatherData);
     }
     catch (err) {
         console.error(err);

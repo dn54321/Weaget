@@ -1,16 +1,14 @@
-import 'reflect-metadata';
-import { NextRequest } from "next/server";
-import { extractQueryParams } from "@src/utils/url";
-import { plainToInstance } from "class-transformer";
 import { getLocationSuggestions } from "@src/services/geolocation.service";
-import { GoogleLocationSuggestionQueryParamsDto } from "../../../../src/types/dtos/google/locationSuggestion.dto";
+import { extractQueryParams } from "@src/utils/url";
+import { NextRequest } from "next/server";
+import { googleLocationSuggestionInputSchema } from '../../../../src/schemas/google/locationSuggestion.schema';
 
 // Generates a list of autocomplete queries given a string
 export async function GET(req: NextRequest) {
     const queryParams = extractQueryParams(`${req.url}`);
 
     try {
-        const {input, ...params} = plainToInstance(GoogleLocationSuggestionQueryParamsDto, queryParams, {excludeExtraneousValues: true});
+        const {input, ...params} = googleLocationSuggestionInputSchema.parse(queryParams);
         const suggestions = await getLocationSuggestions(input, params);
         const formattedSuggestions = suggestions.predictions.map(prediction => ({
             main: prediction.structuredFormatting.mainText,

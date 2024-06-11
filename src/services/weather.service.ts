@@ -1,5 +1,4 @@
-import { plainToInstance } from "class-transformer";
-import OneCallWeatherDetailsDto from "../types/dtos/openWeather/openCall.dto";
+import { oneCallWeatherDetailsSchema } from "../schemas/openWeather/oneCall.schema";
 import { OneCallWeatherDetails } from "../types/models/openWeather/oneCall.model";
 import { getLocationDetails } from "./geolocation.service";
 
@@ -25,7 +24,7 @@ export async function getWeatherByCoords(lat: number, lng: number): Promise<OneC
     }
 
     const data = await response.json();
-    return plainToInstance(OneCallWeatherDetailsDto, data, { enableImplicitConversion: true });
+    return oneCallWeatherDetailsSchema.parse(data);
 }
 
 /**

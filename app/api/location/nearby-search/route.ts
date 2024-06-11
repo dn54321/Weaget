@@ -1,16 +1,14 @@
-import 'reflect-metadata';
-import { plainToInstance } from "class-transformer";
 import { NextRequest } from "next/server";
 import { getNearbyLocationDetails } from "../../../../src/services/geolocation.service";
-import { CoordsDto } from "../../../../src/types/dtos/google/geocode.dto";
 import { extractQueryParams } from "../../../../src/utils/url";
+import { coordsSchema } from '../../../../src/schemas/coords.schema';
 
 // Generates a list of autocomplete queries given a string
 export async function GET(req: NextRequest) {
     const queryParams = extractQueryParams(`${req.url}`);
 
     try {
-        const {lat, lng} = plainToInstance(CoordsDto, queryParams, {excludeExtraneousValues: true});
+        const {lat, lng} = coordsSchema.parse(queryParams);
         const locations = await getNearbyLocationDetails(lat, lng);
         const formattedLocations = locations.geonames.map(location => ({
             name: location.name,

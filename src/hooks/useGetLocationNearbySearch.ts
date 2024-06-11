@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { NearbySearch } from "../types/geolocation.types";
 import { FetchError } from "../errors/FetchError";
+import { weagetNearbyLocationSchema } from "../schemas/nearbyLocation.schema";
 
 async function fetchNearbyLocations(lat?: number, lng?: number) {
     const url = `/api/location/nearby-search`;
@@ -8,12 +9,14 @@ async function fetchNearbyLocations(lat?: number, lng?: number) {
         lat: `${lat}`,
         lng: `${lng}`
     });
-    return await fetch(`${url}?${queryParams}`)        
+    const data = await fetch(`${url}?${queryParams}`)        
         .then(async (data) => {
             const result = await data.json();
             if (!data.ok) throw new FetchError(data, result.message);
             return result;
         });
+
+   return weagetNearbyLocationSchema.parse(data);
 }
 
 export function useGetLocationNearbySearch(lat?: number, lng?: number) {
@@ -22,5 +25,6 @@ export function useGetLocationNearbySearch(lat?: number, lng?: number) {
         queryFn: () => fetchNearbyLocations(lat, lng),
         enabled: Boolean(lat && lng),
         staleTime: Infinity,
+        retry: 0,
     });
 }

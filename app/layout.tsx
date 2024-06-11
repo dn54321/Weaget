@@ -1,5 +1,4 @@
 "use client"
-import "reflect-metadata";
 import 'three-dots/dist/three-dots.css';
 import '../styles/globals.css';
 import { ThemeProvider } from '@emotion/react';

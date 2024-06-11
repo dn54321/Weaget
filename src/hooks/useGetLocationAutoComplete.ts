@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from 'react';
-import { GoogleLocationSuggestionQueryParamsDto } from "../types/dtos/google/locationSuggestion.dto";
-import { AutoCompleteSuggestions } from "../types/autoComplete.types";
+import { AutoCompleteQueryParams, AutoCompleteSuggestions } from "../types/autoComplete.types";
 import { FetchError } from "../errors/FetchError";
+import { weagetAutoCompleteSchema } from "../schemas/autocomplete.schema";
 
-async function fetchAutoComplete(input: string, params?: Partial<GoogleLocationSuggestionQueryParamsDto>) {
+async function fetchAutoComplete(input: string, params?: AutoCompleteQueryParams) {
     const url = `/api/location/auto-complete`;
     const queryParams = new URLSearchParams({input, ...params});
     return await fetch(`${url}?${queryParams}`)        
@@ -12,7 +12,8 @@ async function fetchAutoComplete(input: string, params?: Partial<GoogleLocationS
             const result = await data.json();
             if (!data.ok) throw new FetchError(data, result.message);
             return result;
-        });
+        })
+        .then((data) => weagetAutoCompleteSchema.parse(data));
 }
 
 export function useGetLocationAutoComplete(input: string, location?: string) {
@@ -22,7 +23,8 @@ export function useGetLocationAutoComplete(input: string, location?: string) {
         queryKey: ['location-auto-complete', query, {location}],
         queryFn: () => fetchAutoComplete(query, {location, sessiontoken}),
         enabled: !!query,
-        staleTime: Infinity
+        staleTime: Infinity,
+        retry: 0,
     });
     return [reactQuery, setQuery] as const;
 }
