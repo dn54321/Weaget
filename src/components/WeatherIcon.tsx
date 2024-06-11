@@ -43,7 +43,7 @@ function RainIndicator(props: {rainPercentage: number}) {
             position="absolute" 
             bottom="-30%" 
             right="-25%"
-            title="Chance of Rain/Snow"
+            title="Probability of Precipitation"
         >
             <Chip 
                 label={round(props.rainPercentage*100,0)+"%"}
