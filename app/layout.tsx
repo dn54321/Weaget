@@ -9,6 +9,8 @@ import { queryClient } from '@src/utils/queryClient';
 import theme from '@src/utils/theme';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function RootLayout(props) {      
     return (
@@ -33,6 +35,8 @@ export default function RootLayout(props) {
                         <QueryClientProvider client={queryClient}>
                             {props.children}
                             <ReactQueryDevtools buttonPosition="bottom-left"/>
+                            <Analytics/>
+                            <SpeedInsights/>
                         </QueryClientProvider>
                     </ThemeProvider>
                 </AppRouterCacheProvider>
