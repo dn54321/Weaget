@@ -55,7 +55,7 @@ const SearchContainer = styled('main')(({ theme }) => ({
 
 const PageDivider = styled(Box)(({theme}) => ({
     height:"50px",
-    backgroundColor:"#eee"
+    backgroundColor:"#ddd"
 }));
 
 const ResponsiveLogo = styled(LogoIcon)(({theme}) => ({ 
