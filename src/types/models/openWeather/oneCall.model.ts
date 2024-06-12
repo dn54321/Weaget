@@ -74,7 +74,7 @@ export interface WeatherAlert {
     start: Date,
     end: Date,
     description: string,
-    tags: string
+    tags: Array<string>
 }
 
 export interface CurrentWeatherDetails {
@@ -106,5 +106,5 @@ export interface OneCallWeatherDetails {
     minutely?: Array<MinutelyWeatherDetails>
     hourly?: Array<HourlyWeatherDetails>,
     daily?: Array<DailyWeatherDetails>,
-    alerts?: WeatherAlert
+    alerts?: Array<WeatherAlert>
 }   

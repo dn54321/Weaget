@@ -126,7 +126,7 @@ const weatherAlertSchema = z.object({
     start: z.number().transform(v => new Date(v*1000)),
     end: z.number().transform(v => new Date(v*1000)),
     description: z.string(),
-    tags: z.string()
+    tags: z.array(z.string())
 }).transform((o) => ({
     senderName: o.sender_name,
     event: o.event,
@@ -183,7 +183,7 @@ export const oneCallWeatherDetailsSchema = z.object({
     minutely: z.array(minutelyWeatherDetailsShema).optional(),
     hourly: z.array(hourlyWeatherDetailsSchema).optional(),
     daily: z.array(dailyWeatherDetailsSchema).optional(),
-    alerts: weatherAlertSchema.optional(),
+    alerts: z.array(weatherAlertSchema).optional(),
 }).transform((o) => ({
     lat: o.lat,
     lon: o.lon,

@@ -76,7 +76,7 @@ const weatherAlertSchema = z.object({
     start: z.coerce.date(),
     end: z.coerce.date(),
     description: z.string(),
-    tags: z.string()
+    tags: z.array(z.string())
 });
 
 const CurrentWeatherDetailsSchema = z.object({
@@ -108,7 +108,7 @@ export const weagetWeatherSchema = z.object({
     minutely: z.array(minutelyWeatherDetailsShema).optional(),
     hourly: z.array(hourlyWeatherDetailsSchema).optional(),
     daily: z.array(dailyWeatherDetailsSchema).optional(),
-    alerts: weatherAlertSchema.optional(),
+    alerts: z.array(weatherAlertSchema).optional(),
 });
 
 export default weagetWeatherSchema;
