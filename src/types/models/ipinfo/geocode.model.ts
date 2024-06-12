@@ -1,6 +1,6 @@
 export default interface IpinfoGeocode {
     ip: string,
-    hostname: string,
+    hostname?: string,
     city: string,
     region: string,
     country: string,

@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const ipinfoGeocodeSchema = z.object({
     ip: z.string(),
-    hostname: z.string(),
+    hostname: z.string().optional(),
     city: z.string(),
     region: z.string(),
     country: z.string(),
