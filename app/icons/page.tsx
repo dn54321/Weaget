@@ -3,8 +3,8 @@
 import { Box, Container, Divider } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Head from 'next/head';
-import Navbar from '../../src/components/Containers/Navbar';
-import Footer from '../../src/components/Containers/Footer';
+import Navbar from '../../src/components/System/Navbar';
+import Footer from '../../src/components/System/Footer';
 import WeatherIcon from '../../src/components/WeatherIcon';
 
 function DisplayIcon(props) {
