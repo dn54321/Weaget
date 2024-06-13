@@ -1,9 +1,9 @@
 "use client"
-import { Container } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import styled from '@mui/system/styled';
-import Footer from '@src/components/Containers/Footer';
+import Footer from '@components/System/Footer';
 import Head from 'next/head';
 import LogoIcon from '../src/components/Icon/LogoIcon';
 import { useGetLocationNearbySearch } from '../src/hooks/useGetLocationNearbySearch';
@@ -15,6 +15,8 @@ import { useEffect } from 'react';
 import { useWidgetStore } from '../src/hooks/stores/useWidgetStore';
 import SearchBar from '../src/components/SearchBar';
 import SettingsFab from '../src/components/SettingsFab';
+import { useAlert } from '../src/hooks/useAlert';
+import { randomBytes, randomUUID } from 'crypto';
 
 const Loader = () => (
     <Stack alignItems="center" sx={{
@@ -81,7 +83,27 @@ export default function Home() {
     const locationQuery = useGetLocationNearbySearch(currentLocationQuery.data?.lat, currentLocationQuery.data?.lng);
     const location = `${currentLocationQuery.data?.city}, ${currentLocationQuery.data?.region}, ${currentLocationQuery.data?.country}`;
     const resetWeather = useWidgetStore((state) => state.resetState);
-   
+    const {AlertBox, addAlert} = useAlert();
+    
+    useEffect(() => {
+        if (weatherQuery.isError) {
+            addAlert({
+                type: "error",
+                message: "Error fetching weather data. Please try again later.",
+                duration: Infinity
+            });
+        }
+        if (locationQuery.isError || currentLocationQuery.isError) {
+            addAlert({
+                type: "error",
+                message: "Error fetching location data. Please try again later.",
+                duration: Infinity
+            });
+        }
+    }, [weatherQuery.isError, locationQuery.isError, currentLocationQuery.isError]);
+
+
+
     useEffect(() => {
         if (currentLocationQuery.isFetching) {
             resetWeather();
@@ -116,6 +138,7 @@ export default function Home() {
                         }
                     </Section>
                     <SettingsFab temperature mt="auto"/> 
+                    <AlertBox/>
                 </Stack>
                 <Box>
                     <Footer maxWidth="md"/>

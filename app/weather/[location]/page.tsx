@@ -2,8 +2,8 @@
 import { Box, Container, Grid, Stack } from '@mui/material';
 import Head from 'next/head';
 
-import Footer from '@components/Containers/Footer';
-import Navbar from '@components/Containers/Navbar';
+import Footer from '@components/System/Footer';
+import Navbar from '@components/System/Navbar';
 import SettingsFab from '@components/SettingsFab';
 import DailyWeatherCardList from '@components/Widgets/DailyWeatherCardWidget';
 import HourlyWeatherStripWidget from '@components/Widgets/HourlyWeatherStripWidget';
@@ -13,10 +13,12 @@ import RainfallWidget from '@components/Widgets/RainfallWidget';
 import WeatherDisplayWidget from '@components/Widgets/WeatherDisplayWidget';
 import WeatherStatWidget from '@components/Widgets/WeatherStatWidget';
 
+import { useAlert } from '../../../src/hooks/useAlert';
 import { useGetLocation } from '../../../src/hooks/useGetLocation';
 import { useGetLocationNearbySearch } from '../../../src/hooks/useGetLocationNearbySearch';
 import { useGetPollution } from '../../../src/hooks/useGetPollution';
 import { useGetWeather } from '../../../src/hooks/useGetWeather';
+import { useEffect } from 'react';
 
 interface PageProps {
     params: {
@@ -32,6 +34,18 @@ export default function Page({ params }: PageProps) {
     const locationQuery = useGetLocation(location);
     const locationShortForm = locationQuery.data?.results[0].addressComponents[0].shortName;
     const locationLongForm = locationQuery.data?.results[0].formattedAddress;
+    const {AlertBox, addAlert} = useAlert();
+    
+    useEffect(() => {
+        if (weatherQuery.isError || pollutionQuery.isError || nearbyLocationQuery.isError || locationQuery.isError) {
+            addAlert({
+                type: "error",
+                message: "Error fetching weather data. Some elements may be unresponsive.",
+                duration: Infinity
+            });
+        }
+    }, [weatherQuery.isError, pollutionQuery.isError, nearbyLocationQuery.isError, locationQuery.isError]);
+
     return (
         <Box>
             <Head>
@@ -63,7 +77,8 @@ export default function Page({ params }: PageProps) {
                             </Grid>
                         </Grid>
                     </Container> 
-                    <SettingsFab measurement temperature display={{xs: 'none', md: 'flex'}}/>   
+                    <SettingsFab measurement temperature display={{xs: 'none', md: 'flex'}}/> 
+                    <AlertBox/> 
                 </Box>
                 <Footer maxWidth="lg"/>
             </Box>
