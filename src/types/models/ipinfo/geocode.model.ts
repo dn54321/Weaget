@@ -8,7 +8,7 @@ export default interface IpinfoGeocode {
     lat: number,
     lng: number,
     org: string,
-    postal: string,
+    postal?: string,
     timezone: string,
     bogon?: boolean,
 }

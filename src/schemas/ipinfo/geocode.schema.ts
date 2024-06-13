@@ -8,8 +8,8 @@ export const ipinfoGeocodeSchema = z.object({
     country: z.string(),
     loc: z.string(),
     org: z.string(),
-    postal: z.string(),
     timezone: z.string(),
+    postal: z.string().optional(),
     bogon: z.boolean().optional(),
 }).transform((o) => ({
     ...o,
