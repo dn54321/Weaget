@@ -17,7 +17,7 @@ export const geonamesGeocodeResultSchema = z.object({
     countryCode: z.string(),
     name: z.string(),
     fclName: z.string(),
-    adminCodes1: adminCodeSchema,
+    adminCodes1: adminCodeSchema.optional(),
     countryName: z.string(),
     fcodeName: z.string(),
     adminName1: z.string(),

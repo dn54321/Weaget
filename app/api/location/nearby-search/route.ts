@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
         const locations = await getNearbyLocationDetails(lat, lng);
         const formattedLocations = locations.geonames.map(location => ({
             name: location.name,
-            state: location.adminCodes1.ISO3166_2,
+            state: location.adminCodes1?.ISO3166_2 ?? '',
             country: location.countryName
         }));
         return Response.json(formattedLocations);

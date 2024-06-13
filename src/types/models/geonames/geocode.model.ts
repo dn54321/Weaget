@@ -16,7 +16,7 @@ export interface GeonamesGeocodeResult {
     countryCode: string,
     name: string,
     fclName: string,
-    adminCodes1: AdminCode,
+    adminCodes1?: AdminCode,
     countryName: string,
     fcodeName: string,
     adminName1: string,
