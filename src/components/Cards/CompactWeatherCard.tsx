@@ -31,11 +31,9 @@ const PaperContainer = styled(Paper)(({ theme }) => ({
     display: "flex", 
     flexDirection: "column", 
     alignItems: "center", 
-    py: "4px", 
-    px: "9px", 
     position: "relative",
     aspectRatio: "1", 
-    justifyContent:"center"
+    justifyContent:"center",
 }));
 
 export interface CompactWeatherCardProps {
@@ -53,8 +51,8 @@ export default function CompactWeatherCard(props: CompactWeatherCardProps) {
     return (
         <PaperContainer>
             <Box>{date.weekdayShort}</Box>
-            <Box fontSize="40px">
-            <WeatherIcon id={props.weatherCode} rainPercentage={props.rainfallPercentage}/>
+            <Box fontSize="3em">
+                <WeatherIcon id={props.weatherCode} rainPercentage={props.rainfallPercentage}/>
             </Box>
             <Box>
                 <High><Temp value={props.maxTemperature}/></High>

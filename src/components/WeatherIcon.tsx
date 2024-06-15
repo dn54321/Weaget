@@ -49,6 +49,7 @@ function RainIndicator(props: {rainPercentage: number}) {
                 label={round(props.rainPercentage*100,0)+"%"}
                 sx={{
                     backgroundColor: "primary.dark",
+                    color: "primary.contrastText",
                     fontSize: "0.25em",
                     height: "auto",
                     "& .MuiChip-label": {

@@ -53,6 +53,7 @@ function Container(props) {
     return (
         <Card id="container" sx={{
             backgroundColor: "primary.light",
+            color: "primary.contrastText",
             boxShadow: 3,
             minWidth:"120px",
             width: "100%",
@@ -90,10 +91,10 @@ export interface WeatherCardProps {
 export default function WeatherCard(props: WeatherCardProps & BoxProps) {
     const date = DateTime.fromJSDate(props.date, {zone: props.timezone});
     return (
-        <Container sx={{color: "white"}}>
+        <Container>
             <Day>{date.weekdayLong}</Day>
             <ShortDate>{getDateString(date)}</ShortDate>
-            <IconBox fontSize="64px" pt="5px">  
+            <IconBox fontSize="4em" pt="5px">  
                 <WeatherIcon id={props.weatherCode} rainPercentage={props.rainfallPercentage}/>
             </IconBox>
             <Description>{props.weatherDescription}</Description>

@@ -1,6 +1,8 @@
 import { Box, Button, styled } from '@mui/material';
-import CompactWeatherCard, { CompactWeatherCardProps } from '../Cards/CompactWeatherCard';
 import { OneCallWeatherDetails } from '../../types/models/openWeather/oneCall.model';
+import CompactWeatherCard from '../Cards/CompactWeatherCard';
+import { Widget } from '../Containers/Widget';
+import Grid from '@mui/material/Unstable_Grid2';
 
 /*
     Compact weather card list is a grid containing simplified weather cards.
@@ -14,35 +16,11 @@ import { OneCallWeatherDetails } from '../../types/models/openWeather/oneCall.mo
     leads to more weather details on the user's request.
 */
 
-// Styles 
-const Container = styled(Box)(() => ({
-    display: "flex",
-    flexDirection: "column",
-    width: "100%"
-}));
-
-const Header = styled(Box)(() => ({
-    color: "black",
-    display: "flex",
-    flexDirection:"column",
-    marginBottom: "20px"               
-}));
-
-const Footer = styled(Box)(() => ({  
-    marginTop: "20px"             
-}));
-
-const CardContainer = styled('ol')(() => ({
-    display: "grid",
-    justifyContent: "flex-start",
-    gridTemplateColumns: "repeat(auto-fill, minmax(97px, 1fr))",
-    width: "100%",
-    gap: 3,
-}));
-
 const StyledButton = styled(Button)(({ theme }) => ({
     backgroundColor: theme.palette.primary.dark,
-    color: "white",
+    color: theme.palette.primary.contrastText,
+    marginTop: "20px",
+    width: "fit-content",
     "&:hover": {
         backgroundColor: theme.palette.primary.main
     }
@@ -50,8 +28,8 @@ const StyledButton = styled(Button)(({ theme }) => ({
 
 // List of Weather Card
 export interface WeeklyCompactWeatherWidgetProps {
-    title: string
-    description: string,
+    title?: string
+    subtitle?: string,
     weatherData?: OneCallWeatherDetails,
     location: string
 }
@@ -70,27 +48,35 @@ export default function DailyCompactWeatherWidget(props: WeeklyCompactWeatherWid
     }));
 
     const cards = weatherDetails?.map((dailyWeather) => (
-        <Box component="li" key={dailyWeather.date.getTime()} >
+        <Grid component="li" key={dailyWeather.date.getTime()} xs={4} sm={3}>
             <CompactWeatherCard {...dailyWeather} />
-        </Box>
+        </Grid>
     ));
 
     return (
-        <Container component="section">
-            <Header>
-                <h1>{props.title}</h1>
-                <Box fontSize="0.8em">
-                    {props.description}
-                </Box>
-            </Header>
-            <CardContainer>
-                {cards}
-            </CardContainer>
-            <Footer>
-            <StyledButton href={`/weather/${props.location}`}>
-                More Weather Details
-            </StyledButton>
-            </Footer>
-        </Container>            
+        <Widget 
+            title={props.title ?? "Compact Weather Widget"}
+            subtitle={props.subtitle ?? "Currently Weekly Weather"}
+            variant="transparent"
+            disableChildrenPadding
+        >
+            <Box display="grid" sx={{width: "100%"}}>
+                <Grid container 
+                    spacing={0.5} 
+                    component="ol" 
+                    width="min(600px, 100%)" 
+                    justifyContent="flex-start !important"
+                    sx={{placeSelf:'center'}}
+                >
+                    {cards}
+                    <Grid xs={12}>
+                    <StyledButton href={`/weather/${props.location}`}>
+                    Get More Weather Details
+                    </StyledButton>
+                    </Grid>
+                </Grid>
+
+            </Box>
+        </Widget>            
     )
 }

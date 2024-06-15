@@ -3,7 +3,7 @@ import Box, { BoxProps } from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 import styled from '@mui/system/styled';
-import { NearbySearch } from '../../types/geolocation.types';
+import { NearbyLocation } from '../../types/geolocation.types';
 import { Widget } from '../Containers/Widget';
 
 /*
@@ -36,7 +36,7 @@ const Entry = (props: LinkProps) => {
 }
 
 interface LocationListWidgetProps {
-    locations?: Array<NearbySearch>
+    locations?: Array<NearbyLocation>
 }
 
 export default function LocationListWidget(props: LocationListWidgetProps) {
