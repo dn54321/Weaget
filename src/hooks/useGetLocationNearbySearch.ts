@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { NearbySearch } from "../types/geolocation.types";
+import { NearbyLocation } from "../types/geolocation.types";
 import { FetchError } from "../errors/FetchError";
 import { weagetNearbyLocationSchema } from "../schemas/nearbyLocation.schema";
 
@@ -20,7 +20,7 @@ async function fetchNearbyLocations(lat?: number, lng?: number) {
 }
 
 export function useGetLocationNearbySearch(lat?: number, lng?: number) {
-    return useQuery<Array<NearbySearch>>({
+    return useQuery<Array<NearbyLocation>>({
         queryKey: ['location-nearby-search', lat, lng], 
         queryFn: () => fetchNearbyLocations(lat, lng),
         enabled: Boolean(lat && lng),

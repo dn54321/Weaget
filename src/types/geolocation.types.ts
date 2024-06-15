@@ -3,8 +3,10 @@ export interface LocationSuggestionOptional {
     types: string, 
 }
 
-export interface NearbySearch {
+export interface NearbyLocation {
     name: string,
     state: string,
     country: string
 }
+
+export type NearbyLocations = Array<NearbyLocation>
