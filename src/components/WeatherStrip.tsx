@@ -66,7 +66,7 @@ export default function WeatherStrip(props: WeatherStripProps) {
                         <Stack alignItems="center" p="10px" fontSize="48px" sx={{ position: "relative" }}>
                             <WeatherIcon id={props.weatherCode} rainPercentage={props.rainPercentage}/>
                         </Stack>
-                        <Box ml="5px">
+                        <Box ml="15px">
                             <Box><b><Temp value={props.temperature}/></b></Box>
                             <Capitalise fontSize="0.6em">{props.weatherDescription}</Capitalise>
                         </Box> 
@@ -98,6 +98,7 @@ export default function WeatherStrip(props: WeatherStripProps) {
                                                 title={stat.name}  
                                                 alignItems="center" 
                                                 width="60px"
+                                                sx={{display: {xs: "none", sm: "block"}}}
                                             >
                                                 <Box sx={{color: "primary.light"}}>{stat.statIcon}</Box>
                                                 <Box fontSize="0.7em">{stat.compactValue || stat.value}{stat.unit}</Box>
