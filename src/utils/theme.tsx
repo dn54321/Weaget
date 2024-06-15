@@ -60,7 +60,7 @@ const theme = responsiveFontSizes(createTheme({
             main: red.A400,
         },
         text: {
-            primary: '#fff'
+            primary: '#000',
         },        
     },
     breakpoints: {
