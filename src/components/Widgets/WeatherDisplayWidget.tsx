@@ -1,5 +1,5 @@
-import {Box, Card, CardContent, Stack} from '@mui/material/';
-import { BoxProps, keyframes, styled } from '@mui/system';
+import {Box, Card, CardContent, Stack, Typography} from '@mui/material/';
+import { BoxProps, keyframes, styled, SxProps } from '@mui/system';
 import Temp from '../TemperateUnit';
 import { DateTime } from 'luxon';
 import { CurrentWeatherDetails, DailyWeatherDetails, OneCallWeatherDetails } from '../../types/models/openWeather/oneCall.model';
@@ -11,8 +11,9 @@ const CLOUD_GLOW = "#eee"
 const RAIN_CLOUD_GLOW = "rgba(0,0,0,0.2)"
 
 const move = keyframes`
-    50% {transform: translateX(-4500%);}
-    100% {transform: translateX(4500%);}
+    33% {transform: translateX(-2000%);}
+    66% {transform: translateX(2000%);}
+    99% {transform: translateX(0%);
 `;
 
 const rain = keyframes`
@@ -30,7 +31,7 @@ const snow = keyframes`
     100% { top: 200px; opacity: 0; left: -20px}
 `;
 
-const Scene = styled(Box)((props) => ({
+const Scene = styled(Box)(() => ({
     animation: `${move} 100s infinite ease-in-out`,
     position: "absolute",
     width: "1px"
@@ -45,20 +46,20 @@ const Cloud = (props: BoxProps & {rain?: boolean}) => {
                 "--cloud-shade": hasRain ? RAIN_CLOUD_GLOW : CLOUD_GLOW,
                 filter: "drop-shadow(0px 0px 0.3em var(--cloud-shade))",
                 width: "4em",
-                height: "2em",
                 borderRadius: '.5em',
                 opacity: '1',
                 zIndex: "2",
                 position: 'absolute',
                 backgroundColor: "var(--cloud-color)",
                 transform: "translate(-50%,-50%)",
+                height: "2em",
             }}/>
         </Scene>
     )
 }
 
-const Sunny = styled(Box)((props) => ({
-    fontSize: "min(10px, 5vw)",
+const Sun = styled(Box)(() => ({
+    fontSize: "0.4em",
     background: "linear-gradient(120deg, #FFE5B4, #FFEB3B)",
     filter: "drop-shadow(0px 0px 3em yellow)",
     width: "8em",
@@ -66,7 +67,7 @@ const Sunny = styled(Box)((props) => ({
     borderRadius: '4em',
     position: 'absolute',
     right: "0px",
-    transform: "translate(0%, -40%)",
+    transform: "translate(-20%, -20%)",
     opacity: '1',
     "&:before,&:after": {
         backgroundColor: "rgba(255, 255, 255, .2)",
@@ -182,6 +183,34 @@ function Cloudy(props: BoxProps) {
     )
 }
 
+function Sunny() {
+    return (
+        <>
+            <Sun left={{xs: "55%", sm:"62%", md:"65%"}} top={{xs:"20%", sm:"0%"}}/>
+        </>
+    )
+}
+
+function ScatteredClouds() {
+    return (
+        <>
+            <Sun left={{xs: "55%", sm:"62%", md:"65%"}} top={{xs:"20%", sm:"0%"}}/>
+            <Cloud left="77%" top="40%" fontSize="0.7em"/>
+            <Cloud left="67%" top="60%" fontSize="0.7em"/>
+        </>
+    )
+}
+
+function FewClouds() {
+    return (
+        <>
+            <Sun left={{xs: "55%", sm:"62%", md:"65%"}} top={{xs:"20%", sm:"0%"}}/>
+            <Cloud left="65%" top="65%" fontSize="0.5em" height="4em"/>
+        </>
+    )
+}
+
+
 function Snowy(props: BoxProps) {
     return (
         <>
@@ -209,8 +238,8 @@ const getBackgroundIcon = id => {
         case 600: return (<Snowy/>)
         case 700: return (<Cloudy/>)
         case 800: return (<Sunny/>)
-        case 801: return (<Cloudy/>)
-        case 802: return (<Cloudy/>)
+        case 801: return (<FewClouds/>)
+        case 802: return (<ScatteredClouds/>)
         case 803: return (<Cloudy/>)
         case 804: return (<Cloudy/>)
         default: 
@@ -222,29 +251,10 @@ const getBackgroundIcon = id => {
 
 const Container = styled(Card)((props) => ({
     position: "relative",
-    height: "20rem",
-    boxShadow: "0 0 .3em -.03em #fff"
+    height: "320px",
+    boxShadow: "0 0 .3em -.03em #fff",
+    color: "white"
 }));
-
-
-const Location = (props) => {
-    return (
-        <Box component="h1" width="100%" position="relative" height="3em">
-            <Box sx={{
-                fontSize: "2.5em", 
-                textOverflow: "ellipsis", 
-                overflow: "hidden", 
-                whiteSpace: "nowrap",
-                position: "absolute",
-                left: "0",
-                right: "0",
-                textTransform: "capitalize"
-            }}>
-                {props.children}
-            </Box>
-        </Box>
-    )
-}
 
 const High = styled(Box)(({ theme }) => ({
     display: "inline",
@@ -290,7 +300,7 @@ export default function WeatherDisplayWidget(props: WeatherDisplayWidgetProps) {
     const timezone = props.weatherData?.timezone;
 
     const weatherUpdated = focusedWeather 
-        ? DateTime.fromJSDate(focusedWeather?.dt, { zone: timezone}).toFormat('LLL d t')
+        ? DateTime.fromJSDate(focusedWeather?.dt, { zone: timezone}).toFormat('LLL d, t')
         : "Fetching Details..."
 
     const weatherCode = focusedWeather?.weather[0]?.id;
@@ -300,17 +310,17 @@ export default function WeatherDisplayWidget(props: WeatherDisplayWidgetProps) {
     return (
         <Container sx={{ background: getBackgroundColor(focusedWeather?.weather[0].id) }}>
             <CardContent sx={{height: "100%"}}>
-                <Location>{props.location ?? "Fetching Location Details..."}</Location>
-                <Stack direction="row" height="100%">
-                    <Box mt="0.1em">
-                        <Box fontSize="0.8em" width="200px">Updated At: {weatherUpdated}</Box>
-                        <Box>
-                            <WeatherTemperatureDisplay weather={focusedWeather}/>
-                            {typeof(weatherFeelsLike) === 'number' && <Box fontSize="1em"><b>Feels like <Temp value={weatherFeelsLike}/></b></Box>}
-                            <Box fontSize="1em" sx={{textTransform:"capitalize"}}><b>{weatherDescription}</b></Box>
-                        </Box>
+                <Typography component="h1" variant="h3"><b>{props.location ?? "Fetching Location Details..."}</b></Typography>
+                <Typography variant="body2">Updated At: {weatherUpdated}</Typography>
+                <Stack direction="row" height="80%">
+                    <Box width="150px">
+                        <WeatherTemperatureDisplay weather={focusedWeather}/>
+                        {typeof(weatherFeelsLike) === 'number' && <Box fontSize="1em"><b>Feels like <Temp value={weatherFeelsLike}/></b></Box>}
+                        <Box fontSize="1em" sx={{textTransform:"capitalize"}}><b>{weatherDescription}</b></Box>
                     </Box>
-                    <Box position="relative" width="100%" fontSize="3vw">
+                    <Box position="relative" width="100%" height="100%" sx={{
+                        fontSize: {xs: "2em", sm: "3em", md:"4em"}
+                    }}>
                         {getBackgroundIcon(weatherCode)}
                     </Box>
                 </Stack>

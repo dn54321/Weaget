@@ -34,9 +34,8 @@ const Section = styled(Container)(({theme}) => ({
   display: "flex",
   justifyContent: "center",
   top: "20px",
-  marginBottom: "3  0px",
   position: "relative",
-  gap: "20px",
+  gap: "10px",
   [theme.breakpoints.down('md')]: {
       flexDirection: "column",
       gap: "50px",
@@ -127,11 +126,13 @@ export default function Home() {
                         <>
                             <DailyCompactWeatherWidget 
                                 title="Local Weather"
-                                description={location}
+                                subtitle={location}
                                 weatherData={weatherQuery.data} 
                                 location={location}
                             />
-                            <LocationGrid locations={locationQuery.data}/>
+                            <LocationGrid 
+                                locationData={locationQuery.data}
+                            />
                         </>
                         :
                         <Loader/>

@@ -16,8 +16,8 @@ function IconBox(props) {
         height="100%">
             <Box sx={{
                 position: "relative",
-                width: "1em",
-                height: "1em",
+                width: "20rem",
+                height: "20rem",
                 "& svg": {
                     color: "gray",
                     position: "absolute",
@@ -26,13 +26,13 @@ function IconBox(props) {
                 "& svg:nth-child(1)": {
                     top: "45%",
                     left: "50%",
-                    fontSize: "1em",
+                    fontSize: "20rem",
                     filter: "brightness(80%) drop-shadow(0px 0px 2em #eee)"
                 },
                 "& svg:nth-child(2)": {
                     top: "60%",
                     left: "60%",
-                    fontSize: "0.8em",
+                    fontSize: "16rem",
                     filter: "drop-shadow(0px 0px 2em #eee)"
                 } 
             }}>
