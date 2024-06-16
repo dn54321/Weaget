@@ -118,7 +118,7 @@ export const Rain = styled(Box) ((props: any) => ({
 }))
 
 
-export const Snow1 = styled(Box) ((props: any) => ({
+export const Snow1 = styled(Box)<any>((props: any) => ({
     "--snowHeight": "0.05em",
     "--snowColor": "#2caab6",
     "--snowWidth": "0.3em",

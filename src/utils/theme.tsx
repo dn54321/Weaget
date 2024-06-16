@@ -1,7 +1,6 @@
 'use client';
 import { PaletteMode } from '@mui/material';
 import { red } from '@mui/material/colors';
-import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { Roboto } from 'next/font/google';
 import NextLink from 'next/link';
 import { forwardRef } from 'react';
