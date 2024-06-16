@@ -5,7 +5,6 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Box, Container, IconButton, Stack, Tooltip } from '@mui/material';
 import { ContainerProps } from '@mui/system';
 import styled from '@mui/system/styled';
-import theme from '@src/utils/theme';
 import { useRouter } from 'next/navigation';
 
 /*
@@ -14,20 +13,20 @@ import { useRouter } from 'next/navigation';
     takes you to a page.
 */
 
-const StyledFooter = styled('footer')({ 
+const StyledFooter = styled('footer')(({ theme }) => ({
     backgroundColor: theme.palette.primary.dark,
     color: theme.palette.primary.contrastText,
     height: "fit-content",
-    boxShadow: theme.shadows[1]
-});
+    boxShadow: theme.shadows ? theme.shadows[1] : undefined,
+}));
 
-const StyledIconButton = styled(IconButton)((props: { hoverColor?: string}) => ({
-    backgroundColor: "white",
+const StyledIconButton = styled(IconButton)((props: any) => ({
+    backgroundColor: props.theme.palette.background.paper,
     fontSize:"30px",
     "&:hover": {
         color: "white",
     }
-}))
+}));
 
 export default function Footer(props: ContainerProps) {
     const router = useRouter();

@@ -27,7 +27,7 @@ const Low = styled(Box)(({ theme }) => ({
 }));
 
 const PaperContainer = styled(Paper)(({ theme }) => ({
-    color: theme.palette.grey[800], 
+    color: theme.palette.text.primary, 
     display: "flex", 
     flexDirection: "column", 
     alignItems: "center", 
@@ -50,7 +50,7 @@ export default function CompactWeatherCard(props: CompactWeatherCardProps) {
     const date = DateTime.fromJSDate(props.date, {zone: props.timezone});
     return (
         <PaperContainer>
-            <Box>{date.weekdayShort}</Box>
+            <Box color="text.secondary">{date.weekdayShort}</Box>
             <Box fontSize="3em">
                 <WeatherIcon id={props.weatherCode} rainPercentage={props.rainfallPercentage}/>
             </Box>

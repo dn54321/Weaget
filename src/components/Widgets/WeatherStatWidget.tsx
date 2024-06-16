@@ -6,11 +6,6 @@ import { OneCallWeatherDetails } from "../../types/models/openWeather/oneCall.mo
 import WeatherStatsCard, { parseWeatherDetailStats } from '../Cards/WeatherStatsCard';
 import { Widget } from '../Containers/Widget';
 
-const Container = styled(Card)(() => ({
-    width: "100%",
-    color: "black",
-}));
-
 export function HourlyWeatherWidgetSkeleton() {
     return (
         <Widget

@@ -1,6 +1,5 @@
 
 import { Box, styled } from "@mui/system";
-import theme from "../../../utils/theme";
 
 export const WeatherIconContainer = styled(Box) ({
     width: "1em",
@@ -23,7 +22,7 @@ export const Sun = styled(Box)((props: any) => ({
     filter: "drop-shadow(0px 0px 2px #F8CF2D)"
 }));
 
-export const Moon = styled(Box) ((props: any) => ({
+export const Moon = styled(Box)((props: any) => ({
     position: "absolute",
     left: props.left ? props.left : "50%",
     top:  props.top ? props.top : "50%",
@@ -31,7 +30,7 @@ export const Moon = styled(Box) ((props: any) => ({
     width: "1em",
     height: "1em",
     borderRadius: "0.5em",
-    boxShadow: theme.shadows[1],
+    boxShadow: props.theme.shadows[1],
     backgroundColor: "#c7cbd0",
     filter: "drop-shadow(0px 0px 2px #c7cbd0)"
 }));
@@ -73,7 +72,7 @@ export const Cloud = styled(Box) ((props: any) => ({
     transform: "translate(-50%, -50%)",
     backgroundColor: "#eee",
     height: props.height ? props.height : "0.2em",
-    boxShadow: theme.shadows[1],
+    boxShadow: props.theme.shadows[1],
     filter: "drop-shadow(0px 0px 2em #eee)",
     borderRadius: `calc(${props.height ? props.height : "0.2em"} * 0.5)`,
 }));
@@ -108,18 +107,18 @@ export const GreyCloud = styled(Cloud) ((props) => ({
     backgroundColor: "#c9c9c9"
 }));
 
-export const Rain = styled(Box) ((props) => ({
+export const Rain = styled(Box) ((props: any) => ({
     position: "absolute",
     transform: "translate(-50%, -50%) rotate(50deg)",
     backgroundColor: "#9595e5",
     filter: "drop-shadow(0px 0px 2em #eee)",
-    boxShadow: theme.shadows[1],
+    boxShadow: props.theme.shadows[1],
     height: "0.08em",
     borderRadius: `calc(${props.height ? props.height : "0.08em"} * 0.5)`,
 }))
 
 
-export const Snow1 = styled(Box) ((props: {angle?: string, width?: string, height?: string, left?: string, top?: string, filter?: string}) => ({
+export const Snow1 = styled(Box) ((props: any) => ({
     "--snowHeight": "0.05em",
     "--snowColor": "#2caab6",
     "--snowWidth": "0.3em",
@@ -132,7 +131,7 @@ export const Snow1 = styled(Box) ((props: {angle?: string, width?: string, heigh
         transform: "translate(-50%, -50%)",
         backgroundColor: "var(--snowColor)",
         filter: `drop-shadow(0px 0px 2em #eee) ${props.filter}`,
-        boxShadow: theme.shadows[1],
+        boxShadow: props.theme.shadows[1],
         height: "var(--snowHeight)",
         borderRadius: `calc(${props.height ? props.height : "0.08em"} * 0.5)`,
         left: `calc(${props.left ? props.left : "50%"})`,

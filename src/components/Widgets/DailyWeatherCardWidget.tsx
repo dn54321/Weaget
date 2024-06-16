@@ -116,7 +116,7 @@ export default function DailyWeatherCardList(props: WeeklyWeatherCardWidgetProps
             title="Daily Cards"
             subtitle="Click any card below to see more detailed description of the weather card."
         >
-            <Box position="relative" height="180px">
+            <Box position="relative" height="180px" mt="10px">
                 <Stack 
                     component="ol"
                     onMouseLeave={() => setHoverCard(-1)}

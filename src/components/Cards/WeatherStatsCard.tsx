@@ -25,7 +25,7 @@ const properties = {
     },
     '& div:nth-of-type(2)': {
         gridColumn: "2",
-        color: theme => theme.palette.primary.dark,
+        color: theme => theme.palette.text.color,
     },
     '& div:nth-of-type(3)': {
         gridColumn: "2",

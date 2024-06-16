@@ -109,16 +109,15 @@ export default function HourlyWeatherStripWidget(props: WeatherStripProp) {
             <ol>{WeatherStrips}</ol>
             <Box display="flex" justifyContent="center" mt="10px">
                 {props.weatherData ?
-                    <Pagination count={4} page={page} onChange={handleChange} color="primary"
-                    sx={{
-                        py:"5px",
-                        "& .MuiPaginationItem-root": {
-                            color: "black"
-                        },
-                        "& .Mui-selected": {
-                            color: "#fff"
-                        }
-                    }}/>
+                    <Pagination 
+                        count={4} 
+                        page={page} 
+                        onChange={handleChange} 
+                        color="primary"
+                        sx={{
+                            pb:"7px"
+                        }}
+                    />
                     :
                     <Box my="10px"><Box className="dot-falling"/></Box>
                 }

@@ -1,9 +1,10 @@
 'use client';
-import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import { PaletteMode } from '@mui/material';
 import { red } from '@mui/material/colors';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import { Roboto } from 'next/font/google';
 import NextLink from 'next/link';
 import { forwardRef } from 'react';
-import { Roboto } from 'next/font/google';
 
 
 const LinkBehaviour = forwardRef(function LinkBehaviour(props, ref) {
@@ -15,10 +16,10 @@ const roboto = Roboto({
     weight: ['300', '400', '500', '700'],
     subsets: ['latin'],
     display: 'swap',
-  });
+});
 
 // Create a theme instance.
-const theme = responsiveFontSizes(createTheme({
+export const getDesignTokens = (mode: PaletteMode) => ({
     typography: {
         fontFamily: roboto.style.fontFamily,
     },
@@ -39,29 +40,7 @@ const theme = responsiveFontSizes(createTheme({
             defaultProps: {
                 LinkComponent: LinkBehaviour
             }
-        }
-    },
-    
-    
-    palette: {
-        primary: {
-            main: '#4682B4',
-            light: '#46B4AF',
-            dark: '#005684',
-            contrastText: '#fff'
         },
-        secondary: {
-            main: '#46b478',
-            light: '#7be7a7',
-            dark: '#00834c',
-            contrastText: '#fff'
-        },
-        error: {
-            main: red.A400,
-        },
-        text: {
-            primary: '#000',
-        },        
     },
     breakpoints: {
         values: {
@@ -71,7 +50,54 @@ const theme = responsiveFontSizes(createTheme({
             lg: 1200,
             xl: 1536
         }
-    }
-}));
+    },
 
-export default theme;
+    palette: {
+        mode,
+        ...(mode === 'light'
+            ? {
+                primary: {
+                    main: '#4682B4',
+                    light: '#46B4AF',
+                    dark: '#005684',
+                    contrastText: '#fff'
+                },
+                secondary: {
+                    main: '#46b478',
+                    light: '#7be7a7',
+                    dark: '#00834c',
+                    contrastText: '#fff'
+                },
+                error: {
+                    main: red.A400,
+                },
+                text: {
+                    primary: "#000",
+                    color: '#005684',
+                }, 
+                background: {
+                    default: "#efefef"
+                }
+            }
+            : {
+                primary: {
+                    main: '#042023',
+                    light: 'rgb(54, 76, 79)',
+                    dark: '#04292d',
+                    contrastText: '#fff'
+                },
+                secondary: {
+                    main: '#46b478',
+                    light: '#7be7a7',
+                    dark: '#00834c',
+                    contrastText: '#fff'
+                },
+                text: {
+                    color: "#638087",
+                },
+                error: {
+                    main: red.A400,
+                },
+            }),
+    },
+});

@@ -25,7 +25,7 @@ export const SXContainer = (props) => {
 
 export const NSXContainer = (props) => {
   return (
-    <Box sx={{ display: { xs: 'none', md: 'inline' }}} {...props}>
+    <Box sx={{ display: { xs: 'none', md: 'flex' }}} {...props}>
       {props.children}
     </Box>
   );

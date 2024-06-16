@@ -19,7 +19,7 @@ const Entry = (props) => {
         <Grid component="li" xs={12} sm={4} md={6}>
             <Card>
                 <CardActionArea sx={{
-                    color: "black",
+                    color: "text.primary",
                     display: "grid",
                     placeItems: "center",
                     padding: "20px",

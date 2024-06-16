@@ -1,22 +1,23 @@
 "use client"
-import { Button, Container } from '@mui/material';
+import Footer from '@components/Layout/Section/Footer';
+import { Container, PaletteMode } from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import styled from '@mui/system/styled';
-import Footer from '@components/System/Footer';
 import Head from 'next/head';
-import LogoIcon from '../src/components/Icon/LogoIcon';
-import { useGetLocationNearbySearch } from '../src/hooks/useGetLocationNearbySearch';
-import { useGetWeather } from '../src/hooks/useGetWeather';
-import DailyCompactWeatherWidget from '../src/components/Widgets/DailyCompactWeatherWidget';
-import LocationGrid from '../src/components/Widgets/LocationGridWidget';
-import { useGetCurrentLocation } from '../src/hooks/useGetCurrentLocation';
 import { useEffect } from 'react';
-import { useWidgetStore } from '../src/hooks/stores/useWidgetStore';
+import LogoIcon from '../src/components/Icon/LogoIcon';
 import SearchBar from '../src/components/SearchBar';
 import SettingsFab from '../src/components/SettingsFab';
+import DailyCompactWeatherWidget from '../src/components/Widgets/DailyCompactWeatherWidget';
+import LocationGrid from '../src/components/Widgets/LocationGridWidget';
+import { useWidgetStore } from '../src/hooks/stores/useWidgetStore';
 import { useAlert } from '../src/hooks/useAlert';
-import { randomBytes, randomUUID } from 'crypto';
+import { useGetCurrentLocation } from '../src/hooks/useGetCurrentLocation';
+import { useGetLocationNearbySearch } from '../src/hooks/useGetLocationNearbySearch';
+import { useGetWeather } from '../src/hooks/useGetWeather';
+import { The_Girl_Next_Door } from 'next/font/google';
+import { ThemeToggleButton } from '../src/components/ThemeToggleButton';
 
 const Loader = () => (
     <Stack alignItems="center" sx={{
@@ -25,7 +26,7 @@ const Loader = () => (
         mt: "50px"
     }}>    
         <div className="dot-falling"></div>
-        <Box mt="20px">Fetching Weather...</Box>
+        <Box mt="20px" color="primary.text">Fetching Weather...</Box>
     </Stack>
 
 )
@@ -47,7 +48,7 @@ const Section = styled(Container)(({theme}) => ({
 
 const SearchContainer = styled('main')(({ theme }) => ({
     height: "400px",
-    backgroundColor: theme.palette.primary.main || "#1b8ca9",
+    backgroundColor: theme.palette.primary.main,
     display:"flex",
     justifyContent: "center",
     alignItems: "center",
@@ -56,7 +57,7 @@ const SearchContainer = styled('main')(({ theme }) => ({
 
 const PageDivider = styled(Box)(({theme}) => ({
     height:"50px",
-    backgroundColor:"#ddd"
+    backgroundColor: theme.palette.divider
 }));
 
 const ResponsiveLogo = styled(LogoIcon)(({theme}) => ({ 
@@ -70,13 +71,20 @@ const ResponsiveLogo = styled(LogoIcon)(({theme}) => ({
 
 
 const PaddedSearchBar = () => (
-    <Box sx={{px:"10%", width:"100%", display:"grid", 
-              placeItems:"center", mt:"40px"}}>
+    <Box sx={{
+        px:"10%", 
+        width:"100%", 
+        display:"grid", 
+        placeItems:"center", 
+        mt:"40px",
+        zIndex: 2000
+    }}>
         <SearchBar width="500px"/>
     </Box>   
 )
 
 export default function Home() {
+
     const currentLocationQuery = useGetCurrentLocation();
     const weatherQuery = useGetWeather(currentLocationQuery.data?.city);
     const locationQuery = useGetLocationNearbySearch(currentLocationQuery.data?.lat, currentLocationQuery.data?.lng);
@@ -114,7 +122,10 @@ export default function Home() {
             <Head>
                 <title>Weaget</title>
             </Head>
-            <Box display="grid" gridTemplateRows="1fr auto" width="100%" height="100%">
+            <Box display="grid" gridTemplateRows="1fr auto" width="100%" height="100%" position="relative">
+                <Box position="absolute" top={10} right={10}>
+                    <ThemeToggleButton/>
+                </Box>
                 <Stack height="100%">
                     <SearchContainer>
                         <ResponsiveLogo/>

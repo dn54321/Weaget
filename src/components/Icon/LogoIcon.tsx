@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';
+import styled from "@mui/system/styled";
 import { BoxProps } from '@mui/system';
 import { Quicksand } from 'next/font/google';
 /*
@@ -11,7 +11,7 @@ const Icon = styled(Box)(({ theme }) => ({
     width: "2em",
     height: "2em",
     borderRadius:"1em",
-    boxShadow: theme.shadows[1],
+    boxShadow: theme.shadows?.[1],
     backgroundColor: "#fada5e",
     position: "relative",
 
@@ -23,7 +23,7 @@ const Icon = styled(Box)(({ theme }) => ({
         backgroundColor: "white",
         filter: "drop-shadow(0px 0px 2em #eee)",
         height: "0.5em",
-        boxShadow: theme.shadows[1],
+        boxShadow: theme.shadows?.[1],
     },
     "&::before": {
         "--width": "1.5em",
@@ -40,10 +40,10 @@ const Icon = styled(Box)(({ theme }) => ({
     }
 }));
 
-const Text = styled(Box) (({ theme }) => ({
+const Text = styled(Box) (() => ({
     fontSize: "1em",
     paddingLeft: "0.1em",
-    transform: "translateY(-30%)",
+    transform: "translateY(15%)",
     zIndex: "1",
     textShadow: "-1px 1px 2px rgba(0,0,0,0.2)",
     whiteSpace: "nowrap",
@@ -66,10 +66,9 @@ const quickSandFont = Quicksand({
     display: 'swap',
 });
 export default function Logo(props: BoxProps) {
-
     return (
         <Box {...props} role="img" aria-label="Weaget Logo">
-            <Stack direction="row" alignItems="baseline">
+            <Stack direction="row" alignItems="center" >
                 <Icon/>
                 <Text className={quickSandFont.className}/>
             </Stack>

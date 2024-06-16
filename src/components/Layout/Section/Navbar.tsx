@@ -9,11 +9,13 @@ import { TransitionProps } from '@mui/material/transitions';
 import styled from '@mui/system/styled';
 import { NSXContainer, SXContainer } from '@styles/globals';
 import React, { useState } from 'react';
-import { useSettingStore } from '../../hooks/stores/useSettingStore';
-import Logo from '../Icon/LogoIcon';
-import { TemperatureScale } from '../../types/weather.types';
-import { MeasurementScale } from '../../types/measurement.types';
-import SearchBar from '../SearchBar';
+import { useSettingStore } from '../../../hooks/stores/useSettingStore';
+import Logo from '../../Icon/LogoIcon';
+import { TemperatureScale } from '../../../types/weather.types';
+import { MeasurementScale } from '../../../types/measurement.types';
+import SearchBar from '../../SearchBar';
+import { ThemeToggleButton } from '../../ThemeToggleButton';
+import { SystemTheme } from '../../../types/system.types';
 
 /*
     The navbar seen in /weather/[location].
@@ -28,16 +30,15 @@ import SearchBar from '../SearchBar';
 
 // Logo displayed on left of NAVBAR.
 // Clicking Returns to home.
-const OutlinedLogo = styled(Logo)(({ theme }) => ({
+const OutlinedLogo = styled(Logo)(() => ({
     padding: "1px 5px",
     width: "fit-content",
-    borderRadius: "5px"
+    borderRadius: "5px",
 }));
 
 const Icon = styled(IconButton)(({ theme }) => ({
     border: `1px solid ${theme.palette.primary.light}`,
     borderRadius: "15px",
-    
     "&:hover": {
         backgroundColor: theme.palette.primary.light
     }
@@ -49,7 +50,11 @@ function DefaultNavbar(props) {
     return (
         <>
             <Link href="/"><OutlinedLogo fontSize="25px"/></Link>
-                <NSXContainer ml="60px" width="min(400px, 95%)"><SearchBar width="400px"/></NSXContainer>
+                <NSXContainer ml="60px" width="100%" alignItems="center">
+                    <SearchBar width="400px"/>
+                    <Box className="seperator" ml="auto"/>
+                    <ThemeToggleButton/>
+                </NSXContainer>
                 <SXContainer ml="auto">
                     <Icon 
                         color="inherit" 
@@ -94,8 +99,10 @@ const dialogueTransition = React.forwardRef(function Transition(
 function SettingDialog(props) { 
     const temperatureScale = useSettingStore((state) => state.temperatureScale);
     const measurementScale = useSettingStore((state) => state.measurementScale);
+    const themeColour = useSettingStore((state) => state.theme);
     const setTemperatureScale = useSettingStore((state) => state.setTemperatureScale);
     const setMeasurementScale = useSettingStore((state) => state.setMeasurementScale);
+    const toggleThemeColour = useSettingStore((state) => state.toggleTheme);
     const handleClose = () => {
         props.setDialog(false);
     };
@@ -125,7 +132,7 @@ function SettingDialog(props) {
             </Box>
             </Toolbar>
         </AppBar>
-        <Box color="black" p="20px" sx={{
+        <Box color="text.primary" p="20px" sx={{
             "& .MuiToggleButton-root.Mui-selected": {
                 color: "white",
                 backgroundColor: "primary.dark",
@@ -149,6 +156,12 @@ function SettingDialog(props) {
             <ToggleButtonGroup value={measurementScale} onChange={deltaMeas} exclusive> 
                 <ToggleButton value={MeasurementScale.METRIC}>Metric (M/S)</ToggleButton>
                 <ToggleButton value={MeasurementScale.IMPERIAL}>Imperial (MPH)</ToggleButton>
+            </ToggleButtonGroup> 
+            <Divider sx={{mt:"15px"}}/>
+            <Box sx={{m:"5px"}}><b>Theme Colour</b></Box>
+            <ToggleButtonGroup value={themeColour} onChange={toggleThemeColour} exclusive> 
+                <ToggleButton value={SystemTheme.DARK}>Dark Theme</ToggleButton>
+                <ToggleButton value={SystemTheme.LIGHT}>Light Theme</ToggleButton>
             </ToggleButtonGroup> 
             <Divider sx={{mt:"15px"}}/>
         </Box>

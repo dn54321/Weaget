@@ -1,4 +1,4 @@
-import { Card, CircularProgress, Divider } from '@mui/material';
+import { Button, Card, CircularProgress, Divider } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import { circularProgressClasses } from '@mui/material/CircularProgress';
@@ -101,7 +101,7 @@ function PollutionTable(props) {
         <TableContainer component={Box}>
         <Table sx={{
         "*": {
-            color: "black !important"
+
         }
         }} aria-label="simple table">
             <TableHead>
@@ -201,7 +201,7 @@ export default function PollutionWidget(props: PollutionCardProps) {
                     <CircularProgressWithLabel value={props.pollution?.aqi} loaded={loaded}/>
                     <Box ml="20px" width="max-content">
                         <Box fontSize="16px">Air Quality Index</Box>
-                        <Box sx={{color: (theme) => theme.palette.primary.dark}}>
+                        <Box sx={{color: "text.color"}}>
                             {props.pollution?.aqi ? 
                                 aqiStatus[aqRating] : 
                                 <Box ml="20px"><DotLoader/></Box>
@@ -214,7 +214,7 @@ export default function PollutionWidget(props: PollutionCardProps) {
             { loaded ? 
                 <>
                     <Box mt="20px" color="black">{show && <PollutionTable rows={rows}/>}</Box>
-                    <Link mt="10px" component="button" onClick={()=>{setShow(!show)}} color="primary.dark">
+                    <Link mt="10px" component="button" onClick={()=>{setShow(!show)}} color="text.color">
                         {show ? "Hide Advanced Pollution Details" : "Show Advanced Pollution Details"}
                     </Link>
                 </>

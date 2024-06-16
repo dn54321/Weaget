@@ -1,17 +1,39 @@
 "use client"
-import 'three-dots/dist/three-dots.css';
-import '../styles/globals.css';
 import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
 import { queryClient } from '@src/utils/queryClient';
-import theme from '@src/utils/theme';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import 'three-dots/dist/three-dots.css';
+import { useTheme } from '../src/hooks/useTheme';
+import '../styles/globals.css';
 
-export default function RootLayout(props) {      
+// We can't add this metadata until nextjs supports emotion on the server side.
+// https://nextjs.org/docs/app/building-your-application/styling/css-in-js
+
+
+// export const metadata: Metadata = {
+//     title: 'Weaget',
+//     description: `
+//         Get accurate minutely, hourly, and daily weather forecasts 
+//         for any location with our advanced weather website. 
+//         Stay informed about current conditions, temperature, precipitation, wind, and more. 
+//         Plan your day with confidence!
+//     `,
+// }
+//
+// export const viewport: Viewport = {
+//     initialScale: 1,
+//     width: "device-width",
+// }
+
+
+export default function RootLayout(props: { children: React.ReactNode}) {   
+    const { theme } = useTheme();
+
     return (
         <html lang="en">
             <head>

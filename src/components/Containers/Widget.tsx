@@ -42,7 +42,6 @@ export function Widget(props: WidgetProps) {
             </Box>
             <Divider sx={{
                 visibility:  isTransparent ? "hidden" : "visible",
-                mb: "5px"
             }}/>
             <Box sx={{...(!props.disableChildrenPadding && {px: "15px", pb:"15px"})}}>
                 {props.children}

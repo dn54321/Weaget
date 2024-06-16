@@ -2,8 +2,8 @@
 import { Box, Container, Grid, Stack } from '@mui/material';
 import Head from 'next/head';
 
-import Footer from '@components/System/Footer';
-import Navbar from '@components/System/Navbar';
+import Footer from '@components/Layout/Section/Footer';
+import Navbar from '@components/Layout/Section/Navbar';
 import SettingsFab from '@components/SettingsFab';
 import DailyWeatherCardList from '@components/Widgets/DailyWeatherCardWidget';
 import HourlyWeatherStripWidget from '@components/Widgets/HourlyWeatherStripWidget';

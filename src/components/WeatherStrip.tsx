@@ -28,7 +28,7 @@ const Accordion = (props) => {
         <MuiAccordion disableGutters elevation={0} 
             slotProps={{ transition: {unmountOnExit: true, timeout: 0 }}}
             expanded={props.expanded} onChange={props.onChange}
-            sx={{color: "primary.dark"}}
+            sx={{color: "text.color", backgroundColor: "initial"}}
         >
             {props.children}
         </MuiAccordion>
@@ -58,12 +58,24 @@ export default function WeatherStrip(props: WeatherStripProps) {
                  {...(props.setExpanded && {onChange: () => props.setExpanded!()})}
             >
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{
-                    "& .MuiAccordionSummary-content": { margin: "0px" },
+
                     paddingLeft: "0px",
-                    boxShadow:  "none"
-                }}>
-                    <Stack sx={{width:"100%", alignItems:"center"}} direction="row">
-                        <Stack alignItems="center" p="10px" fontSize="48px" sx={{ position: "relative" }}>
+                    boxShadow:  "none",
+                    "& .MuiAccordionSummary-content": { margin: "0px" },
+                    "& .MuiStack-root": { bgcolor: "initial !important" },
+                }}
+                >
+                    <Stack sx={{
+                        width:"100%", 
+                        alignItems:"center", 
+                        bgcolor:"#121212"
+                    }} direction="row">
+                        <Stack alignItems="center" p="10px" fontSize="48px" sx={{ 
+                            position: "relative",
+                            "div": {
+                                filter: "initial"
+                            }
+                        }}>
                             <WeatherIcon id={props.weatherCode} rainPercentage={props.rainPercentage}/>
                         </Stack>
                         <Box ml="15px">
@@ -112,9 +124,9 @@ export default function WeatherStrip(props: WeatherStripProps) {
                             <Box>{date.toFormat("ha").toLowerCase()}</Box>
                             <Day>{date.toFormat("cccc")}</Day>
                         </Stack>
-                </Stack>
+                    </Stack>
                 </AccordionSummary>
-                <AccordionDetails sx={{color: "black"}}>
+                <AccordionDetails sx={{color: "text.primary"}}>
                     <Typography variant="body2" mt="10px"><b>Hourly Weather Stats</b></Typography>
                     <WeatherStatsCard stats={props.stats}/>
                 </AccordionDetails>

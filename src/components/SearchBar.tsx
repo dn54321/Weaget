@@ -121,14 +121,14 @@ export const SuggestionBox = (props) => {
 
 
 
-export const FieldBox = styled(InputBase)({
-    color: 'black',
+export const FieldBox = styled(InputBase)(({theme}) => ({
+    color: theme.palette.text.primary,
     padding: "5px 5px 0px 10px",
     width: "100%",
     "&:focus": {
         outline: "none !important"
     }
-});
+}));
 
 export const LoadingIcon = styled(StyledLoader)({
     color: "gray"
@@ -148,11 +148,11 @@ export const MyLocationButton = styled(ButtonMyLocationIcon,
 });
 
 
-const SuggestionText = styled(ListItem)(() => ({
-    borderBottom: "1px solid #f1f1f1",
+const SuggestionText = styled(ListItem)(({theme}) => ({
+    borderBottom: `1px solid ${theme.palette.divider}`,
     padding: "5px 10px",
     "&:hover": {
-        backgroundColor: "#e9e9e9"
+        backgroundColor: theme.palette.action.hover
     }
 }));
 
@@ -258,8 +258,8 @@ export default function SearchBar(props) {
                     {...getOptionProps({ option, index })}
                     key={option.main+option.secondary}
                 >
-                    <Box display="inline" color="black"><b>{option.main}</b></Box>
-                    <Box display="inline" color="gray" ml="1ch">{option.secondary}</Box>
+                    <Box display="inline" color="text.main"><b>{option.main}</b></Box>
+                    <Box display="inline" color="text.secondary" ml="1ch">{option.secondary}</Box>
                 </SuggestionText>
             ))}
             </SuggestionBox>
