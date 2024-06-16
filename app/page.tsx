@@ -1,6 +1,6 @@
 "use client"
 import Footer from '@components/Layout/Section/Footer';
-import { Container, PaletteMode } from '@mui/material';
+import { Container } from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import styled from '@mui/system/styled';
@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import LogoIcon from '../src/components/Icon/LogoIcon';
 import SearchBar from '../src/components/SearchBar';
 import SettingsFab from '../src/components/SettingsFab';
+import { ThemeToggleButton } from '../src/components/ThemeToggleButton';
 import DailyCompactWeatherWidget from '../src/components/Widgets/DailyCompactWeatherWidget';
 import LocationGrid from '../src/components/Widgets/LocationGridWidget';
 import { useWidgetStore } from '../src/hooks/stores/useWidgetStore';
@@ -16,8 +17,6 @@ import { useAlert } from '../src/hooks/useAlert';
 import { useGetCurrentLocation } from '../src/hooks/useGetCurrentLocation';
 import { useGetLocationNearbySearch } from '../src/hooks/useGetLocationNearbySearch';
 import { useGetWeather } from '../src/hooks/useGetWeather';
-import { The_Girl_Next_Door } from 'next/font/google';
-import { ThemeToggleButton } from '../src/components/ThemeToggleButton';
 
 const Loader = () => (
     <Stack alignItems="center" sx={{
@@ -107,7 +106,7 @@ export default function Home() {
                 duration: Infinity
             });
         }
-    }, [weatherQuery.isError, locationQuery.isError, currentLocationQuery.isError]);
+    }, [weatherQuery.isError, locationQuery.isError, currentLocationQuery.isError, addAlert]);
 
 
 

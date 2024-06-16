@@ -10,5 +10,5 @@ export const useSettingStore = create<
 >(persist((...a) => ({
     ...createSettingSlice(...a)
 }),
-    { name: 'persistentStore'}
+    {name: 'persistentStore'}
 ));

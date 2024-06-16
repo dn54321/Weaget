@@ -9,6 +9,7 @@ export interface SettingSlice {
     theme: SystemTheme;
     setTemperatureScale: (temperatureScale: TemperatureScale) => void;
     setMeasurementScale: (measurementScale: MeasurementScale) => void;
+    setTheme: (theme: SystemTheme) => void;
     toggleTheme: () => void;
 }
 
@@ -17,18 +18,14 @@ export const createSettingSlice: StateCreator<
     [], [], 
     SettingSlice
 > = (set) => {
-
-    let prefersDarkMode = false;
-    if (typeof window !== "undefined") {
-        prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
-
+    
     return {
         temperatureScale: TemperatureScale.CELSIUS,
         measurementScale: MeasurementScale.METRIC,
-        theme: prefersDarkMode ? SystemTheme.DARK : SystemTheme.LIGHT,
+        theme: SystemTheme.SYSTEM,
         setTemperatureScale: (temperatureScale: TemperatureScale) => set(() => ({ temperatureScale: temperatureScale })),
         setMeasurementScale: (measurementScale: MeasurementScale) => set(() => ({ measurementScale: measurementScale })),
-        toggleTheme: () => set((state) => ({ theme: state.theme === SystemTheme.DARK ? SystemTheme.LIGHT : SystemTheme.DARK})),
+        toggleTheme: () => set((state) => ({ theme: state.theme === SystemTheme.DARK ? SystemTheme.LIGHT : SystemTheme.DARK })),
+        setTheme: (theme: SystemTheme) => set(() => ({ theme: theme }))
     }
 }

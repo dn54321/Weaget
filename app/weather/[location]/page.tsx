@@ -44,7 +44,7 @@ export default function Page({ params }: PageProps) {
                 duration: Infinity
             });
         }
-    }, [weatherQuery.isError, pollutionQuery.isError, nearbyLocationQuery.isError, locationQuery.isError]);
+    }, [weatherQuery.isError, pollutionQuery.isError, nearbyLocationQuery.isError, locationQuery.isError, addAlert]);
 
     return (
         <Box>
