@@ -1,17 +1,16 @@
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { Button, Card, Divider } from '@mui/material';
+import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
-import styled from '@mui/system/styled';
 import { DateTime } from 'luxon';
 import * as React from 'react';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
+import { useSettingStore } from '../../hooks/stores/useSettingStore';
+import { MeasurementScale } from '../../types/measurement.types';
 import { OneCallWeatherDetails } from '../../types/models/openWeather/oneCall.model';
 import { Widget } from '../Containers/Widget';
 import { getVolume, getVolumeSymbol } from '../VolumeUnit';
-import { useSettingStore } from '../../hooks/stores/useSettingStore';
-import { MeasurementScale } from '../../types/measurement.types';
 
 /*
     Rainfall card tells us how much rain has fallen 
@@ -42,11 +41,11 @@ const StyledButton = (props) => {
             padding: "0px",
             "& svg": {
                 fontSize: "16px",
-                color: "white",
+                color: "primary.contrastText",
             },
-        "&:hover": {
-            backgroundColor: "primary.dark",
-        }
+            "&:hover": {
+                backgroundColor: "primary.dark",
+            }
         }}>
             {(props.decrement) ? <ChevronLeftIcon /> : <ChevronRightIcon />}
         </Button>
@@ -60,7 +59,16 @@ interface ChartProps {
 }
 const Chart = (props: ChartProps) => {
     return (
-        <Box position="relative" width="100%" height={chartHeight}>
+        <Box 
+            position="relative" 
+            width="100%" 
+            height={chartHeight}
+            sx={{
+                "& .recharts-tooltip-label": {
+                    color: "black",
+                }
+            }}
+        >
             <Box position="absolute" left={0} right={0} top={0} bottom={0}>
                 <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={props.data}>
