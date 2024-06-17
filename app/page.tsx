@@ -20,12 +20,12 @@ import { useGetWeather } from '../src/hooks/useGetWeather';
 
 const Loader = () => (
     <Stack alignItems="center" sx={{
-        color: "black",
+        color: "primary.text",
         height: "100%",
         mt: "50px"
     }}>    
         <div className="dot-falling"></div>
-        <Box mt="20px" color="primary.text">Fetching Weather...</Box>
+        <Box mt="20px">Fetching Weather...</Box>
     </Stack>
 
 )
@@ -76,7 +76,7 @@ const PaddedSearchBar = () => (
         display:"grid", 
         placeItems:"center", 
         mt:"40px",
-        zIndex: 2000
+        zIndex: "2"
     }}>
         <SearchBar width="500px"/>
     </Box>   

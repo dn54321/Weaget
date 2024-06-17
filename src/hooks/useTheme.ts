@@ -1,4 +1,4 @@
-import { createTheme, responsiveFontSizes, useMediaQuery } from '@mui/material';
+import { PaletteMode, createTheme, responsiveFontSizes, useMediaQuery } from '@mui/material';
 import React from "react";
 import { getDesignTokens } from "../utils/theme";
 import { useSettingStore } from "./stores/useSettingStore";
@@ -7,20 +7,21 @@ import { SystemTheme } from '../types/system.types';
 
 
 export function useTheme() {
-    let themeColour = useSettingStore((state) => state.theme);
+    const storeThemeColour = useSettingStore((state) => state.theme);
     const setTheme = useSettingStore((state) => state.setTheme);
+    const toggleTheme = useSettingStore((state) => state.toggleTheme);
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+    let themeColour = storeThemeColour; 
 
-    if (themeColour === SystemTheme.SYSTEM) {
+    if (storeThemeColour === SystemTheme.SYSTEM) {
         themeColour = prefersDarkMode ? SystemTheme.DARK : SystemTheme.LIGHT;
-        setTheme(themeColour);
     }
 
     const theme = React.useMemo(
         () => {
-            return responsiveFontSizes(createTheme((getDesignTokens(themeColour))));
+            return responsiveFontSizes(createTheme((getDesignTokens(themeColour as PaletteMode))));
         }
     , [themeColour]);
 
-    return {setTheme, themeColour, theme};
+    return {setTheme, toggleTheme, themeColour, theme, };
 }

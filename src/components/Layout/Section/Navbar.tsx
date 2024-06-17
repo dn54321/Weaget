@@ -16,6 +16,7 @@ import { MeasurementScale } from '../../../types/measurement.types';
 import SearchBar from '../../SearchBar';
 import { ThemeToggleButton } from '../../ThemeToggleButton';
 import { SystemTheme } from '../../../types/system.types';
+import { useTheme } from '../../../hooks/useTheme';
 
 /*
     The navbar seen in /weather/[location].
@@ -99,10 +100,9 @@ const dialogueTransition = React.forwardRef(function Transition(
 function SettingDialog(props) { 
     const temperatureScale = useSettingStore((state) => state.temperatureScale);
     const measurementScale = useSettingStore((state) => state.measurementScale);
-    const themeColour = useSettingStore((state) => state.theme);
     const setTemperatureScale = useSettingStore((state) => state.setTemperatureScale);
     const setMeasurementScale = useSettingStore((state) => state.setMeasurementScale);
-    const toggleThemeColour = useSettingStore((state) => state.toggleTheme);
+    const { themeColour, toggleTheme } = useTheme();
     const handleClose = () => {
         props.setDialog(false);
     };
@@ -159,7 +159,7 @@ function SettingDialog(props) {
             </ToggleButtonGroup> 
             <Divider sx={{mt:"15px"}}/>
             <Box sx={{m:"5px"}}><b>Theme Colour</b></Box>
-            <ToggleButtonGroup value={themeColour} onChange={toggleThemeColour} exclusive> 
+            <ToggleButtonGroup value={themeColour} onChange={toggleTheme} exclusive> 
                 <ToggleButton value={SystemTheme.DARK}>Dark Theme</ToggleButton>
                 <ToggleButton value={SystemTheme.LIGHT}>Light Theme</ToggleButton>
             </ToggleButtonGroup> 
