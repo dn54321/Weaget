@@ -7,7 +7,7 @@ on:
     branches:
       - master
 jobs:
-  Run-Tests:
+  Production:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -38,8 +38,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      # - name: Run Tests
-      #   run: pnpm run test
+      - name: Run Tests
+        run: pnpm run test
 
       - name: Install Vercel CLI
         run: pnpm add --global vercel@latest
