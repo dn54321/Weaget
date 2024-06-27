@@ -248,7 +248,7 @@ export default function SearchBar(props) {
             <SuggestionBox listprops={getListboxProps()}>
             {groupedOptions.map((option, index) => (
                 <SuggestionText
-
+                    {...getOptionProps({ option, index })}
                     key={option.main+option.secondary}
                 >
                     <Box display="inline" color="text.main"><b>{option.main}</b></Box>
