@@ -26,7 +26,7 @@ export function   AlertBox(props: AlertBoxProps & BoxProps) {
             flexDirection: "column",
             alignItems: "center",
         }}
-        zIndex={1101}
+        zIndex={1400}
         >
             <Stack gap="10px" width="min(90%,450px)">
                     {
