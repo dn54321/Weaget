@@ -14,7 +14,6 @@ jobs:
       - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
-          version: 8
           run_install: false
 
       - name: Install Node.js
@@ -38,8 +37,8 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-      - run: pnpm build --if-present
-      - run: pnpm test
+      - run: pnpm run --if-present build
+      - run: pnpm run test
 
   Deploy-Production:
     needs: Run-Tests
