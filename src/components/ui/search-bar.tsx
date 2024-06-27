@@ -147,7 +147,7 @@ export const MagnifyIconButton = styled(ButtonSearchIcon)({
 const SuggestionText = styled(ListItem)(({theme}) => ({
     borderBottom: `1px solid ${theme.palette.divider}`,
     padding: "5px 10px",
-    "&:hover": {
+    "&.Mui-focused": {
         backgroundColor: theme.palette.action.hover
     }
 }));
@@ -248,7 +248,7 @@ export default function SearchBar(props) {
             <SuggestionBox listprops={getListboxProps()}>
             {groupedOptions.map((option, index) => (
                 <SuggestionText
-                    {...getOptionProps({ option, index })}
+
                     key={option.main+option.secondary}
                 >
                     <Box display="inline" color="text.main"><b>{option.main}</b></Box>

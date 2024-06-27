@@ -8,7 +8,6 @@
     "start": "next start",
     "lint": "next lint --fix",
     "test": "NODE_ENV='test' vitest --coverage --reporter=verbose",
-    "ci": "NOD_ENV='prod' vitest --coverage",
     "audit": "better-npm-audit audit"
   },
   "dependencies": {

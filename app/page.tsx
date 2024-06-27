@@ -50,7 +50,6 @@ const Section = styled(Container)(({theme}) => ({
 
 const SearchContainer = styled('main')(({ theme }) => ({
     height: "400px",
-    overflow: "hidden",
     backgroundColor: theme.palette.primary.main,
     display:"flex",
     justifyContent: "center",
@@ -66,6 +65,7 @@ const PageDivider = styled(Box)(({theme}) => ({
 const ResponsiveLogo = styled(LogoIcon)(({theme}) => ({ 
     pt: "100px",
     mb: "30px",
+    zIndex: "0",
     fontSize: "min(13vw, 60px)",
     [theme.breakpoints.up('sm')]: {
         fontSize: "60px"

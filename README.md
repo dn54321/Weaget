@@ -9,6 +9,9 @@
 [8]: https://aqicn.org/api/
 [9]: https://openweathermap.org/api/one-call-api
 
+![example workflow](https://github.com/dn54321/weaget/actions/workflows/production.yml/badge.svg)
+[![codecov](https://codecov.io/github/dn54321/Weaget/graph/badge.svg?token=HPNINBGDJE)](https://codecov.io/github/dn54321/Weaget)
+![Known Vulnerabilities](https://snyk.io/test/github/dn54321/weaget/badge.svg)
 ## Demo
 
 Demo Link: [weaget.vercel.app](http://weaget.vercel.app)
