@@ -5,14 +5,14 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
     plugins: [react(), tsconfigPaths()],
     test: {
-        setupFiles: ['test-setup.ts'],
+        setupFiles: ['vitest-setup.ts'],
         environment: 'jsdom',
         coverage: {
             thresholds: {
-                lines: 80,
-                functions: 80,
-                branches: 80,
-                statements: 80
+                lines: 95,
+                functions: 95,
+                branches: 95,
+                statements: 95
             },
             reporter: ['text', 'json', 'html'],
             include: [

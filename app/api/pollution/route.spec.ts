@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { mockApicnPollutionHandle } from "../../../src/features/apicn-pollution/__mocks__/pollution.handler";
 import { withHandleError } from "../../../src/utils/msw-http-mocker";
 import { createMockRequest } from "../../../src/utils/next-mock-request-builder";
-import { server } from "../../../test-setup";
+import { server } from "../../../vitest-setup";
 import { GET } from "./route";
 
 // All IP addresses generated with:

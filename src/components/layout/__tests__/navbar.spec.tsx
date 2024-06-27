@@ -2,7 +2,7 @@ import { RenderResult, act, fireEvent, render, renderHook } from "@testing-libra
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { testWrapper, withTestWrapper } from "../../../utils/wrappers";
 import Navbar from "../navbar";
-import { server } from "../../../../test-setup";
+import { server } from "../../../../vitest-setup";
 import { testQueryClient } from "../../../utils/query-client";
 import userEvent from "@testing-library/user-event";
 import { TemperatureScale } from "../../../types/weather.types";

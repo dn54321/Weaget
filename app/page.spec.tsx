@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Home from "./page";
 import { testOfflineQueryClient, testQueryClient } from "../src/utils/query-client";
 import { withTestOfflineWrapper, withTestWrapper } from "../src/utils/wrappers";
-import { server } from "../test-setup";
+import { server } from "../vitest-setup";
 import { mockWeatherHandle } from "../src/features/weaget/__mocks__/weather.handler";
 import { mockCurrentLocationHandle } from "../src/features/weaget/__mocks__/current-location.handler";
 import { mockNearbyLocationHandle } from "../src/features/weaget/__mocks__/nearby-location.handler";

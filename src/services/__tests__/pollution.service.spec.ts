@@ -1,6 +1,6 @@
 import { HttpResponse } from "msw";
 import { afterEach, describe, expect, test } from "vitest";
-import { server } from "../../../test-setup";
+import { server } from "../../../vitest-setup";
 import { mockApicnPollutionHandle } from "../../features/apicn-pollution/__mocks__/pollution.handler";
 import { createApicnPollutionMockData } from "../../features/apicn-pollution/__mocks__/pollution.mock";
 import apicnPollutionSchema from "../../features/apicn-pollution/pollution.schema";

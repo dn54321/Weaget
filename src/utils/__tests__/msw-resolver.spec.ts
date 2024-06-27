@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { server } from "../../../test-setup";
+import { server } from "../../../vitest-setup";
 import { withSearchParams } from "../msw-resolver";
 import { HttpResponse, http } from "msw";
 

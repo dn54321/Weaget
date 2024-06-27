@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { HttpResponse } from 'msw';
 import { afterEach, describe, expect, test } from 'vitest';
-import { server } from '../../../test-setup';
+import { server } from '../../../vitest-setup';
 import { mockGeonamesNearbyLocationHandle } from '../../features/geonames-nearby-search/__mocks__/nearby-location.handler';
 import { createGeonamesNearbyLocationMockData } from '../../features/geonames-nearby-search/__mocks__/nearby-location.mock';
 import geonamesNearbyLocationSchema from '../../features/geonames-nearby-search/nearby-location.schema';

@@ -1,6 +1,6 @@
 import { HttpResponse } from "msw";
 import { afterEach, describe, expect, test } from "vitest";
-import { server } from "../../../test-setup";
+import { server } from "../../../vitest-setup";
 import { createOpenWeatherOneCallMockData } from "../../features/open-weather-map-one-call/__mocks__/oneCall.mock";
 import { mockOpenWeatherOneCallHandle } from "../../features/open-weather-map-one-call/__mocks__/onecall.handler";
 import { oneCallWeatherDetailsSchema } from "../../features/open-weather-map-one-call/oneCall.schema";

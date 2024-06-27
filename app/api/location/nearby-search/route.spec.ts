@@ -3,7 +3,7 @@ import { mockGeonamesNearbyLocationHandle } from "../../../../src/features/geona
 import { withHandleError, withResponse } from "../../../../src/utils/msw-http-mocker";
 import { createMockRequest } from "../../../../src/utils/next-mock-request-builder";
 import { GET } from "./route";
-import { server } from "../../../../test-setup";
+import { server } from "../../../../vitest-setup";
 import { createGeonameMockData } from "../../../../src/features/geonames-nearby-search/__mocks__/nearby-location.mock";
 ;
 

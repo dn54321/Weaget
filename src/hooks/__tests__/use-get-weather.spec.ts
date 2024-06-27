@@ -1,7 +1,7 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse } from "msw";
 import { afterEach, describe, expect, it, test } from "vitest";
-import { server } from "../../../test-setup";
+import { server } from "../../../vitest-setup";
 import { testQueryClient } from "../../utils/query-client";
 import { mockWeatherHandle } from "../../features/weaget/__mocks__/weather.handler";
 import weatherSchema from "../../features/weaget/weather.schema";
