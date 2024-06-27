@@ -1,5 +1,6 @@
 import { getLocationDetailsByIp } from "@services/geolocation.service";
 import { NextRequest } from "next/server";
+import { createNextResponseError } from "@src/utils/next-request-helper";
 
 export async function GET(req: NextRequest) {
     // Note - it's possible to spoof this header.
@@ -7,7 +8,7 @@ export async function GET(req: NextRequest) {
     let ip = req.headers.get('x-forwarded-for');
     
     if (!ip) {
-        return Response.json({error: "Failed to retrieve IP address."}, {status: 500 });
+        return createNextResponseError("Failed to retrieve IP address.", 500);
     }
 
     if (ip.startsWith("::ffff:")) {

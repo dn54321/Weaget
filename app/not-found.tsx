@@ -3,6 +3,7 @@ import { Button, Stack, Box, Grid, Container } from '@mui/material';
 import Head from 'next/head';
 import CloudIcon from '@mui/icons-material/Cloud';
 import styled from '@mui/system/styled';
+import { ThemeToggleButton } from '../src/components/ui/theme-toggle-button';
 
 function IconBox(props) {
     return (
@@ -53,29 +54,32 @@ export default function NotFound() {
                 <title>Weaget - Not Found</title>
             </Head>
             <Container maxWidth="lg" sx={{height:"100%"}} disableGutters>
-            <Grid container gap={0} sx={{
-                height:"100%",
-                width:"100%"
-            }}>
-                <Grid item xs={12} md={6}>  
-                <IconBox>
-                    <CloudIcon/>
-                    <CloudIcon/>   
-                </IconBox> 
+                <Box position="absolute" top={10} right={10}>
+                    <ThemeToggleButton/>
+                </Box>
+                <Grid container gap={0} sx={{
+                    height:"100%",
+                    width:"100%"
+                }}>
+                    <Grid item xs={12} md={6}>  
+                    <IconBox>
+                        <CloudIcon/>
+                        <CloudIcon/>   
+                    </IconBox> 
+                    </Grid>
+                    <Grid item xs={12} md={6}>  
+                    <Stack 
+                        alignItems="center" 
+                        justifyContent={{sm: "initial", md:"center"}}
+                        height="100%"
+                        sx={{color:"text.primary", px:"10px"}}
+                    >
+                        <Box component="h1" sx={{fontSize: "100px", margin: "0px"}}>404</Box>
+                        <Box fontSize="16px" sx={{textAlign: "center"}}>{"The page you have been looking for could not be found."}</Box>
+                        <Button href="/" variant="contained" sx={{mt:"40px"}}>Go back to home</Button>
+                    </Stack>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} md={6}>  
-                <Stack 
-                    alignItems="center" 
-                    justifyContent="center" 
-                    height="100%"
-                    sx={{color:"black", px:"10px"}}
-                >
-                    <Box component="h1" sx={{fontSize: "100px"}}>404</Box>
-                    <Box fontSize="16px" sx={{textAlign: "center"}}>{"The page you have been looking for could not be found."}</Box>
-                    <Button href="/" variant="outlined" sx={{mt:"40px"}}>Go back to home.</Button>
-                </Stack>
-                </Grid>
-            </Grid>
             </Container>
         </Page>
     )   

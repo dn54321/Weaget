@@ -1,7 +1,9 @@
-import { getLocationSuggestions } from "@src/services/geolocation.service";
-import { extractQueryParams } from "@src/utils/url";
+
+
 import { NextRequest } from "next/server";
-import { googleLocationSuggestionInputSchema } from '../../../../src/schemas/google/locationSuggestion.schema';
+import { getLocationAutocompleteSuggestions } from "../../../../src/services/geolocation.service";
+import { extractQueryParams, handleNextResponseError } from "../../../../src/utils/next-request-helper";
+import { googleLocationSuggestionInputSchema } from "../../../../src/features/google-geocode/location-auto-complete.schema";
 
 // Generates a list of autocomplete queries given a string
 export async function GET(req: NextRequest) {
@@ -9,7 +11,7 @@ export async function GET(req: NextRequest) {
 
     try {
         const {input, ...params} = googleLocationSuggestionInputSchema.parse(queryParams);
-        const suggestions = await getLocationSuggestions(input, params);
+        const suggestions = await getLocationAutocompleteSuggestions(input, params);
         const formattedSuggestions = suggestions.predictions.map(prediction => ({
             main: prediction.structuredFormatting.mainText,
             secondary: prediction.structuredFormatting.secondaryText
@@ -17,13 +19,6 @@ export async function GET(req: NextRequest) {
         return Response.json(formattedSuggestions);
     }
     catch (err) {
-        console.error(err);
-        const errorId = crypto.randomUUID();
-        const errorMessage = `Failed to retrieve location suggestion.`;
-        return Response.json({
-            id: errorId, 
-            message: errorMessage,
-            data: queryParams
-        }, {status: 500 });
+        return handleNextResponseError(err, 'Failed to retrieve location suggestion.');
     }
 }

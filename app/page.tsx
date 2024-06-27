@@ -1,33 +1,36 @@
 "use client"
-import Footer from '@components/Layout/Section/Footer';
+import Footer from '@components/layout/footer';
 import { Container } from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import styled from '@mui/system/styled';
 import Head from 'next/head';
 import { useEffect } from 'react';
-import LogoIcon from '../src/components/Icon/LogoIcon';
-import SearchBar from '../src/components/SearchBar';
-import SettingsFab from '../src/components/SettingsFab';
-import { ThemeToggleButton } from '../src/components/ThemeToggleButton';
-import DailyCompactWeatherWidget from '../src/components/Widgets/DailyCompactWeatherWidget';
-import LocationGrid from '../src/components/Widgets/LocationGridWidget';
-import { useWidgetStore } from '../src/hooks/stores/useWidgetStore';
-import { useAlert } from '../src/hooks/useAlert';
-import { useGetCurrentLocation } from '../src/hooks/useGetCurrentLocation';
-import { useGetLocationNearbySearch } from '../src/hooks/useGetLocationNearbySearch';
-import { useGetWeather } from '../src/hooks/useGetWeather';
+import LogoIcon from '../src/components/icon/core/logo-icon';
+import SearchBar from '../src/components/ui/search-bar';
+import SettingsFab from '../src/components/ui/settings-fab';
+import { ThemeToggleButton } from '../src/components/ui/theme-toggle-button';
+import DailyCompactWeatherWidget from '../src/components/widgets/daily-compact-weather-widget';
+import LocationGrid from '../src/components/widgets/location-grid-widget';
+import { useWidgetStore } from '../src/hooks/stores/use-widget-store';
+import { useAlert } from '../src/hooks/use-alert';
+import { useGetCurrentLocation } from '../src/hooks/use-get-current-location';
+import { useGetNearbyLocation } from '../src/hooks/use-get-nearby-location';
+import { useGetWeather } from '../src/hooks/use-get-weather';
 
 const Loader = () => (
-    <Stack alignItems="center" sx={{
-        color: "primary.text",
-        height: "100%",
-        mt: "50px"
-    }}>    
+    <Stack 
+        data-testid="loader" 
+        alignItems="center" 
+        sx={{
+            color: "primary.text",
+            height: "100%",
+            mt: "50px"
+        }}
+    >    
         <div className="dot-falling"></div>
         <Box mt="20px">Fetching Weather...</Box>
     </Stack>
-
 )
 
 const Section = styled(Container)(({theme}) => ({
@@ -47,6 +50,7 @@ const Section = styled(Container)(({theme}) => ({
 
 const SearchContainer = styled('main')(({ theme }) => ({
     height: "400px",
+    overflow: "hidden",
     backgroundColor: theme.palette.primary.main,
     display:"flex",
     justifyContent: "center",
@@ -86,7 +90,7 @@ export default function Home() {
 
     const currentLocationQuery = useGetCurrentLocation();
     const weatherQuery = useGetWeather(currentLocationQuery.data?.city);
-    const locationQuery = useGetLocationNearbySearch(currentLocationQuery.data?.lat, currentLocationQuery.data?.lng);
+    const locationQuery = useGetNearbyLocation(currentLocationQuery.data?.lat, currentLocationQuery.data?.lng);
     const location = `${currentLocationQuery.data?.city}, ${currentLocationQuery.data?.region}, ${currentLocationQuery.data?.country}`;
     const resetWeather = useWidgetStore((state) => state.resetState);
     const {AlertBox, addAlert} = useAlert();
@@ -152,7 +156,7 @@ export default function Home() {
                     <AlertBox/>
                 </Stack>
                 <Box>
-                    <Footer maxWidth="md"/>
+                    <Footer/>
                 </Box>
             </Box>
         </Box>

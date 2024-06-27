@@ -1,5 +1,6 @@
 import { getLocationDetails } from "@services/geolocation.service";
 import { NextRequest } from "next/server";
+import { createNextResponseError, handleNextResponseError } from "../../../../src/utils/next-request-helper";
 
 export async function GET(
     req: NextRequest, 
@@ -10,31 +11,13 @@ export async function GET(
     
     try {
         const data = await getLocationDetails(params.location, region);
-
         if (data.status === "ZERO_RESULTS") {
-            return Response.json({
-                id: crypto.randomUUID(), 
-                message: "No results found",
-                data: {
-                    location: params.location,
-                    region: region
-                }
-            }, {status: 404 });
+            return createNextResponseError("No results found", 404);
         }
 
         return Response.json(data);
     }
     catch(err) {
-        console.error(err);
-        const errorId = crypto.randomUUID();
-        const errorMessage = `Failed to retrieve location data.)`;
-        return Response.json({
-            id: errorId, 
-            message: errorMessage,
-            data: {
-                location: params.location,
-                region: region
-            }
-        }, {status: 500 });
+        return handleNextResponseError(err, 'Failed to retrieve location data.');
     }
 }

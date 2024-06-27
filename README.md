@@ -66,7 +66,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Upcoming Features
 
-- Unit Testing
 - Login systems for customisation such as local weather location.
 - Pollution based on daily weather (currently waiting for pollution API)
 
@@ -82,5 +81,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
     - Allows for the implementation of rate limiting to prevent API abuse.
 
 ## Known Issues
-- Setting to dark mode flickers on render during first time load.
-    - Currently Material UI's solution for this is still in development and will be fixed in a future release.
+- **Problem**: Setting to dark mode flickers on render during first time load.
+    - Currently Material UI's solution for this is still experimental and will be fixed in a future release.
+    - Ref: https://mui.com/material-ui/experimental-api/css-theme-variables/overview/
+
+- **Problem**: Currently, we only support 'use client' for everything.
+    - Our styling css-in-js (emotion) library doesn't currently support server side rendering.
+    - Ref: https://nextjs.org/docs/app/building-your-application/styling/css-in-js

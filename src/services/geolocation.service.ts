@@ -1,12 +1,12 @@
-import { geonamesGeocodeSchema } from "../schemas/geonames/geocode.schema";
-import { googleGeocodeSchema } from "../schemas/google/geocode.schema";
-import { googleLocationSuggestionSchema } from "../schemas/google/locationSuggestion.schema";
-import { ipinfoGeocodeSchema } from "../schemas/ipinfo/geocode.schema";
-import { LocationSuggestionOptional } from "../types/geolocation.types";
-import { GeonamesGeocode } from "../types/models/geonames/geocode.model";
-import { GoogleGeocode } from "../types/models/google/geocode.model";
-import GoogleLocationSuggestion from "../types/models/google/locationSuggestion.model";
-import IpinfoGeocode from "../types/models/ipinfo/geocode.model";
+import { googleLocationLookupSchema } from "../features/google-geocode/location-lookup.schema";
+import { googleLocationAutoCompleteSchema } from "../features/google-geocode/location-auto-complete.schema";
+import { ipinfoCurrentLocationSchema } from "../features/ipinfo-current-location/current-location.schema";
+import { LocationSuggestionOptional } from "../features/weaget/nearby-location.types";
+import { GoogleGeocode } from "../features/google-geocode/location-lookup.model";
+import IpinfoGeocode from "../features/ipinfo-current-location/current-location.model";
+import GoogleLocationSuggestion from "../features/google-geocode/location-auto-complete.model";
+import geonamesNearbyLocationSchema from "../features/geonames-nearby-search/nearby-location.schema";
+import { GeonamesNearbyLocation } from "../features/geonames-nearby-search/nearby-location.types";
 
 
 // API ENDPOINTS
@@ -35,11 +35,11 @@ export async function getLocationDetails(location: string, region?: string): Pro
 
     const data = await response.json();
 
-    if (data.status === "REQUEST_DENIED") {
+    if (data.status !== "OK" && data.status !== "ZERO_RESULTS") {
         throw new Error(`[Location Service] Could not fetch location data. Invalid Google Geocode API key.`);
     }
 
-    return googleGeocodeSchema.parse(data);
+    return googleLocationLookupSchema.parse(data);
 }
 
 /**
@@ -62,7 +62,7 @@ export async function getLocationDetailsByIp(ip: string, retry=true): Promise<Ip
         return await getLocationDetailsByIp("", false);
     }
 
-    const payload = ipinfoGeocodeSchema.parse(data);
+    const payload = ipinfoCurrentLocationSchema.parse(data);
     return payload;
 }
 
@@ -72,7 +72,7 @@ export async function getLocationDetailsByIp(ip: string, retry=true): Promise<Ip
  * @param lng A number representing the longitude you want to search for nearby locations.
  * @returns A promise that resolves to an instance of GeonamesGeocode.
  */
-export async function getNearbyLocationDetails(lat: number, lng: number): Promise<GeonamesGeocode> {
+export async function getNearbyLocationDetails(lat: number, lng: number): Promise<GeonamesNearbyLocation> {
     const geonamesLocationLookupUrl = URL_GET_NEARBY_LOCATION(lat, lng);
     const response = await fetch(geonamesLocationLookupUrl, { next: {revalidate: LOCATION_LOOKUP_CACHE_SECONDS }});
 
@@ -81,7 +81,7 @@ export async function getNearbyLocationDetails(lat: number, lng: number): Promis
     }
 
     const data = await response.json();
-    return geonamesGeocodeSchema.parse(data);
+    return geonamesNearbyLocationSchema.parse(data);
 }
 
 
@@ -91,7 +91,7 @@ export async function getNearbyLocationDetails(lat: number, lng: number): Promis
  * @param optionalParameters An object containing optional parameters to customize the results.
  * @returns A promise that resolves to an instance of GoogleLocationSuggestion.
  */
-export async function getLocationSuggestions(
+export async function getLocationAutocompleteSuggestions(
     input: string, 
     optionalParameters: Partial<LocationSuggestionOptional> = {}
 ): Promise<GoogleLocationSuggestion> {
@@ -109,5 +109,5 @@ export async function getLocationSuggestions(
     }
 
     const data = await response.json();
-    return googleLocationSuggestionSchema.parse(data);
+    return googleLocationAutoCompleteSchema.parse(data);
 }

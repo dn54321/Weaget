@@ -1,5 +1,5 @@
-import { oneCallWeatherDetailsSchema } from "../schemas/openWeather/oneCall.schema";
-import { OneCallWeatherDetails } from "../types/models/openWeather/oneCall.model";
+import { oneCallWeatherDetailsSchema } from "../features/open-weather-map-one-call/oneCall.schema";
+import { OneCallWeatherDetails } from "../features/open-weather-map-one-call/oneCall.type";
 import { getLocationDetails } from "./geolocation.service";
 
 // API ENDPOINTS

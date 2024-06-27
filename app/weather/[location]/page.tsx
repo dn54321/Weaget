@@ -2,23 +2,25 @@
 import { Box, Container, Grid, Stack } from '@mui/material';
 import Head from 'next/head';
 
-import Footer from '@components/Layout/Section/Footer';
-import Navbar from '@components/Layout/Section/Navbar';
-import SettingsFab from '@components/SettingsFab';
-import DailyWeatherCardList from '@components/Widgets/DailyWeatherCardWidget';
-import HourlyWeatherStripWidget from '@components/Widgets/HourlyWeatherStripWidget';
-import LocationListWidget from '@components/Widgets/LocationListWidget';
-import PollutionWidget from '@components/Widgets/PollutionWidget';
-import RainfallWidget from '@components/Widgets/RainfallWidget';
-import WeatherDisplayWidget from '@components/Widgets/WeatherDisplayWidget';
-import WeatherStatWidget from '@components/Widgets/WeatherStatWidget';
+import Footer from '@components/layout/footer';
 
-import { useAlert } from '../../../src/hooks/useAlert';
-import { useGetLocation } from '../../../src/hooks/useGetLocation';
-import { useGetLocationNearbySearch } from '../../../src/hooks/useGetLocationNearbySearch';
-import { useGetPollution } from '../../../src/hooks/useGetPollution';
-import { useGetWeather } from '../../../src/hooks/useGetWeather';
+import SettingsFab from '@components/ui/settings-fab';
+import DailyWeatherCardWidget from '@components/widgets/daily-weather-card-widget';
+import LocationListWidget from '@components/widgets/location-list-widget';
+import PollutionWidget from '@components/widgets/pollution-widget';
+import WeatherStatWidget from '@components/widgets/weather-stat-widget';
+import WeatherDisplayWidget from '@components/widgets/weather-display-widget';
+import Navbar from '@components/layout/navbar';
+import HourlyWeatherStripWidget from '@components/widgets/hourly-weather-strip-widget';
+import RainfallWidget from '@components/widgets/rainfall-widget';
+
+import { useAlert } from '@src/hooks/use-alert';
+import { useGetLocation } from '@src/hooks/use-get-location';
+import { useGetPollution } from '@src/hooks/use-get-pollution';
+import { useGetWeather } from '@src/hooks/use-get-weather';
 import { useEffect } from 'react';
+import { useGetNearbyLocation } from '@src/hooks/use-get-nearby-location';
+
 
 interface PageProps {
     params: {
@@ -30,7 +32,7 @@ export default function Page({ params }: PageProps) {
     const location = params.location;
     const weatherQuery = useGetWeather(location);
     const pollutionQuery = useGetPollution(weatherQuery.data?.lat, weatherQuery.data?.lon);
-    const nearbyLocationQuery = useGetLocationNearbySearch(weatherQuery.data?.lat, weatherQuery.data?.lon);
+    const nearbyLocationQuery = useGetNearbyLocation(weatherQuery.data?.lat, weatherQuery.data?.lon);
     const locationQuery = useGetLocation(location);
     const locationShortForm = locationQuery.data?.results[0].addressComponents[0].shortName;
     const locationLongForm = locationQuery.data?.results[0].formattedAddress;
@@ -59,7 +61,7 @@ export default function Page({ params }: PageProps) {
                             <Grid item xs={12}>
                                 <Stack spacing={2}>
                                     <WeatherDisplayWidget weatherData={weatherQuery.data} location={locationLongForm}/>
-                                    <DailyWeatherCardList weatherData={weatherQuery.data}/>  
+                                    <DailyWeatherCardWidget weatherData={weatherQuery.data}/>  
                                 </Stack>
                             </Grid>
                             <Grid item xs={12} md={8}>
@@ -80,7 +82,7 @@ export default function Page({ params }: PageProps) {
                     <SettingsFab measurement temperature display={{xs: 'none', md: 'flex'}}/> 
                     <AlertBox/> 
                 </Box>
-                <Footer maxWidth="lg"/>
+                <Footer containerProps={{maxWidth: 'lg'}}/>
             </Box>
         </Box>
     )

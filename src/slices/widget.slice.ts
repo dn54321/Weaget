@@ -1,5 +1,5 @@
 import { StateCreator } from "zustand"
-import { DailyWeatherDetails } from "../types/models/openWeather/oneCall.model"
+import { DailyWeatherDetails } from "../features/open-weather-map-one-call/oneCall.type"
 
 export interface WidgetSlice {
     focusedWeather?: DailyWeatherDetails,

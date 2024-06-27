@@ -2,14 +2,14 @@
 import { ThemeProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
-import { queryClient } from '@src/utils/queryClient';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import 'three-dots/dist/three-dots.css';
-import { useTheme } from '../src/hooks/useTheme';
+import { useTheme } from '../src/hooks/use-theme';
 import '../styles/globals.css';
+import { queryClient } from '../src/utils/query-client';
 
 // We can't add this metadata until nextjs supports emotion on the server side.
 // https://nextjs.org/docs/app/building-your-application/styling/css-in-js

@@ -17,8 +17,8 @@ export const createSettingSlice: StateCreator<
     SettingSlice, 
     [], [], 
     SettingSlice
-> = (set, get) => {
-    const checkIsDarkSchemePreferred = () => window?.matchMedia?.('(prefers-color-scheme:dark)')?.matches ?? false;
+> = (set) => {
+    const checkIsDarkSchemePreferred = () => window.matchMedia("(prefers-color-scheme:dark)").matches;
     return {
         temperatureScale: TemperatureScale.CELSIUS,
         measurementScale: MeasurementScale.METRIC,
