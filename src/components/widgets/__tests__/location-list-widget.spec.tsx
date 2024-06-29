@@ -1,8 +1,8 @@
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest"
 import { render } from "@testing-library/react";
-import { testWrapper } from "../../../utils/wrappers";
-import { NearbyLocations } from "../../../features/weaget/nearby-location.types";
-import LocationListWidget from "../location-list-widget";
+import { testWrapper } from "@utils/wrappers";
+import { NearbyLocations } from "@features/weaget/nearby-location.types";
+import LocationListWidget from "@components/widgets/location-list-widget";
 
 describe('Component: location-list-widget', async () => {
     let nearbyLocations: NearbyLocations;

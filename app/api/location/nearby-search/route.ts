@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
-import { getNearbyLocationDetails } from "../../../../src/services/geolocation.service";
-import { extractQueryParams, handleNextResponseError } from "../../../../src/utils/next-request-helper";
-import { coordsSchema } from '../../../../src/features/weaget/coords.schema';
+import { getNearbyLocationDetails } from "@services/geolocation.service";
+import { extractQueryParams, handleNextResponseError } from "@utils/next-request-helper";
+import { coordsSchema } from '@features/weaget/coords.schema';
 
 // Generates a list of autocomplete queries given a string
 export async function GET(req: NextRequest) {

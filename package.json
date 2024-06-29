@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint --fix",
     "test": "NODE_ENV='test' vitest --coverage --reporter=verbose",
-    "audit": "better-npm-audit audit"
+    "audit": "better-npm-audit audit",
+    "prepare": "husky"
   },
   "dependencies": {
     "@emotion/cache": "latest",
@@ -19,7 +20,7 @@
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
     "@mui/icons-material": "^5.15.20",
-    "@mui/material": "^5.15.20",
+    "@mui/material": "6.0.0-alpha.13",
     "@mui/material-nextjs": "^5.15.11",
     "@mui/system": "^5.15.20",
     "@next/bundle-analyzer": "^14.2.4",
@@ -42,6 +43,8 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@dword-design/eslint-plugin-import-alias": "^5.0.0",
+    "@stylistic/eslint-plugin": "^2.3.0",
     "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
@@ -57,6 +60,7 @@
     "eslint": "^8.56.0",
     "eslint-config-next": "14.2.4",
     "eslint-plugin-unused-imports": "^4.0.0",
+    "husky": "^9.0.11",
     "jsdom": "^24.1.0",
     "msw": "^2.3.1",
     "typescript": "^5.4.5",

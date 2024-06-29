@@ -2,12 +2,12 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse } from "msw";
 import { afterEach, describe, expect, it, test } from "vitest";
 import { server } from "../../../vitest-setup";
-import { testQueryClient } from "../../utils/query-client";
-import { mockLocationLookupHandle } from "../../features/weaget/__mocks__/location-lookup.handler";
-import { createLocationLookupMock } from "../../features/weaget/__mocks__/location-lookup.mock";
-import locationLookupSchema from "../../features/weaget/location-lookup.schema";
-import { useGetLocation } from "../use-get-location";
-import { testWrapper } from "../../utils/wrappers";
+import { testQueryClient } from "@utils/query-client";
+import { mockLocationLookupHandle } from "@features/weaget/__mocks__/location-lookup.handler";
+import { createLocationLookupMock } from "@features/weaget/__mocks__/location-lookup.mock";
+import locationLookupSchema from "@features/weaget/location-lookup.schema";
+import { useGetLocation } from "@src/hooks/use-get-location";
+import { testWrapper } from "@utils/wrappers";
 
 describe('Hooks - use-get-location', async () => {
     afterEach(() => {

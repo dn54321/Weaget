@@ -23,27 +23,16 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@styles/*": [
-        "./styles/*"
-      ],
-      "@public/*": [
-        "./public/*"
-      ],
-      "@api/*": [
-        "./pages/api/*"
-      ],
-      "@src/*": [
-        "./src/*"
-      ],
-      "@types/*": [
-        "./src/types/*"
-      ],
-      "@services/*": [
-        "./src/services/*"
-      ]
+      "@components/*": ["./src/components/*"],
+      "@errors/*": ["./src/errors/*"],
+      "@features/*": ["./src/features/*"],
+      "@services/*": ["./src/services/*"],
+      "@slices/*": ["./src/slices/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@api/*": ["./pages/api/*"],
+      "@styles/*": ["./styles/*"],
+      "@public/*": ["./public/*"],
+      "@src/*": ["./src/*"],
     },
     "plugins": [
       {

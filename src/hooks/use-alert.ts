@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AlertBox, AlertBoxProps } from "../components/ui/alert-box";
+import { AlertBox, AlertBoxProps } from "@components/ui/alert-box";
 
 export interface AlertMessage {
     message: string,

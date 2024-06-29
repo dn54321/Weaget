@@ -1,9 +1,9 @@
 import { Box, Divider, Pagination, Skeleton, Stack } from "@mui/material";
 import { useState } from "react";
-import { OneCallWeatherDetails } from "../../features/open-weather-map-one-call/oneCall.type";
-import { parseWeatherDetailStats } from '../cards/weather-stats-card';
-import { Widget } from '../containers/widget';
-import WeatherStrip from '../ui/weather-strip';
+import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import { parseWeatherDetailStats } from '@components/cards/weather-stats-card/weather-stats-card.utils';
+import { Widget } from '@components/containers/widget/widget';
+import WeatherStrip from '@components/ui/weather-strip';
 
 export function HourlyWeatherWidgetSkeleton() {
     return (

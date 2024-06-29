@@ -1,10 +1,10 @@
 import { beforeAll, describe, expect, it, test } from "vitest";
-import { OneCallWeatherDetails } from "../../../features/open-weather-map-one-call/oneCall.type";
-import { createWeatherDailyMockData, createWeatherHourlyMockData, createWeatherMockData } from "../../../features/weaget/__mocks__/weather.mock";
+import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import { createWeatherDailyMockData, createWeatherHourlyMockData, createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 
-import RainfallWidget from "../rainfall-widget";
+import RainfallWidget from "@components/widgets/rainfall-widget";
 import { render } from "@testing-library/react";
-import { testWrapper } from "../../../utils/wrappers";
+import { testWrapper } from "@utils/wrappers";
 import userEvent from "@testing-library/user-event";
 
 describe('Component: rainfall-widget', async () => {

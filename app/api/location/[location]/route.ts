@@ -1,6 +1,6 @@
 import { getLocationDetails } from "@services/geolocation.service";
 import { NextRequest } from "next/server";
-import { createNextResponseError, handleNextResponseError } from "../../../../src/utils/next-request-helper";
+import { createNextResponseError, handleNextResponseError } from "@utils/next-request-helper";
 
 export async function GET(
     req: NextRequest, 

@@ -1,22 +1,22 @@
 "use client";
 import { List, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Toolbar } from "@mui/material";
 import { Box } from "@mui/system";
-import Navbar from "../../src/components/layout/navbar";
-import { Sidebar } from "../../src/components/layout/sidebar";
+import Navbar from "@components/layout/navbar/navbar.component";
+import { Sidebar } from "@components/layout/sidebar";
 import CollectionsIcon from '@mui/icons-material/Collections';
 import { usePathname, useRouter } from 'next/navigation';
-import { BrokenCloud } from "../../src/components/icon/weather/broken-cloud-icon";
-import { FewCloudIcon } from "../../src/components/icon/weather/few-cloud-icon";
-import { Mist } from "../../src/components/icon/weather/mist-icon";
-import { OvercastCloud } from "../../src/components/icon/weather/overcast-cloud-icon";
-import { RainCloud } from "../../src/components/icon/weather/rain-cloud-icon";
-import { ScatteredCloud } from "../../src/components/icon/weather/scattered-cloud-icon";
-import { ShowerRain } from "../../src/components/icon/weather/shower-rain-icon";
-import { SnowCloud } from "../../src/components/icon/weather/snow-cloud-icon";
-import SunIcon from "../../src/components/icon/weather/sun-icon";
-import Footer from "../../src/components/layout/footer";
+import { BrokenCloud } from "@components/icon/weather/broken-cloud-icon/broken-cloud-icon.component";
+import { FewCloudIcon } from "@components/icon/weather/few-cloud-icon/few-cloud-icon.component";
+import { Mist } from "@components/icon/weather/mist-icon";
+import { OvercastCloud } from "@components/icon/weather/overcast-cloud-icon/overcast-cloud-icon.component";
+import { RainCloud } from "@components/icon/weather/rain-cloud-icon";
+import { ScatteredCloud } from "@components/icon/weather/scattered-cloud-icon";
+import { ShowerRain } from "@components/icon/weather/shower-rain-icon/shower-rain-icon.component";
+import { SnowCloud } from "@components/icon/weather/snow-cloud-icon/snow-cloud-icon.component";
+import SunIcon from "@components/icon/weather/sun-icon/sun-icon.component";
+import Footer from "@components/layout/footer/footer.component";
 import React, { useState } from "react";
-import { Thunderstorm } from "../../src/components/icon/weather/thunderstorm-icon";
+import { Thunderstorm } from "@components/icon/weather/thunderstorm-icon/thunderstorm-icon.component";
 
 export const weatherIconShowcase = [
     {

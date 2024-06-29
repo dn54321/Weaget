@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { FetchError } from "../errors/fetch-error";
-import { GoogleGeocode } from "../features/google-geocode/location-lookup.model";
-import { queryClient } from "../utils/query-client";
-import { locationLookupSchema } from "../features/weaget/location-lookup.schema";
+import { FetchError } from "@errors/fetch-error";
+import { GoogleGeocode } from "@features/google-geocode/location-lookup.model";
+import { queryClient } from "@utils/query-client";
+import { locationLookupSchema } from "@features/weaget/location-lookup.schema";
 
 async function fetchLocation(location?: string, region?: string) {
     const url = `/api/location/${location}`;

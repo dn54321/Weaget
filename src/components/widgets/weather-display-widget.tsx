@@ -1,9 +1,9 @@
 import {Box, Card, CardContent, Stack, Typography} from '@mui/material/';
 import { BoxProps, keyframes, styled } from '@mui/system';
-import Temp from '../ui/temperature-unit';
+import Temp from '@components/ui/temperature-unit/temperature-unit.component';
 import { DateTime } from 'luxon';
-import { CurrentWeatherDetails, DailyWeatherDetails, OneCallWeatherDetails } from '../../features/open-weather-map-one-call/oneCall.type';
-import { useWidgetStore } from '../../hooks/stores/use-widget-store';
+import { CurrentWeatherDetails, DailyWeatherDetails, OneCallWeatherDetails } from '@features/open-weather-map-one-call/oneCall.type';
+import { useWidgetStore } from '@src/hooks/stores/use-widget-store';
 
 const CLOUD_COLOR = "white"
 const RAIN_CLOUD_COLOR = "#c9c9c9"
@@ -231,6 +231,7 @@ const getBackgroundColor = id => {
 }
 
 const getBackgroundIcon = id => {
+    console.log(id);
     switch (id) {
         case 200: return (<Rainy/>)
         case 300: return (<Rainy/>)
@@ -242,7 +243,7 @@ const getBackgroundIcon = id => {
         case 802: return (<ScatteredClouds/>)
         case 803: return (<Cloudy/>)
         case 804: return (<Cloudy/>)
-        default: (id % 100) ? getBackgroundIcon(id-(id % 100)) : <Cloudy/>
+        default: return (id % 100) ? getBackgroundIcon(id-(id % 100)) : <Cloudy/>
     }
 }
 

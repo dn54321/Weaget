@@ -2,13 +2,13 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse } from "msw";
 import { afterEach, describe, expect, it, test } from "vitest";
 import { server } from "../../../vitest-setup";
-import { testQueryClient } from "../../utils/query-client";
-import { mockPollutionHandle } from "../../features/weaget/__mocks__/pollution.handler";
-import { createPollutionMockData } from "../../features/weaget/__mocks__/pollution.mock";
-import { pollutionSchema } from "../../features/weaget/pollution.schema";
-import { useGetPollution } from "../use-get-pollution";
-import { testWrapper } from "../../utils/wrappers";
-import { withResponse } from "../../utils/msw-http-mocker";
+import { testQueryClient } from "@utils/query-client";
+import { mockPollutionHandle } from "@features/weaget/__mocks__/pollution.handler";
+import { createPollutionMockData } from "@features/weaget/__mocks__/pollution.mock";
+import { pollutionSchema } from "@features/weaget/pollution.schema";
+import { useGetPollution } from "@src/hooks/use-get-pollution";
+import { testWrapper } from "@utils/wrappers";
+import { withResponse } from "@utils/msw-http-mocker";
 
 describe('Hooks - use-get-pollution', async () => {
     afterEach(() => {

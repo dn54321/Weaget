@@ -1,10 +1,10 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { mockGeonamesNearbyLocationHandle } from "../../../../src/features/geonames-nearby-search/__mocks__/nearby-location.handler";
-import { withHandleError, withResponse } from "../../../../src/utils/msw-http-mocker";
-import { createMockRequest } from "../../../../src/utils/next-mock-request-builder";
+import { mockGeonamesNearbyLocationHandle } from "@features/geonames-nearby-search/__mocks__/nearby-location.handler";
+import { withHandleError, withResponse } from "@utils/msw-http-mocker";
+import { createMockRequest } from "@utils/next-mock-request-builder";
 import { GET } from "./route";
 import { server } from "../../../../vitest-setup";
-import { createGeonameMockData } from "../../../../src/features/geonames-nearby-search/__mocks__/nearby-location.mock";
+import { createGeonameMockData } from "@features/geonames-nearby-search/__mocks__/nearby-location.mock";
 ;
 
 

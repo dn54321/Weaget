@@ -1,6 +1,6 @@
 
 import { beforeAll, describe, expect, it, vi } from "vitest";
-import WeatherStrip, { WeatherStripProps } from "../weather-strip";
+import WeatherStrip, { WeatherStripProps } from "@components/ui/weather-strip";
 import { DateTime } from "luxon";
 import BugReportIcon from '@mui/icons-material/BugReport';
 import { render } from "@testing-library/react";

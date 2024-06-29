@@ -1,9 +1,9 @@
 import { render } from "@testing-library/react";
 import { beforeAll, describe, expect, it } from "vitest";
-import PollutionWidget from "../pollution-widget";
-import { Pollution } from "../../../features/apicn-pollution/pollution.types";
-import { createApicnPollutionResultMockData } from "../../../features/apicn-pollution/__mocks__/pollution.mock";
-import { testWrapper } from "../../../utils/wrappers";
+import PollutionWidget from "@components/widgets/pollution-widget";
+import { Pollution } from "@features/apicn-pollution/pollution.types";
+import { createApicnPollutionResultMockData } from "@features/apicn-pollution/__mocks__/pollution.mock";
+import { testWrapper } from "@utils/wrappers";
 import userEvent from "@testing-library/user-event";
 
 describe('Component: pollution-widget', async () => {

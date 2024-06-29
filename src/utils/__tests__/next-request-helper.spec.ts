@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { extractQueryParams } from "../next-request-helper";
+import { extractQueryParams } from "@utils/next-request-helper";
 
 describe('Utils - next-request-helper', () => {
     describe('extractQueryParams', () => {

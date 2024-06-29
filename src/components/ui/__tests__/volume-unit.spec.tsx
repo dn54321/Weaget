@@ -1,10 +1,10 @@
 import { render, renderHook } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { useSettingStore } from "../../../hooks/stores/use-setting-store";
-import { MeasurementScale } from "../../../types/measurement.types";
-import { testQueryClient } from "../../../utils/query-client";
-import { testWrapper } from "../../../utils/wrappers";
-import VolumeUnit, { getSymbol, getVolume, getVolumeSymbol } from "../volume-unit";
+import { useSettingStore } from "@src/hooks/stores/use-setting-store";
+import { MeasurementScale } from "@src/types/measurement.types";
+import { testQueryClient } from "@utils/query-client";
+import { testWrapper } from "@utils/wrappers";
+import VolumeUnit, { getSymbol, getVolume, getVolumeSymbol } from "@components/ui/volume-unit";
 
 describe("Component: volume-unit", async () => {
     afterEach(() => {

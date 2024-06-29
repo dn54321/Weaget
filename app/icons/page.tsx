@@ -2,7 +2,7 @@
 "use client"
 import { Box, Card, CardActionArea, CardContent, Container, Divider, Toolbar, Typography } from '@mui/material';
 import Stack from '@mui/material/Stack';
-import WeatherIcon from '../../src/components/ui/weather-icon';
+import WeatherIcon from '@components/ui/weather-icon';
 import React from 'react';
 import Grid from '@mui/system/Unstable_Grid';
 import { weatherIconShowcase } from './layout';

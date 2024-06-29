@@ -1,12 +1,12 @@
 import { afterEach, beforeAll, describe, expect, it } from "vitest"
-import { createWeatherMockData } from "../../../features/weaget/__mocks__/weather.mock";
+import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 import { render, renderHook } from "@testing-library/react";
-import { testWrapper } from "../../../utils/wrappers";
-import { OneCallWeatherDetails } from "../../../features/open-weather-map-one-call/oneCall.type";
+import { testWrapper } from "@utils/wrappers";
+import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import userEvent from "@testing-library/user-event";
-import { useWidgetStore } from "../../../hooks/stores/use-widget-store";
-import DailyWeatherCardWidget from "../daily-weather-card-widget";
-import { testQueryClient } from "../../../utils/query-client";
+import { useWidgetStore } from "@src/hooks/stores/use-widget-store";
+import DailyWeatherCardWidget from "@components/widgets/daily-weather-card-widget/daily-weather-card-widget";
+import { testQueryClient } from "@utils/query-client";
 
 describe('Component: daily-weather-card-widget', async () => {
     let weatherData: OneCallWeatherDetails;

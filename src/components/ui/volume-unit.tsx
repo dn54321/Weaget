@@ -1,8 +1,8 @@
 
 import { Box } from '@mui/material';
 import * as math from '@src/utils/math';
-import { useSettingStore } from '../../hooks/stores/use-setting-store';
-import { MeasurementScale } from '../../types/measurement.types';
+import { useSettingStore } from '@src/hooks/stores/use-setting-store';
+import { MeasurementScale } from '@src/types/measurement.types';
 
 
 /*

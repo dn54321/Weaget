@@ -1,9 +1,9 @@
 import { beforeAll, describe, expect, it } from "vitest"
-import { createWeatherMockData } from "../../../features/weaget/__mocks__/weather.mock";
+import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 import { render } from "@testing-library/react";
-import { testWrapper } from "../../../utils/wrappers";
-import DailyCompactWeatherWidget from "../daily-compact-weather-widget";
-import { OneCallWeatherDetails } from "../../../features/open-weather-map-one-call/oneCall.type";
+import { testWrapper } from "@utils/wrappers";
+import DailyCompactWeatherWidget from "@components/widgets/daily-compact-weather-widget";
+import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 
 describe('Component: daily-compact-weather-widget', () => {
     let weatherData: OneCallWeatherDetails;

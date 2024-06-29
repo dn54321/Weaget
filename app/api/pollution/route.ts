@@ -1,8 +1,8 @@
 import { NextRequest } from "next/server";
-import apicnPollutionSchema from "../../../src/features/apicn-pollution/pollution.schema";
-import { coordsSchema } from '../../../src/features/weaget/coords.schema';
-import { getPollutionByCoord } from "../../../src/services/pollution.service";
-import { extractQueryParams, handleNextResponseError } from "../../../src/utils/next-request-helper";
+import apicnPollutionSchema from "@features/apicn-pollution/pollution.schema";
+import { coordsSchema } from '@features/weaget/coords.schema';
+import { getPollutionByCoord } from "@services/pollution.service";
+import { extractQueryParams, handleNextResponseError } from "@utils/next-request-helper";
 
 export async function GET(req: NextRequest) {
     const queryParams = extractQueryParams(`${req.url}`);

@@ -1,22 +1,22 @@
 "use client"
-import Footer from '@components/layout/footer';
 import { Container } from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import styled from '@mui/system/styled';
 import Head from 'next/head';
 import { useEffect } from 'react';
-import LogoIcon from '../src/components/icon/core/logo-icon';
-import SearchBar from '../src/components/ui/search-bar';
-import SettingsFab from '../src/components/ui/settings-fab';
-import { ThemeToggleButton } from '../src/components/ui/theme-toggle-button';
-import DailyCompactWeatherWidget from '../src/components/widgets/daily-compact-weather-widget';
-import LocationGrid from '../src/components/widgets/location-grid-widget';
-import { useWidgetStore } from '../src/hooks/stores/use-widget-store';
-import { useAlert } from '../src/hooks/use-alert';
-import { useGetCurrentLocation } from '../src/hooks/use-get-current-location';
-import { useGetNearbyLocation } from '../src/hooks/use-get-nearby-location';
-import { useGetWeather } from '../src/hooks/use-get-weather';
+import SearchBar from '@components/ui/search-bar/search-bar.component';
+import { ThemeToggleButton } from '@components/ui/theme-toggle-button/theme-toggle-button';
+import DailyCompactWeatherWidget from '@components/widgets/daily-compact-weather-widget';
+import LocationGrid from '@components/widgets/location-grid-widget';
+import { useWidgetStore } from '@src/hooks/stores/use-widget-store';
+import { useAlert } from '@src/hooks/use-alert';
+import { useGetCurrentLocation } from '@src/hooks/use-get-current-location';
+import { useGetNearbyLocation } from '@src/hooks/use-get-nearby-location';
+import { useGetWeather } from '@src/hooks/use-get-weather';
+import { Footer } from '@styles/globals';
+import { Logo } from '@components/icon/core/logo-icon';
+import { SettingsFab } from '@components/ui/settings-fab';
 
 const Loader = () => (
     <Stack 
@@ -62,7 +62,7 @@ const PageDivider = styled(Box)(({theme}) => ({
     backgroundColor: theme.palette.divider
 }));
 
-const ResponsiveLogo = styled(LogoIcon)(({theme}) => ({ 
+const ResponsiveLogo = styled(Logo)(({theme}) => ({ 
     pt: "100px",
     mb: "30px",
     zIndex: "0",
@@ -82,7 +82,7 @@ const PaddedSearchBar = () => (
         mt:"40px",
         zIndex: "2"
     }}>
-        <SearchBar width="500px"/>
+        <SearchBar maxWidth="500px"/>
     </Box>   
 )
 

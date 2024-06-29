@@ -1,9 +1,9 @@
 
 
 import { NextRequest } from "next/server";
-import { getLocationAutocompleteSuggestions } from "../../../../src/services/geolocation.service";
-import { extractQueryParams, handleNextResponseError } from "../../../../src/utils/next-request-helper";
-import { googleLocationSuggestionInputSchema } from "../../../../src/features/google-geocode/location-auto-complete.schema";
+import { getLocationAutocompleteSuggestions } from "@services/geolocation.service";
+import { extractQueryParams, handleNextResponseError } from "@utils/next-request-helper";
+import { googleLocationSuggestionInputSchema } from "@features/google-geocode/location-auto-complete.schema";
 
 // Generates a list of autocomplete queries given a string
 export async function GET(req: NextRequest) {

@@ -1,8 +1,8 @@
 import { Box, Button, styled } from '@mui/material';
-import { OneCallWeatherDetails } from '../../features/open-weather-map-one-call/oneCall.type';
-import CompactWeatherCard from '../cards/compact-weather-card';
-import { Widget } from '../containers/widget';
+import { OneCallWeatherDetails } from '@features/open-weather-map-one-call/oneCall.type';
+import { Widget } from '@components/containers/widget/widget';
 import Grid from '@mui/material/Unstable_Grid2';
+import CompactWeatherCard from '@components/cards/compact-weather-card/compact-weather-card';
 
 /*
     Compact weather card list is a grid containing simplified weather cards.

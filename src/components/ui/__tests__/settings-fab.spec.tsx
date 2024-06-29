@@ -1,11 +1,11 @@
 import { render, renderHook } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { describe, expect, it } from "vitest"
-import { useSettingStore } from "../../../hooks/stores/use-setting-store"
-import { MeasurementScale } from "../../../types/measurement.types"
-import { TemperatureScale } from "../../../types/weather.types"
-import { testWrapper } from "../../../utils/wrappers"
-import SettingsFab from "../settings-fab"
+import { useSettingStore } from "@src/hooks/stores/use-setting-store"
+import { MeasurementScale } from "@src/types/measurement.types"
+import { TemperatureScale } from "@src/types/weather.types"
+import { testWrapper } from "@utils/wrappers"
+import { SettingsFab } from "@components/ui/settings-fab"
 
 describe("Component: settings-fab", async () => {
     it("should only show temperature scale if temperature is enabled.", () => {

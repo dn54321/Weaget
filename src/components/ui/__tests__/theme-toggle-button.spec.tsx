@@ -1,11 +1,11 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { testQueryClient } from "../../../utils/query-client";
-import { SystemTheme } from "../../../types/system.types";
+import { testQueryClient } from "@utils/query-client";
+import { SystemTheme } from "@src/types/system.types";
 import { render, renderHook } from "@testing-library/react";
-import { useTheme } from "../../../hooks/use-theme";
+import { useTheme } from "@src/hooks/use-theme";
 import userEvent from "@testing-library/user-event";
-import { ThemeToggleButton } from "../theme-toggle-button";
-import { testWrapper } from "../../../utils/wrappers";
+import { ThemeToggleButton } from "@components/ui/theme-toggle-button/theme-toggle-button";
+import { testWrapper } from "@utils/wrappers";
 
 describe("Component: theme-toggle-button", async () => {
     afterEach(() => {

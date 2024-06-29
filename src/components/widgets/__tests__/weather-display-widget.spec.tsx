@@ -1,13 +1,13 @@
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
-import WeatherDisplayWidget from "../weather-display-widget";
-import { OneCallWeatherDetails } from "../../../features/open-weather-map-one-call/oneCall.type";
-import { createWeatherMockData } from "../../../features/weaget/__mocks__/weather.mock";
+import WeatherDisplayWidget from "@components/widgets/weather-display-widget";
+import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 import { render, renderHook } from "@testing-library/react";
-import { testWrapper } from "../../../utils/wrappers";
-import { testQueryClient } from "../../../utils/query-client";
-import { useSettingStore } from "../../../hooks/stores/use-setting-store";
-import { TemperatureScale } from "../../../types/weather.types";
-import { useWidgetStore } from "../../../hooks/stores/use-widget-store";
+import { testWrapper } from "@utils/wrappers";
+import { testQueryClient } from "@utils/query-client";
+import { useSettingStore } from "@src/hooks/stores/use-setting-store";
+import { TemperatureScale } from "@src/types/weather.types";
+import { useWidgetStore } from "@src/hooks/stores/use-widget-store";
 describe('Component: weather-display-widget', async () => {
     let weatherData: OneCallWeatherDetails;
     beforeAll(() => {

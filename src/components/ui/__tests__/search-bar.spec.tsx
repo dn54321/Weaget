@@ -2,14 +2,14 @@ import { render, waitFor } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
 import { server } from "../../../../vitest-setup";
-import { mockAutoCompleteHandle } from "../../../features/weaget/__mocks__/auto-complete.handler";
-import { mockCurrentLocationHandle } from "../../../features/weaget/__mocks__/current-location.handler";
-import { createCurrentLocationMockData } from "../../../features/weaget/__mocks__/current-location.mock";
-import { mockLocationLookupHandle } from "../../../features/weaget/__mocks__/location-lookup.handler";
-import { withHandleError, withResponse } from "../../../utils/msw-http-mocker";
-import { testQueryClient } from "../../../utils/query-client";
-import { withTestWrapper } from "../../../utils/wrappers";
-import SearchBar from "../search-bar";
+import { mockAutoCompleteHandle } from "@features/weaget/__mocks__/auto-complete.handler";
+import { mockCurrentLocationHandle } from "@features/weaget/__mocks__/current-location.handler";
+import { createCurrentLocationMockData } from "@features/weaget/__mocks__/current-location.mock";
+import { mockLocationLookupHandle } from "@features/weaget/__mocks__/location-lookup.handler";
+import { withHandleError, withResponse } from "@utils/msw-http-mocker";
+import { testQueryClient } from "@utils/query-client";
+import { withTestWrapper } from "@utils/wrappers";
+import SearchBar from "@components/ui/search-bar/search-bar.component";
 
 
 describe('Component: search-bar', async () => {

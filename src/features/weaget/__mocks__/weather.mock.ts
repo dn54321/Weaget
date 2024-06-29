@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { DateTime } from 'luxon';
-import { createOpenWeatherWeatherMockData } from '../../open-weather-map-one-call/__mocks__/oneCall.mock';
+import { createOpenWeatherWeatherMockData } from '@features/open-weather-map-one-call/__mocks__/oneCall.mock';
 
 export function createWeatherCurrentMockData(
     date = faker.date.anytime(), 

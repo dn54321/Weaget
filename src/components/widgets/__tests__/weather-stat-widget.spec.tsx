@@ -1,15 +1,15 @@
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
-import { OneCallWeatherDetails } from "../../../features/open-weather-map-one-call/oneCall.type";
-import { createWeatherMockData } from "../../../features/weaget/__mocks__/weather.mock";
-import WeatherStatWidget from "../weather-stat-widget";
+import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
+import WeatherStatWidget from "@components/widgets/weather-stat-widget";
 import { render, renderHook } from "@testing-library/react";
-import { testWrapper } from "../../../utils/wrappers";
-import { testQueryClient } from "../../../utils/query-client";
-import HourlyWeatherStripWidget from "../hourly-weather-strip-widget";
+import { testWrapper } from "@utils/wrappers";
+import { testQueryClient } from "@utils/query-client";
+import HourlyWeatherStripWidget from "@components/widgets/hourly-weather-strip-widget";
 import { DateTime } from "luxon";
-import { useSettingStore } from "../../../hooks/stores/use-setting-store";
-import { TemperatureScale } from "../../../types/weather.types";
-import { MeasurementScale } from "../../../types/measurement.types";
+import { useSettingStore } from "@src/hooks/stores/use-setting-store";
+import { TemperatureScale } from "@src/types/weather.types";
+import { MeasurementScale } from "@src/types/measurement.types";
 
 describe('Component: weather-stat-widget', () => {
     let weatherData: OneCallWeatherDetails;

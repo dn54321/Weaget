@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
 import { afterEach, describe, expect, test } from "vitest";
-import { testQueryClient } from "../../../utils/query-client";
-import WeatherIcon from "../weather-icon";
-import { withTestWrapper } from "../../../utils/wrappers";
+import { testQueryClient } from "@utils/query-client";
+import WeatherIcon from "@components/ui/weather-icon";
+import { withTestWrapper } from "@utils/wrappers";
 
 describe("Component: weather-icon", async () => {
     afterEach(() => {

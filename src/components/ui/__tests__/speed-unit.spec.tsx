@@ -1,10 +1,11 @@
 import { render, renderHook } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { useSettingStore } from "../../../hooks/stores/use-setting-store";
-import { MeasurementScale } from "../../../types/measurement.types";
-import { testQueryClient } from "../../../utils/query-client";
-import { testWrapper } from "../../../utils/wrappers";
-import SpeedUnit from "../speed-unit";
+import { useSettingStore } from "@src/hooks/stores/use-setting-store";
+import { MeasurementScale } from "@src/types/measurement.types";
+import { testQueryClient } from "@utils/query-client";
+import { testWrapper } from "@utils/wrappers";
+import SpeedUnit from "@components/ui/speed-unit";
+import { Box } from "@mui/material";
 
 describe("Component: speed-unit", async () => {
     afterEach(() => {
@@ -57,3 +58,29 @@ describe("Component: speed-unit", async () => {
         expect(getByText(1)).toBeInTheDocument();
     });
 })
+/*
+     SpeedUnit
+     
+     The speedUnit component is a component that outputs the speed in the selected system unit.
+     The speeds are as follows:
+        - Metric: m/s
+        - Imperial: mph
+*/
+export function convertMeasurement(value: number, measurementScale: string) {
+    switch (measurementScale) {
+        case MeasurementScale.METRIC: return value;
+        case MeasurementScale.IMPERIAL: return value * 2.23694;
+        default: return value;
+    }
+}
+
+export function getSymbol(temperatureScale: string) {
+    switch (temperatureScale) {
+        case MeasurementScale.IMPERIAL: return <abbr title="miles per hour">mph</abbr>;
+        case MeasurementScale.METRIC: return <abbr title="meters per second">ms<Box component="sup" sx={{
+            verticalAlign: "top",
+            position: "relative",
+            top: "-0.5em",
+        }}>-1</Box></abbr>;
+    }
+}

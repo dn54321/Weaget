@@ -1,10 +1,10 @@
 import { beforeAll, describe, expect, it } from "vitest"
-import { createWeatherMockData } from "../../../features/weaget/__mocks__/weather.mock";
+import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 import { render } from "@testing-library/react";
-import { testWrapper } from "../../../utils/wrappers";
-import { OneCallWeatherDetails } from "../../../features/open-weather-map-one-call/oneCall.type";
+import { testWrapper } from "@utils/wrappers";
+import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import userEvent from "@testing-library/user-event";
-import HourlyWeatherStripWidget from "../hourly-weather-strip-widget";
+import HourlyWeatherStripWidget from "@components/widgets/hourly-weather-strip-widget";
 
 describe('Component: hourly-weather-card-widget', async () => {
     let weatherData: OneCallWeatherDetails;

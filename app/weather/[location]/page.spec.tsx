@@ -1,13 +1,13 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Page from "./page";
-import { withTestWrapper } from "../../../src/utils/wrappers";
+import { withTestWrapper } from "@utils/wrappers";
 import { render, waitFor } from "@testing-library/react";
-import { mockPollutionHandle } from "../../../src/features/weaget/__mocks__/pollution.handler";
-import { mockLocationLookupHandle } from "../../../src/features/weaget/__mocks__/location-lookup.handler";
-import { mockWeatherHandle } from "../../../src/features/weaget/__mocks__/weather.handler";
-import { withHandleError } from "../../../src/utils/msw-http-mocker";
-import { mockNearbyLocationHandle } from "../../../src/features/weaget/__mocks__/nearby-location.handler";
-import { testQueryClient } from "../../../src/utils/query-client";
+import { mockPollutionHandle } from "@features/weaget/__mocks__/pollution.handler";
+import { mockLocationLookupHandle } from "@features/weaget/__mocks__/location-lookup.handler";
+import { mockWeatherHandle } from "@features/weaget/__mocks__/weather.handler";
+import { withHandleError } from "@utils/msw-http-mocker";
+import { mockNearbyLocationHandle } from "@features/weaget/__mocks__/nearby-location.handler";
+import { testQueryClient } from "@utils/query-client";
 
 describe('Page: app/weather/[location]', () => {
     const mocks = vi.hoisted(() => {

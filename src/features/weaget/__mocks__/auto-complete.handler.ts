@@ -1,6 +1,6 @@
 import { HttpResponse, RequestHandlerOptions, http } from "msw";
 import { createAutoCompleteMockData } from "./auto-complete.mock";
-import { withSearchParams } from "../../../utils/msw-resolver";
+import { withSearchParams } from "@utils/msw-resolver";
 
 export const autoCompleteHandler = [
     http.get('/api/location/auto-complete', withSearchParams(

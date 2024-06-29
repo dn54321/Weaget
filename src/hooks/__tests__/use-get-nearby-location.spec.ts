@@ -2,12 +2,12 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse } from "msw";
 import { afterEach, describe, expect, it, test } from "vitest";
 import { server } from "../../../vitest-setup";
-import { testQueryClient } from "../../utils/query-client";
-import { mockNearbyLocationHandle } from "../../features/weaget/__mocks__/nearby-location.handler";
-import { createNearbyLocationMockData } from "../../features/weaget/__mocks__/nearby-location.mock";
-import { nearbyLocationSchema } from "../../features/weaget/nearby-location.schema";
-import { useGetNearbyLocation } from "../use-get-nearby-location";
-import { testWrapper } from "../../utils/wrappers";
+import { testQueryClient } from "@utils/query-client";
+import { mockNearbyLocationHandle } from "@features/weaget/__mocks__/nearby-location.handler";
+import { createNearbyLocationMockData } from "@features/weaget/__mocks__/nearby-location.mock";
+import { nearbyLocationSchema } from "@features/weaget/nearby-location.schema";
+import { useGetNearbyLocation } from "@src/hooks/use-get-nearby-location";
+import { testWrapper } from "@utils/wrappers";
 
 describe('Hooks - use-get-nearby-location', async () => {
     afterEach(() => {

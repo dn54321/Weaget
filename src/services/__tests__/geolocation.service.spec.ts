@@ -2,19 +2,19 @@ import { faker } from '@faker-js/faker';
 import { HttpResponse } from 'msw';
 import { afterEach, describe, expect, test } from 'vitest';
 import { server } from '../../../vitest-setup';
-import { mockGeonamesNearbyLocationHandle } from '../../features/geonames-nearby-search/__mocks__/nearby-location.handler';
-import { createGeonamesNearbyLocationMockData } from '../../features/geonames-nearby-search/__mocks__/nearby-location.mock';
-import geonamesNearbyLocationSchema from '../../features/geonames-nearby-search/nearby-location.schema';
-import { mockGoogleLocationAutoCompleteHandle } from '../../features/google-geocode/__mocks__/location-auto-complete.handler';
-import { createGoogleLocationAutoCompleteMockData } from '../../features/google-geocode/__mocks__/location-auto-complete.mock';
-import { mockGoogleLocationHandle } from '../../features/google-geocode/__mocks__/location-lookup.handler';
-import { createGoogleLocationLookupMock } from '../../features/google-geocode/__mocks__/location-lookup.mock';
-import { googleLocationAutoCompleteSchema } from '../../features/google-geocode/location-auto-complete.schema';
-import googleLocationLookupSchema from '../../features/google-geocode/location-lookup.schema';
-import { mockIpinfoCurrentLocationHandle } from '../../features/ipinfo-current-location/__mocks__/current-location.handler';
-import { createIpInfoCurrentLocationMock } from '../../features/ipinfo-current-location/__mocks__/current-location.mock';
-import { ipinfoCurrentLocationSchema } from '../../features/ipinfo-current-location/current-location.schema';
-import { getLocationAutocompleteSuggestions, getLocationDetails, getLocationDetailsByIp, getNearbyLocationDetails } from '../geolocation.service';
+import { mockGeonamesNearbyLocationHandle } from '@features/geonames-nearby-search/__mocks__/nearby-location.handler';
+import { createGeonamesNearbyLocationMockData } from '@features/geonames-nearby-search/__mocks__/nearby-location.mock';
+import geonamesNearbyLocationSchema from '@features/geonames-nearby-search/nearby-location.schema';
+import { mockGoogleLocationAutoCompleteHandle } from '@features/google-geocode/__mocks__/location-auto-complete.handler';
+import { createGoogleLocationAutoCompleteMockData } from '@features/google-geocode/__mocks__/location-auto-complete.mock';
+import { mockGoogleLocationHandle } from '@features/google-geocode/__mocks__/location-lookup.handler';
+import { createGoogleLocationLookupMock } from '@features/google-geocode/__mocks__/location-lookup.mock';
+import { googleLocationAutoCompleteSchema } from '@features/google-geocode/location-auto-complete.schema';
+import googleLocationLookupSchema from '@features/google-geocode/location-lookup.schema';
+import { mockIpinfoCurrentLocationHandle } from '@features/ipinfo-current-location/__mocks__/current-location.handler';
+import { createIpInfoCurrentLocationMock } from '@features/ipinfo-current-location/__mocks__/current-location.mock';
+import { ipinfoCurrentLocationSchema } from '@features/ipinfo-current-location/current-location.schema';
+import { getLocationAutocompleteSuggestions, getLocationDetails, getLocationDetailsByIp, getNearbyLocationDetails } from '@services/geolocation.service';
 
 describe('Geolocation Service', async () => {
     afterEach(() => {

@@ -1,6 +1,6 @@
 
-import { apicnPollutionSchema } from "../features/apicn-pollution/pollution.schema";
-import ApicnPollutionModel from "../features/apicn-pollution/pollution.types";
+import { apicnPollutionSchema } from "@features/apicn-pollution/pollution.schema";
+import ApicnPollutionModel from "@features/apicn-pollution/pollution.types";
 
 // API ENDPOINTS
 const URL_GET_POLLUTION = (lat: number, lng: number) => `https://api.waqi.info/feed/geo:${lat};${lng}/?token=${process.env.POLLUTION_APIKEY}`;

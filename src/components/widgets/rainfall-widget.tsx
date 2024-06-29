@@ -7,11 +7,11 @@ import { DateTime } from 'luxon';
 import * as React from 'react';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from 'recharts';
 
-import { useSettingStore } from '../../hooks/stores/use-setting-store';
-import { MeasurementScale } from '../../types/measurement.types';
-import { OneCallWeatherDetails } from '../../features/open-weather-map-one-call/oneCall.type';
-import { Widget } from '../containers/widget';
-import { getVolume, getVolumeSymbol } from '../ui/volume-unit';
+import { useSettingStore } from '@src/hooks/stores/use-setting-store';
+import { MeasurementScale } from '@src/types/measurement.types';
+import { OneCallWeatherDetails } from '@features/open-weather-map-one-call/oneCall.type';
+import { Widget } from '@components/containers/widget/widget';
+import { getVolume, getVolumeSymbol } from '@components/ui/volume-unit';
 
 /*
     Rainfall card tells us how much rain has fallen 

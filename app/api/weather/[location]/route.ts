@@ -1,6 +1,6 @@
 import { getWeatherByRegion } from "@services/weather.service";
 import { NextRequest } from "next/server";
-import { extractQueryParams, handleNextResponseError } from "../../../../src/utils/next-request-helper";
+import { extractQueryParams, handleNextResponseError } from "@utils/next-request-helper";
 
 export async function GET(
     req: NextRequest, 

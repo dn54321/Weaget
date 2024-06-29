@@ -1,9 +1,10 @@
 import { Box, Skeleton, Stack } from "@mui/material";
 import { DateTime } from 'luxon';
-import { useWidgetStore } from '../../hooks/stores/use-widget-store';
-import { OneCallWeatherDetails } from "../../features/open-weather-map-one-call/oneCall.type";
-import WeatherStatsCard, { parseWeatherDetailStats } from '../cards/weather-stats-card';
-import { Widget } from '../containers/widget';
+import { useWidgetStore } from '@src/hooks/stores/use-widget-store';
+import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import WeatherStatsCard from '@components/cards/weather-stats-card/weather-stats-card.component';
+import { parseWeatherDetailStats } from '@components/cards/weather-stats-card/weather-stats-card.utils';
+import { Widget } from '@components/containers/widget/widget';
 
 export function HourlyWeatherWidgetSkeleton() {
     return (

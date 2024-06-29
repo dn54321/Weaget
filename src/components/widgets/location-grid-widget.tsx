@@ -1,8 +1,8 @@
 import { Card, CardActionArea } from '@mui/material';
 import Box from '@mui/material/Box';
 import { useRouter } from 'next/navigation';
-import { Widget } from '../containers/widget';
-import { NearbyLocation } from '../../features/weaget/nearby-location.types';
+import { Widget } from '@components/containers/widget/widget';
+import { NearbyLocation } from '@features/weaget/nearby-location.types';
 import Grid from '@mui/material/Unstable_Grid2';
 
 /*

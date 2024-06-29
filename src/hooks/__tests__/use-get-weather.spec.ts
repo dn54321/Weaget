@@ -2,12 +2,12 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse } from "msw";
 import { afterEach, describe, expect, it, test } from "vitest";
 import { server } from "../../../vitest-setup";
-import { testQueryClient } from "../../utils/query-client";
-import { mockWeatherHandle } from "../../features/weaget/__mocks__/weather.handler";
-import weatherSchema from "../../features/weaget/weather.schema";
-import { useGetWeather } from "../use-get-weather";
-import { testWrapper } from "../../utils/wrappers";
-import { createWeatherMockData } from "../../features/weaget/__mocks__/weather.mock";
+import { testQueryClient } from "@utils/query-client";
+import { mockWeatherHandle } from "@features/weaget/__mocks__/weather.handler";
+import weatherSchema from "@features/weaget/weather.schema";
+import { useGetWeather } from "@src/hooks/use-get-weather";
+import { testWrapper } from "@utils/wrappers";
+import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 
 describe('Hooks - use-get-weather', async () => {
     afterEach(() => {

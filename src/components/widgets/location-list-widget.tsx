@@ -1,20 +1,20 @@
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
-import { NearbyLocation } from '../../features/weaget/nearby-location.types';
-import { Widget } from '../containers/widget';
+import { NearbyLocation } from '@features/weaget/nearby-location.types';
+import { Widget } from '@components/containers/widget/widget';
+import { useRouter } from 'next/navigation';
 
 /*
     Provides a list of the nearest suburbs/cities.
 */
-
 
 interface LocationListWidgetProps {
     locations?: Array<NearbyLocation>
 }
 
 export default function LocationListWidget(props: LocationListWidgetProps) {
-
+    const router = useRouter();
     const locations = props.locations ? props.locations.map(location => {
         const locationLink = encodeURI(`/weather/${location.name} ${location.state}, ${location.country}`)
         const locationString = [location.name, location.state]
@@ -26,7 +26,7 @@ export default function LocationListWidget(props: LocationListWidgetProps) {
                 component="li" 
                 disablePadding 
             >
-                <ListItemButton href={locationLink} sx={{
+                <ListItemButton onClick={() => router.push(locationLink)} sx={{
                     "&:hover span": {
                         textDecoration: 'underline',
                     }

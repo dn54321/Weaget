@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { weatherIconShowcase } from './layout';
 import Page from './page';
 import userEvent from '@testing-library/user-event';
-import { withTestWrapper } from '../../src/utils/wrappers';
+import { withTestWrapper } from '@utils/wrappers';
 
 
 describe('Page: app/icons/page', () => {

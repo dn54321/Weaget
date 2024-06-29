@@ -7,8 +7,8 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { DateTime } from 'luxon';
-import WeatherStatsCard, { WeatherStats } from '../cards/weather-stats-card';
-import Temp from './temperature-unit';
+import WeatherStatsCard, { WeatherStats } from '@components/cards/weather-stats-card/weather-stats-card.component';
+import Temp from './temperature-unit/temperature-unit.component';
 import WeatherIcon from './weather-icon';
 
 const Day = styled(Box)(() => ({

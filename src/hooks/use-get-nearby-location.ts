@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { NearbyLocation } from "../features/weaget/nearby-location.types";
-import { FetchError } from "../errors/fetch-error";
-import { nearbyLocationSchema } from "../features/weaget/nearby-location.schema";
+import { NearbyLocation } from "@features/weaget/nearby-location.types";
+import { FetchError } from "@errors/fetch-error";
+import { nearbyLocationSchema } from "@features/weaget/nearby-location.schema";
 
 async function fetchNearbyLocations(lat?: number, lng?: number) {
     const url = `/api/location/nearby-search`;

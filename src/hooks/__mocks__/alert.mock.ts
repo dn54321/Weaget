@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { AlertMessage } from "../use-alert";
+import { AlertMessage } from "@src/hooks/use-alert";
 
 export function createOpenWeatherAlertMessageMockData(): AlertMessage {
     return {

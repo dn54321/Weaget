@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from 'react';
-import { AutoCompleteQueryParams, AutoCompleteSuggestions } from "../features/weaget/auto-complete.types";
-import { FetchError } from "../errors/fetch-error";
-import { weagetAutoCompleteSchema } from "../features/weaget/auto-complete.schema";
+import { AutoCompleteQueryParams, AutoCompleteSuggestions } from "@features/weaget/auto-complete.types";
+import { FetchError } from "@errors/fetch-error";
+import { weagetAutoCompleteSchema } from "@features/weaget/auto-complete.schema";
 
 async function fetchAutoComplete(input: string, params?: AutoCompleteQueryParams) {
     const url = `/api/location/auto-complete`;

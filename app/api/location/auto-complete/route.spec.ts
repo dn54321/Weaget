@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { mockGoogleLocationAutoCompleteHandle } from "../../../../src/features/google-geocode/__mocks__/location-auto-complete.handler";
-import { withHandleError } from "../../../../src/utils/msw-http-mocker";
-import { createMockRequest } from "../../../../src/utils/next-mock-request-builder";
+import { mockGoogleLocationAutoCompleteHandle } from "@features/google-geocode/__mocks__/location-auto-complete.handler";
+import { withHandleError } from "@utils/msw-http-mocker";
+import { createMockRequest } from "@utils/next-mock-request-builder";
 import { GET } from "./route";
 import { server } from "../../../../vitest-setup";
 

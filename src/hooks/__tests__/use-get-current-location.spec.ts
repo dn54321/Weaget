@@ -2,12 +2,12 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse } from "msw";
 import { afterEach, describe, expect, it, test } from "vitest";
 import { server } from "../../../vitest-setup";
-import { createCurrentLocationMockData } from "../../features/weaget/__mocks__/current-location.mock";
-import { queryCurrentLocation, useGetCurrentLocation } from "../use-get-current-location";
-import weagetCurrentLocationSchema from "../../features/weaget/current-location.schema";
-import { mockCurrentLocationHandle } from "../../features/weaget/__mocks__/current-location.handler";
-import { testQueryClient } from "../../utils/query-client";
-import { testWrapper } from "../../utils/wrappers";
+import { createCurrentLocationMockData } from "@features/weaget/__mocks__/current-location.mock";
+import { queryCurrentLocation, useGetCurrentLocation } from "@src/hooks/use-get-current-location";
+import weagetCurrentLocationSchema from "@features/weaget/current-location.schema";
+import { mockCurrentLocationHandle } from "@features/weaget/__mocks__/current-location.handler";
+import { testQueryClient } from "@utils/query-client";
+import { testWrapper } from "@utils/wrappers";
 
 describe('Hooks - use-get-current-location', async () => {
     afterEach(() => {

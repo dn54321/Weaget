@@ -1,9 +1,9 @@
 import { afterEach, describe, expect, it } from "vitest";
 
 import { GET } from "./route";
-import { createMockRequest } from "../../../../src/utils/next-mock-request-builder";
-import { mockOpenWeatherOneCallHandle } from "../../../../src/features/open-weather-map-one-call/__mocks__/onecall.handler";
-import { withHandleError } from "../../../../src/utils/msw-http-mocker";
+import { createMockRequest } from "@utils/next-mock-request-builder";
+import { mockOpenWeatherOneCallHandle } from "@features/open-weather-map-one-call/__mocks__/onecall.handler";
+import { withHandleError } from "@utils/msw-http-mocker";
 import { server } from "../../../../vitest-setup";
 
 

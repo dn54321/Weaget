@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { server } from "../../../vitest-setup";
-import { withSearchParams } from "../msw-resolver";
+import { withSearchParams } from "@utils/msw-resolver";
 import { HttpResponse, http } from "msw";
 
 describe('Utils - msw-resolver', async () => {

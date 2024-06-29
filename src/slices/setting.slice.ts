@@ -1,7 +1,7 @@
 import { StateCreator } from "zustand";
-import { MeasurementScale } from "../types/measurement.types";
-import { SystemTheme } from "../types/system.types";
-import { TemperatureScale } from "../types/weather.types";
+import { MeasurementScale } from "@src/types/measurement.types";
+import { SystemTheme } from "@src/types/system.types";
+import { TemperatureScale } from "@src/types/weather.types";
 
 export interface SettingSlice {
     temperatureScale: string;

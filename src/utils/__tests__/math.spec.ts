@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { round } from "../math";
+import { round } from "@utils/math";
 
 describe('Utils - math', async () => {
     it.each([

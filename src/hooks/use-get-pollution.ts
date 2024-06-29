@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { Pollution } from "../features/apicn-pollution/pollution.types";
-import { FetchError } from "../errors/fetch-error";
-import { pollutionSchema } from "../features/weaget/pollution.schema";
+import { Pollution } from "@features/apicn-pollution/pollution.types";
+import { FetchError } from "@errors/fetch-error";
+import { pollutionSchema } from "@features/weaget/pollution.schema";
 
 async function fetchPollution(lat?: number, lng?: number) {
     const url = `/api/pollution`;

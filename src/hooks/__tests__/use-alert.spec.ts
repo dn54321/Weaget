@@ -1,7 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { useAlert } from '../use-alert';
-import { createOpenWeatherAlertMessageMockData } from '../__mocks__/alert.mock';
+import { useAlert } from '@src/hooks/use-alert';
+import { createOpenWeatherAlertMessageMockData } from '@src/hooks/__mocks__/alert.mock';
 
 describe('Hooks - use-alert', () => {
     beforeEach(() => {

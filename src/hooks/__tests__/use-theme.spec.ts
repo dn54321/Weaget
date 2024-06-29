@@ -1,7 +1,7 @@
 import { act, renderHook } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { SystemTheme } from "../../types/system.types";
-import { useTheme } from "../use-theme";
+import { SystemTheme } from "@src/types/system.types";
+import { useTheme } from "@src/hooks/use-theme";
 
 describe('Hooks - use-theme', async () => {
     beforeEach(() => {

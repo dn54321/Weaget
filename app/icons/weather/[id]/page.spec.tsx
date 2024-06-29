@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { render } from '@testing-library/react';
 import Page from './page';
-import { withTestWrapper } from '../../../../src/utils/wrappers';
+import { withTestWrapper } from '@utils/wrappers';
 
 
 describe('Page: app/icons/weather/[id]', () => {

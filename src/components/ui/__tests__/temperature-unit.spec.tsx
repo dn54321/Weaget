@@ -1,10 +1,10 @@
 import { render, renderHook } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { useSettingStore } from "../../../hooks/stores/use-setting-store";
-import { TemperatureScale } from "../../../types/weather.types";
-import { testQueryClient } from "../../../utils/query-client";
-import { testWrapper } from "../../../utils/wrappers";
-import Temp from "../temperature-unit";
+import { useSettingStore } from "@src/hooks/stores/use-setting-store";
+import { TemperatureScale } from "@src/types/weather.types";
+import { testQueryClient } from "@utils/query-client";
+import { testWrapper } from "@utils/wrappers";
+import Temp from "@components/ui/temperature-unit/temperature-unit.component";
 
 describe("Component: temperature-unit", async () => {
     afterEach(() => {

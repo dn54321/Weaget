@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Layout, { weatherIconShowcase } from "./layout";
 import { render } from "@testing-library/react";
-import { withTestWrapper } from "../../src/utils/wrappers";
+import { withTestWrapper } from "@utils/wrappers";
 import userEvent from "@testing-library/user-event";
 
 describe('Page: app/icons/layout.tsx', async () => {

@@ -1,10 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { TemperatureScale } from "../../../types/weather.types";
+import { TemperatureScale } from "@src/types/weather.types";
 import { act, renderHook } from "@testing-library/react";
-import { useSettingStore } from "../use-setting-store";
-import { testWrapper } from "../../../utils/wrappers";
-import { MeasurementScale } from "../../../types/measurement.types";
-import { SystemTheme } from "../../../types/system.types";
+import { useSettingStore } from "@src/hooks/stores/use-setting-store";
+import { testWrapper } from "@utils/wrappers";
+import { MeasurementScale } from "@src/types/measurement.types";
+import { SystemTheme } from "@src/types/system.types";
 
 describe('Hooks - use-setting-store', () => {
     beforeEach(() => {

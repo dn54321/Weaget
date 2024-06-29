@@ -1,3 +1,3 @@
-import { createApicnPollutionMockData } from "../../apicn-pollution/__mocks__/pollution.mock";
+import { createApicnPollutionMockData } from "@features/apicn-pollution/__mocks__/pollution.mock";
 
 export const createPollutionMockData = createApicnPollutionMockData;

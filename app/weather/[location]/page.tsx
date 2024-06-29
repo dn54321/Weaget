@@ -2,24 +2,23 @@
 import { Box, Container, Grid, Stack } from '@mui/material';
 import Head from 'next/head';
 
-import Footer from '@components/layout/footer';
-
-import SettingsFab from '@components/ui/settings-fab';
-import DailyWeatherCardWidget from '@components/widgets/daily-weather-card-widget';
+import DailyWeatherCardWidget from '@components/widgets/daily-weather-card-widget/daily-weather-card-widget';
 import LocationListWidget from '@components/widgets/location-list-widget';
 import PollutionWidget from '@components/widgets/pollution-widget';
 import WeatherStatWidget from '@components/widgets/weather-stat-widget';
 import WeatherDisplayWidget from '@components/widgets/weather-display-widget';
-import Navbar from '@components/layout/navbar';
 import HourlyWeatherStripWidget from '@components/widgets/hourly-weather-strip-widget';
 import RainfallWidget from '@components/widgets/rainfall-widget';
 
-import { useAlert } from '@src/hooks/use-alert';
-import { useGetLocation } from '@src/hooks/use-get-location';
-import { useGetPollution } from '@src/hooks/use-get-pollution';
-import { useGetWeather } from '@src/hooks/use-get-weather';
+import { useAlert } from '@src/hooks//use-alert';
+import { useGetLocation } from '@src/hooks//use-get-location';
+import { useGetPollution } from '@src/hooks//use-get-pollution';
+import { useGetWeather } from '@src/hooks//use-get-weather';
 import { useEffect } from 'react';
-import { useGetNearbyLocation } from '@src/hooks/use-get-nearby-location';
+import { useGetNearbyLocation } from '@src/hooks//use-get-nearby-location';
+import { Navbar } from '@components/layout/navbar';
+import { Footer } from '@components/layout/footer';
+import { SettingsFab } from '@components/ui/settings-fab';
 
 
 interface PageProps {
