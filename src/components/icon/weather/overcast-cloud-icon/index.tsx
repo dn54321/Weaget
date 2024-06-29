@@ -1,1 +1,1 @@
-export * from './overcast-cloud-icon.component';
+export * from "./overcast-cloud-icon.component";

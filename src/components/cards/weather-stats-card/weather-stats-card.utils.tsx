@@ -17,20 +17,26 @@ export function UVWarning(scale: number) {
     else return `Extreme (${scale})`;
 }
 
-
 export function parseWeatherDetailStats(weather: Partial<HourlyWeatherDetails | CurrentWeatherDetails | DailyWeatherDetails>, timezone: string) {
     return [
         {
             name: "Wind",
             statIcon: <Air sx={{ fontSize: "1em" }} />,
-            value: weather.windSpeed ? <><SpeedUnit value={weather.windSpeed} />{` / ${weather.windDeg}°`}</> : undefined,
+            value: weather.windSpeed
+                ? (
+                        <>
+                            <SpeedUnit value={weather.windSpeed} />
+                            {` / ${weather.windDeg}°`}
+                        </>
+                    )
+                : undefined,
             compactValue: weather.windSpeed ? <SpeedUnit value={weather.windSpeed} /> : undefined,
         },
         {
             name: "Humidity",
             statIcon: <Icon path={mdiWaterPercent} size="1em" />,
             value: weather.humidity,
-            unit: "%"
+            unit: "%",
         },
         {
             name: "Dew Point",
@@ -52,12 +58,12 @@ export function parseWeatherDetailStats(weather: Partial<HourlyWeatherDetails | 
         {
             name: "Sunrise",
             statIcon: <Icon path={mdiWeatherSunsetUp} size="1em" />,
-            value: weather['sunrise'] ? DateTime.fromJSDate(weather['sunrise'], { zone: timezone }).toLocaleString(DateTime.TIME_SIMPLE) : undefined,
+            value: weather["sunrise"] ? DateTime.fromJSDate(weather["sunrise"], { zone: timezone }).toLocaleString(DateTime.TIME_SIMPLE) : undefined,
         },
         {
             name: "Sunset",
             statIcon: <Icon path={mdiWeatherSunsetDown} size="1em" />,
-            value: weather['sunset'] ? DateTime.fromJSDate(weather['sunset'], { zone: timezone }).toLocaleString(DateTime.TIME_SIMPLE) : undefined,
+            value: weather["sunset"] ? DateTime.fromJSDate(weather["sunset"], { zone: timezone }).toLocaleString(DateTime.TIME_SIMPLE) : undefined,
         },
         {
             name: "Snowfall",

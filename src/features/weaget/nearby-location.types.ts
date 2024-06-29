@@ -1,12 +1,12 @@
 export interface LocationSuggestionOptional {
-    location: string,
-    types: string, 
+    location: string;
+    types: string;
 }
 
 export interface NearbyLocation {
-    name: string,
-    state: string,
-    country: string
+    name: string;
+    state: string;
+    country: string;
 }
 
-export type NearbyLocations = Array<NearbyLocation>
+export type NearbyLocations = Array<NearbyLocation>;

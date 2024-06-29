@@ -9,45 +9,44 @@ import { mockCurrentLocationHandle } from "@features/weaget/__mocks__/current-lo
 import { testQueryClient } from "@utils/query-client";
 import { testWrapper } from "@utils/wrappers";
 
-describe('Hooks - use-get-current-location', async () => {
+describe("Hooks - use-get-current-location", async () => {
     afterEach(() => {
         server.resetHandlers();
         testQueryClient.clear();
     });
-    
-    
-    describe('useGetCurrentLocation', async () => {
-        it('hook should return the correct data upon receiving valid request.', async () => {
+
+    describe("useGetCurrentLocation", async () => {
+        it("hook should return the correct data upon receiving valid request.", async () => {
             const currentLocationMockData = createCurrentLocationMockData();
             const parsedMockData = weagetCurrentLocationSchema.parse(currentLocationMockData);
             server.use(mockCurrentLocationHandle(HttpResponse.json(currentLocationMockData)));
             const { result } = renderHook(
-                () => useGetCurrentLocation(), 
+                () => useGetCurrentLocation(),
                 { wrapper: testWrapper }
             );
-            
+
             await waitFor(() => expect(result.current.isSuccess).toBe(true));
             expect(result.current.data).toEqual(parsedMockData);
         });
 
         test.each([
-            [401], [403], [404], [405], [406], [500], [502], [504]
-        ])('should throw error on invalid status code %i.', async (statusCode: number) => {
+            [401], [403], [404], [405], [406], [500], [502], [504],
+        ])("should throw error on invalid status code %i.", async (statusCode: number) => {
             const currentLocationMockData = createCurrentLocationMockData();
             server.use(mockCurrentLocationHandle(
-                HttpResponse.json(currentLocationMockData,  {status: statusCode})
+                HttpResponse.json(currentLocationMockData, { status: statusCode })
             ));
             const { result } = renderHook(
-                () => useGetCurrentLocation(), 
+                () => useGetCurrentLocation(),
                 { wrapper: testWrapper }
             );
-            
+
             await waitFor(() => expect(result.current.isError).toBe(true));
         });
     });
 
-    describe('queryCurrentLocation', () => {
-        it('function return the correct data upon receiving valid request.', async () => {
+    describe("queryCurrentLocation", () => {
+        it("function return the correct data upon receiving valid request.", async () => {
             const currentLocationMockData = createCurrentLocationMockData();
             const parsedMockData = weagetCurrentLocationSchema.parse(currentLocationMockData);
             server.use(mockCurrentLocationHandle(HttpResponse.json(currentLocationMockData)));
@@ -56,13 +55,13 @@ describe('Hooks - use-get-current-location', async () => {
         });
 
         test.each([
-            [401], [403], [404], [405], [406], [500], [502], [504]
-        ])('should throw error on invalid status code %i.', async (statusCode: number) => {
+            [401], [403], [404], [405], [406], [500], [502], [504],
+        ])("should throw error on invalid status code %i.", async (statusCode: number) => {
             const currentLocationMockData = createCurrentLocationMockData();
             server.use(mockCurrentLocationHandle(
-                HttpResponse.json(currentLocationMockData, {status: statusCode})
+                HttpResponse.json(currentLocationMockData, { status: statusCode })
             ));
             await expect(queryCurrentLocation(testQueryClient)).rejects.toThrow();
         });
-    })
-})
+    });
+});

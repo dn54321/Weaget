@@ -2,15 +2,15 @@ import { HttpResponse, RequestHandlerOptions, http } from "msw";
 import { createCurrentLocationMockData } from "./current-location.mock";
 
 export const currentLocationHandler = [
-    http.get('/api/location', () => {
-        return HttpResponse.json(createCurrentLocationMockData())
+    http.get("/api/location", () => {
+        return HttpResponse.json(createCurrentLocationMockData());
     }),
 ];
 
 export function mockCurrentLocationHandle(response: HttpResponse, options?: RequestHandlerOptions) {
     return http.get(
-        '/api/location',
+        "/api/location",
         () => response,
         options
-    )
+    );
 }

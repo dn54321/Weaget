@@ -1,1 +1,1 @@
-export * from './shower-rain-icon.component';
+export * from "./shower-rain-icon.component";

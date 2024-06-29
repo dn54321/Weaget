@@ -1,9 +1,9 @@
 export interface AutoCompleteSuggestions {
-    main: string,
-    secondary: string
+    main: string;
+    secondary: string;
 }
 
 export interface AutoCompleteQueryParams {
-    location?: string,
-    sessiontoken: string,
+    location?: string;
+    sessiontoken: string;
 }

@@ -3,8 +3,8 @@ import { List, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Toolba
 import { Box } from "@mui/system";
 import Navbar from "@components/layout/navbar/navbar.component";
 import { Sidebar } from "@components/layout/sidebar";
-import CollectionsIcon from '@mui/icons-material/Collections';
-import { usePathname, useRouter } from 'next/navigation';
+import CollectionsIcon from "@mui/icons-material/Collections";
+import { usePathname, useRouter } from "next/navigation";
 import { BrokenCloud } from "@components/icon/weather/broken-cloud-icon/broken-cloud-icon.component";
 import { FewCloudIcon } from "@components/icon/weather/few-cloud-icon/few-cloud-icon.component";
 import { Mist } from "@components/icon/weather/mist-icon";
@@ -21,152 +21,153 @@ import { Thunderstorm } from "@components/icon/weather/thunderstorm-icon/thunder
 export const weatherIconShowcase = [
     {
         id: 200,
-        icon: <Thunderstorm/>,
+        icon: <Thunderstorm />,
         name: "Thunderstorm",
-        description: "A lightning bolt accompanied with a cloud."
+        description: "A lightning bolt accompanied with a cloud.",
     },
     {
         id: 300,
-        icon: <ShowerRain/>,
+        icon: <ShowerRain />,
         name: "Shower Rain",
-            description: "Grey clouds with many light raindrops."
+        description: "Grey clouds with many light raindrops.",
     },
     {
         id: 500,
-        icon: <RainCloud/>,
+        icon: <RainCloud />,
         name: "Rain Cloud",
-        description: "Grey clouds with some heavy raindrops."
+        description: "Grey clouds with some heavy raindrops.",
     },
     {
         id: 600,
-        icon: <SnowCloud/>,
+        icon: <SnowCloud />,
         name: "Snow Cloud",
-        description: "Light gray clouds with acommpanying snow flakes."
+        description: "Light gray clouds with acommpanying snow flakes.",
     },
     {
         id: 700,
-        icon: <Mist/>,
+        icon: <Mist />,
         name: "Mist",
-        description: "A layer of clouds obscuring the sun."
+        description: "A layer of clouds obscuring the sun.",
     },
     {
         id: 800,
-        icon: <SunIcon/>,
+        icon: <SunIcon />,
         name: "Sun",
-        description: "A bright circle representing the sun."
+        description: "A bright circle representing the sun.",
     },
     {
         id: 801,
-        icon: <FewCloudIcon/>,
+        icon: <FewCloudIcon />,
         name: "Few Clouds",
-        description: "A small cloud accompanied with the sun."
+        description: "A small cloud accompanied with the sun.",
     },
     {
         id: 802,
         name: "Scattered Clouds",
-        icon: <ScatteredCloud/>,
-        description: "A few clouds accompanied with the sun."
+        icon: <ScatteredCloud />,
+        description: "A few clouds accompanied with the sun.",
     },
     {
         id: 803,
         name: "Broken Clouds",
-        icon: <BrokenCloud/>,
-        description: "A few clouds obscuring with the sun."
+        icon: <BrokenCloud />,
+        description: "A few clouds obscuring with the sun.",
     },
     {
         id: 804,
         name: "Overcast Clouds",
-        icon: <OvercastCloud/>,
-        description: "Many clouds accompanied with a small sun."
-    }
-]
+        icon: <OvercastCloud />,
+        description: "Many clouds accompanied with a small sun.",
+    },
+];
 
 export const menuItem = [
     {
         name: "Gallery",
-        icon: <CollectionsIcon fontSize="small"/>,
-        to: "/icons"
+        icon: <CollectionsIcon fontSize="small" />,
+        to: "/icons",
     },
     {
         name: "Weather Icons",
     },
-    ...weatherIconShowcase.map((weather) => ({
+    ...weatherIconShowcase.map(weather => ({
         name: weather.name,
         icon: weather.icon,
-        to: `/icons/weather/${weather.id}`
-    }))
-]
+        to: `/icons/weather/${weather.id}`,
+    })),
+];
 
-export default function IconLayout(props: { children: React.ReactNode}) {  
+export default function IconLayout(props: { children: React.ReactNode }) {
     const router = useRouter();
     const pathname = usePathname();
     const [sideMenuOpen, setSideMenuOpen] = useState(false);
-    const toggleSideMenu = () => setSideMenuOpen((menuOpen) => !menuOpen)
+    const toggleSideMenu = () => setSideMenuOpen(menuOpen => !menuOpen);
     const sidebarWidth = "280px";
 
     return (
         <Box height="100%" position="relative">
-            <Box sx={{ display: 'flex' }}>
-                <Navbar mobileBurgerFn={toggleSideMenu}/>
-                <Sidebar 
-                    drawerWidth={sidebarWidth} 
+            <Box sx={{ display: "flex" }}>
+                <Navbar mobileBurgerFn={toggleSideMenu} />
+                <Sidebar
+                    drawerWidth={sidebarWidth}
                     isMobileSidebarOpen={sideMenuOpen}
                     onClose={toggleSideMenu}
                 >
-                <Box mt="20px"/>
-                    <List 
-                        sx={{mt: "20px"}}
+                    <Box mt="20px" />
+                    <List
+                        sx={{ mt: "20px" }}
                         component="nav"
-                        aria-labelledby="Sidebar" 
+                        aria-labelledby="Sidebar"
                         dense
                     >
                         {
                             menuItem.map((menu) => {
                                 if (menu.to) {
                                     return (
-                                        <ListItemButton 
-                                            key={menu.to} 
+                                        <ListItemButton
+                                            key={menu.to}
                                             onClick={() => {
                                                 router.push(menu.to);
                                                 toggleSideMenu();
                                             }}
                                             selected={menu.to === pathname}
                                             sx={{
-                                                color: "text.primary",
+                                                "color": "text.primary",
                                                 "&.Mui-selected": {
                                                     backgroundColor: "secondary.dark",
-                                                    color: "secondary.contrastText"
+                                                    color: "secondary.contrastText",
                                                 },
                                                 "&.MuiListItemButton-root.Mui-selected:hover": {
                                                     backgroundColor: "secondary.dark",
-                                                    color: "secondary.contrastText"
-                                                }
+                                                    color: "secondary.contrastText",
+                                                },
                                             }}
                                         >
                                             <ListItemIcon sx={{
-                                                filter: "initial", 
+                                                filter: "initial",
                                                 overflow: "hidden",
-                                                width: "fit-content"
-                                            }}>
+                                                width: "fit-content",
+                                            }}
+                                            >
                                                 {menu.icon}
                                             </ListItemIcon>
                                             <ListItemText primary={menu.name} />
                                         </ListItemButton>
-                                    )
+                                    );
                                 }
                                 else {
-                                    return (<ListSubheader key={menu.name}>{menu.name}</ListSubheader>)
+                                    return (<ListSubheader key={menu.name}>{menu.name}</ListSubheader>);
                                 }
                             })
                         }
-                    </List> 
+                    </List>
                 </Sidebar>
-                <Box component="main" sx={{ flexGrow: 1, p: 3, minHeight:"calc(100vh - 80px)"}}>
+                <Box component="main" sx={{ flexGrow: 1, p: 3, minHeight: "calc(100vh - 80px)" }}>
                     <Toolbar />
                     {props.children}
-                </Box>        
+                </Box>
             </Box>
-            <Footer containerProps={{maxWidth: "lg"}} />
+            <Footer containerProps={{ maxWidth: "lg" }} />
         </Box>
-    )
+    );
 }

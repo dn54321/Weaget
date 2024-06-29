@@ -1,1 +1,1 @@
-export * from './mist-icon.component';
+export * from "./mist-icon.component";

@@ -1,1 +1,1 @@
-export * from './rain-cloud-icon.component';
+export * from "./rain-cloud-icon.component";

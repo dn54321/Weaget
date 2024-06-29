@@ -6,8 +6,8 @@ export function withSkeleton<T extends (props: any) => React.ReactNode>(
     componentProps?: Parameters<T>[0]
 ) {
     if (componentProps) {
-        const component = (props: Partial<Parameters<T>[0]>) => <Component {...componentProps} {...props}/>;
-        component.displayName = 'HOC skeleton';
+        const component = (props: Partial<Parameters<T>[0]>) => <Component {...componentProps} {...props} />;
+        component.displayName = "HOC skeleton";
         return component;
     }
 

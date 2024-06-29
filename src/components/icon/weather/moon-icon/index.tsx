@@ -1,1 +1,1 @@
-export * from './moon-icon.component';
+export * from "./moon-icon.component";

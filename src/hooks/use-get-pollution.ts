@@ -6,8 +6,8 @@ import { pollutionSchema } from "@features/weaget/pollution.schema";
 async function fetchPollution(lat?: number, lng?: number) {
     const url = `/api/pollution`;
     const queryParams = new URLSearchParams({
-        lat: `${lat}`, 
-        lng: `${lng}`
+        lat: `${lat}`,
+        lng: `${lng}`,
     });
     const data = await fetch(`${url}?${queryParams}`)
         .then(async (data) => {
@@ -26,7 +26,7 @@ async function fetchPollution(lat?: number, lng?: number) {
 
 export function useGetPollution(lat?: number, lng?: number) {
     return useQuery<Pollution>({
-        queryKey: ['pollution', lat, lng], 
+        queryKey: ["pollution", lat, lng],
         queryFn: () => fetchPollution(lat, lng),
         enabled: Boolean(lat !== undefined && lng !== undefined),
         retry: 0,

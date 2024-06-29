@@ -7,15 +7,15 @@ import { render } from "@testing-library/react";
 import { testWrapper } from "@utils/wrappers";
 import userEvent from "@testing-library/user-event";
 
-describe('Component: rainfall-widget', async () => {
+describe("Component: rainfall-widget", async () => {
     let weatherData: OneCallWeatherDetails;
     beforeAll(() => {
         weatherData = createWeatherMockData();
     });
-    it('should contain a title.', () => {
-        const { getByText} = render(
-            <RainfallWidget weatherData={weatherData}/>, 
-            {wrapper: testWrapper}
+    it("should contain a title.", () => {
+        const { getByText } = render(
+            <RainfallWidget weatherData={weatherData} />,
+            { wrapper: testWrapper }
         );
 
         expect(getByText("Rainfall")).toBeInTheDocument();
@@ -24,30 +24,34 @@ describe('Component: rainfall-widget', async () => {
     test.each([
         ["minutely", "120 mins"],
         ["hourly", "48 hours"],
-        ["daily", "14 days"]
-    ])('should show rainfall for %s.', (rainfallType, title) => {
-        const { getByText} = render(
+        ["daily", "14 days"],
+    ])("should show rainfall for %s.", (rainfallType, title) => {
+        const { getByText } = render(
             <RainfallWidget weatherData={{
                 ...weatherData,
                 hourly: undefined,
                 minutely: undefined,
                 daily: undefined,
-                [rainfallType]: weatherData[rainfallType]
-            }}/>, 
-            {wrapper: testWrapper}
+                [rainfallType]: weatherData[rainfallType],
+            }}
+            />,
+            { wrapper: testWrapper }
         );
 
         expect(getByText(title)).toBeInTheDocument();
     });
 
-    it('should be able to switch between 3 different rainfalls', async () => {
+    it("should be able to switch between 3 different rainfalls", async () => {
         const user = userEvent.setup();
-        const { getAllByRole } = render(<RainfallWidget weatherData={{
-            ...weatherData,
-            hourly: undefined,
-            minutely: undefined,
-            daily: undefined
-        }} />);
+        const { getAllByRole } = render(
+            <RainfallWidget weatherData={{
+                ...weatherData,
+                hourly: undefined,
+                minutely: undefined,
+                daily: undefined,
+            }}
+            />
+        );
         expect(getAllByRole("button")).toHaveLength(2);
         expect(getAllByRole("button")[0]).toHaveAttribute("aria-label", "See 14 days rainfall");
         await user.click(getAllByRole("button")[0]);
@@ -59,25 +63,28 @@ describe('Component: rainfall-widget', async () => {
     });
 
     it.each([
-        ["hourly", [{...createWeatherHourlyMockData(), rain: undefined}]],
-        ["hourly", [{...createWeatherHourlyMockData(), rain: {"1h": undefined}}]],
-        ["daily", [{...createWeatherDailyMockData(), rain: undefined}]]
-    ])('should work when there is no rainfall weather for %s.', async (key: string, value: object) => {
+        ["hourly", [{ ...createWeatherHourlyMockData(), rain: undefined }]],
+        ["hourly", [{ ...createWeatherHourlyMockData(), rain: { "1h": undefined } }]],
+        ["daily", [{ ...createWeatherDailyMockData(), rain: undefined }]],
+    ])("should work when there is no rainfall weather for %s.", async (key: string, value: object) => {
         const user = userEvent.setup();
-        const { getAllByRole } = render(<RainfallWidget weatherData={{
-            ...weatherData,
-            hourly: [],
-            minutely: [],
-            daily: [],
-            [key]: weatherData[key].concat(value)
-        }} />);
+        const { getAllByRole } = render(
+            <RainfallWidget weatherData={{
+                ...weatherData,
+                hourly: [],
+                minutely: [],
+                daily: [],
+                [key]: weatherData[key].concat(value),
+            }}
+            />
+        );
     });
 
-    it('should return a skeleton if no data is provided.', () => {
+    it("should return a skeleton if no data is provided.", () => {
         const { getByTestId } = render(
-            <RainfallWidget weatherData={undefined}/>,
-            {wrapper: testWrapper}        
+            <RainfallWidget weatherData={undefined} />,
+            { wrapper: testWrapper }
         );
-        expect(getByTestId('rainfall-skeleton')).toBeInTheDocument();
+        expect(getByTestId("rainfall-skeleton")).toBeInTheDocument();
     });
-})
+});

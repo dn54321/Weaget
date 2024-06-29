@@ -9,10 +9,10 @@ import { mockCurrentLocationHandle } from "@features/weaget/__mocks__/current-lo
 import { mockNearbyLocationHandle } from "@features/weaget/__mocks__/nearby-location.handler";
 import { withHandleError } from "@utils/msw-http-mocker";
 
-describe('Page: not-found', async () => {
+describe("Page: not-found", async () => {
     beforeEach(() => {
         vi.mock("next/navigation", () => ({
-            useRouter: () => ({push: () => true}),
+            useRouter: () => ({ push: () => true }),
         }));
     });
 
@@ -22,30 +22,30 @@ describe('Page: not-found', async () => {
         server.resetHandlers();
     });
 
-    it('should display loader when widgets have not loaded.', () => {
-        const {getByTestId} = render(withTestOfflineWrapper(<Home/>));
-        expect(getByTestId('loader')).toBeInTheDocument();
+    it("should display loader when widgets have not loaded.", () => {
+        const { getByTestId } = render(withTestOfflineWrapper(<Home />));
+        expect(getByTestId("loader")).toBeInTheDocument();
     });
 
     it.each([
-        ['weather', mockWeatherHandle, 'Error fetching weather data. Please try again later.'],
-        ['current location', mockCurrentLocationHandle, 'Error fetching location data. Please try again later.'],
-        ['nearby location', mockNearbyLocationHandle, 'Error fetching location data. Please try again later.']
-    ])('should display errors when %s data fails to load.', async (
+        ["weather", mockWeatherHandle, "Error fetching weather data. Please try again later."],
+        ["current location", mockCurrentLocationHandle, "Error fetching location data. Please try again later."],
+        ["nearby location", mockNearbyLocationHandle, "Error fetching location data. Please try again later."],
+    ])("should display errors when %s data fails to load.", async (
         _,
         mockHandle,
         expectedErrorMessage
     ) => {
         withHandleError(mockHandle);
-        const {getByText} = render(withTestWrapper(<Home/>));
+        const { getByText } = render(withTestWrapper(<Home />));
         await waitFor(() => expect(getByText(expectedErrorMessage)).toBeInTheDocument());
     });
 
     it.each([
-        ['Local Weather'],
-        ['Suggested Locations']
-    ])('should display %s when widgets have loaded.', async (widgetName) => {
-        const {getByText} = render(withTestWrapper(<Home/>));
+        ["Local Weather"],
+        ["Suggested Locations"],
+    ])("should display %s when widgets have loaded.", async (widgetName) => {
+        const { getByText } = render(withTestWrapper(<Home />));
         await waitFor(() => expect(getByText(widgetName)).toBeInTheDocument());
-    })
+    });
 });

@@ -3,14 +3,14 @@ import { Moon, WeatherIconContainer } from "@components/icon/weather/weather-ico
 import { WeatherIconProps } from "@components/icon/weather/weather-icon.types";
 
 export function MoonIcon(props: BoxProps & WeatherIconProps) {
-    const { decoration, ...rest} = props;
-    
-    return ( 
-        <WeatherIconContainer 
+    const { decoration, ...rest } = props;
+
+    return (
+        <WeatherIconContainer
             {...rest}
-            {...(!decoration && {ariaLabel: "Moon"})}
+            {...(!decoration && { ariaLabel: "Moon" })}
         >
-            <Moon fontSize="0.8em"/>
+            <Moon fontSize="0.8em" />
         </WeatherIconContainer>
-    )
+    );
 }

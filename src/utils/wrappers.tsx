@@ -1,4 +1,3 @@
-
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -13,8 +12,8 @@ export const testWrapper = ({ children }) => {
                 <QueryClientProvider client={testQueryClient}>{children}</QueryClientProvider>
             </ThemeProvider>
         </AppRouterCacheProvider>
-    )
-}
+    );
+};
 
 export function withTestWrapper(element: React.ReactElement) {
     return (
@@ -22,9 +21,9 @@ export function withTestWrapper(element: React.ReactElement) {
             <ThemeProvider theme={createTheme(getDesignTokens(SystemTheme.LIGHT))}>
                 <CssBaseline />
                 <QueryClientProvider client={testQueryClient}>{element}</QueryClientProvider>
-            </ThemeProvider>  
+            </ThemeProvider>
         </AppRouterCacheProvider>
-    )
+    );
 }
 
 export function withTestOfflineWrapper(element: React.ReactElement) {
@@ -33,7 +32,7 @@ export function withTestOfflineWrapper(element: React.ReactElement) {
             <ThemeProvider theme={createTheme(getDesignTokens(SystemTheme.LIGHT))}>
                 <CssBaseline />
                 <QueryClientProvider client={testOfflineQueryClient}>{element}</QueryClientProvider>
-            </ThemeProvider>  
+            </ThemeProvider>
         </AppRouterCacheProvider>
-    )
+    );
 }

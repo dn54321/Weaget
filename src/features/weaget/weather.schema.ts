@@ -4,7 +4,7 @@ const weatherDetailsSchema = z.object({
     id: z.number(),
     main: z.string(),
     description: z.string(),
-    icon: z.string()
+    icon: z.string(),
 });
 
 const minutelyWeatherDetailsShema = z.object({
@@ -32,7 +32,7 @@ const hourlyWeatherDetailsSchema = z.object({
     weather: z.array(weatherDetailsSchema),
     pop: z.number(),
     rain: hourlyDownpourWeatherDetailsSchema.optional(),
-    snow: hourlyDownpourWeatherDetailsSchema.optional()
+    snow: hourlyDownpourWeatherDetailsSchema.optional(),
 });
 
 const dailyWeatherDetailsSchema = z.object({
@@ -48,7 +48,7 @@ const dailyWeatherDetailsSchema = z.object({
         eve: z.number(),
         night: z.number(),
         min: z.number(),
-        max: z.number()
+        max: z.number(),
     }),
     feelsLike: z.object({
         morn: z.number(),
@@ -76,7 +76,7 @@ const weatherAlertSchema = z.object({
     start: z.coerce.date(),
     end: z.coerce.date(),
     description: z.string(),
-    tags: z.array(z.string())
+    tags: z.array(z.string()),
 });
 
 const CurrentWeatherDetailsSchema = z.object({

@@ -9,5 +9,5 @@ export function createOpenWeatherAlertMessageMockData(): AlertMessage {
         unclosable: faker.datatype.boolean(),
         id: faker.lorem.lines(),
         active: faker.datatype.boolean(),
-    }
+    };
 }

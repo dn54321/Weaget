@@ -1,4 +1,4 @@
-import { z } from "zod"
+import { z } from "zod";
 
 const timeSchema = z.object({
     s: z.string(),
@@ -39,7 +39,7 @@ const dailyPollutantReportSchema = z.object({
     avg: z.number(),
     day: z.string(),
     max: z.number(),
-    min: z.number()
+    min: z.number(),
 });
 
 const dailySchema = z.object({
@@ -50,7 +50,7 @@ const dailySchema = z.object({
 });
 
 const forecastSchema = z.object({
-    daily: dailySchema
+    daily: dailySchema,
 });
 
 const citySchema = z.object({
@@ -69,9 +69,8 @@ export const apicnPollutionSchemaResult = z.object({
     iaqi: iaqiSchema,
     time: timeSchema,
     forecast: forecastSchema,
-    debug: debugSchema
+    debug: debugSchema,
 });
-
 
 export const apicnPollutionSchema = z.object({
     status: z.string(),

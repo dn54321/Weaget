@@ -1,8 +1,8 @@
-import { Box, Paper, styled } from '@mui/material';
+import { Box, Paper, styled } from "@mui/material";
 
 export const High = styled(Box)(() => ({
     fontSize: "1em",
-    display: "inline"
+    display: "inline",
 }));
 
 export const Low = styled(Box)(({ theme }) => ({
@@ -12,11 +12,11 @@ export const Low = styled(Box)(({ theme }) => ({
 }));
 
 export const PaperContainer = styled(Paper)(({ theme }) => ({
-    color: theme.palette.text.primary, 
-    display: "flex", 
-    flexDirection: "column", 
-    alignItems: "center", 
+    color: theme.palette.text.primary,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     position: "relative",
-    aspectRatio: "1", 
-    justifyContent:"center",
+    aspectRatio: "1",
+    justifyContent: "center",
 }));

@@ -2,12 +2,12 @@ import { useState } from "react";
 import { AlertBox, AlertBoxProps } from "@components/ui/alert-box";
 
 export interface AlertMessage {
-    message: string,
-    type: "success" | "info" | "warning" | "error",
-    duration?: number,
-    unclosable?: boolean,
-    id?: string,
-    active?: boolean,
+    message: string;
+    type: "success" | "info" | "warning" | "error";
+    duration?: number;
+    unclosable?: boolean;
+    id?: string;
+    active?: boolean;
 }
 
 export type useAlertInterface = Omit<AlertBoxProps, "alerts" | "removeAlert">;
@@ -18,43 +18,41 @@ export function useAlert() {
 
     const markStaleAlerts = () => {
         setAlerts(oldAlerts => oldAlerts.map(
-            alert => (alert.duration > Date.now()) ? alert : {...alert, active: false}
+            alert => (alert.duration > Date.now()) ? alert : { ...alert, active: false }
         ));
-    }
+    };
     const removeAlert = (id: string) => {
         setAlerts(oldAlerts => oldAlerts.map(
-            alert => (alert.id !== id) ? alert : {...alert, active: false}
+            alert => (alert.id !== id) ? alert : { ...alert, active: false }
         ));
-    }
+    };
 
     const addAlert = (alert: AlertMessage) => {
         const duration = alert.duration || 5000;
         const id = alert.id ?? alert.message;
         setAlerts((oldAlerts) => {
-            const hasSameId = oldAlerts.some((alert) => alert.id === id);
+            const hasSameId = oldAlerts.some(alert => alert.id === id);
             if (hasSameId) {
                 return oldAlerts;
             }
 
             const newAlert = {
-                ...alert, 
+                ...alert,
                 duration: Date.now() + duration,
                 unclosable: Boolean(alert.unclosable),
                 active: true,
                 id: id,
-            }
+            };
 
             return [...oldAlerts, newAlert];
-        })
+        });
 
         if (duration !== Infinity) {
             setTimeout(() => markStaleAlerts(), duration);
         }
-    }
+    };
 
+    const alertBox = (props: useAlertInterface) => AlertBox({ ...props, alerts: activeAlerts, removeAlert });
 
-    const alertBox = (props: useAlertInterface) => AlertBox({...props, alerts: activeAlerts, removeAlert});
-
-
-    return {alerts: activeAlerts, addAlert, removeAlert, AlertBox: alertBox} as const;
+    return { alerts: activeAlerts, addAlert, removeAlert, AlertBox: alertBox } as const;
 }

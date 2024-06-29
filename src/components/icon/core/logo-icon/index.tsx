@@ -1,1 +1,1 @@
-export {default as Logo} from "./logo-icon.component";
+export { default as Logo } from "./logo-icon.component";

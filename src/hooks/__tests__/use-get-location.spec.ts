@@ -9,54 +9,54 @@ import locationLookupSchema from "@features/weaget/location-lookup.schema";
 import { useGetLocation } from "@src/hooks/use-get-location";
 import { testWrapper } from "@utils/wrappers";
 
-describe('Hooks - use-get-location', async () => {
+describe("Hooks - use-get-location", async () => {
     afterEach(() => {
         server.resetHandlers();
         testQueryClient.clear();
     });
-    
-    describe('useGetLocation', async () => {
-        it('hook should return the correct data upon receiving valid request.', async () => {
+
+    describe("useGetLocation", async () => {
+        it("hook should return the correct data upon receiving valid request.", async () => {
             const locationLookupMockData = createLocationLookupMock();
             const parsedMockData = locationLookupSchema.parse(locationLookupMockData);
             server.use(mockLocationLookupHandle(HttpResponse.json(locationLookupMockData)));
             const { result } = renderHook(
-                () => useGetLocation('mockLocation'), 
+                () => useGetLocation("mockLocation"),
                 { wrapper: testWrapper }
             );
-            
+
             await waitFor(() => expect(result.current.isSuccess).toBe(true));
             expect(result.current.data).toEqual(parsedMockData);
         });
 
-        it('hook should return the correct data upon receiving valid request with optional params.', async () => {
+        it("hook should return the correct data upon receiving valid request with optional params.", async () => {
             const locationLookupMockData = createLocationLookupMock();
             const parsedMockData = locationLookupSchema.parse(locationLookupMockData);
             server.use(mockLocationLookupHandle(HttpResponse.json(locationLookupMockData)));
             const { result } = renderHook(
-                () => useGetLocation('mockLocation', 'mockRegion'), 
+                () => useGetLocation("mockLocation", "mockRegion"),
                 { wrapper: testWrapper }
             );
-            
+
             await waitFor(() => expect(result.current.isSuccess).toBe(true));
             expect(result.current.data).toEqual(parsedMockData);
         });
 
         test.each([
-            [401], [403], [404], [405], [406], [500], [502], [504]
-        ])('hook should return throw error upon receiving request with invalid status code. (%d)', 
-        async (statusCode: number) => {
-            const locationLookupMockData = createLocationLookupMock();
-            server.use(mockLocationLookupHandle(
-                HttpResponse.json(locationLookupMockData, {status: statusCode})
-            ));
+            [401], [403], [404], [405], [406], [500], [502], [504],
+        ])("hook should return throw error upon receiving request with invalid status code. (%d)",
+            async (statusCode: number) => {
+                const locationLookupMockData = createLocationLookupMock();
+                server.use(mockLocationLookupHandle(
+                    HttpResponse.json(locationLookupMockData, { status: statusCode })
+                ));
 
-            const { result } = renderHook(
-                () => useGetLocation('mockLocation'), 
-                { wrapper: testWrapper }
-            );
-            
-            await waitFor(() => expect(result.current.isError).toBe(true));
-        });
+                const { result } = renderHook(
+                    () => useGetLocation("mockLocation"),
+                    { wrapper: testWrapper }
+                );
+
+                await waitFor(() => expect(result.current.isError).toBe(true));
+            });
     });
 });

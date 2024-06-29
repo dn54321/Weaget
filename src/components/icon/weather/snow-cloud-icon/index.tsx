@@ -1,1 +1,1 @@
-export * from './snow-cloud-icon.component';
+export * from "./snow-cloud-icon.component";

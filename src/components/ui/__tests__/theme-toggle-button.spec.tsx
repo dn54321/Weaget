@@ -15,13 +15,13 @@ describe("Component: theme-toggle-button", async () => {
     it.each([
         [SystemTheme.LIGHT, SystemTheme.DARK],
         [SystemTheme.DARK, SystemTheme.LIGHT],
-    ])('should toggle from %s to %s when the theme toggle button is pressed', 
-    async (initial, expected) => {
-        const {result} = renderHook(() => useTheme());
-        result.current.setThemeColour(initial);
-        const user = userEvent.setup();
-        const {getByRole} = render(<ThemeToggleButton/>, {wrapper: testWrapper});
-        await user.click(getByRole("button"));
-        expect(result.current.themeColour).toBe(expected);
-    });
+    ])("should toggle from %s to %s when the theme toggle button is pressed",
+        async (initial, expected) => {
+            const { result } = renderHook(() => useTheme());
+            result.current.setThemeColour(initial);
+            const user = userEvent.setup();
+            const { getByRole } = render(<ThemeToggleButton />, { wrapper: testWrapper });
+            await user.click(getByRole("button"));
+            expect(result.current.themeColour).toBe(expected);
+        });
 });

@@ -1,1 +1,1 @@
-export * from './thunderstorm-icon.component';
+export * from "./thunderstorm-icon.component";

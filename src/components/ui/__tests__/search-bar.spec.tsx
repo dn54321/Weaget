@@ -1,5 +1,5 @@
 import { render, waitFor } from "@testing-library/react";
-import userEvent from '@testing-library/user-event';
+import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
 import { server } from "../../../../vitest-setup";
 import { mockAutoCompleteHandle } from "@features/weaget/__mocks__/auto-complete.handler";
@@ -11,17 +11,16 @@ import { testQueryClient } from "@utils/query-client";
 import { withTestWrapper } from "@utils/wrappers";
 import SearchBar from "@components/ui/search-bar/search-bar.component";
 
-
-describe('Component: search-bar', async () => {
+describe("Component: search-bar", async () => {
     const mocks = vi.hoisted(() => {
         return {
             mockRouterPush: vi.fn(),
-        }
-    })
+        };
+    });
 
     beforeEach(() => {
         vi.mock("next/navigation", () => ({
-            useRouter: () => ({push: mocks.mockRouterPush}),
+            useRouter: () => ({ push: mocks.mockRouterPush }),
         }));
     });
 
@@ -31,80 +30,80 @@ describe('Component: search-bar', async () => {
         testQueryClient.clear();
     });
 
-    it('should be able to search a location.', async () => {
+    it("should be able to search a location.", async () => {
         mocks.mockRouterPush.mockResolvedValue(true);
         const user = userEvent.setup();
-        const {getByPlaceholderText, getByLabelText} = render(
-            withTestWrapper(<SearchBar/>)
+        const { getByPlaceholderText, getByLabelText } = render(
+            withTestWrapper(<SearchBar />)
         );
 
-        const comboBox = getByPlaceholderText('Search Weather Location');
+        const comboBox = getByPlaceholderText("Search Weather Location");
         await user.click(comboBox);
-        await user.keyboard('mockLocation');
-        await user.click(getByLabelText('Search'));
-        expect(mocks.mockRouterPush).toHaveBeenCalledWith('/weather/mockLocation');
+        await user.keyboard("mockLocation");
+        await user.click(getByLabelText("Search"));
+        expect(mocks.mockRouterPush).toHaveBeenCalledWith("/weather/mockLocation");
     });
 
     test.each([
-    [404, "Invalid Suburb Location"],
-    [500, "Internal Server Error. Please try again later!"]   
-    ])('should display an error if the location endpoint returns status code %d.', 
-    async (statusCode, errorMessage) => {
-        withHandleError(mockLocationLookupHandle, statusCode);
-        withResponse(mockAutoCompleteHandle, []);
-        const user = userEvent.setup();
-        const {getByPlaceholderText, getByLabelText, getByText} = render(
-            withTestWrapper(<SearchBar/>)
-        );
+        [404, "Invalid Suburb Location"],
+        [500, "Internal Server Error. Please try again later!"],
+    ])("should display an error if the location endpoint returns status code %d.",
+        async (statusCode, errorMessage) => {
+            withHandleError(mockLocationLookupHandle, statusCode);
+            withResponse(mockAutoCompleteHandle, []);
+            const user = userEvent.setup();
+            const { getByPlaceholderText, getByLabelText, getByText } = render(
+                withTestWrapper(<SearchBar />)
+            );
 
-        const comboBox = getByPlaceholderText('Search Weather Location');
-        await user.click(comboBox);
-        await user.keyboard('invalidSuburb');
-        await user.click(getByLabelText('Search'));
-        expect(getByText(errorMessage)).toBeInTheDocument();
-    });
+            const comboBox = getByPlaceholderText("Search Weather Location");
+            await user.click(comboBox);
+            await user.keyboard("invalidSuburb");
+            await user.click(getByLabelText("Search"));
+            expect(getByText(errorMessage)).toBeInTheDocument();
+        });
 
-    it('Upon searching, should display a list of clickable auto-complete options.', async () => {
+    it("Upon searching, should display a list of clickable auto-complete options.", async () => {
         mocks.mockRouterPush.mockResolvedValue(true);
-        withResponse(mockAutoCompleteHandle, [{main: "mockLocation", secondary: "mockState"}]);
+        withResponse(mockAutoCompleteHandle, [{ main: "mockLocation", secondary: "mockState" }]);
         const user = userEvent.setup();
-        const {getByPlaceholderText, getByText} = render(
-            withTestWrapper(<SearchBar/>)
+        const { getByPlaceholderText, getByText } = render(
+            withTestWrapper(<SearchBar />)
         );
 
-        const comboBox = getByPlaceholderText('Search Weather Location');
+        const comboBox = getByPlaceholderText("Search Weather Location");
         await user.click(comboBox);
-        await user.keyboard('m');
+        await user.keyboard("m");
         await waitFor(() => expect(getByText("mockLocation")).toBeInTheDocument());
-        await user.click(getByText('mockLocation'));
-        expect(mocks.mockRouterPush).toHaveBeenCalledWith('/weather/mockLocation mockState');
+        await user.click(getByText("mockLocation"));
+        expect(mocks.mockRouterPush).toHaveBeenCalledWith("/weather/mockLocation mockState");
     });
 
-    it('should take me to my current location upon clicking the current location button.', async () => {
+    it("should take me to my current location upon clicking the current location button.", async () => {
         mocks.mockRouterPush.mockResolvedValue(true);
         const currentLocationMock = createCurrentLocationMockData();
         withResponse(mockCurrentLocationHandle, currentLocationMock);
         const user = userEvent.setup();
-        const {getByLabelText} = render(
-            withTestWrapper(<SearchBar/>)
+        const { getByLabelText } = render(
+            withTestWrapper(<SearchBar />)
         );
 
-        const currentLocationButton = getByLabelText('Use current location');
+        const currentLocationButton = getByLabelText("Use current location");
         await user.click(currentLocationButton);
         expect(mocks.mockRouterPush).toHaveBeenCalledWith(`/weather/${currentLocationMock.city}`);
     });
-    
-    it('Upon clicking current location button, and the endpoint fails, an appropriate error message should be displayed.', async () => {
+
+    it("Upon clicking current location button, and the endpoint fails, an appropriate error message should be displayed.", async () => {
         mocks.mockRouterPush.mockResolvedValue(true);
         withHandleError(mockCurrentLocationHandle, 500);
-        withResponse(mockAutoCompleteHandle, [{main: "mockLocation", secondary: "mockState"}]);
+        withResponse(mockAutoCompleteHandle, [{ main: "mockLocation", secondary: "mockState" }]);
         const user = userEvent.setup();
-        const {getByLabelText, getByText} = render(
-            withTestWrapper(<SearchBar/>)
+        const { getByLabelText, getByText } = render(
+            withTestWrapper(<SearchBar />)
         );
 
-        const currentLocationButton = getByLabelText('Use current location');
+        const currentLocationButton = getByLabelText("Use current location");
         await user.click(currentLocationButton);
         expect(getByText("Could not retrieve current location. Please enter it manually!")).toBeInTheDocument();
     });
-})
+});

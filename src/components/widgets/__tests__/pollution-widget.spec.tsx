@@ -6,16 +6,16 @@ import { createApicnPollutionResultMockData } from "@features/apicn-pollution/__
 import { testWrapper } from "@utils/wrappers";
 import userEvent from "@testing-library/user-event";
 
-describe('Component: pollution-widget', async () => {
+describe("Component: pollution-widget", async () => {
     let pollutionData: Pollution;
     beforeAll(() => {
-        pollutionData = createApicnPollutionResultMockData()
-    })
+        pollutionData = createApicnPollutionResultMockData();
+    });
 
-    it('should contain a title.', () => {
+    it("should contain a title.", () => {
         const { getByText } = render(
-            <PollutionWidget pollution={pollutionData}/>, 
-            {wrapper: testWrapper}
+            <PollutionWidget pollution={pollutionData} />,
+            { wrapper: testWrapper }
         );
         expect(getByText("Pollution Level")).toBeInTheDocument();
     });
@@ -27,7 +27,7 @@ describe('Component: pollution-widget', async () => {
             ["Unhealthy for sensitive groups", 110],
             ["Unhealthy", 160],
             ["Very Unhealthy", 210],
-            ["Hazardous", 310]
+            ["Hazardous", 310],
         ]
     )("should display '%s' air quality index when aqi is %d.", (
         quality: string,
@@ -36,9 +36,10 @@ describe('Component: pollution-widget', async () => {
         const { getByText } = render(
             <PollutionWidget pollution={{
                 ...pollutionData,
-                aqi
-            }}/>, 
-            {wrapper: testWrapper}
+                aqi,
+            }}
+            />,
+            { wrapper: testWrapper }
         );
 
         expect(getByText(quality)).toBeInTheDocument();
@@ -48,13 +49,13 @@ describe('Component: pollution-widget', async () => {
     it("should have a button that shows more pollution stats.", async () => {
         const user = userEvent.setup();
         const { getByText, getAllByRole } = render(
-            <PollutionWidget pollution={pollutionData}/>, 
-            {wrapper: testWrapper}
+            <PollutionWidget pollution={pollutionData} />,
+            { wrapper: testWrapper }
         );
-        const openButton = getByText("Show Advanced Pollution Details")
+        const openButton = getByText("Show Advanced Pollution Details");
         await user.click(openButton);
         expect(getAllByRole("row")).not.toHaveLength(0);
-        const closeButton = getByText("Hide Advanced Pollution Details")
+        const closeButton = getByText("Hide Advanced Pollution Details");
         await user.click(closeButton);
         expect(() => getAllByRole("row")).toThrow();
     });
@@ -62,10 +63,10 @@ describe('Component: pollution-widget', async () => {
     it("should show skeleton when pollution data is loading.", () => {
         const user = userEvent.setup();
         const { getByText } = render(
-            <PollutionWidget pollution={undefined}/>, 
-            {wrapper: testWrapper}
+            <PollutionWidget pollution={undefined} />,
+            { wrapper: testWrapper }
         );
-        
+
         expect(getByText("Loading Pollution Details...")).toBeInTheDocument();
     });
 
@@ -74,12 +75,13 @@ describe('Component: pollution-widget', async () => {
         const { getAllByRole, getByText } = render(
             <PollutionWidget pollution={{
                 ...pollutionData,
-                iaqi: {}
-            }}/>, 
-            {wrapper: testWrapper}
+                iaqi: {},
+            }}
+            />,
+            { wrapper: testWrapper }
         );
-        
-        const openButton = getByText("Show Advanced Pollution Details")
+
+        const openButton = getByText("Show Advanced Pollution Details");
         await user.click(openButton);
         expect(getAllByRole("row")).not.toHaveLength(0);
     });

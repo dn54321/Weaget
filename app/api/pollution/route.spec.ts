@@ -8,30 +8,29 @@ import { GET } from "./route";
 // All IP addresses generated with:
 // https://commentpicker.com/ip-address-generator.php
 
-describe('Route: api/pollution', async () => {
+describe("Route: api/pollution", async () => {
     afterEach(() => {
         server.resetHandlers();
     });
-    
-    
-    it('should return 200 status when lat and lng is set.', async () => {
-        const request = createMockRequest({ 
+
+    it("should return 200 status when lat and lng is set.", async () => {
+        const request = createMockRequest({
             path: "/api/location",
-            params: { lat: "1.23", lng: "4.56" }
+            params: { lat: "1.23", lng: "4.56" },
         });
 
         const response = await GET(request);
         expect(response.status).toBe(200);
     });
 
-    it('should return 500 when unexpected error occurs.', async () => {
+    it("should return 500 when unexpected error occurs.", async () => {
         withHandleError(mockApicnPollutionHandle);
-        const request = createMockRequest({ 
+        const request = createMockRequest({
             path: "/api/location",
-            params: { lat: "1.23", lng: "4.56" }
+            params: { lat: "1.23", lng: "4.56" },
         });
 
         const response = await GET(request);
         expect(response.status).toBe(500);
     });
-})
+});

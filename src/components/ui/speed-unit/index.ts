@@ -1,1 +1,1 @@
-export {default as SpeedUnit} from './speed-unit.component';
+export { default as SpeedUnit } from "./speed-unit.component";

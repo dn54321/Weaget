@@ -146,43 +146,43 @@ export enum GeocodeType {
 }
 
 export interface Coords {
-    lat: number,
-    lng: number
+    lat: number;
+    lng: number;
 }
 
 export interface AddressComponent {
-    longName: string,
-    shortName: string,
-    types: Array<string>,
+    longName: string;
+    shortName: string;
+    types: Array<string>;
 }
 
 export interface Geometry {
-    location: Coords
-    viewport: Bounds,
-    locationType: string,
-    bounds?: Bounds
+    location: Coords;
+    viewport: Bounds;
+    locationType: string;
+    bounds?: Bounds;
 }
 
 export interface Bounds {
-    northeast: Coords,
-    southwest: Coords
+    northeast: Coords;
+    southwest: Coords;
 }
 
 export interface PlusCode {
-    compoundCode: string,
-    globalCode: string
+    compoundCode: string;
+    globalCode: string;
 }
 
 export interface GoogleGeocodeResult {
-    addressComponents: Array<AddressComponent>,
-    formattedAddress: string,
-    geometry: Geometry
-    placeId: string,
-    plusCode?: PlusCode,
-    types: Array<string>,
+    addressComponents: Array<AddressComponent>;
+    formattedAddress: string;
+    geometry: Geometry;
+    placeId: string;
+    plusCode?: PlusCode;
+    types: Array<string>;
 }
 
 export interface GoogleGeocode {
-    results: Array<GoogleGeocodeResult>,
-    status: string,
+    results: Array<GoogleGeocodeResult>;
+    status: string;
 }

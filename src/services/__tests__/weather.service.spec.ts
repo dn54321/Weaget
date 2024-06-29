@@ -6,13 +6,13 @@ import { mockOpenWeatherOneCallHandle } from "@features/open-weather-map-one-cal
 import { oneCallWeatherDetailsSchema } from "@features/open-weather-map-one-call/oneCall.schema";
 import { getWeatherByCoords, getWeatherByRegion } from "@services/weather.service";
 
-describe('Weather Service', async () => {
+describe("Weather Service", async () => {
     afterEach(() => {
         server.resetHandlers();
-    })
-    
-    describe('getWeatherByCoords', async () => {
-        test('Expect function with lat and lng to return valid response.', async () => {
+    });
+
+    describe("getWeatherByCoords", async () => {
+        test("Expect function with lat and lng to return valid response.", async () => {
             const mockWeatherData = createOpenWeatherOneCallMockData();
             const responseData = oneCallWeatherDetailsSchema.parse(mockWeatherData);
             server.use(mockOpenWeatherOneCallHandle(HttpResponse.json(mockWeatherData)));
@@ -21,8 +21,8 @@ describe('Weather Service', async () => {
                 .toEqual(responseData);
         });
 
-        test('Expect function to throw on unexpected response.', async () => {
-            const mockWeatherData = {data: "malformedData"};
+        test("Expect function to throw on unexpected response.", async () => {
+            const mockWeatherData = { data: "malformedData" };
             server.use(mockOpenWeatherOneCallHandle(HttpResponse.json(mockWeatherData)));
             await expect(getWeatherByCoords(0, 0))
                 .rejects
@@ -30,28 +30,28 @@ describe('Weather Service', async () => {
         });
 
         test.each([
-            [401], [403], [404], [405], [406], [500], [502], [504]
-        ])('Expect invalid response to throw error on %i status code.', async (statusCode: number) => {
+            [401], [403], [404], [405], [406], [500], [502], [504],
+        ])("Expect invalid response to throw error on %i status code.", async (statusCode: number) => {
             const mockWeatherData = createOpenWeatherOneCallMockData();
             const responseData = oneCallWeatherDetailsSchema.parse(mockWeatherData);
-            server.use(mockOpenWeatherOneCallHandle(HttpResponse.json(responseData, {status: statusCode})));
+            server.use(mockOpenWeatherOneCallHandle(HttpResponse.json(responseData, { status: statusCode })));
             await expect(getWeatherByCoords(0, 0))
                 .rejects
                 .toThrow();
         });
     });
 
-    describe('getWeatherByRegion', async () => {
-        test('Expect function with location to return a valid response', async () => {
-            await expect(getWeatherByRegion('mockLocation'))
+    describe("getWeatherByRegion", async () => {
+        test("Expect function with location to return a valid response", async () => {
+            await expect(getWeatherByRegion("mockLocation"))
                 .resolves
-                .toBeTypeOf('object');
+                .toBeTypeOf("object");
         });
 
-        test('Expect function with location and region to return a valid response', async () => {
-            await expect(getWeatherByRegion('mockLocation', 'mockRegion'))
+        test("Expect function with location and region to return a valid response", async () => {
+            await expect(getWeatherByRegion("mockLocation", "mockRegion"))
                 .resolves
-                .toBeTypeOf('object');
+                .toBeTypeOf("object");
         });
     });
 });

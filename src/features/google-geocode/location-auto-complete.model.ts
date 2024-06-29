@@ -1,6 +1,6 @@
 export interface MatchedSubString {
-    length: number,
-    offset: number
+    length: number;
+    offset: number;
 }
 
 export interface StructuredFormatting {
@@ -15,15 +15,15 @@ export interface Term {
 }
 
 export interface GoogleLocationSuggestionResult {
-    description: string,
-    matchedSubstrings: Array<MatchedSubString>,
-    placeId: string,
-    reference: string,
-    structuredFormatting: StructuredFormatting
-    terms: Array<Term>
-    types: Array<string>,
+    description: string;
+    matchedSubstrings: Array<MatchedSubString>;
+    placeId: string;
+    reference: string;
+    structuredFormatting: StructuredFormatting;
+    terms: Array<Term>;
+    types: Array<string>;
 }
 
 export default interface GoogleLocationSuggestion {
-    predictions: Array<GoogleLocationSuggestionResult>
+    predictions: Array<GoogleLocationSuggestionResult>;
 }

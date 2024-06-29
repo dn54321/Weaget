@@ -3,22 +3,22 @@ import { createAutoCompleteMockData } from "./auto-complete.mock";
 import { withSearchParams } from "@utils/msw-resolver";
 
 export const autoCompleteHandler = [
-    http.get('/api/location/auto-complete', withSearchParams(
-        (params) => params.has('input'),
+    http.get("/api/location/auto-complete", withSearchParams(
+        params => params.has("input"),
         () => HttpResponse.json(createAutoCompleteMockData())
     )),
-    http.get('/api/location/auto-complete', () => {
+    http.get("/api/location/auto-complete", () => {
         return HttpResponse.json({
-            "id": crypto.randomUUID(),
-            "message": "Failed to retrieve location suggestion.",
-        })
+            id: crypto.randomUUID(),
+            message: "Failed to retrieve location suggestion.",
+        });
     }),
 ];
 
 export function mockAutoCompleteHandle(response: HttpResponse, options?: RequestHandlerOptions) {
     return http.get(
-        '/api/location/auto-complete',
+        "/api/location/auto-complete",
         () => response,
         options
-    )
+    );
 }

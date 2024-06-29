@@ -6,38 +6,37 @@ import { mockOpenWeatherOneCallHandle } from "@features/open-weather-map-one-cal
 import { withHandleError } from "@utils/msw-http-mocker";
 import { server } from "../../../../vitest-setup";
 
-
-describe('Route: api/weather/[location]', async () => {
+describe("Route: api/weather/[location]", async () => {
     afterEach(() => {
         server.resetHandlers();
     });
-    
-    it('should return 200 status when location is set.', async () => {
-        const request = createMockRequest({ 
+
+    it("should return 200 status when location is set.", async () => {
+        const request = createMockRequest({
             path: "/api/location/mockLocation",
         });
 
-        const response = await GET(request, {params : {location: 'mockLocation'}});
+        const response = await GET(request, { params: { location: "mockLocation" } });
         expect(response.status).toBe(200);
     });
 
-    it('should return 200 status when location and region is set.', async () => {
-        const request = createMockRequest({ 
+    it("should return 200 status when location and region is set.", async () => {
+        const request = createMockRequest({
             path: "/api/location/mockLocation",
-            params: {region: 'mockRegion'}
+            params: { region: "mockRegion" },
         });
 
-        const response = await GET(request, {params : {location: 'mockLocation'}});
+        const response = await GET(request, { params: { location: "mockLocation" } });
         expect(response.status).toBe(200);
     });
 
-    it('should return 500 when unexpected error occurs.', async () => {
+    it("should return 500 when unexpected error occurs.", async () => {
         withHandleError(mockOpenWeatherOneCallHandle);
-        const request = createMockRequest({ 
+        const request = createMockRequest({
             path: "/api/location/mockLocation",
         });
 
-        const response = await GET(request, {params : {location: 'mockLocation'}});
+        const response = await GET(request, { params: { location: "mockLocation" } });
         expect(response.status).toBe(500);
     });
-})
+});

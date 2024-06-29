@@ -1,4 +1,3 @@
-
 export interface WeatherIconProps {
-    decoration?: boolean
+    decoration?: boolean;
 }

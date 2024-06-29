@@ -6,8 +6,7 @@ import { getLocationDetails } from "./geolocation.service";
 const URL_GET_ONE_WEATHER = (lat: number, lng: number) => `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&appid=${process.env.OPENWEATHER_API}`;
 
 // CONFIGURATIONS
-const WEATHER_CACHE_SECONDS = 30*60;
-
+const WEATHER_CACHE_SECONDS = 30 * 60;
 
 /**
  * Fetches weather information for a location specified by latitude and longitude.
@@ -17,7 +16,7 @@ const WEATHER_CACHE_SECONDS = 30*60;
  */
 export async function getWeatherByCoords(lat: number, lng: number): Promise<OneCallWeatherDetails> {
     const oneWeatherUrl = URL_GET_ONE_WEATHER(lat, lng);
-    const response = await fetch(oneWeatherUrl, { next: {revalidate: WEATHER_CACHE_SECONDS }});
+    const response = await fetch(oneWeatherUrl, { next: { revalidate: WEATHER_CACHE_SECONDS } });
 
     if (!response.ok) {
         throw new Error(`[Weather Service] Could not fetch weather by coords. (lat: ${lat}, lon: ${lng})`);

@@ -17,15 +17,15 @@ async function fetchCurrentLocation() {
 
 export function useGetCurrentLocation() {
     return useQuery<IpinfoGeocode>({
-        queryKey: ['current-location'], 
+        queryKey: ["current-location"],
         queryFn: () => fetchCurrentLocation(),
         retry: 0,
     });
 }
 
 export async function queryCurrentLocation(client: QueryClient = queryClient) {
-    return await client.ensureQueryData<IpinfoGeocode>({         
-        queryKey: [], 
+    return await client.ensureQueryData<IpinfoGeocode>({
+        queryKey: [],
         queryFn: () => fetchCurrentLocation(),
     });
 }

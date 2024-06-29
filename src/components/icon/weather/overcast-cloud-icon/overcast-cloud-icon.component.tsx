@@ -3,17 +3,17 @@ import { WeatherIconContainer, Sun, Cloud } from "@components/icon/weather/weath
 import { WeatherIconProps } from "@components/icon/weather/weather-icon.types";
 
 export function OvercastCloud(props: BoxProps & WeatherIconProps) {
-    const { decoration, ...rest} = props;
-    
-    return ( 
-        <WeatherIconContainer 
+    const { decoration, ...rest } = props;
+
+    return (
+        <WeatherIconContainer
             {...rest}
-            {...(!decoration && {ariaLabel: "Overcast cloud"})}
+            {...(!decoration && { ariaLabel: "Overcast cloud" })}
         >
-            <Sun fontSize="0.3em" top="40%" left="70%"/>
-            <Cloud width="0.5em" height="0.5em" top="50%" left="40%"/>
-            <Cloud width="0.3em" height="0.3em" top="60%" left="70%"/>
-            <Cloud width="0.9em" top="70%" left="50%"/>
+            <Sun fontSize="0.3em" top="40%" left="70%" />
+            <Cloud width="0.5em" height="0.5em" top="50%" left="40%" />
+            <Cloud width="0.3em" height="0.3em" top="60%" left="70%" />
+            <Cloud width="0.9em" top="70%" left="50%" />
         </WeatherIconContainer>
-    )
+    );
 }

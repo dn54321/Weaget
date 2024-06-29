@@ -11,7 +11,7 @@ export const ipinfoCurrentLocationSchema = z.object({
     timezone: z.string(),
     postal: z.string().optional(),
     bogon: z.boolean().optional(),
-}).transform((o) => ({
+}).transform(o => ({
     ...o,
     lat: Number.parseFloat(o.loc.split(",")[0]),
     lng: Number.parseFloat(o.loc.split(",")[1]),

@@ -2,9 +2,9 @@ const stylistic = require('@stylistic/eslint-plugin')
 
 const customized = stylistic.configs.customize({
   // the following options are the default values
-  indent: 2,
-  quotes: 'single',
-  semi: false,
+  indent: 4,
+  quotes: 'double',
+  semi: true,
   jsx: true,
   // ...
 })
@@ -19,7 +19,7 @@ module.exports = {
       "react",
       "@typescript-eslint",
       "unused-imports",
-      "@stylistic/ts"
+      "@stylistic"
   ],
   "rules": {
       ...customized.rules,

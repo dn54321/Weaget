@@ -1,39 +1,39 @@
 export interface Pollution {
     aqi: number;
     idx: number;
-    attributions: Array<Attribution>
+    attributions: Array<Attribution>;
     city: City;
     dominentpol: string;
     iaqi: Iaqi;
     time: Time;
     forecast: Forecast;
-    debug: Debug
+    debug: Debug;
 }
 
 export interface Iaqi {
-    co?: Volume,
-    h?: Volume,
-    neph?: Volume,
-    no2?: Volume,
-    o3?: Volume,
-    p?: Volume,
-    pm10?: Volume,
-    pm25?: Volume,
-    so2?: Volume,
-    t?: Volume,
-    w?: Volume,
-    wg?: Volume,
+    co?: Volume;
+    h?: Volume;
+    neph?: Volume;
+    no2?: Volume;
+    o3?: Volume;
+    p?: Volume;
+    pm10?: Volume;
+    pm25?: Volume;
+    so2?: Volume;
+    t?: Volume;
+    w?: Volume;
+    wg?: Volume;
 }
 
 export interface Time {
-    s: string,
-    tz: string,
-    v: number,
-    iso: string
+    s: string;
+    tz: string;
+    v: number;
+    iso: string;
 }
 
 export interface Debug {
-    sync: Date
+    sync: Date;
 }
 
 export interface Volume {
@@ -46,21 +46,21 @@ export interface Attribution {
 }
 
 export interface Forecast {
-    daily: Daily
+    daily: Daily;
 }
 
 export interface Daily {
-    o3?: Array<DailyPollutantReport>
-    pm10?: Array<DailyPollutantReport>
-    pm25?: Array<DailyPollutantReport>
-    uvi?: Array<DailyPollutantReport>
+    o3?: Array<DailyPollutantReport>;
+    pm10?: Array<DailyPollutantReport>;
+    pm25?: Array<DailyPollutantReport>;
+    uvi?: Array<DailyPollutantReport>;
 }
 
 export interface DailyPollutantReport {
-    avg: number,
-    day: string,
-    max: number,
-    min: number
+    avg: number;
+    day: string;
+    max: number;
+    min: number;
 }
 
 export interface City {

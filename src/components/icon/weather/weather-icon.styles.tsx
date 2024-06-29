@@ -1,41 +1,40 @@
-
 import { Box, styled } from "@mui/system";
 
 export const WeatherIconContainer = styled(Box) ({
     width: "1em",
     height: "1em",
     position: "relative",
-    userSelect: "none"
+    userSelect: "none",
 
 });
 
 export const Sun = styled(Box)((props: any) => ({
     position: "absolute",
     left: props.left ? props.left : "50%",
-    top:  props.top ? props.top : "50%",
+    top: props.top ? props.top : "50%",
     transform: "translate(-50%, -50%)",
     width: "1em",
     height: "1em",
     borderRadius: "0.5em",
     boxShadow: props.theme.shadows?.[1],
     backgroundColor: "#fada5e",
-    filter: "drop-shadow(0px 0px 2px #F8CF2D)"
+    filter: "drop-shadow(0px 0px 2px #F8CF2D)",
 }));
 
 export const Moon = styled(Box)((props: any) => ({
     position: "absolute",
     left: props.left ?? "50%",
-    top:  props.top ?? "50%",
+    top: props.top ?? "50%",
     transform: "translate(-50%, -50%)",
     width: "1em",
     height: "1em",
     borderRadius: "0.5em",
     boxShadow: props.theme.shadows![1],
     backgroundColor: "#c7cbd0",
-    filter: "drop-shadow(0px 0px 2px #c7cbd0)"
+    filter: "drop-shadow(0px 0px 2px #c7cbd0)",
 }));
 
-export const Bolt = styled(Box) ((props) => ({
+export const Bolt = styled(Box) (props => ({
     "&:before,&:after": {
         content: "''",
         display: "block",
@@ -51,9 +50,9 @@ export const Bolt = styled(Box) ((props) => ({
         borderTop: "0.2em solid transparent",
         borderBottom: "0.7em solid #fada5e",
         left: `calc(${props.left ?? "50%"} + 0.2em)`,
-        top:  `calc(${props.top ?? "50%"} - 0.4em)`,
+        top: `calc(${props.top ?? "50%"} - 0.4em)`,
         transform: "translate(-50%, -50%) rotate(40deg)",
-        transformOrigin: "center"
+        transformOrigin: "center",
     },
     "&:after": {
         borderLeft: "0.2em solid transparent",
@@ -61,9 +60,9 @@ export const Bolt = styled(Box) ((props) => ({
         borderBottom: "0.2em solid transparent",
         borderTop: "0.7em solid #fada5e",
         left: `calc(${props.left ?? "50%"} - 0.2em)`,
-        top:  `calc(${props.top ?? "50%"} + 0.4em)`,
+        top: `calc(${props.top ?? "50%"} + 0.4em)`,
         transform: "translate(-50%, -50%) rotate(40deg)",
-        transformOrigin: "center"
+        transformOrigin: "center",
     },
 }));
 
@@ -102,8 +101,8 @@ export const Cloud = styled(Box) ((props: any) => ({
 //     }
 // }));
 
-export const GreyCloud = styled(Cloud) ((props) => ({
-    backgroundColor: "#c9c9c9"
+export const GreyCloud = styled(Cloud) (props => ({
+    backgroundColor: "#c9c9c9",
 }));
 
 export const Rain = styled(Box) ((props: any) => ({
@@ -114,8 +113,7 @@ export const Rain = styled(Box) ((props: any) => ({
     boxShadow: props.theme.shadows?.[1],
     height: "0.08em",
     borderRadius: `calc(${props.height ?? "0.08em"} * 0.5)`,
-}))
-
+}));
 
 export const Snow1 = styled(Box)<any>((props: any) => ({
     "--snowHeight": "0.05em",
@@ -134,23 +132,23 @@ export const Snow1 = styled(Box)<any>((props: any) => ({
         height: "var(--snowHeight)",
         borderRadius: `calc(${props.height ?? "0.08em"} * 0.5)`,
         left: `calc(${props.left ?? "50%"})`,
-        top:  `calc(${props.top ?? "50%"})`,
+        top: `calc(${props.top ?? "50%"})`,
     },
-    "&:before": { 
+    "&:before": {
         transform: "translate(-50%, -50%) rotate(var(--angle))",
-        transformOrigin: "center"
+        transformOrigin: "center",
     },
     "&:after": {
         transform: "translate(-50%, -50%) rotate(calc(var(--angle) + 90deg))",
-        transformOrigin: "center"
+        transformOrigin: "center",
     },
 }));
 
 export const Snow2 = (props) => {
     return (
         <>
-            <Snow1 {...props}/>
+            <Snow1 {...props} />
             <Snow1 angle="45" {...props} filter="brightness(130%)" />
         </>
-    )
-}
+    );
+};

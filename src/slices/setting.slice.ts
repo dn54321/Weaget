@@ -14,8 +14,8 @@ export interface SettingSlice {
 }
 
 export const createSettingSlice: StateCreator<
-    SettingSlice, 
-    [], [], 
+    SettingSlice,
+    [], [],
     SettingSlice
 > = (set) => {
     const checkIsDarkSchemePreferred = () => window.matchMedia("(prefers-color-scheme:dark)").matches;
@@ -25,17 +25,17 @@ export const createSettingSlice: StateCreator<
         theme: SystemTheme.SYSTEM,
         setTemperatureScale: (temperatureScale: TemperatureScale) => set(() => ({ temperatureScale: temperatureScale })),
         setMeasurementScale: (measurementScale: MeasurementScale) => set(() => ({ measurementScale: measurementScale })),
-        toggleTheme: () => set((state) => { 
+        toggleTheme: () => set((state) => {
             if (state.theme === SystemTheme.LIGHT) {
-                return {theme: SystemTheme.DARK};
+                return { theme: SystemTheme.DARK };
             }
             if (state.theme === SystemTheme.DARK) {
-                return {theme: SystemTheme.LIGHT};
+                return { theme: SystemTheme.LIGHT };
             }
             const isDarkPreferred = checkIsDarkSchemePreferred();
-            return {theme: isDarkPreferred ? SystemTheme.LIGHT : SystemTheme.DARK};
+            return { theme: isDarkPreferred ? SystemTheme.LIGHT : SystemTheme.DARK };
         }),
 
-        setTheme: (theme: SystemTheme) => set(() => ({ theme: theme }))
-    }
-}
+        setTheme: (theme: SystemTheme) => set(() => ({ theme: theme })),
+    };
+};
