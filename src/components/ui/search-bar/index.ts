@@ -1,1 +1,1 @@
-export { default as Searchbar } from "./search-bar.component";
+export { default as SearchBar } from "./search-bar.component";

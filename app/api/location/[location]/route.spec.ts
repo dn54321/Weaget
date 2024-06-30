@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { mockGoogleLocationHandle } from "@features/google-geocode/__mocks__/location-lookup.handler";
 import { withHandleError, withResponse } from "@utils/msw-http-mocker";
 import { createMockRequest } from "@utils/next-mock-request-builder";
-import { server } from "../../../../vitest-setup";
+import { server } from "@project/vitest-setup";
 import { GET } from "./route";
 
 describe("Route: api/location/[location]", async () => {

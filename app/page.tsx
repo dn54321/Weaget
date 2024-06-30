@@ -5,18 +5,18 @@ import Stack from "@mui/material/Stack";
 import styled from "@mui/system/styled";
 import Head from "next/head";
 import { useEffect } from "react";
-import SearchBar from "@components/ui/search-bar/search-bar.component";
-import { ThemeToggleButton } from "@components/ui/theme-toggle-button/theme-toggle-button";
-import DailyCompactWeatherWidget from "@components/widgets/daily-compact-weather-widget";
-import LocationGrid from "@components/widgets/location-grid-widget";
+import { SearchBar } from "@components/ui/search-bar";
 import { useWidgetStore } from "@src/hooks/stores/use-widget-store";
 import { useAlert } from "@src/hooks/use-alert";
 import { useGetCurrentLocation } from "@src/hooks/use-get-current-location";
 import { useGetNearbyLocation } from "@src/hooks/use-get-nearby-location";
 import { useGetWeather } from "@src/hooks/use-get-weather";
-import { Footer } from "@styles/globals";
 import { Logo } from "@components/icon/core/logo-icon";
 import { SettingsFab } from "@components/ui/settings-fab";
+import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
+import { DailyCompactWeatherWidget } from "@components/widgets/daily-compact-weather-widget";
+import LocationGrid from "@components/widgets/location-grid-widget/location-grid-widget.component";
+import { Footer } from "@components/layout/footer";
 
 const Loader = () => (
     <Stack

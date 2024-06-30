@@ -7,10 +7,10 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "three-dots/dist/three-dots.css";
-import { useTheme } from "@src/hooks/use-theme";
 import "@styles/globals.css";
 import { queryClient } from "@utils/query-client";
 import { ThemeProvider } from "@mui/system";
+import { useSystemTheme } from "@src/hooks/use-system-theme";
 
 // We can't add this metadata until nextjs supports emotion on the server side.
 // https://nextjs.org/docs/app/building-your-application/styling/css-in-js
@@ -31,7 +31,7 @@ import { ThemeProvider } from "@mui/system";
 // }
 
 export default function RootLayout(props: { children: React.ReactNode }) {
-    const { theme } = useTheme();
+    const { theme } = useSystemTheme();
 
     return (
         <html lang="en">

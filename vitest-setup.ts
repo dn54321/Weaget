@@ -1,19 +1,19 @@
-import '@testing-library/jest-dom/vitest';
-import { setupServer } from 'msw/node';
-import { apicnPollutionHandler } from './src/features/apicn-pollution/__mocks__/pollution.handler';
-import { geonamesNearbyLocationHandler } from './src/features/geonames-nearby-search/__mocks__/nearby-location.handler';
-import { googleLocationAutoCompleteHandler } from './src/features/google-geocode/__mocks__/location-auto-complete.handler';
-import { googleLocationLookupHandler } from './src/features/google-geocode/__mocks__/location-lookup.handler';
-import { ipinfoCurrentLocationHandler } from './src/features/ipinfo-current-location/__mocks__/current-location.handler';
-import { openWeatherOneCallHandler } from './src/features/open-weather-map-one-call/__mocks__/onecall.handler';
-import { autoCompleteHandler } from './src/features/weaget/__mocks__/auto-complete.handler';
-import { currentLocationHandler } from './src/features/weaget/__mocks__/current-location.handler';
-import { locationLookupHandler } from './src/features/weaget/__mocks__/location-lookup.handler';
-import { nearbyLocationHandler } from './src/features/weaget/__mocks__/nearby-location.handler';
-import { pollutionHandler } from './src/features/weaget/__mocks__/pollution.handler';
-import { weatherHandler } from './src/features/weaget/__mocks__/weather.handler';
-import { afterEach, vi } from 'vitest';
-import { cleanup } from '@testing-library/react';
+import "@testing-library/jest-dom/vitest";
+import { setupServer } from "msw/node";
+import { apicnPollutionHandler } from "./src/features/apicn-pollution/__mocks__/pollution.handler";
+import { geonamesNearbyLocationHandler } from "./src/features/geonames-nearby-search/__mocks__/nearby-location.handler";
+import { googleLocationAutoCompleteHandler } from "./src/features/google-geocode/__mocks__/location-auto-complete.handler";
+import { googleLocationLookupHandler } from "./src/features/google-geocode/__mocks__/location-lookup.handler";
+import { ipinfoCurrentLocationHandler } from "./src/features/ipinfo-current-location/__mocks__/current-location.handler";
+import { openWeatherOneCallHandler } from "./src/features/open-weather-map-one-call/__mocks__/onecall.handler";
+import { autoCompleteHandler } from "./src/features/weaget/__mocks__/auto-complete.handler";
+import { currentLocationHandler } from "./src/features/weaget/__mocks__/current-location.handler";
+import { locationLookupHandler } from "./src/features/weaget/__mocks__/location-lookup.handler";
+import { nearbyLocationHandler } from "./src/features/weaget/__mocks__/nearby-location.handler";
+import { pollutionHandler } from "./src/features/weaget/__mocks__/pollution.handler";
+import { weatherHandler } from "./src/features/weaget/__mocks__/weather.handler";
+import { afterEach, vi } from "vitest";
+import { cleanup } from "@testing-library/react";
 
 // Mock every endpoint possible.
 export const server = setupServer(
@@ -23,14 +23,14 @@ export const server = setupServer(
     ...googleLocationLookupHandler,
     ...ipinfoCurrentLocationHandler,
     ...openWeatherOneCallHandler,
-    
+
     ...autoCompleteHandler,
     ...nearbyLocationHandler,
     ...currentLocationHandler,
     ...locationLookupHandler,
     ...pollutionHandler,
     ...weatherHandler
-)
+);
 
 server.listen();
 
@@ -39,36 +39,34 @@ afterEach(() => {
 });
 
 // Hard-coded mocks to get tests to work.
-vi.mock('zustand');
+vi.mock("zustand");
 
-
-
-vi.mock('next/font/google', () => ({
+vi.mock("next/font/google", () => ({
     Roboto: () => ({
         style: {
-            fontFamily: 'mocked',
+            fontFamily: "mocked",
         },
     }),
     Quicksand: () => ({
         style: {
-            fontFamily: 'mocked',
+            fontFamily: "mocked",
         },
-    })
+    }),
 }));
 
 const resizeObserverMock = vi.fn(() => ({
     observe: vi.fn(),
     unobserve: vi.fn(),
     disconnect: vi.fn(),
-  }));
-  
+}));
+
 // Stub the global ResizeObserver
-vi.stubGlobal('ResizeObserver', resizeObserverMock)
+vi.stubGlobal("ResizeObserver", resizeObserverMock);
 
 const originalConsoleError = console.error;
 const jsDomCssError = "Error: Could not parse CSS stylesheet";
 console.error = (...params: Array<string>) => {
-    if (!params.find((p) => p.toString().includes(jsDomCssError))) {
+    if (!params.find(p => p.toString().includes(jsDomCssError))) {
         originalConsoleError(...params);
     }
 };

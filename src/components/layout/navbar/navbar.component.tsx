@@ -2,20 +2,21 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { AppBar, Box, Container, Divider, IconButton, Link, ToggleButton, ToggleButtonGroup, Toolbar, useTheme } from "@mui/material";
+import { AppBar, Box, Container, Divider, IconButton, Link, ToggleButton, ToggleButtonGroup, Toolbar } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { NSXContainer, SXContainer } from "@styles/globals";
 import React, { useState } from "react";
-import SearchBar from "@components/ui/search-bar/search-bar.component";
-import { ThemeToggleButton } from "@components/ui/theme-toggle-button/theme-toggle-button";
+import { SearchBar } from "@components/ui/search-bar";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Icon, OutlinedLogo } from "./navbar.styles";
 import { MeasurementScale } from "@src/types/measurement.types";
 import { SystemTheme } from "@src/types/system.types";
 import { TemperatureScale } from "@src/types/weather.types";
 import { useSettingStore } from "@src/hooks//stores/use-setting-store";
+import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
+import { useSystemTheme } from "@src/hooks/use-system-theme";
 
 // Default Navbar seen normally on every device
 function DefaultNavbar(props: NavbarProps & { setState: (str: string) => void }) {
@@ -69,7 +70,7 @@ function SearchNavbar(props) {
     return (
         <>
             <IconButton
-                aria-label="back"
+                aria-label="go back"
                 sx={{ color: "white", mr: "20px" }}
                 onClick={() => props.setState("default")}
             >
@@ -96,7 +97,7 @@ function SettingsDialog(props) {
     const measurementScale = useSettingStore(state => state.measurementScale);
     const setTemperatureScale = useSettingStore(state => state.setTemperatureScale);
     const setMeasurementScale = useSettingStore(state => state.setMeasurementScale);
-    const { themeColour, toggleTheme } = useTheme();
+    const { themeColour, toggleTheme } = useSystemTheme();
     const handleClose = () => {
         props.setDialog(false);
     };

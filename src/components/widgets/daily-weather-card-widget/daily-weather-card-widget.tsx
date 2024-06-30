@@ -64,11 +64,11 @@ function WeatherList(props: WeatherListProps) {
     });
 }
 
-export interface WeeklyWeatherCardWidgetProps {
+export interface DailyWeatherCardWidgetProps {
     weatherData?: OneCallWeatherDetails;
 }
 
-export default function DailyWeatherCardWidget(props: WeeklyWeatherCardWidgetProps) {
+export default function DailyWeatherCardWidget(props: DailyWeatherCardWidgetProps) {
     const [activeCard, setActiveCard] = useState(-1);
     const [hoverCard, setHoverCard] = useState(-1);
     const setFocusedWeather = useWidgetStore(state => state.setFocusedWeather);

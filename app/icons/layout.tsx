@@ -5,7 +5,7 @@ import Navbar from "@components/layout/navbar/navbar.component";
 import { Sidebar } from "@components/layout/sidebar";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import { usePathname, useRouter } from "next/navigation";
-import { BrokenCloud } from "@components/icon/weather/broken-cloud-icon/broken-cloud-icon.component";
+import { BrokenCloud } from "@components/icon/weather/broken-cloud-icon";
 import { FewCloudIcon } from "@components/icon/weather/few-cloud-icon/few-cloud-icon.component";
 import { Mist } from "@components/icon/weather/mist-icon";
 import { OvercastCloud } from "@components/icon/weather/overcast-cloud-icon/overcast-cloud-icon.component";
@@ -21,62 +21,62 @@ import { Thunderstorm } from "@components/icon/weather/thunderstorm-icon/thunder
 export const weatherIconShowcase = [
     {
         id: 200,
-        icon: <Thunderstorm />,
+        icon: <Thunderstorm decoration />,
         name: "Thunderstorm",
         description: "A lightning bolt accompanied with a cloud.",
     },
     {
         id: 300,
-        icon: <ShowerRain />,
+        icon: <ShowerRain decoration />,
         name: "Shower Rain",
         description: "Grey clouds with many light raindrops.",
     },
     {
         id: 500,
-        icon: <RainCloud />,
+        icon: <RainCloud decoration />,
         name: "Rain Cloud",
         description: "Grey clouds with some heavy raindrops.",
     },
     {
         id: 600,
-        icon: <SnowCloud />,
+        icon: <SnowCloud decoration />,
         name: "Snow Cloud",
         description: "Light gray clouds with acommpanying snow flakes.",
     },
     {
         id: 700,
-        icon: <Mist />,
+        icon: <Mist decoration />,
         name: "Mist",
         description: "A layer of clouds obscuring the sun.",
     },
     {
         id: 800,
-        icon: <SunIcon />,
+        icon: <SunIcon decoration />,
         name: "Sun",
         description: "A bright circle representing the sun.",
     },
     {
         id: 801,
-        icon: <FewCloudIcon />,
+        icon: <FewCloudIcon decoration />,
         name: "Few Clouds",
         description: "A small cloud accompanied with the sun.",
     },
     {
         id: 802,
         name: "Scattered Clouds",
-        icon: <ScatteredCloud />,
+        icon: <ScatteredCloud decoration />,
         description: "A few clouds accompanied with the sun.",
     },
     {
         id: 803,
         name: "Broken Clouds",
-        icon: <BrokenCloud />,
+        icon: <BrokenCloud decoration />,
         description: "A few clouds obscuring with the sun.",
     },
     {
         id: 804,
         name: "Overcast Clouds",
-        icon: <OvercastCloud />,
+        icon: <OvercastCloud decoration />,
         description: "Many clouds accompanied with a small sun.",
     },
 ];

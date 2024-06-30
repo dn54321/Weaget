@@ -8,7 +8,8 @@ export function MoonIcon(props: BoxProps & WeatherIconProps) {
     return (
         <WeatherIconContainer
             {...rest}
-            {...(!decoration && { ariaLabel: "Moon" })}
+            {...(!decoration && { "aria-label": "Moon" })}
+            role="img"
         >
             <Moon fontSize="0.8em" />
         </WeatherIconContainer>

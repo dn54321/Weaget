@@ -1,7 +1,7 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse } from "msw";
 import { afterEach, describe, expect, it, test } from "vitest";
-import { server } from "../../../vitest-setup";
+import { server } from "@project/vitest-setup";
 import { testQueryClient } from "@utils/query-client";
 import { mockNearbyLocationHandle } from "@features/weaget/__mocks__/nearby-location.handler";
 import { createNearbyLocationMockData } from "@features/weaget/__mocks__/nearby-location.mock";

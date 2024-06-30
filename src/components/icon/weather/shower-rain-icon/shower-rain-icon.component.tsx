@@ -8,7 +8,8 @@ export function ShowerRain(props: BoxProps & WeatherIconProps) {
     return (
         <WeatherIconContainer
             {...rest}
-            {...(!decoration && { ariaLabel: "Shower rain" })}
+            {...(!decoration && { "aria-label": "Shower rain" })}
+            role="img"
         >
             <Sun fontSize="0.3em" top="20%" left="70%" />
             <GreyCloud width="0.5em" height="0.5em" top="30%" left="40%" />

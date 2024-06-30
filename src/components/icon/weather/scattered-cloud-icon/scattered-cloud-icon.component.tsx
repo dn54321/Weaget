@@ -8,7 +8,8 @@ export function ScatteredCloud(props: BoxProps & WeatherIconProps) {
     return (
         <WeatherIconContainer
             {...rest}
-            {...(!decoration && { ariaLabel: "Scattered cloud" })}
+            {...(!decoration && { "aria-label": "Scattered cloud" })}
+            role="img"
         >
             <Sun fontSize="0.7em" top="50%" />
             <Cloud width="0.4em" top="80%" left="30%" />

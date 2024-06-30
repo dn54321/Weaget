@@ -8,7 +8,8 @@ export function BrokenCloud(props: BoxProps & WeatherIconProps) {
     return (
         <WeatherIconContainer
             {...rest}
-            {...(!decoration && { ariaLabel: "Broken clouds" })}
+            {...(!decoration && { "aria-label": "Broken clouds" })}
+            role="img"
         >
             <Sun fontSize="0.7em" top="50%" left="50%" />
             <Cloud width="0.3em" top="35%" left="80%" />

@@ -3,7 +3,7 @@ import { Button, Stack, Box, Grid, Container } from "@mui/material";
 import Head from "next/head";
 import CloudIcon from "@mui/icons-material/Cloud";
 import styled from "@mui/system/styled";
-import { ThemeToggleButton } from "@components/ui/theme-toggle-button/theme-toggle-button";
+import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
 
 function IconBox(props) {
     return (

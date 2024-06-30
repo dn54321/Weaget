@@ -8,7 +8,8 @@ export function Thunderstorm(props: BoxProps & WeatherIconProps) {
     return (
         <WeatherIconContainer
             {...rest}
-            {...(!decoration && { ariaLabel: "Thunderstorm" })}
+            {...(!decoration && { "aria-label": "Thunderstorm" })}
+            role="img"
         >
             <Rain width="0.3em" top="75%" left="35%" />
             <Rain width="0.3em" top="75%" left="55%" />

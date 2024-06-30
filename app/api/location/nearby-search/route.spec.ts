@@ -3,7 +3,7 @@ import { mockGeonamesNearbyLocationHandle } from "@features/geonames-nearby-sear
 import { withHandleError, withResponse } from "@utils/msw-http-mocker";
 import { createMockRequest } from "@utils/next-mock-request-builder";
 import { GET } from "./route";
-import { server } from "../../../../vitest-setup";
+import { server } from "@project/vitest-setup";
 import { createGeonameMockData } from "@features/geonames-nearby-search/__mocks__/nearby-location.mock";
 ;
 

@@ -3,10 +3,10 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { IconButton, IconButtonProps } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import { SystemTheme } from "@src/types/system.types";
-import { useTheme } from "@src/hooks/use-theme";
+import { useSystemTheme } from "@src/hooks/use-system-theme";
 
-export function ThemeToggleButton(props: IconButtonProps) {
-    let { themeColour, toggleTheme } = useTheme();
+export default function ThemeToggleButton(props: IconButtonProps) {
+    let { themeColour, toggleTheme } = useSystemTheme();
 
     return (
         <Tooltip title="Toggle Colour Theme">

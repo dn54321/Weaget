@@ -1,1 +1,1 @@
-export * from "./sun-icon.component";
+export { default as SunIcon } from "./sun-icon.component";

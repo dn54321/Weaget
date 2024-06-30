@@ -6,6 +6,11 @@ export const StyledFooter = styled("footer")((props: any) => ({
     color: props.theme.palette.primary.contrastText,
     height: "fit-content",
     boxShadow: props.theme.shadows[1],
+    position: "relative",
+    bottom: "0px",
+    left: "0px",
+    right: "0px",
+    zIndex: 1300,
 }));
 
 export const StyledIconButton = styled(IconButton)((props: any) => ({

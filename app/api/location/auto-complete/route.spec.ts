@@ -3,7 +3,7 @@ import { mockGoogleLocationAutoCompleteHandle } from "@features/google-geocode/_
 import { withHandleError } from "@utils/msw-http-mocker";
 import { createMockRequest } from "@utils/next-mock-request-builder";
 import { GET } from "./route";
-import { server } from "../../../../vitest-setup";
+import { server } from "@project/vitest-setup";
 
 describe("Route: api/location/auto-complete", async () => {
     afterEach(() => {

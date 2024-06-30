@@ -8,7 +8,7 @@ import { useSettingStore } from "@src/hooks/stores/use-setting-store";
 import { TemperatureScale } from "@src/types/weather.types";
 import { testWrapper, withTestWrapper } from "@utils/wrappers";
 import { testQueryClient } from "@utils/query-client";
-import WeatherCard, { WeatherCardProps } from "@components/cards/weather-card/weather-card.component";
+import { WeatherCard, WeatherCardProps } from "./..";
 
 describe("Component: Weather Card", () => {
     let cardProps: WeatherCardProps;

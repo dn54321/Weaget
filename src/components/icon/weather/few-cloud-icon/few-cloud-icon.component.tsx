@@ -8,7 +8,8 @@ export function FewCloudIcon(props: BoxProps & WeatherIconProps) {
     return (
         <WeatherIconContainer
             {...rest}
-            {...(!decoration && { ariaLabel: "Few clouds" })}
+            {...(!decoration && { "aria-label": "Few clouds" })}
+            role="img"
         >
             <Sun fontSize="0.7em" top="50%" />
             <Cloud width="0.35em" top="70%" left="30%" />

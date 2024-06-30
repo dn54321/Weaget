@@ -1,10 +1,10 @@
 import { CardActionArea } from "@mui/material";
 import { BoxProps } from "@mui/material/Box";
 import { DateTime } from "luxon";
-import Temp from "@components/ui/temperature-unit/temperature-unit.component";
-import WeatherIcon from "@components/ui/weather-icon";
+import { TempUnit } from "@components/ui/temperature-unit";
 import { Day, ShortDate, Temperature, High, Low, IconBox, CardContainer, WeatherDescription } from "./weather-card.styles";
 import { getWeatherCardDateString } from "./weather-card.utils";
+import { WeatherIcon } from "@components/ui/weather-icon";
 
 export interface RainProps {
     label: number;
@@ -32,8 +32,8 @@ export default function WeatherCard(props: WeatherCardProps & BoxProps) {
                 </IconBox>
                 <WeatherDescription>{props.weatherDescription}</WeatherDescription>
                 <Temperature>
-                    <High><Temp value={props.maxTemperature} /></High>
-                    <Low><Temp value={props.minTemperature} /></Low>
+                    <High><TempUnit value={props.maxTemperature} /></High>
+                    <Low><TempUnit value={props.minTemperature} /></Low>
                 </Temperature>
             </CardActionArea>
         </CardContainer>

@@ -1,5 +1,6 @@
 import * as math from "@src/utils/math";
 import { useSettingStore } from "@src/hooks/stores/use-setting-store";
+import { convertTemperature, getTemperatureSymbol } from "./temperature-unit.utils";
 import { TemperatureScale } from "@src/types/weather.types";
 
 /*
@@ -11,37 +12,20 @@ import { TemperatureScale } from "@src/types/weather.types";
         - Fahrenheit: F
 */
 
-function convertTemperature(temp: number, tempScale: string) {
-    switch (tempScale) {
-        case TemperatureScale.CELSIUS: return (temp - 273.15);
-        case TemperatureScale.FAHRENHEIT: return ((temp - 273.15) * 9 / 5 + 32);
-        default: return temp;
-    }
-}
-
-export function getSymbol(tempScale: string) {
-    switch (tempScale) {
-        case TemperatureScale.CELSIUS: return "C";
-        case TemperatureScale.FAHRENHEIT: return "F";
-        default: return "K";
-    }
-}
-
 export interface TempProps {
     decimals?: number;
     symbol?: boolean;
     value: number;
 }
 
-export default function Temp(props: TempProps) {
+export default function TempUnit(props: TempProps) {
     const round = props.decimals ?? 0;
     const symbol = Boolean(props.symbol);
-
-    const temperatureScale = useSettingStore(state => state.temperatureScale);
+    const temperatureScale = useSettingStore(state => state.temperatureScale) as TemperatureScale;
     return (
         <>
-            {math.round(convertTemperature(props.value, temperatureScale), round) + "°"}
-            {symbol && getSymbol(temperatureScale)}
+            {math.round(convertTemperature(temperatureScale, props.value), round) + "°"}
+            {symbol && getTemperatureSymbol(temperatureScale)}
         </>
     );
 }

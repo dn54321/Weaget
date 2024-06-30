@@ -4,9 +4,9 @@ import { Air } from "@mui/icons-material";
 import { DateTime } from "luxon";
 import React from "react";
 import { CurrentWeatherDetails, DailyWeatherDetails, HourlyWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
-import SpeedUnit from "@components/ui/speed-unit";
-import Temp from "@components/ui/temperature-unit/temperature-unit.component";
-import VolumeUnit from "@components/ui/volume-unit";
+import { TempUnit } from "@components/ui/temperature-unit";
+import { SpeedUnit } from "@components/ui/speed-unit";
+import VolumeUnit from "@components/ui/volume-unit/volume-unit.component";
 
 export function UVWarning(scale: number) {
     if (scale === undefined) return scale;
@@ -41,7 +41,7 @@ export function parseWeatherDetailStats(weather: Partial<HourlyWeatherDetails | 
         {
             name: "Dew Point",
             statIcon: <Icon path={mdiThermometerWater} size="1em" />,
-            value: weather.dewPoint ? <Temp value={weather.dewPoint} /> : undefined,
+            value: weather.dewPoint ? <TempUnit value={weather.dewPoint} /> : undefined,
         },
         {
             name: "Clouds",

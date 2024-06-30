@@ -2,13 +2,9 @@
 import { Box, Container, Grid, Stack } from "@mui/material";
 import Head from "next/head";
 
-import DailyWeatherCardWidget from "@components/widgets/daily-weather-card-widget/daily-weather-card-widget";
-import LocationListWidget from "@components/widgets/location-list-widget";
-import PollutionWidget from "@components/widgets/pollution-widget";
-import WeatherStatWidget from "@components/widgets/weather-stat-widget";
-import WeatherDisplayWidget from "@components/widgets/weather-display-widget";
-import HourlyWeatherStripWidget from "@components/widgets/hourly-weather-strip-widget";
-import RainfallWidget from "@components/widgets/rainfall-widget";
+import { DailyWeatherCardWidget } from "@components/widgets/daily-weather-card-widget";
+
+import { WeatherDisplayWidget } from "@components/widgets/weather-display-widget";
 
 import { useAlert } from "@src/hooks//use-alert";
 import { useGetLocation } from "@src/hooks//use-get-location";
@@ -19,6 +15,11 @@ import { useGetNearbyLocation } from "@src/hooks//use-get-nearby-location";
 import { Navbar } from "@components/layout/navbar";
 import { Footer } from "@components/layout/footer";
 import { SettingsFab } from "@components/ui/settings-fab";
+import { HourlyWeatherStripWidget } from "@components/widgets/hourly-weather-strip-widget";
+import { LocationListWidget } from "@components/widgets/location-list-widget";
+import { PollutionWidget } from "@components/widgets/pollution-widget";
+import { RainfallWidget } from "@components/widgets/rainfall-widget";
+import { WeatherStatWidget } from "@components/widgets/weather-stat-widget";
 
 interface PageProps {
     params: {

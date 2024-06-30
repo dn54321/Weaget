@@ -53,12 +53,7 @@ export default function Footer(props: FooterProps) {
 
     return (
         <StyledFooter sx={{
-            position: "relative",
-            bottom: 0,
-            left: 0,
-            right: 0,
             fontSize: { sm: "16px", xs: "min(3.5vw, 16px)" },
-            zIndex: 1300,
             ...props.footerProps,
         }}
         >
@@ -74,11 +69,7 @@ export default function Footer(props: FooterProps) {
                     {/* Copyright Message */}
                     <Box>
                         <Box py="15px" component="span">
-                            @
-                            {new Date().getFullYear()}
-                            {" "}
-                            DN54321.
-                            {" "}
+                            {`@${new Date().getFullYear()} DN54321. `}
                         </Box>
                         <Box sx={{ display: { xs: "block", sm: "inline" } }}>All Rights Reserved.</Box>
                     </Box>

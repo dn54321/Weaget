@@ -1,7 +1,7 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse } from "msw";
 import { afterEach, describe, expect, it, test } from "vitest";
-import { server } from "../../../vitest-setup";
+import { server } from "@project/vitest-setup";
 import { mockAutoCompleteHandle } from "@features/weaget/__mocks__/auto-complete.handler";
 import { createAutoCompleteMockData } from "@features/weaget/__mocks__/auto-complete.mock";
 import { weagetAutoCompleteSchema as autoCompleteSchema } from "@features/weaget/auto-complete.schema";

@@ -27,6 +27,14 @@ describe("Page: app/weather/[location]", () => {
         vi.resetAllMocks();
     });
 
+    it("should resolve without displaying any skeletons", async () => {
+        const { getByText } = render(
+            withTestWrapper(<Page params={{ location: "testLocation" }} />)
+        );
+        await waitFor(() => expect(testQueryClient.isFetching()).toEqual(0));
+        expect(() => getByText("Error fetching weather data. Some elements may be unresponsive.")).toThrow();
+    });
+
     it.each([
         ["weather", mockWeatherHandle],
         ["location", mockLocationLookupHandle],
@@ -40,6 +48,7 @@ describe("Page: app/weather/[location]", () => {
         const { getByText } = render(
             withTestWrapper(<Page params={{ location: "testLocation" }} />)
         );
+
         await waitFor(() => expect(getByText("Error fetching weather data. Some elements may be unresponsive.")).toBeInTheDocument());
     });
 });

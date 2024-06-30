@@ -3,7 +3,7 @@ import { styled } from "@mui/system";
 
 export const StatContainer = styled(Box)(({ theme }) => ({
     "width": "150px",
-    "m": "10px",
+    "margin": "10px",
     "display": "inline-grid",
     "gridTemplateColumns": "60px auto",
     "gridTemplateRows": "1fr 1fr",

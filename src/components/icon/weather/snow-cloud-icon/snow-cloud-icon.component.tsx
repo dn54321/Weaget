@@ -8,7 +8,8 @@ export function SnowCloud(props: BoxProps & WeatherIconProps) {
     return (
         <WeatherIconContainer
             {...rest}
-            {...(!decoration && { ariaLabel: "Snow cloud" })}
+            {...(!decoration && { "aria-label": "Snow cloud" })}
+            role="img"
         >
             <Snow1 top="70%" left="50%" fontSize="0.5em" angle="20" />
             <Snow1 top="80%" left="75%" fontSize="0.7em" angle="40" />

@@ -1,15 +1,15 @@
-import { RenderResult, act, fireEvent, render, renderHook } from "@testing-library/react";
+import { RenderResult, act, fireEvent, render, renderHook, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { testWrapper, withTestWrapper } from "@utils/wrappers";
 import Navbar from "@components/layout/navbar/navbar.component";
-import { server } from "../../../../../vitest-setup";
+import { server } from "@project/vitest-setup";
 import { testQueryClient } from "@utils/query-client";
 import userEvent from "@testing-library/user-event";
 import { TemperatureScale } from "@src/types/weather.types";
 import { useSettingStore } from "@src/hooks/stores/use-setting-store";
 import { MeasurementScale } from "@src/types/measurement.types";
-import { useTheme } from "@src/hooks/use-theme";
 import { SystemTheme } from "@src/types/system.types";
+import { useSystemTheme } from "@src/hooks/use-system-theme";
 
 describe("Component: navbar", () => {
     beforeEach(() => {
@@ -46,6 +46,36 @@ describe("Component: navbar", () => {
         expect(getByText("Measurement System")).toBeInTheDocument();
         expect(getByText("Temperature Scale")).toBeInTheDocument();
         expect(getByText("Theme Colour")).toBeInTheDocument();
+    });
+
+    it("should be able to close settings dialogue in navbar.", async () => {
+        const user = userEvent.setup();
+        window.innerWidth = 500;
+        fireEvent(window, new Event("resize"));
+        const { getByRole } = render(withTestWrapper(<Navbar />));
+        await user.click(getByRole("button", { name: /settings/i }));
+        await user.click(getByRole("button", { name: /close/i }));
+        waitFor(() => expect(getByRole("button", { name: /settings/i })).toBeInTheDocument());
+    });
+
+    it("should have access to the search bar in mobile view.", async () => {
+        const user = userEvent.setup();
+        window.innerWidth = 500;
+        fireEvent(window, new Event("resize"));
+        const { getByRole, getByPlaceholderText } = render(withTestWrapper(<Navbar />));
+        const settingsButton = getByRole("button", { name: /Search Weather/i });
+        await user.click(settingsButton);
+        expect(getByPlaceholderText("Search Weather Location")).toBeInTheDocument();
+    });
+
+    it("should be able to close the search bar in mobile view.", async () => {
+        const user = userEvent.setup();
+        window.innerWidth = 500;
+        fireEvent(window, new Event("resize"));
+        const { getByRole, getByLabelText } = render(withTestWrapper(<Navbar />));
+        await user.click(getByRole("button", { name: /Search Weather/i }));
+        await user.click(getByLabelText("go back"));
+        expect(getByRole("button", { name: /Search Weather/i })).toBeInTheDocument();
     });
 
     describe("when the mobile menu is open", async () => {
@@ -100,7 +130,7 @@ describe("Component: navbar", () => {
             pattern: string
         ) => {
             const user = userEvent.setup();
-            const { result } = renderHook(() => useTheme(), { wrapper: testWrapper });
+            const { result } = renderHook(() => useSystemTheme(), { wrapper: testWrapper });
             act(() => result.current.setThemeColour(from));
             const themeButton = renderedScreen.getByText(pattern);
             await user.click(themeButton);

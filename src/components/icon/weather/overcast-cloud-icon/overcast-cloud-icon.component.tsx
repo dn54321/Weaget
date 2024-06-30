@@ -8,7 +8,8 @@ export function OvercastCloud(props: BoxProps & WeatherIconProps) {
     return (
         <WeatherIconContainer
             {...rest}
-            {...(!decoration && { ariaLabel: "Overcast cloud" })}
+            {...(!decoration && { "aria-label": "Overcast cloud" })}
+            role="img"
         >
             <Sun fontSize="0.3em" top="40%" left="70%" />
             <Cloud width="0.5em" height="0.5em" top="50%" left="40%" />

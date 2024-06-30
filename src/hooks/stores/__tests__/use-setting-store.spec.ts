@@ -72,8 +72,8 @@ describe("Hooks - use-setting-store", () => {
             matches: isDarkMode,
             media: true,
             onchange: null,
-            addListener: vi.fn(),
-            removeListener: vi.fn(),
+            addEventListener: vi.fn(),
+            removeEventListener: vi.fn(),
         }));
 
         const { result } = renderHook(() => useSettingStore(), { wrapper: testWrapper });

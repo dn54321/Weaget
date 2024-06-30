@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { ShowerRain } from "@components/icon/weather/shower-rain-icon/shower-rain-icon/shower-rain-icon";
-import { withTestWrapper } from "@components/utils/wrappers";
+import { ShowerRain } from "..";
+import { withTestWrapper } from "@utils/wrappers";
 
 describe("Component: shower-rain-icon", () => {
     it("Widget should be able to render.", () => {

@@ -8,7 +8,8 @@ export function RainCloud(props: BoxProps & WeatherIconProps) {
     return (
         <WeatherIconContainer
             {...rest}
-            {...(!decoration && { ariaLabel: "Rain cloud" })}
+            {...(!decoration && { "aria-label": "Rain cloud" })}
+            role="img"
         >
             <GreyCloud width="0.5em" height="0.5em" top="30%" left="40%" />
             <GreyCloud width="0.3em" height="0.3em" top="40%" left="70%" />

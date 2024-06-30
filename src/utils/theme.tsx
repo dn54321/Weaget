@@ -39,11 +39,6 @@ export const getDesignTokens = (mode: PaletteMode) => ({
                 LinkComponent: LinkBehaviour,
             },
         },
-        MuiListItemButton: {
-            defaultProps: {
-                component: LinkBehaviour,
-            },
-        },
     },
     breakpoints: {
         values: {

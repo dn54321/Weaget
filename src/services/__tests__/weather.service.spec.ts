@@ -1,10 +1,10 @@
 import { HttpResponse } from "msw";
 import { afterEach, describe, expect, test } from "vitest";
-import { server } from "../../../vitest-setup";
 import { createOpenWeatherOneCallMockData } from "@features/open-weather-map-one-call/__mocks__/oneCall.mock";
 import { mockOpenWeatherOneCallHandle } from "@features/open-weather-map-one-call/__mocks__/onecall.handler";
 import { oneCallWeatherDetailsSchema } from "@features/open-weather-map-one-call/oneCall.schema";
 import { getWeatherByCoords, getWeatherByRegion } from "@services/weather.service";
+import { server } from "@project/vitest-setup";
 
 describe("Weather Service", async () => {
     afterEach(() => {

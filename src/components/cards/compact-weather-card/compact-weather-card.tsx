@@ -1,8 +1,8 @@
 import { DateTime } from "luxon";
-import WeatherIcon from "@components/ui/weather-icon";
-import Temp from "@components/ui/temperature-unit/temperature-unit.component";
+import { TempUnit } from "@components/ui/temperature-unit";
 import { Box } from "@mui/material";
 import { High, Low, PaperContainer } from "./compact-weather-card.styles";
+import { WeatherIcon } from "@components/ui/weather-icon";
 /*
     Compact weather card list is a grid containing simplified weather cards.
     Each weather card is a square box that contains:
@@ -36,8 +36,8 @@ export default function CompactWeatherCard(props: CompactWeatherCardProps) {
                 <WeatherIcon id={props.weatherCode} rainPercentage={props.rainfallPercentage} />
             </Box>
             <Box>
-                <High><Temp value={props.maxTemperature} /></High>
-                <Low><Temp value={props.minTemperature} /></Low>
+                <High><TempUnit value={props.maxTemperature} /></High>
+                <Low><TempUnit value={props.minTemperature} /></Low>
             </Box>
         </PaperContainer>
     );

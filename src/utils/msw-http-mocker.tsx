@@ -1,5 +1,5 @@
 import { HttpHandler, HttpResponse, RequestHandlerOptions } from "msw";
-import { server } from "../../vitest-setup";
+import { server } from "@project/vitest-setup";
 
 export function withHandleError(
     handle: (response: HttpResponse, options?: RequestHandlerOptions) => HttpHandler,

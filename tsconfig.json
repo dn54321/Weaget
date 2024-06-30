@@ -32,7 +32,9 @@
       "@api/*": ["./pages/api/*"],
       "@styles/*": ["./styles/*"],
       "@public/*": ["./public/*"],
+      "@app/*": ["./pages/app/*"],
       "@src/*": ["./src/*"],
+      "@project/*": ["./*"]
     },
     "plugins": [
       {

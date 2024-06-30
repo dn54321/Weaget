@@ -1,11 +1,11 @@
 "use client";
 import { Box, Card, CardActionArea, CardContent, Container, Divider, Toolbar, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import WeatherIcon from "@components/ui/weather-icon";
 import React from "react";
 import Grid from "@mui/system/Unstable_Grid";
 import { weatherIconShowcase } from "./layout";
 import { useRouter } from "next/navigation";
+import { WeatherIcon } from "@components/ui/weather-icon";
 
 export default function Page() {
     const router = useRouter();
@@ -21,7 +21,7 @@ export default function Page() {
                             <CardActionArea onClick={() => router.push(`icons/weather/${weatherIcon.id}`)}>
                                 <CardContent>
                                     <Stack alignItems="center">
-                                        <Box fontSize="8em"><WeatherIcon id={weatherIcon.id} /></Box>
+                                        <Box fontSize="8em"><WeatherIcon id={weatherIcon.id} decoration /></Box>
                                         <Typography variant="body1">{weatherIcon.name}</Typography>
                                     </Stack>
                                 </CardContent>

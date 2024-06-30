@@ -18,7 +18,7 @@ describe("Component: Compact Weather Card", () => {
             timezone: faker.location.timeZone(),
             date: faker.date.future(),
             weatherCode: createOpenWeatherWeatherMockData().id,
-            rainfallPercentage: faker.number.float({ min: 0, max: 1, fractionDigits: 2 }),
+            rainfallPercentage: faker.number.float({ min: 0.1, max: 1, fractionDigits: 2 }),
             maxTemperature: faker.number.float({ min: 273.15, max: 300.15, fractionDigits: 2 }),
             minTemperature: faker.number.float({ min: 301.15, max: 325.15, fractionDigits: 2 }),
         };

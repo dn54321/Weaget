@@ -3,7 +3,7 @@ import { GET } from "./route";
 import { createMockRequest } from "@utils/next-mock-request-builder";
 import { withHandleError } from "@utils/msw-http-mocker";
 import { mockIpinfoCurrentLocationHandle } from "@features/ipinfo-current-location/__mocks__/current-location.handler";
-import { server } from "../../../vitest-setup";
+import { server } from "@project/vitest-setup";
 
 // All IP addresses generated with:
 // https://commentpicker.com/ip-address-generator.php

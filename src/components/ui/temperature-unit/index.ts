@@ -1,1 +1,2 @@
-export { default as Temp } from "./temperature-unit.component";
+export { default as TempUnit } from "./temperature-unit.component";
+export * from "./temperature-unit.utils";

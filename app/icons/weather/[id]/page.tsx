@@ -3,8 +3,8 @@ import { Box, Container, Toolbar, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import React from "react";
 import Grid from "@mui/system/Unstable_Grid";
-import WeatherIcon from "@components/ui/weather-icon";
-import { weatherIconShowcase } from "../../layout";
+import { WeatherIcon } from "@components/ui/weather-icon";
+import { weatherIconShowcase } from "@project/app/icons/layout";
 
 export interface PageProps {
     params: { id: string };
