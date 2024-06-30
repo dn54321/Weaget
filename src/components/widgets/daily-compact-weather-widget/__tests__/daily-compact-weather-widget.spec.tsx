@@ -3,7 +3,7 @@ import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 import { render } from "@testing-library/react";
 import { testWrapper } from "@utils/wrappers";
 import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
-import { DailyCompactWeatherWidget } from "@components/widgets/daily-compact-weather-widget";
+import { DailyCompactWeatherWidget } from "./..";
 
 describe("Component: daily-compact-weather-widget", () => {
     let weatherData: OneCallWeatherDetails;

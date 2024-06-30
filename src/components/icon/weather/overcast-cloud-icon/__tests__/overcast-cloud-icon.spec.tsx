@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { OvercastCloud } from "@components/icon/weather/overcast-cloud-icon"
+import { OvercastCloud } from "./..";
 import { withTestWrapper } from "@utils/wrappers";
 
 describe("Component: overcast-cloud-icon", () => {
