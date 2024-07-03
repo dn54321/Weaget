@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, SxProps } from "@mui/material";
 import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { Widget } from "@components/containers/widget/widget";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -6,14 +6,15 @@ import { StyledButton } from "./daily-compact-weather-widget.styles";
 import { CompactWeatherCard } from "@components/cards/compact-weather-card";
 
 // List of Weather Card
-export interface WeeklyCompactWeatherWidgetProps {
+export interface DailyCompactWeatherWidgetProps {
     title?: string;
     subtitle?: string;
     weatherData?: OneCallWeatherDetails;
     location: string;
+    sx?: SxProps;
 }
 
-export default function DailyCompactWeatherWidget(props: WeeklyCompactWeatherWidgetProps) {
+export default function DailyCompactWeatherWidget(props: DailyCompactWeatherWidgetProps) {
     if (!props.weatherData) return null;
 
     const weatherDetails = props.weatherData?.daily?.map(dailyWeather => ({
@@ -43,6 +44,7 @@ export default function DailyCompactWeatherWidget(props: WeeklyCompactWeatherWid
             subtitle={props.subtitle ?? "Currently Weekly Weather"}
             variant="transparent"
             disableChildrenPadding
+            sx={props.sx}
         >
             <Box display="grid" sx={{ width: "100%" }}>
                 <Grid

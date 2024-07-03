@@ -1,5 +1,4 @@
 import { CardActionArea } from "@mui/material";
-import { BoxProps } from "@mui/material/Box";
 import { DateTime } from "luxon";
 import { TempUnit } from "@components/ui/temperature-unit";
 import { Day, ShortDate, Temperature, High, Low, IconBox, CardContainer, WeatherDescription } from "./weather-card.styles";
@@ -20,7 +19,7 @@ export interface WeatherCardProps {
     minTemperature: number;
 }
 
-export default function WeatherCard(props: WeatherCardProps & BoxProps) {
+export default function WeatherCard(props: WeatherCardProps) {
     const date = DateTime.fromJSDate(props.date, { zone: props.timezone });
     return (
         <CardContainer data-testid="weather-card">

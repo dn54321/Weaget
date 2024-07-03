@@ -4,10 +4,10 @@ import { afterEach, describe, expect, it, test } from "vitest";
 import { server } from "@project/vitest-setup";
 import { testQueryClient } from "@utils/query-client";
 import { mockWeatherHandle } from "@features/weaget/__mocks__/weather.handler";
-import weatherSchema from "@features/weaget/weather.schema";
 import { useGetWeather } from "@src/hooks/use-get-weather";
 import { testWrapper } from "@utils/wrappers";
 import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
+import weatherSchema from "@features/weaget/weather/weather.schema";
 
 describe("Hooks - use-get-weather", async () => {
     afterEach(() => {

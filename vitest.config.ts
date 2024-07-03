@@ -21,7 +21,7 @@ export default defineConfig({
             ],
             exclude: [
                 "**/__mocks__/**",
-
+                "**/*.stories.tsx",
                 ...coverageConfigDefaults.exclude,
             ],
         },

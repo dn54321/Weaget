@@ -8,7 +8,7 @@ import { TempUnit } from "@components/ui/temperature-unit";
 import { SpeedUnit } from "@components/ui/speed-unit";
 import VolumeUnit from "@components/ui/volume-unit/volume-unit.component";
 
-export function UVWarning(scale: number) {
+export function UVWarning(scale: number | undefined) {
     if (scale === undefined) return scale;
     if (scale <= 2) return `Low (${scale})`;
     else if (scale <= 5) return `Moderate (${scale})`;
@@ -58,22 +58,40 @@ export function parseWeatherDetailStats(weather: Partial<HourlyWeatherDetails | 
         {
             name: "Sunrise",
             statIcon: <Icon path={mdiWeatherSunsetUp} size="1em" />,
-            value: weather["sunrise"] ? DateTime.fromJSDate(weather["sunrise"], { zone: timezone }).toLocaleString(DateTime.TIME_SIMPLE) : undefined,
+            value: "sunrise" in weather && typeof weather.sunrise === "object"
+                ? DateTime.fromJSDate(weather["sunrise"], { zone: timezone }).toLocaleString(DateTime.TIME_SIMPLE)
+                : undefined,
         },
         {
             name: "Sunset",
             statIcon: <Icon path={mdiWeatherSunsetDown} size="1em" />,
-            value: weather["sunset"] ? DateTime.fromJSDate(weather["sunset"], { zone: timezone }).toLocaleString(DateTime.TIME_SIMPLE) : undefined,
+            value: "sunset" in weather && typeof weather.sunset === "object"
+                ? DateTime.fromJSDate(weather["sunset"], { zone: timezone }).toLocaleString(DateTime.TIME_SIMPLE)
+                : undefined,
         },
         {
             name: "Snowfall",
             statIcon: <Icon path={mdiWeatherSnowy} size="1em" />,
-            value: weather.snow ? <VolumeUnit value={weather.snow?.["1h"] || weather.snow} decimals={2} /> : undefined,
+            value: weather.snow
+                ? (
+                        <VolumeUnit
+                            value={typeof weather.snow === "number" ? weather.snow : weather.snow["1h"]!}
+                            decimals={2}
+                        />
+                    )
+                : undefined,
         },
         {
             name: "Rainfall",
             statIcon: <Icon path={mdiWeatherPouring} size="1em" />,
-            value: weather.rain ? <VolumeUnit value={weather.rain?.["1h"] || weather.rain} decimals={2} /> : undefined,
+            value: weather.rain
+                ? (
+                        <VolumeUnit
+                            value={typeof weather.rain === "number" ? weather.rain : weather.rain["1h"]!}
+                            decimals={2}
+                        />
+                    )
+                : undefined,
         },
     ];
 }

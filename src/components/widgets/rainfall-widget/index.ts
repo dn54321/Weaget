@@ -1,1 +1,1 @@
-export { default as RainfallWidget } from "./rainfall-widget";
+export { default as RainfallWidget, type RainfallWidgetProps } from "./rainfall-widget.component";

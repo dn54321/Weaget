@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Page from "./page";
-import { withTestWrapper } from "@utils/wrappers";
-import { render, waitFor } from "@testing-library/react";
+import { withRender } from "@utils/wrappers";
+import { waitFor } from "@testing-library/react";
 import { mockPollutionHandle } from "@features/weaget/__mocks__/pollution.handler";
 import { mockLocationLookupHandle } from "@features/weaget/__mocks__/location-lookup.handler";
 import { mockWeatherHandle } from "@features/weaget/__mocks__/weather.handler";
@@ -28,9 +28,7 @@ describe("Page: app/weather/[location]", () => {
     });
 
     it("should resolve without displaying any skeletons", async () => {
-        const { getByText } = render(
-            withTestWrapper(<Page params={{ location: "testLocation" }} />)
-        );
+        const { getByText } = withRender(<Page params={{ location: "testLocation" }} />);
         await waitFor(() => expect(testQueryClient.isFetching()).toEqual(0));
         expect(() => getByText("Error fetching weather data. Some elements may be unresponsive.")).toThrow();
     });
@@ -45,10 +43,7 @@ describe("Page: app/weather/[location]", () => {
         mockHandle,
     ) => {
         withHandleError(mockHandle);
-        const { getByText } = render(
-            withTestWrapper(<Page params={{ location: "testLocation" }} />)
-        );
-
+        const { getByText } = withRender(<Page params={{ location: "testLocation" }} />);
         await waitFor(() => expect(getByText("Error fetching weather data. Some elements may be unresponsive.")).toBeInTheDocument());
     });
 });

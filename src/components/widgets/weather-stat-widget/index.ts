@@ -1,1 +1,1 @@
-export { default as WeatherStatWidget } from "./weather-stat-widget";
+export { default as WeatherStatWidget, type WeatherStatWidgetProps } from "./weather-stat-widget";

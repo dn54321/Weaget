@@ -13,6 +13,7 @@ module.exports = {
     extends: [
         "next/core-web-vitals",
         "plugin:@dword-design/import-alias/recommended",
+        "plugin:storybook/recommended"
     ],
     parser: "@typescript-eslint/parser",
     plugins: [

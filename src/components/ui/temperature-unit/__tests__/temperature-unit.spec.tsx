@@ -1,9 +1,7 @@
-import { render, renderHook } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { useSettingStore } from "@src/hooks/stores/use-setting-store";
 import { TemperatureScale } from "@src/types/weather.types";
 import { testQueryClient } from "@utils/query-client";
-import { testWrapper } from "@utils/wrappers";
+import { withRender } from "@utils/wrappers";
 import { TempUnit } from "./..";
 
 describe("Component: temperature-unit", async () => {
@@ -20,10 +18,9 @@ describe("Component: temperature-unit", async () => {
         decimal: number,
         expected: string
     ) => {
-        const { result } = renderHook(() => useSettingStore(), { wrapper: testWrapper });
-        result.current.setTemperatureScale(TemperatureScale.CELSIUS);
-        const { getByText } = render(<TempUnit value={kelvin} decimals={decimal} symbol />);
-        expect(getByText(`${expected}°C`)).toBeInTheDocument();
+        const settings = { temperatureScale: TemperatureScale.CELSIUS };
+        const view = withRender(<TempUnit value={kelvin} decimals={decimal} symbol />, { settings });
+        expect(view.getByText(`${expected}°C`)).toBeInTheDocument();
     });
 
     it.each([
@@ -35,25 +32,22 @@ describe("Component: temperature-unit", async () => {
         decimal: number,
         expected: string
     ) => {
-        const { result } = renderHook(() => useSettingStore(), { wrapper: testWrapper });
-        result.current.setTemperatureScale(TemperatureScale.FAHRENHEIT);
-        const { getByText } = render(<TempUnit value={kelvin} decimals={decimal} symbol />);
-        expect(getByText(`${expected}°F`)).toBeInTheDocument();
+        const settings = { temperatureScale: TemperatureScale.FAHRENHEIT };
+        const view = withRender(<TempUnit value={kelvin} decimals={decimal} symbol />, { settings });
+        expect(view.getByText(`${expected}°F`)).toBeInTheDocument();
     });
 
     it("should work without decimal.", (
     ) => {
-        const { result } = renderHook(() => useSettingStore(), { wrapper: testWrapper });
-        result.current.setTemperatureScale(TemperatureScale.CELSIUS);
-        const { getByText } = render(<TempUnit value={274.284} symbol />);
-        expect(getByText(`1°C`)).toBeInTheDocument();
+        const settings = { temperatureScale: TemperatureScale.CELSIUS };
+        const view = withRender(<TempUnit value={274.284} symbol />, { settings });
+        expect(view.getByText(`1°C`)).toBeInTheDocument();
     });
 
     it("should default to kelvin if measurement scale is unknown.", (
     ) => {
-        const { result } = renderHook(() => useSettingStore(), { wrapper: testWrapper });
-        result.current.setTemperatureScale("unknownScale" as unknown as TemperatureScale);
-        const { getByText } = render(<TempUnit value={274.284} symbol />);
-        expect(getByText(`274°K`)).toBeInTheDocument();
+        const settings = { temperatureScale: "unknownScale" };
+        const view = withRender(<TempUnit value={274.284} symbol />, { settings });
+        expect(view.getByText(`274°K`)).toBeInTheDocument();
     });
 });

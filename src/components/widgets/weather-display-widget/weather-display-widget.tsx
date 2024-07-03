@@ -1,5 +1,5 @@
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material/";
-import { BoxProps, keyframes, styled } from "@mui/system";
+import { BoxProps, SxProps, keyframes, styled } from "@mui/system";
 import { TempUnit } from "@components/ui/temperature-unit";
 import { DateTime } from "luxon";
 import { CurrentWeatherDetails, DailyWeatherDetails, OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
@@ -222,7 +222,7 @@ function Snowy(props: BoxProps) {
     );
 }
 
-const getBackgroundColor = (id) => {
+function getBackgroundColor(id: number) {
     const cloudy = "linear-gradient(to right top, #1b9ce2 0%, #e0e2e5 90%)";
     const stormy = "linear-gradient(to right top, #4b9cc2 0%, #9adbd9 90%)";
     const snowy = "linear-gradient(to bottom left, #758595 0%, #e0e2e5 90%)";
@@ -231,7 +231,7 @@ const getBackgroundColor = (id) => {
     return cloudy;
 };
 
-const getBackgroundIcon = (id) => {
+function getBackgroundIcon(id: number): JSX.Element {
     switch (id) {
         case 200: return (<Rainy />);
         case 300: return (<Rainy />);
@@ -268,6 +268,7 @@ const Low = styled(Box)(({ theme }) => ({
 export interface WeatherDisplayWidgetProps {
     weatherData?: OneCallWeatherDetails;
     location?: string;
+    sx?: SxProps;
 }
 
 export interface WeatherTemperatureDisplayProps {
@@ -301,12 +302,12 @@ export default function WeatherDisplayWidget(props: WeatherDisplayWidgetProps) {
         ? DateTime.fromJSDate(focusedWeather?.dt, { zone: timezone }).toFormat("LLL d, t")
         : "Fetching Details...";
 
-    const weatherCode = focusedWeather?.weather[0]?.id;
+    const weatherCode = focusedWeather?.weather[0]?.id ?? 0;
     const weatherDescription = focusedWeather?.weather[0]?.description;
     const weatherFeelsLike = focusedWeather?.feelsLike;
 
     return (
-        <Container sx={{ background: getBackgroundColor(focusedWeather?.weather[0].id) }}>
+        <Container sx={{ background: getBackgroundColor(weatherCode), ...props.sx }}>
             <CardContent sx={{ height: "100%" }}>
                 <Typography component="h1" variant="h3"><b>{props.location ?? "Fetching Location Details..."}</b></Typography>
                 <Typography variant="body2">

@@ -7,11 +7,11 @@ import { useSystemTheme } from "@src/hooks/use-system-theme";
 
 export default function ThemeToggleButton(props: IconButtonProps) {
     let { themeColour, toggleTheme } = useSystemTheme();
-
+    const nextTheme = themeColour === SystemTheme.LIGHT ? SystemTheme.DARK : SystemTheme.LIGHT;
     return (
-        <Tooltip title="Toggle Colour Theme">
+        <Tooltip title={`Toggle to ${nextTheme} theme`}>
             <IconButton
-                aria-label="Toggle Colour Theme"
+                aria-label={`Toggle to ${nextTheme} theme`}
                 onClick={toggleTheme}
                 color="inherit"
                 {...props}

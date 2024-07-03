@@ -1,15 +1,13 @@
-import { RenderResult, act, fireEvent, render, renderHook, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { testWrapper, withTestWrapper } from "@utils/wrappers";
+import { withRender } from "@utils/wrappers";
 import Navbar from "@components/layout/navbar/navbar.component";
 import { server } from "@project/vitest-setup";
 import { testQueryClient } from "@utils/query-client";
 import userEvent from "@testing-library/user-event";
 import { TemperatureScale } from "@src/types/weather.types";
-import { useSettingStore } from "@src/hooks/stores/use-setting-store";
 import { MeasurementScale } from "@src/types/measurement.types";
 import { SystemTheme } from "@src/types/system.types";
-import { useSystemTheme } from "@src/hooks/use-system-theme";
 
 describe("Component: navbar", () => {
     beforeEach(() => {
@@ -25,13 +23,13 @@ describe("Component: navbar", () => {
     });
 
     it("should render navbar.", () => {
-        render(withTestWrapper(<Navbar />));
+        withRender(<Navbar />);
     });
 
     it("should render navbar with hamburger if mobileBurgerFn is defined.", async () => {
         const mockfn = vi.fn();
         const user = userEvent.setup();
-        const { getByLabelText } = render(withTestWrapper(<Navbar mobileBurgerFn={mockfn} />));
+        const { getByLabelText } = withRender(<Navbar mobileBurgerFn={mockfn} />);
         await user.click(getByLabelText("open menu"));
         expect(mockfn).toHaveBeenCalled();
     });
@@ -40,7 +38,7 @@ describe("Component: navbar", () => {
         const user = userEvent.setup();
         window.innerWidth = 500;
         fireEvent(window, new Event("resize"));
-        const { getByRole, getByText } = render(withTestWrapper(<Navbar />));
+        const { getByRole, getByText } = withRender(<Navbar />);
         const settingsButton = getByRole("button", { name: /settings/i });
         await user.click(settingsButton);
         expect(getByText("Measurement System")).toBeInTheDocument();
@@ -52,7 +50,7 @@ describe("Component: navbar", () => {
         const user = userEvent.setup();
         window.innerWidth = 500;
         fireEvent(window, new Event("resize"));
-        const { getByRole } = render(withTestWrapper(<Navbar />));
+        const { getByRole } = withRender(<Navbar />);
         await user.click(getByRole("button", { name: /settings/i }));
         await user.click(getByRole("button", { name: /close/i }));
         waitFor(() => expect(getByRole("button", { name: /settings/i })).toBeInTheDocument());
@@ -62,7 +60,7 @@ describe("Component: navbar", () => {
         const user = userEvent.setup();
         window.innerWidth = 500;
         fireEvent(window, new Event("resize"));
-        const { getByRole, getByPlaceholderText } = render(withTestWrapper(<Navbar />));
+        const { getByRole, getByPlaceholderText } = withRender(<Navbar />);
         const settingsButton = getByRole("button", { name: /Search Weather/i });
         await user.click(settingsButton);
         expect(getByPlaceholderText("Search Weather Location")).toBeInTheDocument();
@@ -72,69 +70,74 @@ describe("Component: navbar", () => {
         const user = userEvent.setup();
         window.innerWidth = 500;
         fireEvent(window, new Event("resize"));
-        const { getByRole, getByLabelText } = render(withTestWrapper(<Navbar />));
+        const { getByRole, getByLabelText } = withRender(<Navbar />);
         await user.click(getByRole("button", { name: /Search Weather/i }));
         await user.click(getByLabelText("go back"));
         expect(getByRole("button", { name: /Search Weather/i })).toBeInTheDocument();
     });
 
     describe("when the mobile menu is open", async () => {
-        let renderedScreen: RenderResult;
-        beforeEach(async () => {
+        it.each([
+            ["Celcius (C°)", "Fahrenenheit (F°)", TemperatureScale.CELSIUS],
+            ["Fahrenenheit (F°)", "Celcius (C°)", TemperatureScale.FAHRENHEIT],
+        ])("should be able to toggle from %s to %s when clicking temperature button toggle.", async (
+            from: string,
+            to: string,
+            temperatureSetting: TemperatureScale
+        ) => {
             const user = userEvent.setup();
             window.innerWidth = 500;
             fireEvent(window, new Event("resize"));
-            renderedScreen = render(withTestWrapper(<Navbar />));
-            const settingsButton = renderedScreen.getByRole("button", { name: /settings/i });
+            const settings = { temperatureScale: temperatureSetting };
+            const view = withRender(<Navbar />, { settings });
+            const settingsButton = view.getByRole("button", { name: /settings/i });
             await user.click(settingsButton);
-        });
 
-        it.each([
-            [TemperatureScale.CELSIUS, TemperatureScale.FAHRENHEIT, "Fahrenenheit (F°)"],
-            [TemperatureScale.FAHRENHEIT, TemperatureScale.CELSIUS, "Celcius (C°)"],
-        ])("should be able to toggle temperature scale from %s to %s", async (
-            from: TemperatureScale,
-            to: TemperatureScale,
-            pattern: string
-        ) => {
-            const user = userEvent.setup();
-            const { result } = renderHook(() => useSettingStore(), { wrapper: testWrapper });
-            act(() => result.current.setTemperatureScale(from));
-            const tempButton = renderedScreen.getByText(pattern);
+            const tempButton = view.getByText(from);
             await user.click(tempButton);
-            expect(result.current.temperatureScale).toEqual(to);
+            expect(view.getByText(to)).toBeInTheDocument();
         });
 
         it.each([
-            [MeasurementScale.METRIC, MeasurementScale.IMPERIAL, "Imperial (MPH)"],
-            [MeasurementScale.IMPERIAL, MeasurementScale.METRIC, "Metric (M/S)"],
-        ])("should be able to toggle temperature scale from %s to %s", async (
-            from: MeasurementScale,
-            to: MeasurementScale,
-            pattern: string
+            ["Metric (M/S)", "Imperial (MPH)", MeasurementScale.METRIC],
+            ["Imperial (MPH)", "Metric (M/S)", MeasurementScale.IMPERIAL],
+        ])("should be able to toggle from %s to %s when clicking measurement button toggle.", async (
+            from: string,
+            to: string,
+            measurementSetting: MeasurementScale
         ) => {
             const user = userEvent.setup();
-            const { result } = renderHook(() => useSettingStore(), { wrapper: testWrapper });
-            act(() => result.current.setMeasurementScale(from));
-            const measurementButton = renderedScreen.getByText(pattern);
-            await user.click(measurementButton);
-            expect(result.current.measurementScale).toEqual(to);
+            window.innerWidth = 500;
+            fireEvent(window, new Event("resize"));
+            const settings = { measurementScale: measurementSetting };
+            const view = withRender(<Navbar />, { settings });
+            const settingsButton = view.getByRole("button", { name: /settings/i });
+            await user.click(settingsButton);
+
+            const tempButton = view.getByText(from);
+            await user.click(tempButton);
+            expect(view.getByText(to)).toBeInTheDocument();
         });
 
         it.each([
-            [SystemTheme.DARK, SystemTheme.LIGHT, "Light Theme"],
-            [SystemTheme.LIGHT, SystemTheme.DARK, "Dark Theme"],
-        ])("should be able to toggle temperature scale from %s to %s", async (
-            from: SystemTheme,
-            to: SystemTheme,
-            pattern: string
+            ["Dark Theme", "Light Theme", SystemTheme.DARK],
+            ["Light Theme", "Dark Theme", SystemTheme.LIGHT],
+        ])("should be able to toggle from %s to %s when clicking theme button toggle.", async (
+            from: string,
+            to: string,
+            themeSetting: SystemTheme
         ) => {
             const user = userEvent.setup();
-            const { result } = renderHook(() => useSystemTheme(), { wrapper: testWrapper });
-            act(() => result.current.setThemeColour(from));
-            const themeButton = renderedScreen.getByText(pattern);
-            await user.click(themeButton);
-            expect(result.current.themeColour).toEqual(to);
+            window.innerWidth = 500;
+            fireEvent(window, new Event("resize"));
+            const settings = { theme: themeSetting };
+            const view = withRender(<Navbar />, { settings });
+            const settingsButton = view.getByRole("button", { name: /settings/i });
+            await user.click(settingsButton);
+
+            const tempButton = view.getByText(from);
+            await user.click(tempButton);
+            expect(view.getByText(to)).toBeInTheDocument();
         });
     });
 });

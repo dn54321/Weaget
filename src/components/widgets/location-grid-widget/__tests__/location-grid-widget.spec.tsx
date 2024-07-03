@@ -1,7 +1,6 @@
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
-import { render } from "@testing-library/react";
-import { testWrapper } from "@utils/wrappers";
-import { NearbyLocations } from "@features/weaget/nearby-location.types";
+import { withRender } from "@utils/wrappers";
+import { NearbyLocations } from "@features/weaget/nearby-location/nearby-location.types";
 import userEvent from "@testing-library/user-event";
 import { LocationGridWidget } from "..";
 
@@ -34,25 +33,22 @@ describe("Component: location-grid-widget", async () => {
     });
 
     it("should contain a title.", () => {
-        const { getByText } = render(
+        const { getByText } = withRender(
             <LocationGridWidget locationData={nearbyLocations} />,
-            { wrapper: testWrapper }
         );
         expect(getByText("Suggested Locations")).toBeInTheDocument();
     });
 
     it("should contain a subtitle.", () => {
-        const { getByText } = render(
+        const { getByText } = withRender(
             <LocationGridWidget locationData={nearbyLocations} />,
-            { wrapper: testWrapper }
         );
         expect(getByText("Click on any card for more weather details!")).toBeInTheDocument();
     });
 
     it("should contains a list of locations.", () => {
-        const { getByText } = render(
+        const { getByText } = withRender(
             <LocationGridWidget locationData={nearbyLocations} />,
-            { wrapper: testWrapper }
         );
         expect(getByText("mockName")).toBeInTheDocument();
         expect(getByText("mockName2")).toBeInTheDocument();
@@ -62,9 +58,8 @@ describe("Component: location-grid-widget", async () => {
         async () => {
             mocks.mockRouterPush.mockResolvedValue(true);
             const user = userEvent.setup();
-            const { getByText } = render(
+            const { getByText } = withRender(
                 <LocationGridWidget locationData={nearbyLocations} />,
-                { wrapper: testWrapper }
             );
 
             await user.click(getByText("mockName"));
@@ -73,9 +68,8 @@ describe("Component: location-grid-widget", async () => {
         });
 
     it("should return null if no data is provided.", () => {
-        const { container } = render(
+        const { container } = withRender(
             <LocationGridWidget locationData={undefined} />,
-            { wrapper: testWrapper }
         );
 
         expect(container.firstChild).toBeNull();

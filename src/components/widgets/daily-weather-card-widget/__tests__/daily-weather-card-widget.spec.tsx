@@ -1,7 +1,7 @@
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
 import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
-import { render, renderHook } from "@testing-library/react";
-import { testWrapper } from "@utils/wrappers";
+import { renderHook } from "@testing-library/react";
+import { testWrapper, withRender } from "@utils/wrappers";
 import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import userEvent from "@testing-library/user-event";
 import { useWidgetStore } from "@src/hooks/stores/use-widget-store";
@@ -18,25 +18,22 @@ describe("Component: daily-weather-card-widget", async () => {
     });
 
     it("should contain a title.", () => {
-        const { getByText } = render(
+        const { getByText } = withRender(
             <DailyWeatherCardWidget weatherData={weatherData} />,
-            { wrapper: testWrapper }
         );
         expect(getByText("Daily Cards")).toBeInTheDocument();
     });
 
     it("should contain a subtitle.", () => {
-        const { getByText } = render(
+        const { getByText } = withRender(
             <DailyWeatherCardWidget weatherData={weatherData} />,
-            { wrapper: testWrapper }
         );
         expect(getByText("Click any card below to see more detailed description of the weather card.")).toBeInTheDocument();
     });
 
     it("should contains a card for each day.", () => {
-        const { getAllByTestId } = render(
+        const { getAllByTestId } = withRender(
             <DailyWeatherCardWidget weatherData={weatherData} />,
-            { wrapper: testWrapper }
         );
         expect(getAllByTestId("weather-card")).toHaveLength(8);
     });
@@ -45,9 +42,8 @@ describe("Component: daily-weather-card-widget", async () => {
         async () => {
             const user = userEvent.setup();
             const { result } = renderHook(() => useWidgetStore());
-            const { getAllByTestId } = render(
-                <DailyWeatherCardWidget weatherData={weatherData} />,
-                { wrapper: testWrapper }
+            const { getAllByTestId } = withRender(
+                <DailyWeatherCardWidget weatherData={weatherData} />
             );
             const cards = getAllByTestId("weather-card");
             await user.hover(cards[0]);
@@ -58,9 +54,8 @@ describe("Component: daily-weather-card-widget", async () => {
     it("should set the weather in the widget store as active if a card is clicked.", async () => {
         const user = userEvent.setup();
         const { result } = renderHook(() => useWidgetStore());
-        const { getAllByRole } = render(
-            <DailyWeatherCardWidget weatherData={weatherData} />,
-            { wrapper: testWrapper }
+        const { getAllByRole } = withRender(
+            <DailyWeatherCardWidget weatherData={weatherData} />
         );
         await user.click(getAllByRole("listitem")[0]);
         await user.unhover(getAllByRole("listitem")[0]);
@@ -72,9 +67,8 @@ describe("Component: daily-weather-card-widget", async () => {
         async () => {
             const user = userEvent.setup();
             const { result } = renderHook(() => useWidgetStore());
-            const { getAllByRole } = render(
-                <DailyWeatherCardWidget weatherData={weatherData} />,
-                { wrapper: testWrapper }
+            const { getAllByRole } = withRender(
+                <DailyWeatherCardWidget weatherData={weatherData} />
             );
 
             await user.click(getAllByRole("listitem")[0]);
@@ -87,9 +81,8 @@ describe("Component: daily-weather-card-widget", async () => {
     it("should unactivate an active weather card if clicked again.", async () => {
         const user = userEvent.setup();
         const { result } = renderHook(() => useWidgetStore(), { wrapper: testWrapper });
-        const { getAllByRole, getByText } = render(
-            <DailyWeatherCardWidget weatherData={weatherData} />,
-            { wrapper: testWrapper }
+        const { getAllByRole, getByText } = withRender(
+            <DailyWeatherCardWidget weatherData={weatherData} />
         );
         await user.click(getAllByRole("listitem")[0]);
         expect(result.current.focusedWeather).toEqual(weatherData.daily?.[0]);
@@ -100,9 +93,8 @@ describe("Component: daily-weather-card-widget", async () => {
     });
 
     it("should return a skeleton if no data is provided.", () => {
-        const { getAllByTestId } = render(
-            <DailyWeatherCardWidget weatherData={undefined} />,
-            { wrapper: testWrapper }
+        const { getAllByTestId } = withRender(
+            <DailyWeatherCardWidget weatherData={undefined} />
         );
         expect(getAllByTestId("weather-card-skeleton")).toHaveLength(8);
     });

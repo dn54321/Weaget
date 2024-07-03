@@ -1,25 +1,10 @@
 import Box from "@mui/material/Box";
 import React from "react";
-import { StatContainer } from "./weather-stats-card.styles";
+import { CardContainer, StatContainer } from "./weather-stats-card.styles";
+import { Card, SxProps } from "@mui/material";
 
 export interface ItemContainerProps {
     children: React.ReactElement;
-}
-
-function ItemContainer(props: ItemContainerProps) {
-    return (
-        <Box
-            sx={{
-                display: "grid",
-                justifyContent: "space-around",
-                gridTemplateColumns: "repeat(auto-fill, 170px)",
-                py: "10px",
-            }}
-            component="ul"
-        >
-            {props.children}
-        </Box>
-    );
 }
 
 export interface WeatherStats {
@@ -43,22 +28,21 @@ function IconCard(props: WeatherStats) {
     );
 }
 
-export interface WeatherStatsCardProp {
+export interface WeatherStatsCardProps {
     stats: Array<WeatherStats>;
+    transparent?: boolean;
+    sx?: SxProps;
 }
 
-export default function WeatherStatsCard(props: WeatherStatsCardProp) {
+export default function WeatherStatsCard(props: WeatherStatsCardProps) {
+    const component = props.transparent ? Box : Card;
     return (
-        <Box>
-            <ItemContainer aria-live="polite">
-                <React.Fragment>
-                    {
-                        props.stats
-                            .filter(item => item.value !== undefined)
-                            .map(stat => <IconCard key={stat.name} {...stat} />)
-                    }
-                </React.Fragment>
-            </ItemContainer>
-        </Box>
+        <CardContainer component={component} aria-live="polite" sx={props.sx}>
+            {
+                props.stats
+                    .filter(item => item.value !== undefined)
+                    .map(stat => <IconCard key={stat.name} {...stat} />)
+            }
+        </CardContainer>
     );
 }

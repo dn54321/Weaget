@@ -1,1 +1,2 @@
+git restore --staged .env.local
 pnpm lint

@@ -1,4 +1,5 @@
-import { Box, styled } from "@mui/system";
+import { styled } from "@mui/material";
+import { Box, BoxProps } from "@mui/system";
 
 export const WeatherIconContainer = styled(Box) ({
     width: "1em",
@@ -110,7 +111,7 @@ export const Rain = styled(Box) ((props: any) => ({
     transform: "translate(-50%, -50%) rotate(50deg)",
     backgroundColor: "#9595e5",
     filter: "drop-shadow(0px 0px 2em #eee)",
-    boxShadow: props.theme.shadows?.[1],
+    boxShadow: props.theme.shadow?.[1],
     height: "0.08em",
     borderRadius: `calc(${props.height ?? "0.08em"} * 0.5)`,
 }));
@@ -128,7 +129,7 @@ export const Snow1 = styled(Box)<any>((props: any) => ({
         transform: "translate(-50%, -50%)",
         backgroundColor: "var(--snowColor)",
         filter: `drop-shadow(0px 0px 2em #eee) ${props.filter}`,
-        boxShadow: props.theme.shadows![1],
+        boxShadow: props.theme.shadows?.[1],
         height: "var(--snowHeight)",
         borderRadius: `calc(${props.height ?? "0.08em"} * 0.5)`,
         left: `calc(${props.left ?? "50%"})`,
@@ -144,7 +145,7 @@ export const Snow1 = styled(Box)<any>((props: any) => ({
     },
 }));
 
-export const Snow2 = (props) => {
+export const Snow2 = (props: BoxProps) => {
     return (
         <>
             <Snow1 {...props} />

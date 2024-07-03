@@ -1,7 +1,6 @@
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
-import { render } from "@testing-library/react";
-import { testWrapper } from "@utils/wrappers";
-import { NearbyLocations } from "@features/weaget/nearby-location.types";
+import { withRender } from "@utils/wrappers";
+import { NearbyLocations } from "@features/weaget/nearby-location/nearby-location.types";
 import { LocationListWidget } from "./..";
 import userEvent from "@testing-library/user-event";
 
@@ -34,17 +33,15 @@ describe("Component: location-list-widget", async () => {
     });
 
     it("should contain a title.", () => {
-        const { getByText } = render(
-            <LocationListWidget locations={nearbyLocations} />,
-            { wrapper: testWrapper }
+        const { getByText } = withRender(
+            <LocationListWidget locationData={nearbyLocations} />,
         );
         expect(getByText("Suggested Locations")).toBeInTheDocument();
     });
 
     it("should contains a list of locations.", () => {
-        const { getByText } = render(
-            <LocationListWidget locations={nearbyLocations} />,
-            { wrapper: testWrapper }
+        const { getByText } = withRender(
+            <LocationListWidget locationData={nearbyLocations} />,
         );
         expect(getByText("mockName, mockState")).toBeInTheDocument();
         expect(getByText("mockName2, mockState2")).toBeInTheDocument();
@@ -54,9 +51,8 @@ describe("Component: location-list-widget", async () => {
         async () => {
             const user = userEvent.setup();
             mocks.mockRouterPush.mockResolvedValue(true);
-            const { getByText } = render(
-                <LocationListWidget locations={nearbyLocations} />,
-                { wrapper: testWrapper }
+            const { getByText } = withRender(
+                <LocationListWidget locationData={nearbyLocations} />,
             );
 
             await user.click(getByText("mockName, mockState"));
@@ -64,9 +60,8 @@ describe("Component: location-list-widget", async () => {
         });
 
     it("should return a skeleton if no data is provided.", () => {
-        const { getAllByTestId } = render(
-            <LocationListWidget locations={undefined} />,
-            { wrapper: testWrapper }
+        const { getAllByTestId } = withRender(
+            <LocationListWidget locationData={undefined} />,
         );
 
         expect(getAllByTestId("location-card-skeleton")).not.toHaveLength(0);
@@ -74,9 +69,8 @@ describe("Component: location-list-widget", async () => {
 
     it("should diplay an appropriate message when no nearby location exists.",
         () => {
-            const { getByText } = render(
-                <LocationListWidget locations={[]} />,
-                { wrapper: testWrapper }
+            const { getByText } = withRender(
+                <LocationListWidget locationData={[]} />,
             );
 
             expect(getByText("No nearby places found...")).toBeInTheDocument();

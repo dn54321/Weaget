@@ -1,1 +1,1 @@
-export { default as LocationListWidget } from "./location-list-widget.component";
+export { default as LocationListWidget, type LocationListWidgetProps } from "./location-list-widget.component";

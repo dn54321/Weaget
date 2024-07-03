@@ -1,12 +1,11 @@
-import { Stack } from "@mui/material";
+import { Stack, SxProps } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState } from "react";
 import { useWidgetStore } from "@src/hooks/stores/use-widget-store";
 import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { Widget } from "@components/containers/widget/widget";
-import { withSkeleton } from "@components/with-skeleton";
-import WeatherCardSkeleton from "@components/cards/weather-card/weather-card.skeleton";
-import { StyledWeatherCard } from "./daily-weather-card-widget.styles";
+import { WeatherCard, WeatherCardProps } from "@components/cards/weather-card";
+import { SkeletonProps } from "@src/types/component.types";
 
 export interface WeatherListProps {
     weatherData?: OneCallWeatherDetails;
@@ -16,7 +15,7 @@ export interface WeatherListProps {
 }
 
 function WeatherList(props: WeatherListProps) {
-    const weatherDetails = props.weatherData?.daily?.map(dailyWeather => ({
+    const weatherDetails = props.weatherData?.daily?.map((dailyWeather, idx) => ({
         key: dailyWeather.dt.getTime(),
         props: {
             date: dailyWeather.dt,
@@ -26,14 +25,15 @@ function WeatherList(props: WeatherListProps) {
             rainfallPercentage: dailyWeather.pop,
             maxTemperature: dailyWeather.temp.max,
             minTemperature: dailyWeather.temp.min,
-        },
+            active: props.activeCard === idx,
+        } as WeatherCardProps,
     }));
 
     const weatherListData = weatherDetails
-        || Array(8).fill(null).map((_, i) => ({ key: i, props: undefined }));
+        || Array(8).fill(null).map((_, i) => (
+            { key: i, props: { skeleton: true } as SkeletonProps }));
 
     return weatherListData.map((dailyWeather, idx) => {
-        const WeatherCard = withSkeleton(StyledWeatherCard, WeatherCardSkeleton, dailyWeather.props);
         return (
             <Box
                 key={dailyWeather.key}
@@ -58,7 +58,7 @@ function WeatherList(props: WeatherListProps) {
                     },
                 }}
             >
-                <WeatherCard active={props.activeCard === idx} />
+                <WeatherCard {...dailyWeather.props} />
             </Box>
         );
     });
@@ -66,6 +66,7 @@ function WeatherList(props: WeatherListProps) {
 
 export interface DailyWeatherCardWidgetProps {
     weatherData?: OneCallWeatherDetails;
+    sx?: SxProps;
 }
 
 export default function DailyWeatherCardWidget(props: DailyWeatherCardWidgetProps) {
@@ -89,6 +90,7 @@ export default function DailyWeatherCardWidget(props: DailyWeatherCardWidgetProp
         <Widget
             title="Daily Cards"
             subtitle="Click any card below to see more detailed description of the weather card."
+            sx={props.sx}
         >
             <Box position="relative" height="180px" mt="10px">
                 <Stack

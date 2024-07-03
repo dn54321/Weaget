@@ -11,6 +11,7 @@ declare module "@mui/material/styles" {
                 contrastColor: string;
             };
         };
+        shadows: Array<string>;
     }
 
     interface ThemeOptions {

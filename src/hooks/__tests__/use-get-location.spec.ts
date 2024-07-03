@@ -5,7 +5,7 @@ import { server } from "@project/vitest-setup";
 import { testQueryClient } from "@utils/query-client";
 import { mockLocationLookupHandle } from "@features/weaget/__mocks__/location-lookup.handler";
 import { createLocationLookupMock } from "@features/weaget/__mocks__/location-lookup.mock";
-import locationLookupSchema from "@features/weaget/location-lookup.schema";
+import locationLookupSchema from "@features/weaget/location-lookup/location-lookup.schema";
 import { useGetLocation } from "@src/hooks/use-get-location";
 import { testWrapper } from "@utils/wrappers";
 

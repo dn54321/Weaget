@@ -1,4 +1,4 @@
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, SxProps } from "@mui/material";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import { circularProgressClasses } from "@mui/material/CircularProgress";
@@ -11,7 +11,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import * as React from "react";
-import { Pollution } from "@features/apicn-pollution/pollution.types";
+import { Iaqi, Pollution } from "@features/apicn-pollution/pollution.types";
 import { Widget } from "@components/containers/widget/widget";
 
 /*
@@ -94,11 +94,15 @@ const DotLoader = () => {
     );
 };
 
-function createData(chemical, amount) {
+function createData(chemical: JSX.Element, amount: JSX.Element) {
     return { chemical, amount };
 }
 
-function PollutionTable(props) {
+interface PollutionTableProps {
+    rows: Array<{ chemical: JSX.Element; amount: JSX.Element }>;
+}
+
+function PollutionTable(props: PollutionTableProps) {
     return (
         <TableContainer component={Box}>
             <Table
@@ -143,7 +147,7 @@ const warn = ["",
     "Active children and adults, and people with respiratory disease, such as asthma, should avoid all outdoor exertion; everyone else, especially children, should limit outdoor exertion.",
     "Everyone should avoid all outdoor exertion"];
 
-const stringToTag = {
+const stringToTag: Record<string, JSX.Element> = {
     neph: <span title="visibility">NEPH</span>,
     pm25: (
         <span title="particles with a diameter of 2.5 micrometres or less">
@@ -205,34 +209,35 @@ function aqiRating(aqi: number) {
     return 5;
 }
 
-const dataOrder = ["neph", "pm25", "pm10", "o3", "no2", "so2", "co"];
+const dataOrder: Array<keyof Iaqi> = ["neph", "pm25", "pm10", "o3", "no2", "so2", "co"];
 
-export interface PollutionCardProps {
-    pollution?: Pollution;
+export interface PollutionWidgetProps {
+    pollutionData?: Pollution;
+    sx?: SxProps;
 }
 
-export default function PollutionWidget(props: PollutionCardProps) {
+export default function PollutionWidget(props: PollutionWidgetProps) {
     const [show, setShow] = React.useState(false);
-    const loaded = props.pollution ? true : false;
-    const aqi = props.pollution ? props.pollution.aqi : 0;
+    const loaded = props.pollutionData ? true : false;
+    const aqi = props.pollutionData ? props.pollutionData.aqi : 0;
     const aqRating = aqiRating(aqi);
 
     let rows: any = [];
 
-    if (props.pollution) {
-        const pollution = props.pollution;
-        dataOrder.forEach((key) => {
-            if (pollution.iaqi[key] === undefined) return;
+    if (props.pollutionData) {
+        const pollution = props.pollutionData;
+        dataOrder.filter(key => key in pollution.iaqi).forEach((key) => {
+            const iaqiData = pollution.iaqi[key]!;
             const rating = (
                 <Box sx={{ float: "right" }}>
                     (
-                    {aqiStatus[aqiRating(pollution.iaqi[key].v)]}
+                    {aqiStatus[aqiRating(iaqiData.v)]}
                     )
                 </Box>
             );
             rows.push(createData(stringToTag[key],
                 <>
-                    {pollution.iaqi[key].v}
+                    {iaqiData.v}
                     {" "}
                     {rating}
                 </>
@@ -241,7 +246,7 @@ export default function PollutionWidget(props: PollutionCardProps) {
     }
 
     return (
-        <Widget title="Pollution Level">
+        <Widget title="Pollution Level" sx={props.sx}>
             <Box p="20px" pb="10px">
                 <Stack
                     direction={{ xs: "column", sm: "row", md: "column" }}
@@ -249,11 +254,11 @@ export default function PollutionWidget(props: PollutionCardProps) {
                     gap={2}
                 >
                     <Stack direction="row" alignItems="center">
-                        <CircularProgressWithLabel value={props.pollution?.aqi} loaded={loaded} />
+                        <CircularProgressWithLabel value={props.pollutionData?.aqi} loaded={loaded} />
                         <Box ml="20px" width="max-content">
                             <Box fontSize="16px">Air Quality Index</Box>
                             <Box sx={{ color: "text.color" }}>
-                                {props.pollution?.aqi
+                                {props.pollutionData?.aqi
                                     ? aqiStatus[aqRating]
                                     : <Box ml="20px"><DotLoader /></Box>}
                             </Box>

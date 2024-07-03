@@ -17,6 +17,7 @@ import { TemperatureScale } from "@src/types/weather.types";
 import { useSettingStore } from "@src/hooks//stores/use-setting-store";
 import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
 import { useSystemTheme } from "@src/hooks/use-system-theme";
+import NextLink from "next/link";
 
 // Default Navbar seen normally on every device
 function DefaultNavbar(props: NavbarProps & { setState: (str: string) => void }) {
@@ -42,7 +43,7 @@ function DefaultNavbar(props: NavbarProps & { setState: (str: string) => void })
                         )
                     : ""
             }
-            <Link href="/"><OutlinedLogo fontSize="25px" hideShadow /></Link>
+            <Link component={NextLink} href="/"><OutlinedLogo fontSize="25px" hideShadow /></Link>
             <NSXContainer ml="60px" width="100%" alignItems="center">
                 <SearchBar maxWidth="400px" />
                 <Box className="seperator" ml="auto" />
@@ -66,7 +67,10 @@ function DefaultNavbar(props: NavbarProps & { setState: (str: string) => void })
 }
 
 // Search Navbar seen only during mobile use when the search icon is pressed.
-function SearchNavbar(props) {
+interface SearchNavbar {
+    setState: () => void;
+}
+function SearchNavbar(props: SearchNavbar) {
     return (
         <>
             <IconButton
@@ -102,8 +106,8 @@ function SettingsDialog(props) {
         props.setDialog(false);
     };
 
-    const deltaTemp = (_, v: TemperatureScale) => v && setTemperatureScale(v);
-    const deltaMeas = (_, v: MeasurementScale) => v && setMeasurementScale(v);
+    const deltaTemp = (_: any, v: TemperatureScale) => v && setTemperatureScale(v);
+    const deltaMeas = (_: any, v: MeasurementScale) => v && setMeasurementScale(v);
 
     return (
         <Dialog

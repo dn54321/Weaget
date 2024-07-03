@@ -1,11 +1,10 @@
-import { IconButton } from "@mui/material";
-import { styled } from "@mui/system";
+import { IconButton, styled } from "@mui/material";
 
 export const StyledFooter = styled("footer")((props: any) => ({
     backgroundColor: props.theme.palette.primary.dark,
     color: props.theme.palette.primary.contrastText,
     height: "fit-content",
-    boxShadow: props.theme.shadows[1],
+    boxShadow: props.theme.shadows?.[1],
     position: "relative",
     bottom: "0px",
     left: "0px",

@@ -2,8 +2,7 @@ import { beforeAll, describe, expect, it, test } from "vitest";
 import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { createWeatherDailyMockData, createWeatherHourlyMockData, createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 import { RainfallWidget } from "./..";
-import { render } from "@testing-library/react";
-import { testWrapper } from "@utils/wrappers";
+import { withRender } from "@utils/wrappers";
 import userEvent from "@testing-library/user-event";
 
 describe("Component: rainfall-widget", async () => {
@@ -12,9 +11,8 @@ describe("Component: rainfall-widget", async () => {
         weatherData = createWeatherMockData();
     });
     it("should contain a title.", () => {
-        const { getByText } = render(
+        const { getByText } = withRender(
             <RainfallWidget weatherData={weatherData} />,
-            { wrapper: testWrapper }
         );
 
         expect(getByText("Rainfall")).toBeInTheDocument();
@@ -24,17 +22,20 @@ describe("Component: rainfall-widget", async () => {
         ["minutely", "120 mins"],
         ["hourly", "48 hours"],
         ["daily", "14 days"],
-    ])("should show rainfall for %s.", (rainfallType, title) => {
-        const { getByText } = render(
+    ])("should show rainfall for %s.", (
+        rainfallType: string,
+        title: string
+    ) => {
+        const rainfallData = weatherData[rainfallType as keyof OneCallWeatherDetails];
+        const { getByText } = withRender(
             <RainfallWidget weatherData={{
                 ...weatherData,
                 hourly: undefined,
                 minutely: undefined,
                 daily: undefined,
-                [rainfallType]: weatherData[rainfallType],
+                [rainfallType]: rainfallData,
             }}
             />,
-            { wrapper: testWrapper }
         );
 
         expect(getByText(title)).toBeInTheDocument();
@@ -42,7 +43,7 @@ describe("Component: rainfall-widget", async () => {
 
     it("should be able to switch between 3 different rainfalls", async () => {
         const user = userEvent.setup();
-        const { getAllByRole } = render(
+        const { getAllByRole } = withRender(
             <RainfallWidget weatherData={{
                 ...weatherData,
                 hourly: undefined,
@@ -62,27 +63,27 @@ describe("Component: rainfall-widget", async () => {
     });
 
     it.each([
-        ["hourly", [{ ...createWeatherHourlyMockData(), rain: undefined }]],
+        ["minutely", [{ ...createWeatherHourlyMockData(), rain: undefined }]],
         ["hourly", [{ ...createWeatherHourlyMockData(), rain: { "1h": undefined } }]],
         ["daily", [{ ...createWeatherDailyMockData(), rain: undefined }]],
     ])("should work when there is no rainfall weather for %s.", async (key: string, value: object) => {
-        const user = userEvent.setup();
-        const { getAllByRole } = render(
+        const view = withRender(
             <RainfallWidget weatherData={{
                 ...weatherData,
                 hourly: [],
                 minutely: [],
                 daily: [],
-                [key]: weatherData[key].concat(value),
+                [key]: value,
             }}
             />
         );
+
+        expect(view.getByText("Rainfall")).toBeInTheDocument();
     });
 
     it("should return a skeleton if no data is provided.", () => {
-        const { getByTestId } = render(
+        const { getByTestId } = withRender(
             <RainfallWidget weatherData={undefined} />,
-            { wrapper: testWrapper }
         );
         expect(getByTestId("rainfall-skeleton")).toBeInTheDocument();
     });

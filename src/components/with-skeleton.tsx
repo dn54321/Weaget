@@ -1,15 +1,21 @@
 import React from "react";
+import { SkeletonProps } from "@src/types/component.types";
 
-export function withSkeleton<T extends (props: any) => React.ReactNode>(
+export function withSkeleton<
+    T extends (props: any) => React.ReactNode,
+    V extends (props: any) => React.ReactNode,
+>(
     Component: T,
-    Skeleton: () => React.ReactNode,
-    componentProps?: Parameters<T>[0]
+    Skeleton: V
 ) {
-    if (componentProps) {
-        const component = (props: Partial<Parameters<T>[0]>) => <Component {...componentProps} {...props} />;
-        component.displayName = "HOC skeleton";
-        return component;
-    }
+    const component = (props: Parameters<T>[0] | SkeletonProps | Parameters<V>[0]) => {
+        if ("skeleton" in props && (props as SkeletonProps).skeleton === true) {
+            const { skeleton, ...rest } = props as (Parameters<V>[0] & SkeletonProps);
+            return <Skeleton {...rest as Parameters<V>[0]} />;
+        }
 
-    return Skeleton;
+        return <Component {...props as Parameters<T>[0]} />;
+    };
+
+    return component;
 }

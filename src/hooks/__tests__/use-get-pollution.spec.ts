@@ -5,10 +5,10 @@ import { server } from "@project/vitest-setup";
 import { testQueryClient } from "@utils/query-client";
 import { mockPollutionHandle } from "@features/weaget/__mocks__/pollution.handler";
 import { createPollutionMockData } from "@features/weaget/__mocks__/pollution.mock";
-import { pollutionSchema } from "@features/weaget/pollution.schema";
 import { useGetPollution } from "@src/hooks/use-get-pollution";
 import { testWrapper } from "@utils/wrappers";
 import { withResponse } from "@utils/msw-http-mocker";
+import { pollutionSchema } from "@features/weaget/pollution/pollution.schema";
 
 describe("Hooks - use-get-pollution", async () => {
     afterEach(() => {

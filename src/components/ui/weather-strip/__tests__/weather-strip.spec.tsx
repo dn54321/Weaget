@@ -1,10 +1,9 @@
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import { DateTime } from "luxon";
 import BugReportIcon from "@mui/icons-material/BugReport";
-import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { WeatherStrip, WeatherStripProps } from "./..";
-import { withTestWrapper } from "@utils/wrappers";
+import { withRender } from "@utils/wrappers";
 describe("Component: weather-strip", async () => {
     let weatherStripProps: WeatherStripProps;
     beforeAll(() => {
@@ -49,17 +48,17 @@ describe("Component: weather-strip", async () => {
         ["weather description", "mockWeatherDescription"],
         ["stat value", "mockCompactValuemm"],
         ["non-compact value", "nonCompactValuegg"],
-    ])("should display some the %s on the accordion summary.", (
+    ])("should display the %s on the accordion summary.", (
         _: string,
         value: string
     ) => {
-        const { getByText } = render(withTestWrapper(<WeatherStrip {...weatherStripProps} />));
+        const { getByText } = withRender(<WeatherStrip {...weatherStripProps} />);
         expect(getByText(value)).toBeInTheDocument();
     });
 
     it("should be openable/closable, displaying additional stats.", async () => {
         const user = userEvent.setup();
-        const { getByText, getByRole } = render(withTestWrapper(<WeatherStrip {...weatherStripProps} />));
+        const { getByText, getByRole } = withRender(<WeatherStrip {...weatherStripProps} />);
         const button = getByRole("button");
         await user.click(button);
         expect(getByText("Hourly Weather Stats")).toBeInTheDocument();
@@ -72,7 +71,7 @@ describe("Component: weather-strip", async () => {
     });
 
     it("should not display any stats that don't have values.", () => {
-        const { getByText } = render(withTestWrapper(<WeatherStrip {...weatherStripProps} />));
+        const { getByText } = withRender(<WeatherStrip {...weatherStripProps} />);
         expect(() => getByText("ff")).toThrow();
     });
 
@@ -80,19 +79,15 @@ describe("Component: weather-strip", async () => {
         ["open", true],
         ["closed", false],
     ])("should initially be %s if expanded prop is %o ", (_, isExpanded: boolean) => {
-        const { getByRole } = render(
-            withTestWrapper(<WeatherStrip {...weatherStripProps} expanded={isExpanded} />)
-        );
-        expect(getByRole("button", { expanded: isExpanded })).toBeInTheDocument();
+        const view = withRender(<WeatherStrip {...weatherStripProps} expanded={isExpanded} />);
+        expect(view.getByRole("button", { expanded: isExpanded })).toBeInTheDocument();
     });
 
     it("should call the setExpanded function if setExpanded prop is supplied", async () => {
         const user = userEvent.setup();
         const mockSetExpanded = vi.fn();
-        const { getByRole } = render(
-            withTestWrapper(<WeatherStrip {...weatherStripProps} setExpanded={mockSetExpanded} />)
-        );
-        const button = getByRole("button");
+        const view = withRender(<WeatherStrip {...weatherStripProps} setExpanded={mockSetExpanded} />);
+        const button = view.getByRole("button");
         await user.click(button);
         expect(mockSetExpanded).toHaveBeenCalled();
     });

@@ -1,10 +1,11 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { AlertBox } from "./..";
+import { withRender } from "@utils/wrappers";
 
 describe("Component: alert-box", () => {
     it("should render be able to render an alert.", () => {
-        const { getByText } = render(
+        const { getByText } = withRender(
             <AlertBox
                 alerts={[
                     {
@@ -26,7 +27,7 @@ describe("Component: alert-box", () => {
 
     it("should call the removeAlert function when removing an alert.", () => {
         const deleteMessageMock = vi.fn();
-        const { getByText, getByLabelText } = render(
+        const { getByText, getByLabelText } = withRender(
             <AlertBox
                 alerts={[
                     {
@@ -49,7 +50,7 @@ describe("Component: alert-box", () => {
 
     it("only shows the last N alerts based on the maxAlerts prop.", () => {
         const deleteMessageMock = vi.fn();
-        const { getByText, queryByText } = render(
+        const { getByText, queryByText } = withRender(
             <AlertBox
                 maxAlerts={1}
                 alerts={[

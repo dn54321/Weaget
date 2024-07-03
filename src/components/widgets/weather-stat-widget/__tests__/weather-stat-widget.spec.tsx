@@ -1,11 +1,9 @@
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
 import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
-import { render, renderHook } from "@testing-library/react";
-import { testWrapper } from "@utils/wrappers";
+import { withRender } from "@utils/wrappers";
 import { testQueryClient } from "@utils/query-client";
 import { DateTime } from "luxon";
-import { useSettingStore } from "@src/hooks/stores/use-setting-store";
 import { TemperatureScale } from "@src/types/weather.types";
 import { MeasurementScale } from "@src/types/measurement.types";
 import { HourlyWeatherStripWidget } from "@components/widgets/hourly-weather-strip-widget";
@@ -22,19 +20,19 @@ describe("Component: weather-stat-widget", () => {
     });
 
     it("should contain a title.", () => {
-        const { getByText } = render(
+        const { getByText } = withRender(
             <HourlyWeatherStripWidget weatherData={weatherData} />,
-            { wrapper: testWrapper }
         );
         expect(getByText("Hourly Weather Details")).toBeInTheDocument();
     });
 
     it("should display current weather stats.", async () => {
-        const { result: settingHook } = renderHook(() => useSettingStore());
-        settingHook.current.setTemperatureScale(TemperatureScale.CELSIUS);
-        settingHook.current.setMeasurementScale(MeasurementScale.METRIC);
         const datetime = DateTime.local(2023, 1, 1, { zone: weatherData.timezone });
-        const { getByText } = render(
+        const settings = {
+            temperatureScale: TemperatureScale.CELSIUS,
+            measurementScale: MeasurementScale.METRIC,
+        };
+        const { getByText } = withRender(
             <WeatherStatWidget weatherData={{
                 ...weatherData,
                 current: {
@@ -45,7 +43,7 @@ describe("Component: weather-stat-widget", () => {
                 },
             }}
             />,
-            { wrapper: testWrapper }
+            { settings }
         );
 
         expect(getByText("Jan 1, 2023")).toBeInTheDocument();
@@ -54,11 +52,10 @@ describe("Component: weather-stat-widget", () => {
     });
 
     it("should display a skeleton while the data is loading.", async () => {
-        const { getByTestId } = render(
+        const { getByTestId } = withRender(
             <WeatherStatWidget weatherData={undefined} />,
-            { wrapper: testWrapper }
         );
 
-        expect(getByTestId("weather-details-skeleton")).toBeInTheDocument();
+        expect(getByTestId("weather-stats-skeleton")).toBeInTheDocument();
     });
 });

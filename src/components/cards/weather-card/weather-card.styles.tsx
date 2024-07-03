@@ -1,4 +1,4 @@
-import { styled, Box, Card } from "@mui/material";
+import { Box, Card, styled } from "@mui/material";
 
 export const Day = styled(Box)(() => ({
     fontWeight: "bold",
@@ -35,7 +35,7 @@ export const IconBox = styled(Box)(() => ({
 export const CardContainer = styled(Card)(({ theme }) => ({
     "backgroundColor": theme.palette.primary.light,
     "color": theme.palette.primary.contrastText,
-    "boxShadow": theme.shadows[3],
+    "boxShadow": theme.shadows?.[3],
     "minWidth": "120px",
     "width": "100%",
     "borderRadius": "10px",

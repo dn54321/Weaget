@@ -71,9 +71,9 @@ export default function Page({ params }: PageProps) {
                             </Grid>
                             <Grid item xs={12} md={4}>
                                 <Stack spacing={2}>
-                                    <PollutionWidget pollution={pollutionQuery.data} />
+                                    <PollutionWidget pollutionData={pollutionQuery.data} />
                                     <RainfallWidget weatherData={weatherQuery.data} />
-                                    <LocationListWidget locations={nearbyLocationQuery.data} />
+                                    <LocationListWidget locationData={nearbyLocationQuery.data} />
                                 </Stack>
                             </Grid>
                         </Grid>

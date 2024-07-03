@@ -1,7 +1,7 @@
-import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { List, ListItem, ListItemButton, ListItemText, SxProps } from "@mui/material";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
-import { NearbyLocation } from "@features/weaget/nearby-location.types";
+import { NearbyLocation } from "@features/weaget/nearby-location/nearby-location.types";
 import { Widget } from "@components/containers/widget/widget";
 import { useRouter } from "next/navigation";
 
@@ -9,14 +9,15 @@ import { useRouter } from "next/navigation";
     Provides a list of the nearest suburbs/cities.
 */
 
-interface LocationListWidgetProps {
-    locations?: Array<NearbyLocation>;
+export interface LocationListWidgetProps {
+    locationData?: Array<NearbyLocation>;
+    sx?: SxProps;
 }
 
 export default function LocationListWidget(props: LocationListWidgetProps) {
     const router = useRouter();
-    const locations = props.locations
-        ? props.locations.map((location) => {
+    const locations = props.locationData
+        ? props.locationData.map((location) => {
             const locationLink = encodeURI(`/weather/${location.name} ${location.state}, ${location.country}`);
             const locationString = [location.name, location.state]
                 .filter(location => Boolean(location))
@@ -56,11 +57,11 @@ export default function LocationListWidget(props: LocationListWidgetProps) {
             )
             );
     return (
-        <Widget title="Suggested Locations">
+        <Widget title="Suggested Locations" sx={props.sx}>
             <Box sx={{ mt: "10px" }} />
             <List dense component="ul">
                 {locations}
-                {props.locations && !locations.length
+                {props.locationData && !locations.length
                     ? <Box pt="5px" mx="5px">No nearby places found...</Box>
                     : null}
             </List>

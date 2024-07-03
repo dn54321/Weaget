@@ -25,3 +25,10 @@ export const StatContainer = styled(Box)(({ theme }) => ({
         fontWeight: "bold",
     },
 }));
+
+export const CardContainer = styled(Box)(() => ({
+    display: "grid",
+    justifyContent: "space-around",
+    gridTemplateColumns: "repeat(auto-fill, 170px)",
+    padding: "10px 0px",
+}));

@@ -15,7 +15,7 @@ import { Logo } from "@components/icon/core/logo-icon";
 import { SettingsFab } from "@components/ui/settings-fab";
 import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
 import { DailyCompactWeatherWidget } from "@components/widgets/daily-compact-weather-widget";
-import LocationGrid from "@components/widgets/location-grid-widget/location-grid-widget.component";
+import LocationGridWidget from "@components/widgets/location-grid-widget/location-grid-widget.component";
 import { Footer } from "@components/layout/footer";
 
 const Loader = () => (
@@ -132,7 +132,12 @@ export default function Home() {
                         <PaddedSearchBar />
                     </SearchContainer>
                     <PageDivider />
-                    <Section maxWidth="md">
+                    <Section
+                        maxWidth="md"
+                        sx={{
+                            alignItems: { xs: "center", md: "initial" },
+                        }}
+                    >
                         { weatherQuery.data && locationQuery.data && currentLocationQuery.data
                             ? (
                                     <>
@@ -141,9 +146,11 @@ export default function Home() {
                                             subtitle={location}
                                             weatherData={weatherQuery.data}
                                             location={location}
+                                            sx={{ maxWidth: "550px" }}
                                         />
-                                        <LocationGrid
+                                        <LocationGridWidget
                                             locationData={locationQuery.data}
+                                            sx={{ maxWidth: "550px" }}
                                         />
                                     </>
                                 )

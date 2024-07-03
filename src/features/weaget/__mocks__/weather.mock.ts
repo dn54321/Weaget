@@ -23,7 +23,7 @@ export function createWeatherCurrentMockData(
         clouds: faker.number.int({ min: 0, max: 100 }),
         visibility: faker.number.int({ min: 0, max: 10000 }),
         windSpeed: faker.number.float({ min: 0, max: 35, fractionDigits: 1 }),
-        windDeg: faker.number.float({ min: 0, max: 360 }),
+        windDeg: faker.number.int({ min: 0, max: 360 }),
         windGust: faker.number.float({ min: 0, max: 113, fractionDigits: 2 }),
         weather: faker.helpers.multiple(createOpenWeatherWeatherMockData, { count: { min: 1, max: 3 } }),
     };
@@ -64,7 +64,7 @@ export function createWeatherDailyMockData(
         humidity: faker.number.int({ min: 0, max: 100 }),
         dewPoint: faker.number.float({ min: 186, max: 331, fractionDigits: 2 }),
         windSpeed: faker.number.float({ min: 0, max: 35, fractionDigits: 1 }),
-        windDeg: faker.number.float({ min: 0, max: 360 }),
+        windDeg: faker.number.int({ min: 0, max: 360 }),
         windGust: faker.number.float({ min: 0, max: 113, fractionDigits: 2 }),
         weather: faker.helpers.multiple(createOpenWeatherWeatherMockData, { count: { min: 1, max: 3 } }),
         clouds: faker.number.int({ min: 0, max: 100 }),
@@ -88,7 +88,7 @@ export function createWeatherHourlyMockData(
         clouds: faker.number.int({ min: 0, max: 100 }),
         visibility: faker.number.int({ min: 0, max: 10000 }),
         windSpeed: faker.number.float({ min: 0, max: 35, fractionDigits: 1 }),
-        windDeg: faker.number.float({ min: 0, max: 360 }),
+        windDeg: faker.number.int({ min: 0, max: 360 }),
         windGust: faker.number.float({ min: 0, max: 113, fractionDigits: 2 }),
         rain: {
             "1h": faker.number.int({ min: 1, max: 100 }),

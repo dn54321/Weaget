@@ -29,11 +29,6 @@ export const getDesignTokens = (mode: PaletteMode) => ({
                 },
             },
         },
-        MuiLink: {
-            defaultProps: {
-                component: LinkBehaviour,
-            },
-        },
         MuiButtonBase: {
             defaultProps: {
                 LinkComponent: LinkBehaviour,

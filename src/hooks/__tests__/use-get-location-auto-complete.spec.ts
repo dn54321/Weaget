@@ -4,7 +4,7 @@ import { afterEach, describe, expect, it, test } from "vitest";
 import { server } from "@project/vitest-setup";
 import { mockAutoCompleteHandle } from "@features/weaget/__mocks__/auto-complete.handler";
 import { createAutoCompleteMockData } from "@features/weaget/__mocks__/auto-complete.mock";
-import { weagetAutoCompleteSchema as autoCompleteSchema } from "@features/weaget/auto-complete.schema";
+import { weagetAutoCompleteSchema as autoCompleteSchema } from "@features/weaget/auto-complete/auto-complete.schema";
 import { useGetLocationAutoComplete } from "@src/hooks/use-get-location-auto-complete";
 import { testQueryClient } from "@utils/query-client";
 import { testWrapper } from "@utils/wrappers";

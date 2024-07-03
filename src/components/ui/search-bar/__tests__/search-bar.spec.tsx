@@ -1,4 +1,4 @@
-import { render, waitFor } from "@testing-library/react";
+import { waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
 import { mockAutoCompleteHandle } from "@features/weaget/__mocks__/auto-complete.handler";
@@ -7,7 +7,7 @@ import { createCurrentLocationMockData } from "@features/weaget/__mocks__/curren
 import { mockLocationLookupHandle } from "@features/weaget/__mocks__/location-lookup.handler";
 import { withHandleError, withResponse } from "@utils/msw-http-mocker";
 import { testQueryClient } from "@utils/query-client";
-import { withTestWrapper } from "@utils/wrappers";
+import { withRender } from "@utils/wrappers";
 import { SearchBar } from "./..";
 import { server } from "@project/vitest-setup";
 
@@ -33,9 +33,7 @@ describe("Component: search-bar", async () => {
     it("should be able to search a location.", async () => {
         mocks.mockRouterPush.mockResolvedValue(true);
         const user = userEvent.setup();
-        const { getByPlaceholderText, getByLabelText } = render(
-            withTestWrapper(<SearchBar />)
-        );
+        const { getByPlaceholderText, getByLabelText } = withRender(<SearchBar />);
 
         const comboBox = getByPlaceholderText("Search Weather Location");
         await user.click(comboBox);
@@ -52,24 +50,20 @@ describe("Component: search-bar", async () => {
             withHandleError(mockLocationLookupHandle, statusCode);
             withResponse(mockAutoCompleteHandle, []);
             const user = userEvent.setup();
-            const { getByPlaceholderText, getByLabelText, getByText } = render(
-                withTestWrapper(<SearchBar />)
-            );
+            const view = withRender(<SearchBar />);
 
-            const comboBox = getByPlaceholderText("Search Weather Location");
+            const comboBox = view.getByPlaceholderText("Search Weather Location");
             await user.click(comboBox);
             await user.keyboard("invalidSuburb");
-            await user.click(getByLabelText("Search"));
-            expect(getByText(errorMessage)).toBeInTheDocument();
+            await user.click(view.getByLabelText("Search"));
+            expect(view.getByText(errorMessage)).toBeInTheDocument();
         });
 
     it("Upon searching, should display a list of clickable auto-complete options.", async () => {
         mocks.mockRouterPush.mockResolvedValue(true);
         withResponse(mockAutoCompleteHandle, [{ main: "mockLocation", secondary: "mockState" }]);
         const user = userEvent.setup();
-        const { getByPlaceholderText, getByText } = render(
-            withTestWrapper(<SearchBar />)
-        );
+        const { getByPlaceholderText, getByText } = withRender(<SearchBar />);
 
         const comboBox = getByPlaceholderText("Search Weather Location");
         await user.click(comboBox);
@@ -84,9 +78,7 @@ describe("Component: search-bar", async () => {
         const currentLocationMock = createCurrentLocationMockData();
         withResponse(mockCurrentLocationHandle, currentLocationMock);
         const user = userEvent.setup();
-        const { getByLabelText } = render(
-            withTestWrapper(<SearchBar />)
-        );
+        const { getByLabelText } = withRender(<SearchBar />);
 
         const currentLocationButton = getByLabelText("Use current location");
         await user.click(currentLocationButton);
@@ -98,9 +90,7 @@ describe("Component: search-bar", async () => {
         withHandleError(mockCurrentLocationHandle, 500);
         withResponse(mockAutoCompleteHandle, [{ main: "mockLocation", secondary: "mockState" }]);
         const user = userEvent.setup();
-        const { getByLabelText, getByText } = render(
-            withTestWrapper(<SearchBar />)
-        );
+        const { getByLabelText, getByText } = withRender(<SearchBar />);
 
         const currentLocationButton = getByLabelText("Use current location");
         await user.click(currentLocationButton);

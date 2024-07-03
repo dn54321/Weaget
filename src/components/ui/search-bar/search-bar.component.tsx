@@ -7,7 +7,7 @@ import { Box, BoxProps } from "@mui/system";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { FetchError } from "@errors/fetch-error";
-import { AutoCompleteSuggestions } from "@features/weaget/auto-complete.types";
+import { AutoCompleteSuggestions } from "@features/weaget/auto-complete/auto-complete.types";
 import { useGetCurrentLocation } from "@src/hooks/use-get-current-location";
 import { queryLocation } from "@src/hooks/use-get-location";
 import { useGetLocationAutoComplete } from "@src/hooks/use-get-location-auto-complete";

@@ -1,6 +1,6 @@
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { Button } from "@mui/material";
+import { Button, SxProps } from "@mui/material";
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 import { DateTime } from "luxon";
@@ -23,19 +23,21 @@ const chartLabel = ["120 mins", "48 hours", "14 days"];
 const dataLabel = ["minutely", "hourly", "daily"];
 const chartHeight = "250px";
 
-const StyledButton = (props) => {
-    const buttonType = { type: "increment", val: 1 };
-    if (props.decrement) {
-        buttonType.type = "decrement";
-        buttonType.val = 2;
-    }
+export interface SyledButtonprops {
+    decrement?: boolean;
+    dispatch: (action: ReducerAction) => void;
+    chart: { id: number };
 
+}
+const StyledButton = (props: SyledButtonprops) => {
+    const reducerAction = props.decrement ? ReducerActions.DECREMENT : ReducerActions.INCREMENT;
+    const incrementCounter = props.decrement ? 2 : 1;
     return (
         <Button
             component="span"
-            aria-label={`See ${chartLabel[(props.chart.id + buttonType.val) % 3]} rainfall`}
-            title={`See ${chartLabel[(props.chart.id + buttonType.val) % 3]} rainfall`}
-            onClick={() => props.dispatch({ type: buttonType.type })}
+            aria-label={`See ${chartLabel[(props.chart.id + incrementCounter) % 3]} rainfall`}
+            title={`See ${chartLabel[(props.chart.id + incrementCounter) % 3]} rainfall`}
+            onClick={() => props.dispatch({ type: reducerAction })}
             sx={{
                 "backgroundColor": "primary.main",
                 "minWidth": "16px",
@@ -105,13 +107,13 @@ const Chart = (props: ChartProps) => {
 // which we prefer over a graph over a chaotic graph or a graph with nothing.
 
 function getScore(weatherLabel: string, wtr: OneCallWeatherDetails) {
-    let arr;
+    let arr: Array<number> = [];
     switch (weatherLabel) {
         case "minutely":
             arr = wtr.minutely?.map(x => x.precipitation) ?? [];
             break;
         case "hourly":
-            arr = wtr.hourly?.map(x => x.rain ? x.rain["1h"] : 0) ?? [];
+            arr = wtr.hourly?.map(x => x.rain?.["1h"] ? x.rain?.["1h"] : 0) ?? [];
             break;
         case "daily":
             arr = wtr.daily?.map(x => x.rain ? x.rain : 0) ?? [];
@@ -126,7 +128,7 @@ function getData(measurementScale: MeasurementScale, weatherLabel: string, wtr: 
     switch (weatherLabel) {
         case "minutely": return wtr.minutely?.map(x => ({
             name: DateTime.fromJSDate(x.dt, { zone: wtr.timezone }).toFormat("h:mma"),
-            rainfall: convertVolumeMeasurement(measurementScale, x.precipitation, 2),
+            rainfall: convertVolumeMeasurement(measurementScale, x.precipitation ?? 0, 2),
         })) ?? [];
         case "hourly": return wtr.hourly?.map(x => ({
             name: DateTime.fromJSDate(x.dt, { zone: wtr.timezone }).toFormat("h:mma"),
@@ -140,7 +142,22 @@ function getData(measurementScale: MeasurementScale, weatherLabel: string, wtr: 
 }
 
 // Switches between different graphs
-function reducer(state, action) {
+export enum ReducerActions {
+    SET = "set",
+    INCREMENT = "increment",
+    DECREMENT = "decrement",
+}
+
+export type ReducerAction =
+    | { type: ReducerActions.SET; val: number }
+    | { type: ReducerActions.INCREMENT }
+    | { type: ReducerActions.DECREMENT };
+
+export interface ReducerState {
+    id: number;
+}
+
+function reducer(state: ReducerState, action: ReducerAction): ReducerState {
     switch (action.type) {
         case "increment":
             return { id: (state.id + 1) % 3 };
@@ -148,6 +165,9 @@ function reducer(state, action) {
             return { id: (state.id + 2) % 3 };
         case "set":
             return { id: action.val };
+        default:
+            console.log("Received invalid reducer type");
+            return state;
     }
 }
 
@@ -166,20 +186,22 @@ function getChartIndex(weather?: OneCallWeatherDetails) {
     return maxIndex;
 }
 
-export interface RainfallProps {
+export interface RainfallWidgetProps {
     weatherData?: OneCallWeatherDetails;
+    sx?: SxProps;
 }
 
-export default function RainfallWidget(props: RainfallProps) {
+export default function RainfallWidget(props: RainfallWidgetProps) {
     const measurementScale = useSettingStore(state => state.measurementScale) as MeasurementScale;
     const [chart, dispatch] = React.useReducer(reducer, { id: 0 });
     React.useEffect(() => {
-        dispatch({ type: "set", val: getChartIndex(props.weatherData) });
+        dispatch({ type: ReducerActions.SET, val: getChartIndex(props.weatherData) });
     }, [props.weatherData]);
 
     return (
         <Widget
             title="Rainfall"
+            sx={props.sx}
             rightDecorum={(
                 <Box display="flex" alignItems="center">
                     <StyledButton chart={chart} dispatch={dispatch} decrement />

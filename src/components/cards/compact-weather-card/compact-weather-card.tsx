@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { TempUnit } from "@components/ui/temperature-unit";
-import { Box } from "@mui/material";
+import { Box, SxProps } from "@mui/material";
 import { High, Low, PaperContainer } from "./compact-weather-card.styles";
 import { WeatherIcon } from "@components/ui/weather-icon";
 /*
@@ -24,15 +24,16 @@ export interface CompactWeatherCardProps {
     rainfallPercentage: number;
     maxTemperature: number;
     minTemperature: number;
+    sx?: SxProps;
 }
 
 // Compact weather card
 export default function CompactWeatherCard(props: CompactWeatherCardProps) {
     const date = DateTime.fromJSDate(props.date, { zone: props.timezone });
     return (
-        <PaperContainer data-testid="compact-weather-card" sx={{ overflow: "hidden" }}>
+        <PaperContainer data-testid="compact-weather-card" sx={{ overflow: "hidden", ...props.sx }}>
             <Box color="text.secondary">{date.weekdayShort}</Box>
-            <Box fontSize="3em">
+            <Box sx={{ fontSize: { xs: "3.5em", sm: "4em", md: "3em" } }}>
                 <WeatherIcon id={props.weatherCode} rainPercentage={props.rainfallPercentage} />
             </Box>
             <Box>

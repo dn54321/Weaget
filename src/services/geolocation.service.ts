@@ -1,7 +1,7 @@
 import { googleLocationLookupSchema } from "@features/google-geocode/location-lookup.schema";
 import { googleLocationAutoCompleteSchema } from "@features/google-geocode/location-auto-complete.schema";
 import { ipinfoCurrentLocationSchema } from "@features/ipinfo-current-location/current-location.schema";
-import { LocationSuggestionOptional } from "@features/weaget/nearby-location.types";
+import { LocationSuggestionOptional } from "@features/weaget/nearby-location/nearby-location.types";
 import { GoogleGeocode } from "@features/google-geocode/location-lookup.model";
 import IpinfoGeocode from "@features/ipinfo-current-location/current-location.model";
 import GoogleLocationSuggestion from "@features/google-geocode/location-auto-complete.model";

@@ -2,7 +2,7 @@ import { QueryClient, useQuery } from "@tanstack/react-query";
 import { FetchError } from "@errors/fetch-error";
 import IpinfoGeocode from "@features/ipinfo-current-location/current-location.model";
 import { queryClient } from "@utils/query-client";
-import weagetCurrentLocationSchema from "@features/weaget/current-location.schema";
+import weagetCurrentLocationSchema from "@features/weaget/current-location/current-location.schema";
 
 async function fetchCurrentLocation() {
     const url = `/api/location`;

@@ -1,4 +1,4 @@
-import { Box, Card, Divider, Typography } from "@mui/material";
+import { Box, Card, Divider, Typography, SxProps } from "@mui/material";
 import React from "react";
 
 export interface WidgetProps {
@@ -8,25 +8,27 @@ export interface WidgetProps {
     children?: React.ReactNode;
     disableChildrenPadding?: boolean;
     variant?: "default" | "transparent";
+    sx?: SxProps;
 }
 
 interface ContainerProps {
     variant?: "default" | "transparent";
     children: React.ReactNode;
+    sx?: SxProps;
 }
 
 function Container(props: ContainerProps) {
     if (props.variant === "transparent") {
-        return <Box component="section" sx={{ width: "100%" }}>{props.children}</Box>;
+        return <Box component="section" sx={{ width: "100%", ...props.sx }}>{props.children}</Box>;
     }
 
-    return <Card component="section" sx={{ width: "100%" }}>{props.children}</Card>;
+    return <Card component="section" sx={{ width: "100%", ...props.sx }}>{props.children}</Card>;
 }
 
 export function Widget(props: WidgetProps) {
     const isTransparent = (props.variant === "transparent");
     return (
-        <Container variant={props.variant}>
+        <Container variant={props.variant} sx={props.sx}>
             <Box
                 display="flex"
                 justifyContent="space-between"

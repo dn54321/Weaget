@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { FetchError } from "@errors/fetch-error";
-import { weatherSchema } from "@features/weaget/weather.schema";
+import weatherSchema from "@features/weaget/weather/weather.schema";
 
 async function fetchWeather(location?: string, region?: string) {
     const url = `/api/weather/${location}`;

@@ -1,9 +1,7 @@
-import { render, renderHook } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { useSettingStore } from "@src/hooks/stores/use-setting-store";
 import { MeasurementScale } from "@src/types/measurement.types";
 import { testQueryClient } from "@utils/query-client";
-import { testWrapper } from "@utils/wrappers";
+import { withRender } from "@utils/wrappers";
 import { VolumeUnit } from "./..";
 import { convertVolumeMeasurement, getVolumeSymbol } from "@components/ui/volume-unit/volume-unit.utils";
 
@@ -21,9 +19,8 @@ describe("Component: volume-unit", async () => {
         decimal: number,
         expected: string
     ) => {
-        const { result } = renderHook(() => useSettingStore(), { wrapper: testWrapper });
-        result.current.setMeasurementScale(MeasurementScale.METRIC);
-        const { getByText } = render(<VolumeUnit value={input} decimals={decimal} />);
+        const settings = { measurementScale: MeasurementScale.METRIC };
+        const { getByText } = withRender(<VolumeUnit value={input} decimals={decimal} />);
         expect(getByText(expected)).toBeInTheDocument();
     });
 
@@ -36,17 +33,15 @@ describe("Component: volume-unit", async () => {
         decimal: number,
         expected: string
     ) => {
-        const { result } = renderHook(() => useSettingStore(), { wrapper: testWrapper });
-        result.current.setMeasurementScale(MeasurementScale.IMPERIAL);
-        const { getByText } = render(<VolumeUnit value={input} decimals={decimal} />);
-        expect(getByText(expected)).toBeInTheDocument();
+        const settings = { measurementScale: MeasurementScale.IMPERIAL };
+        const view = withRender(<VolumeUnit value={input} decimals={decimal} />, { settings });
+        expect(view.getByText(expected)).toBeInTheDocument();
     });
 
     it("should work without decimal.", () => {
-        const { result } = renderHook(() => useSettingStore(), { wrapper: testWrapper });
-        result.current.setMeasurementScale(MeasurementScale.METRIC);
-        const { getByText } = render(<VolumeUnit value={1} />);
-        expect(getByText(1)).toBeInTheDocument();
+        const settings = { measurementScale: MeasurementScale.METRIC };
+        const view = withRender(<VolumeUnit value={1} />, { settings });
+        expect(view.getByText(1)).toBeInTheDocument();
     });
 
     it.each([
@@ -56,10 +51,9 @@ describe("Component: volume-unit", async () => {
         symbol: string,
         measurementScale: MeasurementScale
     ) => {
-        const { result } = renderHook(() => useSettingStore(), { wrapper: testWrapper });
-        result.current.setMeasurementScale(measurementScale);
-        const { getByText } = render(<VolumeUnit value={1} symbol />);
-        expect(getByText(symbol)).toBeInTheDocument();
+        const settings = { measurementScale: measurementScale };
+        const view = withRender(<VolumeUnit value={1} symbol />, { settings });
+        expect(view.getByText(symbol)).toBeInTheDocument();
     });
 
     describe("getVolumeSymbol", () => {

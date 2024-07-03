@@ -1,27 +1,24 @@
 import BugReportIcon from "@mui/icons-material/BugReport";
-import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { HourlyWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { createWeatherHourlyMockData, createWeatherDailyMockData, createWeatherCurrentMockData } from "@features/weaget/__mocks__/weather.mock";
 import { WeatherStatsCard } from "./..";
 import { UVWarning, parseWeatherDetailStats } from "@components/cards/weather-stats-card/weather-stats-card.utils";
-import { withTestWrapper } from "@utils/wrappers";
+import { withRender } from "@utils/wrappers";
 
 describe("Component: Weather Stats Card", () => {
     it("should render be able to render a stat.", () => {
-        const { getByText, getByLabelText } = render(
-            withTestWrapper(
-                <WeatherStatsCard stats={[
-                    {
-                        name: "mockStat",
-                        value: 20,
-                        compactValue: "mock-compact",
-                        unit: "mm",
-                        statIcon: <BugReportIcon aria-label="test-icon" />,
-                    },
-                ]}
-                />
-            )
+        const { getByText, getByLabelText } = withRender(
+            <WeatherStatsCard stats={[
+                {
+                    name: "mockStat",
+                    value: 20,
+                    compactValue: "mock-compact",
+                    unit: "mm",
+                    statIcon: <BugReportIcon aria-label="test-icon" />,
+                },
+            ]}
+            />
         );
         expect(getByText("mockStat")).toBeInTheDocument();
         expect(getByText("20mm")).toBeInTheDocument();
@@ -29,18 +26,16 @@ describe("Component: Weather Stats Card", () => {
     });
 
     it("should render be able to render a stat without unit.", () => {
-        const { getByText, getByLabelText } = render(
-            withTestWrapper(
-                <WeatherStatsCard stats={[
-                    {
-                        name: "mockStat",
-                        value: 20,
-                        compactValue: "mock-compact",
-                        statIcon: <BugReportIcon aria-label="test-icon" />,
-                    },
-                ]}
-                />
-            )
+        const { getByText, getByLabelText } = withRender(
+            <WeatherStatsCard stats={[
+                {
+                    name: "mockStat",
+                    value: 20,
+                    compactValue: "mock-compact",
+                    statIcon: <BugReportIcon aria-label="test-icon" />,
+                },
+            ]}
+            />
         );
 
         expect(getByText("mockStat")).toBeInTheDocument();
@@ -49,18 +44,16 @@ describe("Component: Weather Stats Card", () => {
     });
 
     it("should not render a stat without a value.", () => {
-        const { getByText, getByLabelText } = render(
-            withTestWrapper(
-                <WeatherStatsCard stats={[
-                    {
-                        name: "mockStat",
-                        value: undefined,
-                        compactValue: undefined,
-                        statIcon: <BugReportIcon aria-label="test-icon" />,
-                    },
-                ]}
-                />
-            )
+        const { getByText, getByLabelText } = withRender(
+            <WeatherStatsCard stats={[
+                {
+                    name: "mockStat",
+                    value: undefined,
+                    compactValue: undefined,
+                    statIcon: <BugReportIcon aria-label="test-icon" />,
+                },
+            ]}
+            />
         );
 
         expect(() => getByText("mockStat")).toThrow();
@@ -75,7 +68,7 @@ describe("Component: Weather Stats Card", () => {
             [8, "Very High (8)"],
             [11, "Extreme (11)"],
         ])("UV Index of %d should output warning \"%s\"",
-            (uvIndex: number, expectedText: string) => {
+            (uvIndex: number | undefined, expectedText: string | undefined) => {
                 expect(UVWarning(uvIndex)).toBe(expectedText);
             });
     });

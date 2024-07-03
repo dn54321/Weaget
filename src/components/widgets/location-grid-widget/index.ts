@@ -1,1 +1,1 @@
-export { default as LocationGridWidget } from "./location-grid-widget.component";
+export { default as LocationGridWidget, type LocationGridWidgetProps } from "./location-grid-widget.component";

@@ -9,6 +9,7 @@ import { DateTime } from "luxon";
 import WeatherStatsCard, { WeatherStats } from "@components/cards/weather-stats-card/weather-stats-card.component";
 import { TempUnit } from "@components/ui/temperature-unit";
 import WeatherIcon from "@components/ui/weather-icon/weather-icon.component";
+import React from "react";
 
 const Day = styled(Box)(() => ({
     textTransform: "uppercase",
@@ -21,15 +22,21 @@ const WeatherDescription = styled(Box) ({
     fontSize: "0.6em",
 });
 
-const Accordion = (props) => {
+export interface AccordionProps {
+    expanded?: boolean;
+    onChange?: () => void;
+    children: JSX.Element | JSX.Element[];
+}
+
+const Accordion = (props: AccordionProps) => {
     return (
         <MuiAccordion
+            data-testid="weather-strip"
             disableGutters
             elevation={0}
             slotProps={{ transition: { unmountOnExit: true, timeout: 0 } }}
             expanded={props.expanded}
             onChange={props.onChange}
-            data-testid="weather-strip"
             sx={{ color: "text.color", backgroundColor: "initial" }}
         >
             {props.children}
@@ -149,7 +156,7 @@ export default function WeatherStrip(props: WeatherStripProps) {
                 </AccordionSummary>
                 <AccordionDetails sx={{ color: "text.primary" }}>
                     <Typography variant="body2" mt="10px"><b>Hourly Weather Stats</b></Typography>
-                    <WeatherStatsCard stats={props.stats} />
+                    <WeatherStatsCard stats={props.stats} transparent />
                 </AccordionDetails>
             </Accordion>
             <Divider />

@@ -21,7 +21,7 @@ describe("Hooks - use-setting-store", () => {
     ])("should return %s if the temperature scale is set to it.", (
         temperatureScale: TemperatureScale
     ) => {
-        const { result } = renderHook(() => useSettingStore(), { wrapper: testWrapper });
+        const { result } = renderHook(() => useSettingStore(state => state), { wrapper: testWrapper });
         act(() => result.current.setTemperatureScale(temperatureScale));
         expect(result.current.temperatureScale).toBe(temperatureScale);
     });
@@ -32,7 +32,7 @@ describe("Hooks - use-setting-store", () => {
     ])("should return %s if the measurement scale is set to it.", (
         measurementScale: MeasurementScale
     ) => {
-        const { result } = renderHook(() => useSettingStore(), { wrapper: testWrapper });
+        const { result } = renderHook(() => useSettingStore(state => state), { wrapper: testWrapper });
         act(() => result.current.setMeasurementScale(measurementScale));
         expect(result.current.measurementScale).toBe(measurementScale);
     });
@@ -43,7 +43,7 @@ describe("Hooks - use-setting-store", () => {
     ])("should return %s if the system theme is set to it.", (
         systemTheme: SystemTheme
     ) => {
-        const { result } = renderHook(() => useSettingStore(), { wrapper: testWrapper });
+        const { result } = renderHook(() => useSettingStore(state => state), { wrapper: testWrapper });
         act(() => result.current.setTheme(systemTheme));
         expect(result.current.theme).toBe(systemTheme);
     });
@@ -55,7 +55,7 @@ describe("Hooks - use-setting-store", () => {
         input: SystemTheme,
         expected: SystemTheme
     ) => {
-        const { result } = renderHook(() => useSettingStore(), { wrapper: testWrapper });
+        const { result } = renderHook(() => useSettingStore(state => state), { wrapper: testWrapper });
         act(() => result.current.setTheme(input));
         act(() => result.current.toggleTheme());
         expect(result.current.theme).toBe(expected);
@@ -76,7 +76,7 @@ describe("Hooks - use-setting-store", () => {
             removeEventListener: vi.fn(),
         }));
 
-        const { result } = renderHook(() => useSettingStore(), { wrapper: testWrapper });
+        const { result } = renderHook(() => useSettingStore(state => state), { wrapper: testWrapper });
         act(() => result.current.setTheme(SystemTheme.SYSTEM));
         act(() => result.current.toggleTheme());
         expect(result.current.theme).toBe(expected);

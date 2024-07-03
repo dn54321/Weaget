@@ -45,27 +45,28 @@ In order to reduce costs, this website uses free services from various providers
 1. Ensure you run this project using VSCode editor
 2. Register API keys for the [API services mention above](#the-api-services-used-in-this-website).
 4. Store API keys in .env.local found in the root folder of this project.
-5. Install yarn from the command line 
+5. Install pnpm from the command line 
 ```bash
 npm install -g pnpm
 ```
-6. Install all yarn dependencies 
+6. Install all pnpm dependencies 
 ```bash
 pnpm install
 ```
-7. Build the website
 
-```bash
-pnpm run build
-```
-
-8. Run the website
+7. Run the website
 ```bash
 pnpm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Useful Commands
+| Command | Description |
+| --- | --- |
+| `pnpm test` | Runs all test cases and reveals coverage. |
+| `pnpm lint` | Reports and fixes the linting errors.|
+| `pnpm storybook` | Provides a visual library of most of the components. |
 
 ## Upcoming Features
 
