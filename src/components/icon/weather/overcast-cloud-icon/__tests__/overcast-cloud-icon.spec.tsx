@@ -1,4 +1,3 @@
-import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { OvercastCloud } from "./..";
 import { withRender } from "@utils/wrappers";
