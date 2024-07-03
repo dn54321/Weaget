@@ -16,8 +16,6 @@
 
 Demo Link: [weaget.vercel.app](http://weaget.vercel.app)
 
-This website is currently only for demonstration purposes. Please do not abuse links as there are no API rate limit set.
-
 ## About
 This project is a website written primarily in [Javascript][1] using [Nextjs][2] (a react framework) and [Material UI][3] (a UI library). The website allows a user to find <b>minutely, hourly and daily</b> weather information at any location as well as <b>pollution</b> details.
 
@@ -29,6 +27,7 @@ This project is a website written primarily in [Javascript][1] using [Nextjs][2]
 - Rainfall Graph w/ heuristic to show the most meaningful graph.
 - Skeleton framework while weather data is being fetched.
 - Custom weather icons.
+- Advanced server/client side caching.
 - The website is mostly web accessible.
 
 ## The API services used in this website:
@@ -90,5 +89,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
     - Ref: https://mui.com/material-ui/experimental-api/css-theme-variables/overview/
 
 - **Problem**: Currently, we only support 'use client' for everything.
-    - Our styling css-in-js (emotion) library doesn't currently support server side rendering.
+    - Our styling css-in-js (emotion) library doesn't currently support server side rendering, but this will be changed in v6 of mui.
     - Ref: https://nextjs.org/docs/app/building-your-application/styling/css-in-js
