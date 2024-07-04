@@ -26,6 +26,7 @@ export default function AlertBox(props: AlertBoxProps & BoxProps) {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                pointerEvents: "none",
             }}
             zIndex={1400}
         >
@@ -36,6 +37,7 @@ export default function AlertBox(props: AlertBoxProps & BoxProps) {
                             key={alert.id}
                             variant="filled"
                             severity={alert.type}
+                            sx={{ pointerEvents: "all" }}
                             {...(!alert.unclosable && { onClose: () => removeAlert(alert.id) })}
                         >
                             {alert.message}

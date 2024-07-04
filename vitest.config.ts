@@ -1,9 +1,9 @@
 import react from "@vitejs/plugin-react";
-import { coverageConfigDefaults, defineConfig } from "vitest/config";
+import { coverageConfigDefaults, defineConfig, UserConfig } from "vitest/config";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-    plugins: [react(), tsconfigPaths()],
+    plugins: [react(), tsconfigPaths()] as UserConfig["plugins"],
     test: {
         setupFiles: ["vitest-setup.ts"],
         environment: "jsdom",

@@ -1,71 +1,10 @@
-import { Box, Divider, Pagination, Skeleton, SkeletonProps, Stack, SxProps } from "@mui/material";
+import { Box, Pagination, SxProps } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { parseWeatherDetailStats } from "@components/cards/weather-stats-card/weather-stats-card.utils";
 import { Widget } from "@components/containers/widget/widget";
 import { WeatherStrip, type WeatherStripProps } from "@components/ui/weather-strip";
-
-export function HourlyWeatherWidgetSkeleton() {
-    return (
-        <Widget
-            title="Weather Details"
-            disableChildrenPadding
-        >
-            {[...Array(12)].map((_, i) => (
-                <Box key={i} data-testid="weather-stat-skeleton">
-                    <Box height="66px" my="1px" key={i} display="flex" alignItems="center">
-                        <Box width="40px" ml="20px">
-                            <Skeleton variant="circular" width={40} height={40} />
-                        </Box>
-                        <Box ml="10px">
-                            <Skeleton variant="text" width="60px" sx={{ lineHeight: 1 }} />
-                            <Skeleton variant="text" width="90px" sx={{ lineHeight: 1 }} />
-                        </Box>
-                        <Box position="relative" width="100%" height="100%" mx="30px">
-                            <Stack
-                                direction="row"
-                                gap="20px"
-                                sx={{
-                                    alignItems: "center",
-                                    position: "absolute",
-                                    left: "0px",
-                                    right: "0px",
-                                    top: "0px",
-                                    bottom: "0px",
-                                }}
-                            >
-                                <Stack
-                                    direction="row"
-                                    sx={{
-                                        overflow: "hidden",
-                                        flexWrap: "wrap",
-                                        width: "100%",
-                                        height: "40px",
-                                        gap: "20px",
-                                    }}
-                                >
-                                    {[...Array(7)].map((_, i) => (
-                                        <Box key={i}>
-                                            <Skeleton variant="rectangular" width={40} height={40} />
-                                        </Box>
-                                    ))}
-                                </Stack>
-                            </Stack>
-                        </Box>
-                        <Stack ml="auto" mr="15px" alignItems="flex-end">
-                            <Skeleton variant="text" width="80px" sx={{ lineHeight: 1 }} />
-                            <Skeleton variant="text" width="90px" sx={{ lineHeight: 1 }} />
-                        </Stack>
-                    </Box>
-                    <Divider />
-                </Box>
-            ))}
-            <Box display="flex" justifyContent="center" mt="10px" pb="7px">
-                <Pagination count={4} page={1} color="primary" disabled />
-            </Box>
-        </Widget>
-    );
-}
+import { SkeletonProps } from "@src/types/component.types";
 
 export interface HourlyWeatherStripWidgetProps {
     weatherData?: OneCallWeatherDetails;

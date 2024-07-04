@@ -18,6 +18,8 @@ export async function GET(
         return Response.json(data);
     }
     catch (err) {
-        return handleNextResponseError(err, "Failed to retrieve location data.");
+        if (err instanceof Error) {
+            return handleNextResponseError(err, "Failed to retrieve location data.");
+        }
     }
 }

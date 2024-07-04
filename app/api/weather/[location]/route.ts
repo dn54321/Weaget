@@ -14,6 +14,8 @@ export async function GET(
         return Response.json(weatherData);
     }
     catch (err) {
-        return handleNextResponseError(err, "Failed to retrieve weather.");
+        if (err instanceof Error) {
+            return handleNextResponseError(err, "Failed to retrieve weather.");
+        }
     }
 }

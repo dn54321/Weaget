@@ -5,7 +5,7 @@ import Divider from "@mui/material/Divider";
 import useAutocomplete from "@mui/material/useAutocomplete";
 import { Box, BoxProps } from "@mui/system";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FetchError } from "@errors/fetch-error";
 import { AutoCompleteSuggestions } from "@features/weaget/auto-complete/auto-complete.types";
 import { useGetCurrentLocation } from "@src/hooks/use-get-current-location";
@@ -14,16 +14,23 @@ import { useGetLocationAutoComplete } from "@src/hooks/use-get-location-auto-com
 import { FieldBox, FormContainer, MagnifyIconButtonContainer, SearchComponent, SearchField, SuggestionText } from "./search-bar.styles";
 import { debounceFunc, throttleFunc } from "./search-bar.utils";
 
+export enum SearchErrorMessage {
+    EMPTY = "",
+    INVALID_LOCATION = "Invalid Suburb Location!",
+    INTERNAL_SERVER_ERROR = "Internal Server Error. Please try again later!",
+    INVALID_CURRENT_LOCATION = "Could not retrieve current location. Please enter it manually!",
+}
+
 // React Components
 function Loader() {
     return (
-        <Box px="8px" mx="12px" display="flex" color="gray">
-            <CircularProgress />
+        <Box px="8px" mx="12px" display="flex">
+            <CircularProgress size={25} />
         </Box>
     );
 };
 
-function MagnifyIconButton(props) {
+function MagnifyIconButton() {
     return (
         <MagnifyIconButtonContainer
             aria-label="Search"
@@ -34,7 +41,7 @@ function MagnifyIconButton(props) {
     );
 };
 
-const MyLocationButtonIcon = (props: { setErrno: (number: number) => void }) => {
+function MyLocationButtonIcon(props: { setErrorMessage: (errMessage: SearchErrorMessage) => void }) {
     const router = useRouter();
     const currentLocationQuery = useGetCurrentLocation();
 
@@ -44,7 +51,7 @@ const MyLocationButtonIcon = (props: { setErrno: (number: number) => void }) => 
             router.push(`/weather/${city}`);
         }
         else {
-            props.setErrno(3);
+            props.setErrorMessage(SearchErrorMessage.INVALID_CURRENT_LOCATION);
         }
     }
 
@@ -64,29 +71,23 @@ const MyLocationButtonIcon = (props: { setErrno: (number: number) => void }) => 
         </IconButton>
     );
 };
-// Styled Components
 
-const errmsg = {
-    0: "",
-    1: "Invalid Suburb Location",
-    2: "Internal Server Error. Please try again later!",
-    3: "Could not retrieve current location. Please enter it manually!",
-};
-
-export function Error(props) {
-    if (!props.errno) return null;
+export function Error(props: { message: string }) {
+    if (!props.message) {
+        return null;
+    }
     return (
         <Box position="relative" height="0">
             <Box position="absolute" mt={1}>
-                <Alert variant="filled" severity="error">
-                    {errmsg[props.errno]}
+                <Alert variant="filled" severity="error" sx={{ pr: "25px" }}>
+                    {props.message}
                 </Alert>
             </Box>
         </Box>
     );
 }
 
-export const SuggestionBox = (props) => {
+export function SuggestionBox(props: { children: React.ReactNode; listprops: React.HTMLAttributes<HTMLUListElement> }) {
     return (
         <Box
             component="ul"
@@ -115,9 +116,8 @@ export default function SearchBar(props: BoxProps) {
     const currentLocationQuery = useGetCurrentLocation();
     const coords = `${currentLocationQuery.data?.lat},${currentLocationQuery.data?.lng}`;
     const [searchQuery, setQuery] = useGetLocationAutoComplete("", coords);
-    const [errno, setErrno] = useState(0);
-    const [icon, setIcon] = useState(<MyLocationButtonIcon setErrno={setErrno} />);
-
+    const [searchError, setSearchError] = useState(SearchErrorMessage.EMPTY);
+    const [icon, setIcon] = useState(<MyLocationButtonIcon setErrorMessage={setSearchError} />);
     const mounted = useRef(false);
     const router = useRouter();
 
@@ -125,20 +125,25 @@ export default function SearchBar(props: BoxProps) {
     // Shows Loading Icon && Determines if Location Exist.
     // Returns Weather details if exist.
     // Provide an error if it does not exist.
-    async function onSubmit(e) {
+    async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         setIcon(<Loader />);
-        const { suburb } = e.target.elements;
-        const location = suburb.value;
+        const target = e.target as typeof e.target & { elements: { suburb: { value: string } } };
+        const location = target.elements.suburb.value;
         await queryLocation(location)
             .then((_) => {
                 router.push(`/weather/${location}`);
             })
             .catch((err: FetchError) => {
-                if (err.res.status === 404) return setErrno(1);
-                if (err.res.status === 500) return setErrno(2);
+                if (err.res.status === 404) {
+                    return setSearchError(SearchErrorMessage.INVALID_LOCATION);
+                }
+
+                if (err.res.status === 500) {
+                    return setSearchError(SearchErrorMessage.INTERNAL_SERVER_ERROR);
+                }
             })
-            .finally(() => mounted && setIcon(<MyLocationButtonIcon setErrno={setErrno} />));
+            .finally(() => mounted && setIcon(<MyLocationButtonIcon setErrorMessage={setSearchError} />));
     }
 
     // Get a location query and finds location that match the query.
@@ -148,7 +153,7 @@ export default function SearchBar(props: BoxProps) {
     }
 
     // Debounce && Throttle Queries for Reduce API Calls.
-    function DebounceAndThrottleAutoComplete(query) {
+    function DebounceAndThrottleAutoComplete(query: string) {
         if (query.length < 5) {
             debounceFunc(getSuggestion, undefined);
             throttleFunc(getSuggestion, query);
@@ -184,37 +189,41 @@ export default function SearchBar(props: BoxProps) {
     });
 
     return (
-        <FormContainer component="form" {...props} {...getRootProps()} onSubmit={onSubmit}>
-            <SearchComponent>
-                <SearchField>
-                    <FieldBox
-                        name="suburb"
-                        placeholder="Search Weather Location"
-                        required
-                        inputProps={{ ...getInputProps() }}
-                    />
-                    <MagnifyIconButton />
-                </SearchField>
-                <Divider orientation="vertical" sx={{ height: 28 }} />
-                {icon}
-            </SearchComponent>
+        <FormContainer {...getRootProps()} {...props}>
+            <Box component="form" onSubmit={onSubmit}>
+                <SearchComponent>
+                    <SearchField>
+                        <FieldBox
+                            name="suburb"
+                            placeholder="Search Weather Location"
+                            required
+                            inputProps={{ ...getInputProps() }}
+                        />
+                        <MagnifyIconButton />
+                    </SearchField>
+                    <Divider orientation="vertical" sx={{ height: 28 }} />
+                    {icon}
+                </SearchComponent>
 
-            {groupedOptions.length > 0
-                ? (
-                        <SuggestionBox listprops={getListboxProps()}>
-                            {groupedOptions.map((option, index) => (
-                                <SuggestionText
-                                    {...getOptionProps({ option, index })}
-                                    key={option.main + option.secondary}
-                                >
-                                    <Box display="inline" color="text.main"><b>{option.main}</b></Box>
-                                    <Box display="inline" color="text.secondary" ml="1ch">{option.secondary}</Box>
-                                </SuggestionText>
-                            ))}
-                        </SuggestionBox>
-                    )
-                : null }
-            <Error errno={errno} />
+                {groupedOptions.length > 0
+                    ? (
+                            <SuggestionBox listprops={getListboxProps()}>
+                                {(groupedOptions as Array<AutoCompleteSuggestions>).map((option, index: number) => {
+                                    return (
+                                        <SuggestionText
+                                            {...getOptionProps({ option, index })}
+                                            key={option.main + option.secondary}
+                                        >
+                                            <Box display="inline" color="text.main"><b>{option.main}</b></Box>
+                                            <Box display="inline" color="text.secondary" ml="1ch">{option.secondary}</Box>
+                                        </SuggestionText>
+                                    );
+                                })}
+                            </SuggestionBox>
+                        )
+                    : null }
+                <Error message={searchError} />
+            </Box>
         </FormContainer>
     );
 }

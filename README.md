@@ -1,5 +1,5 @@
 
-[1]: https://en.wikipedia.org/wiki/JavaScript
+[1]: https://www.typescriptlang.org/
 [2]: https://nextjs.org/
 [3]: https://mui.com/
 [4]: https://developers.google.com/maps/documentation/geocoding/overview
@@ -19,7 +19,7 @@
 Demo Link: [weaget.vercel.app](http://weaget.vercel.app)
 
 ## About
-This project is a website written primarily in [Javascript][1] using [Nextjs][2] (a react framework) and [Material UI][3] (a UI library). The website allows a user to find <b>minutely, hourly and daily</b> weather information at any location as well as <b>pollution</b> details.
+This project is a website written primarily in [Typescript][1] using [Nextjs][2] (a react framework) and [Material UI][3] (a UI library). The website allows a user to find <b>minutely, hourly and daily</b> weather information at any location as well as <b>pollution</b> details.
 
 ## Current Features:
 - A search engine with autocomplete.

@@ -18,6 +18,8 @@ export async function GET(req: NextRequest) {
         return Response.json(formattedLocations);
     }
     catch (err) {
-        return handleNextResponseError(err, "Failed to retrieve nearby locations.");
+        if (err instanceof Error) {
+            return handleNextResponseError(err, "Failed to retrieve nearby locations.");
+        }
     }
 }

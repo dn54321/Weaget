@@ -17,6 +17,8 @@ export async function GET(req: NextRequest) {
         return Response.json(formattedSuggestions);
     }
     catch (err) {
-        return handleNextResponseError(err, "Failed to retrieve location suggestion.");
+        if (err instanceof Error) {
+            return handleNextResponseError(err, "Failed to retrieve location suggestion.");
+        }
     }
 }

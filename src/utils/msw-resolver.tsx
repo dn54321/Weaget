@@ -1,8 +1,8 @@
 export function withSearchParams(
     predicate: (params: URLSearchParams) => boolean,
-    resolver: (params: URLSearchParams) => Response | Promise<Response>
+    resolver: (params: { request: Request }) => Response | Promise<Response>
 ) {
-    return (args) => {
+    return (args: { request: Request }) => {
         const { request } = args;
         const url = new URL(request.url);
 

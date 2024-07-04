@@ -4,8 +4,12 @@ import Head from "next/head";
 import CloudIcon from "@mui/icons-material/Cloud";
 import styled from "@mui/system/styled";
 import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
+import React from "react";
 
-function IconBox(props) {
+interface IconBoxProps {
+    children: JSX.Element | Array<JSX.Element>;
+}
+function IconBox(props: IconBoxProps) {
     return (
         <Box
             sx={{ display: "grid", placeItems: "center",

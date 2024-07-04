@@ -14,6 +14,8 @@ export async function GET(req: NextRequest) {
         return Response.json(response);
     }
     catch (err) {
-        return handleNextResponseError(err, "Failed to retrieve pollution data.");
+        if (err instanceof Error) {
+            return handleNextResponseError(err, "Failed to retrieve pollution data.");
+        }
     }
 }

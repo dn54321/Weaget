@@ -10,6 +10,7 @@ import { testQueryClient } from "@utils/query-client";
 import { withRender } from "@utils/wrappers";
 import { SearchBar } from "./..";
 import { server } from "@project/vitest-setup";
+import { SearchErrorMessage } from "@components/ui/search-bar/search-bar.component";
 
 describe("Component: search-bar", async () => {
     const mocks = vi.hoisted(() => {
@@ -33,18 +34,15 @@ describe("Component: search-bar", async () => {
     it("should be able to search a location.", async () => {
         mocks.mockRouterPush.mockResolvedValue(true);
         const user = userEvent.setup();
-        const { getByPlaceholderText, getByLabelText } = withRender(<SearchBar />);
-
-        const comboBox = getByPlaceholderText("Search Weather Location");
-        await user.click(comboBox);
-        await user.keyboard("mockLocation");
-        await user.click(getByLabelText("Search"));
+        const view = withRender(<SearchBar />);
+        await user.type(view.getByRole("combobox"), "mockLocation");
+        await user.click(view.getByLabelText("Search"));
         expect(mocks.mockRouterPush).toHaveBeenCalledWith("/weather/mockLocation");
     });
 
     test.each([
-        [404, "Invalid Suburb Location"],
-        [500, "Internal Server Error. Please try again later!"],
+        [404, SearchErrorMessage.INVALID_LOCATION],
+        [500, SearchErrorMessage.INTERNAL_SERVER_ERROR],
     ])("should display an error if the location endpoint returns status code %d.",
         async (statusCode, errorMessage) => {
             withHandleError(mockLocationLookupHandle, statusCode);
@@ -52,11 +50,9 @@ describe("Component: search-bar", async () => {
             const user = userEvent.setup();
             const view = withRender(<SearchBar />);
 
-            const comboBox = view.getByPlaceholderText("Search Weather Location");
-            await user.click(comboBox);
-            await user.keyboard("invalidSuburb");
+            await user.type(view.getByRole("combobox"), "invalidSuburb");
             await user.click(view.getByLabelText("Search"));
-            expect(view.getByText(errorMessage)).toBeInTheDocument();
+            await waitFor(() => expect(view.getByText(errorMessage)).toBeInTheDocument());
         });
 
     it("Upon searching, should display a list of clickable auto-complete options.", async () => {

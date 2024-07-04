@@ -19,8 +19,18 @@ import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
 import { useSystemTheme } from "@src/hooks/use-system-theme";
 import NextLink from "next/link";
 
+export interface NavbarStateProp {
+    mobileBurgerFn?: () => void;
+    setState: (state: NavbarStates) => void;
+}
+
+export enum NavbarStates {
+    DEFAULT = "default",
+    SEARCH = "search",
+}
+
 // Default Navbar seen normally on every device
-function DefaultNavbar(props: NavbarProps & { setState: (str: string) => void }) {
+function DefaultNavbar(props: NavbarStateProp) {
     const [settingDialog, setDialog] = useState(false);
     return (
         <>
@@ -53,7 +63,7 @@ function DefaultNavbar(props: NavbarProps & { setState: (str: string) => void })
                 <Icon
                     color="inherit"
                     aria-label="Search Weather"
-                    onClick={() => props.setState("search")}
+                    onClick={() => props.setState(NavbarStates.SEARCH)}
                 >
                     <SearchIcon sx={{ fontSize: "1.2em" }} />
                 </Icon>
@@ -67,16 +77,13 @@ function DefaultNavbar(props: NavbarProps & { setState: (str: string) => void })
 }
 
 // Search Navbar seen only during mobile use when the search icon is pressed.
-interface SearchNavbar {
-    setState: () => void;
-}
-function SearchNavbar(props: SearchNavbar) {
+function SearchNavbar(props: NavbarStateProp) {
     return (
         <>
             <IconButton
                 aria-label="go back"
                 sx={{ color: "white", mr: "20px" }}
-                onClick={() => props.setState("default")}
+                onClick={() => props.setState(NavbarStates.DEFAULT)}
             >
                 <ArrowBackIosNewIcon />
             </IconButton>
@@ -96,7 +103,11 @@ const dialogueTransition = React.forwardRef(function Transition(
 });
 
 // Dialogue
-function SettingsDialog(props) {
+export interface SettingsDialogProps {
+    setDialog: (setOpen: boolean) => void;
+    open: boolean;
+}
+function SettingsDialog(props: SettingsDialogProps) {
     const temperatureScale = useSettingStore(state => state.temperatureScale);
     const measurementScale = useSettingStore(state => state.measurementScale);
     const setTemperatureScale = useSettingStore(state => state.setTemperatureScale);
@@ -178,10 +189,10 @@ export interface NavbarProps {
 }
 
 export default function Navbar(props: NavbarProps) {
-    const [navStateID, setNavStateID] = useState("default");
+    const [navStateID, setNavStateID] = useState(NavbarStates.DEFAULT);
     const navState = {
-        default: <DefaultNavbar setState={setNavStateID} mobileBurgerFn={props.mobileBurgerFn} />,
-        search: <SearchNavbar setState={setNavStateID} />,
+        [NavbarStates.DEFAULT]: <DefaultNavbar setState={setNavStateID} mobileBurgerFn={props.mobileBurgerFn} />,
+        [NavbarStates.SEARCH]: <SearchNavbar setState={setNavStateID} />,
     };
     return (
         <AppBar sx={{ zIndex: theme => theme.zIndex.drawer + 1 }}>

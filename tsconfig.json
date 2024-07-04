@@ -53,6 +53,5 @@
     "**/*.tsx",
     ".next/types/**/*.ts", 
     "next.config.js", 
-    "eslint.config.js"
   ]
 }
