@@ -42,7 +42,7 @@ In order to reduce costs, this website uses free services from various providers
 - [AQICN's Pollution API][8] - To find the pollution level of a particular location.
 - [OpenWeatherMap's One Call API][9] - To find the minutely/hourly/daily weather details.
 
-# How to run this project on your machine
+## How to run this project on your machine
 1. Ensure you run this project using VSCode editor
 2. Register API keys for the [API services mention above](#the-api-services-used-in-this-website).
 4. Store API keys in .env.local found in the root folder of this project.
