@@ -3,7 +3,7 @@ import { Pollution } from "@features/apicn-pollution/pollution.types";
 import { createApicnPollutionResultMockData } from "@features/apicn-pollution/__mocks__/pollution.mock";
 import userEvent from "@testing-library/user-event";
 import { PollutionWidget } from "./..";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 
 describe("Component: pollution-widget", async () => {
     let pollutionData: Pollution;

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { BrokenCloud } from "./..";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 
 describe("Component: broken-cloud-icon", () => {
     it("Widget should be able to render.", () => {

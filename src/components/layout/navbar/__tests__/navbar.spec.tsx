@@ -1,6 +1,6 @@
 import { fireEvent, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 import Navbar from "@components/layout/navbar/navbar.component";
 import { server } from "@project/vitest-setup";
 import { testQueryClient } from "@utils/query-client";

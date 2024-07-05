@@ -3,7 +3,7 @@ import { DateTime } from "luxon";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import userEvent from "@testing-library/user-event";
 import { WeatherStrip, WeatherStripProps } from "./..";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 describe("Component: weather-strip", async () => {
     let weatherStripProps: WeatherStripProps;
     beforeAll(() => {

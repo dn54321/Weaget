@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Page from "./page";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 import { waitFor } from "@testing-library/react";
 import { mockPollutionHandle } from "@features/weaget/__mocks__/pollution.handler";
 import { mockLocationLookupHandle } from "@features/weaget/__mocks__/location-lookup.handler";

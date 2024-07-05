@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { weatherIconShowcase } from "./layout";
 import Page from "./page";
 import userEvent from "@testing-library/user-event";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 
 describe("Page: app/icons/page", () => {
     const mocks = vi.hoisted(() => {

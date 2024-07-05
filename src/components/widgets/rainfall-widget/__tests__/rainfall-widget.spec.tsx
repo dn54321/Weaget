@@ -2,7 +2,7 @@ import { beforeAll, describe, expect, it, test } from "vitest";
 import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { createWeatherDailyMockData, createWeatherHourlyMockData, createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 import { RainfallWidget } from "./..";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 import userEvent from "@testing-library/user-event";
 
 describe("Component: rainfall-widget", async () => {

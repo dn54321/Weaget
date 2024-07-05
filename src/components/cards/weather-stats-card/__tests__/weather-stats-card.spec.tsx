@@ -4,7 +4,7 @@ import { HourlyWeatherDetails } from "@features/open-weather-map-one-call/oneCal
 import { createWeatherHourlyMockData, createWeatherDailyMockData, createWeatherCurrentMockData } from "@features/weaget/__mocks__/weather.mock";
 import { WeatherStatsCard } from "./..";
 import { UVWarning, parseWeatherDetailStats } from "@components/cards/weather-stats-card/weather-stats-card.utils";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 
 describe("Component: Weather Stats Card", () => {
     it("should render be able to render a stat.", () => {

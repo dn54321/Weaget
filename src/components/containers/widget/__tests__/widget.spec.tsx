@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import { Widget } from "@components/containers/widget/widget";
 import { Box } from "@mui/system";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 
 describe("Component: Widget", () => {
     it("Widget should be able to render with correct title / subtitle.", () => {

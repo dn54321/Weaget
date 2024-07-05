@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { MeasurementScale } from "@src/types/measurement.types";
 import { testQueryClient } from "@utils/query-client";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 import { SpeedUnit } from "./..";
 
 describe("Component: speed-unit", async () => {

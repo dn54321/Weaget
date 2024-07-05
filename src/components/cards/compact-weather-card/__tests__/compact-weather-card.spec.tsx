@@ -4,7 +4,7 @@ import React from "react";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { createOpenWeatherWeatherMockData } from "@features/open-weather-map-one-call/__mocks__/oneCall.mock";
 import { TemperatureScale } from "@src/types/weather.types";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 import { testQueryClient } from "@utils/query-client";
 import CompactWeatherCard, { CompactWeatherCardProps } from "@components/cards/compact-weather-card/compact-weather-card";
 

@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, test } from "vitest";
 import { testQueryClient } from "@utils/query-client";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 import { WeatherIcon } from "@components/ui/weather-icon";
 
 describe("Component: weather-icon", async () => {

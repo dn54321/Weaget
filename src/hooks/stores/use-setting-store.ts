@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { useStoreWithEqualityFn } from "zustand/traditional";
 import { SettingStore } from "@src/stores/settings.store";
-import { SettingsStoreContext } from "@components/provider/settings-provider/settings-store-provider";
 import { shallow } from "zustand/shallow";
+import { SettingsStoreContext } from "@components/provider/settings-provider";
 
 export function useSettingStore<T>(
     selector: (store: SettingStore) => T,

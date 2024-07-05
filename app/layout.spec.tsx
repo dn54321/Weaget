@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import Layout from "./layout";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 
 describe("Page: layout.tsx", async () => {
     it("should be able to render it's children element successfully.", () => {

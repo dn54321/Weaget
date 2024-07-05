@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { MeasurementScale } from "@src/types/measurement.types";
 import { testQueryClient } from "@utils/query-client";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 import { VolumeUnit } from "./..";
 import { convertVolumeMeasurement, getVolumeSymbol } from "@components/ui/volume-unit/volume-unit.utils";
 

@@ -3,7 +3,7 @@ import { testQueryClient } from "@utils/query-client";
 import { SystemTheme } from "@src/types/system.types";
 import userEvent from "@testing-library/user-event";
 import ThemeToggleButton from "@components/ui/theme-toggle-button/theme-toggle-button.component";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 
 describe("Component: theme-toggle-button", async () => {
     afterEach(() => {

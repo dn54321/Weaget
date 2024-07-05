@@ -2,7 +2,7 @@ import { waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Home from "./page";
 import { testOfflineQueryClient, testQueryClient } from "@utils/query-client";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 import { server } from "@project/vitest-setup";
 import { mockWeatherHandle } from "@features/weaget/__mocks__/weather.handler";
 import { mockCurrentLocationHandle } from "@features/weaget/__mocks__/current-location.handler";

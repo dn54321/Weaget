@@ -16,7 +16,7 @@ describe("Route: api/location/[location]", async () => {
         });
 
         const response = await GET(request, { params: { location: "mockLocation" } });
-        expect(response.status).toBe(200);
+        expect(response?.status).toBe(200);
     });
 
     it("should return 200 given valid location and region", async () => {
@@ -26,7 +26,7 @@ describe("Route: api/location/[location]", async () => {
         });
 
         const response = await GET(request, { params: { location: "mockLocation" } });
-        expect(response.status).toBe(200);
+        expect(response?.status).toBe(200);
     });
 
     it("should return 404 with empty results.", async () => {
@@ -36,7 +36,7 @@ describe("Route: api/location/[location]", async () => {
             status: "ZERO_RESULTS",
         });
         const response = await GET(request, { params: { location: "mockLocation" } });
-        expect(response.status).toBe(404);
+        expect(response?.status).toBe(404);
     });
 
     it("should return 500 when unexpected error occurs.", async () => {
@@ -46,6 +46,6 @@ describe("Route: api/location/[location]", async () => {
         });
 
         const response = await GET(request, { params: { location: "mockLocation" } });
-        expect(response.status).toBe(500);
+        expect(response?.status).toBe(500);
     });
 });

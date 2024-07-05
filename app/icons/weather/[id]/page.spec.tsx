@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import Page from "./page";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 
 describe("Page: app/icons/weather/[id]", () => {
     it("should correctly display the correct information for 200 weather id.", () => {

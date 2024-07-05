@@ -7,7 +7,7 @@ import { createCurrentLocationMockData } from "@features/weaget/__mocks__/curren
 import { mockLocationLookupHandle } from "@features/weaget/__mocks__/location-lookup.handler";
 import { withHandleError, withResponse } from "@utils/msw-http-mocker";
 import { testQueryClient } from "@utils/query-client";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 import { SearchBar } from "./..";
 import { server } from "@project/vitest-setup";
 import { SearchErrorMessage } from "@components/ui/search-bar/search-bar.component";

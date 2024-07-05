@@ -45,5 +45,4 @@ yarn-error.log*
 
 # Others
 .vscode
-**/[Tt]est*
 *storybook.log

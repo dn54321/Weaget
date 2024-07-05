@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { TemperatureScale } from "@src/types/weather.types";
 import { testQueryClient } from "@utils/query-client";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 import { TempUnit } from "./..";
 
 describe("Component: temperature-unit", async () => {

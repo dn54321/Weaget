@@ -34,7 +34,7 @@
       "@public/*": ["./public/*"],
       "@app/*": ["./pages/app/*"],
       "@src/*": ["./src/*"],
-      "@project/*": ["./*"]
+      "@project/*": ["./*"],
     },
     "plugins": [
       {

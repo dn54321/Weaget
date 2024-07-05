@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { FewCloudIcon } from "./..";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 
 describe("Component: few-cloud-icon", () => {
     it("Widget should be able to render.", () => {

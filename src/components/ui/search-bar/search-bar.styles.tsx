@@ -28,7 +28,7 @@ export const FieldBox = styled(InputBase)(({ theme }) => ({
     "color": theme.palette.text.primary,
     "padding": "5px 5px 0px 10px",
     "width": "100%",
-    "text-overflow": "hidden",
+    "textOverflow": "hidden",
     "&:focus": {
         outline: "none !important",
     },

@@ -1,7 +1,7 @@
 import { fireEvent } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { AlertBox } from "./..";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 
 describe("Component: alert-box", () => {
     it("should render be able to render an alert.", () => {

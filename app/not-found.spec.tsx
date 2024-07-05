@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import NotFound from "./not-found";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 
 describe("Page: not-found", () => {
     it("should display loader when page isn't loaded.", () => {

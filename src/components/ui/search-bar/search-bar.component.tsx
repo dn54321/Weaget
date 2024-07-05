@@ -1,3 +1,5 @@
+"use client";
+
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import SearchIcon from "@mui/icons-material/Search";
 import { Alert, CircularProgress, IconButton, List, Paper } from "@mui/material";

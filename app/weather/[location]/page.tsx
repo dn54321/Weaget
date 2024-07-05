@@ -6,12 +6,12 @@ import { DailyWeatherCardWidget } from "@components/widgets/daily-weather-card-w
 
 import { WeatherDisplayWidget } from "@components/widgets/weather-display-widget";
 
-import { useAlert } from "@src/hooks//use-alert";
-import { useGetLocation } from "@src/hooks//use-get-location";
-import { useGetPollution } from "@src/hooks//use-get-pollution";
-import { useGetWeather } from "@src/hooks//use-get-weather";
+import { useAlert } from "@src/hooks/use-alert";
+import { useGetLocation } from "@src/hooks/use-get-location";
+import { useGetPollution } from "@src/hooks/use-get-pollution";
+import { useGetWeather } from "@src/hooks/use-get-weather";
 import { useEffect } from "react";
-import { useGetNearbyLocation } from "@src/hooks//use-get-nearby-location";
+import { useGetNearbyLocation } from "@src/hooks/use-get-nearby-location";
 import { Navbar } from "@components/layout/navbar";
 import { Footer } from "@components/layout/footer";
 import { SettingsFab } from "@components/ui/settings-fab";

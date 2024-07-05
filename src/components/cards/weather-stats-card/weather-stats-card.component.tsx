@@ -37,12 +37,14 @@ export interface WeatherStatsCardProps {
 export default function WeatherStatsCard(props: WeatherStatsCardProps) {
     const component = props.transparent ? Box : Card;
     return (
-        <CardContainer component={component} aria-live="polite" sx={props.sx}>
-            {
-                props.stats
-                    .filter(item => item.value !== undefined)
-                    .map(stat => <IconCard key={stat.name} {...stat} />)
-            }
-        </CardContainer>
+        <Box component={component}>
+            <CardContainer component="ul" aria-live="polite" sx={props.sx}>
+                {
+                    props.stats
+                        .filter(item => item.value !== undefined)
+                        .map(stat => <IconCard key={stat.name} {...stat} />)
+                }
+            </CardContainer>
+        </Box>
     );
 }

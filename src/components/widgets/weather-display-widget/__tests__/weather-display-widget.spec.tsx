@@ -2,11 +2,9 @@ import { afterEach, beforeAll, describe, expect, it } from "vitest";
 import { WeatherDisplayWidget } from "./..";
 import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
-import { renderHook } from "@testing-library/react";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 import { testQueryClient } from "@utils/query-client";
 import { TemperatureScale } from "@src/types/weather.types";
-import { useWidgetStore } from "@src/hooks/stores/use-widget-store";
 describe("Component: weather-display-widget", async () => {
     let weatherData: OneCallWeatherDetails;
     beforeAll(() => {
@@ -56,8 +54,7 @@ describe("Component: weather-display-widget", async () => {
     });
 
     it("should contain the active details of the widget store.", () => {
-        const { result: widgetHook } = renderHook(() => useWidgetStore());
-        widgetHook.current.setFocusedWeather({
+        const widgetState = { focusedWeather: {
             ...weatherData.daily![0],
             temp: {
                 min: 293.15,
@@ -73,11 +70,11 @@ describe("Component: weather-display-widget", async () => {
                 id: 200,
                 main: "testMain",
             }],
-        });
+        } };
         const settings = { temperatureScale: TemperatureScale.CELSIUS };
         const { getByText } = withRender(
             <WeatherDisplayWidget location="testLocation" weatherData={weatherData} />,
-            { settings }
+            { settings, widgetState }
         );
         expect(getByText("20°")).toBeInTheDocument();
         expect(getByText("21°")).toBeInTheDocument();

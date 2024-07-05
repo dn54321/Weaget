@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 import { SunIcon } from "..";
 
 describe("Component: sun-icon", () => {

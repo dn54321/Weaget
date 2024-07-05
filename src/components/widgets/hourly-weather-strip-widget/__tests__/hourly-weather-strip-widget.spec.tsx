@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from "vitest";
 import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import userEvent from "@testing-library/user-event";
 import { HourlyWeatherStripWidget } from "./..";

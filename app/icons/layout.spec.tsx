@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Layout, { weatherIconShowcase } from "./layout";
 import userEvent from "@testing-library/user-event";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 
 describe("Page: app/icons/layout.tsx", async () => {
     const mocks = vi.hoisted(() => {

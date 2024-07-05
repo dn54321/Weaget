@@ -1,7 +1,7 @@
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
 import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
-import { withRender } from "@utils/wrappers";
+import { withRender } from "@utils/render";
 import { testQueryClient } from "@utils/query-client";
 import { DateTime } from "luxon";
 import { TemperatureScale } from "@src/types/weather.types";

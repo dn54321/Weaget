@@ -20,7 +20,7 @@ describe("Route: api/pollution", async () => {
         });
 
         const response = await GET(request);
-        expect(response.status).toBe(200);
+        expect(response?.status).toBe(200);
     });
 
     it("should return 500 when unexpected error occurs.", async () => {
@@ -31,6 +31,6 @@ describe("Route: api/pollution", async () => {
         });
 
         const response = await GET(request);
-        expect(response.status).toBe(500);
+        expect(response?.status).toBe(500);
     });
 });
