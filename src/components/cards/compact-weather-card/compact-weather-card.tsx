@@ -33,7 +33,7 @@ export default function CompactWeatherCard(props: CompactWeatherCardProps) {
     return (
         <PaperContainer data-testid="compact-weather-card" sx={{ overflow: "hidden", ...props.sx }}>
             <Box color="text.secondary">{date.weekdayShort}</Box>
-            <Box sx={{ fontSize: { xs: "3.5em", sm: "4em", md: "3em" } }}>
+            <Box sx={{ fontSize: { xs: "3em", sm: "4em", md: "3em" } }}>
                 <WeatherIcon id={props.weatherCode} rainPercentage={props.rainfallPercentage} />
             </Box>
             <Box>

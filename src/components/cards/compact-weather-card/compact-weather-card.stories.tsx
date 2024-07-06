@@ -77,6 +77,7 @@ const meta: Meta<StoryType> = {
         maxTemperature: faker.number.float({ min: 273.15, max: 300.15, fractionDigits: 2 }),
         minTemperature: faker.number.float({ min: 301.15, max: 325.15, fractionDigits: 2 }),
         weatherType: faker.helpers.arrayElement(openWeatherTypes.map(weather => weather.main)),
+        sx: { minWidth: "120px" },
     },
 } satisfies Meta<StoryType>;
 
