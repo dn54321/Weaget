@@ -19,7 +19,6 @@ export const PaperContainer = styled(Paper)(({ theme }) => ({
     position: "relative",
     aspectRatio: "1",
     justifyContent: "center",
-
 }));
 
 export const ResponsiveIconContainer = styled(Box)(() => ({
