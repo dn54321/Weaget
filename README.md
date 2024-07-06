@@ -91,7 +91,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
     - Ref: https://mui.com/material-ui/experimental-api/css-theme-variables/overview/
 
 - **Performance and SEO**: Currently, we cannot take advantage of SSR, loading all JS scripts in the client which negatively impacts the performance and SEO of the website.
-    - Our styling css-in-js (emotion) library recommended by MUI doesn't currently support server side rendering, but this will be changed with zero run-time Pigment CSS when it gets integrated in Mui V6.
+    - Our styling css-in-js (emotion) library recommended by Material UI doesn't currently support server side rendering, but this will be changed with zero run-time Pigment CSS when it gets integrated in Material UI v6.
     - Ref: 
         - https://nextjs.org/docs/app/building-your-application/styling/css-in-js
         - https://mui.com/blog/introducing-pigment-css/
