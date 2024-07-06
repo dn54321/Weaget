@@ -85,10 +85,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
     - Allows for the implementation of rate limiting to prevent API abuse.
 
 ## Known Issues
-- **Problem**: Setting to dark mode flickers on render during first time load.
-    - Currently Material UI's solution for this is still experimental and will be fixed in a future release.
+- **Dark Mode Flicker**: Setting the system theme to dark mode causes the UI to flicker for first time renders which impacts the UX for users with slower network speeds.
+
+    - This is a known issue in Material UI and the fix is still highly experimental and thus has not been implemented in this project yet.
     - Ref: https://mui.com/material-ui/experimental-api/css-theme-variables/overview/
 
-- **Problem**: Currently, we only support 'use client' for everything.
-    - Our styling css-in-js (emotion) library doesn't currently support server side rendering, but this will be changed in v6 of mui.
-    - Ref: https://nextjs.org/docs/app/building-your-application/styling/css-in-js
+- **Performance and SEO**: Currently, we cannot take advantage of SSR, loading all JS scripts in the client which negatively impacts the performance and SEO of the website.
+    - Our styling css-in-js (emotion) library recommended by MUI doesn't currently support server side rendering, but this will be changed with zero run-time Pigment CSS when it gets integrated in Mui V6.
+    - Ref: 
+        - https://nextjs.org/docs/app/building-your-application/styling/css-in-js
+        - https://mui.com/blog/introducing-pigment-css/
