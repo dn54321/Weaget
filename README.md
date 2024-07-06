@@ -43,19 +43,18 @@ In order to reduce costs, this website uses free services from various providers
 - [OpenWeatherMap's One Call API][9] - To find the minutely/hourly/daily weather details.
 
 ## How to run this project on your machine
-1. Ensure you run this project using VSCode editor
-2. Register API keys for the [API services mention above](#the-api-services-used-in-this-website).
-4. Store API keys in .env.local found in the root folder of this project.
-5. Install pnpm from the command line 
+1. Register API keys for the [API services mention above](#the-api-services-used-in-this-website).
+2. Store API keys in .env.local found in the root folder of this project.
+3. Install pnpm from the command line.
 ```bash
 npm install -g pnpm
 ```
-6. Install all pnpm dependencies 
+4. Install all pnpm dependencies.
 ```bash
 pnpm install
 ```
 
-7. Run the website
+5. Run the website.
 ```bash
 pnpm run dev
 ```
@@ -72,7 +71,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Upcoming Features
 
 - Login systems for customisation such as local weather location.
-- Pollution based on daily weather (currently waiting for pollution API)
+- Pollution based on daily weather. (currently waiting for pollution API)
 
 ## Design Considerations
 - Smart caching mechanism on both server and client. 
