@@ -33,7 +33,6 @@ export const FieldBox = styled(InputBase)(({ theme }) => ({
         outline: "none !important",
     },
     "& .MuiInputBase-input": {
-        width: 0,
         textOverflow: "ellipsis",
     },
 }));

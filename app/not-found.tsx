@@ -1,9 +1,10 @@
 "use client";
-import { Button, Stack, Box, Grid, Container } from "@mui/material";
+import { Button, Stack, Box, Container } from "@mui/material";
 import Head from "next/head";
 import CloudIcon from "@mui/icons-material/Cloud";
 import styled from "@mui/system/styled";
 import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
+import Grid from "@mui/material/Grid2";
 import React from "react";
 
 interface IconBoxProps {
@@ -72,13 +73,13 @@ export default function NotFound() {
                         width: "100%",
                     }}
                 >
-                    <Grid item xs={12} md={6}>
+                    <Grid size={{ xs: 12, md: 6 }}>
                         <IconBox>
                             <CloudIcon />
                             <CloudIcon />
                         </IconBox>
                     </Grid>
-                    <Grid item xs={12} md={6}>
+                    <Grid size={{ xs: 12, md: 6 }}>
                         <Stack
                             alignItems="center"
                             justifyContent={{ sm: "initial", md: "center" }}

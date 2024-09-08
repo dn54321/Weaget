@@ -1,7 +1,7 @@
 import { Box, SxProps } from "@mui/material";
 import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { Widget } from "@components/containers/widget/widget";
-import Grid from "@mui/material/Unstable_Grid2";
+import Grid from "@mui/material/Grid2";
 import { StyledButton } from "./daily-compact-weather-widget.styles";
 import { CompactWeatherCard } from "@components/cards/compact-weather-card";
 
@@ -31,8 +31,7 @@ export default function DailyCompactWeatherWidget(props: DailyCompactWeatherWidg
         <Grid
             component="li"
             key={dailyWeather.date.getTime()}
-            xs={4}
-            sm={3}
+            size={{ xs: 4, sm: 3 }}
         >
             <CompactWeatherCard {...dailyWeather} />
         </Grid>

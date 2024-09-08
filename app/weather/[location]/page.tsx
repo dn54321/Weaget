@@ -1,6 +1,6 @@
 "use client";
-import { Box, Container, Grid, Stack } from "@mui/material";
-import Head from "next/head";
+import { Box, Container, Stack } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 
 import { DailyWeatherCardWidget } from "@components/widgets/daily-weather-card-widget";
 
@@ -49,27 +49,25 @@ export default function Page({ params }: PageProps) {
 
     return (
         <Box>
-            <Head>
-                <title>{locationShortForm ? `${locationShortForm} - Weaget` : "Weaget" }</title>
-            </Head>
+            <title>{locationShortForm ? `${locationShortForm} - Weaget` : "Weaget" }</title>
             <Box display="grid" gridTemplateRows="80px auto max-content" gap={1} height="100%" width="100%">
                 <Box sx={{ gridRow: "1" }}><Navbar /></Box>
                 <Box>
                     <Container maxWidth="lg" sx={{ height: "fit-content", gridRow: "2" }}>
                         <Grid container spacing={2} mt="1px">
-                            <Grid item xs={12}>
+                            <Grid size={{ xs: 12 }}>
                                 <Stack spacing={2}>
                                     <WeatherDisplayWidget weatherData={weatherQuery.data} location={locationLongForm} />
                                     <DailyWeatherCardWidget weatherData={weatherQuery.data} />
                                 </Stack>
                             </Grid>
-                            <Grid item xs={12} md={8}>
+                            <Grid size={{ xs: 12, md: 8 }}>
                                 <Stack spacing={2}>
                                     <WeatherStatWidget weatherData={weatherQuery.data} />
                                     <HourlyWeatherStripWidget weatherData={weatherQuery.data} />
                                 </Stack>
                             </Grid>
-                            <Grid item xs={12} md={4}>
+                            <Grid size={{ xs: 12, md: 4 }}>
                                 <Stack spacing={2}>
                                     <PollutionWidget pollutionData={pollutionQuery.data} />
                                     <RainfallWidget weatherData={weatherQuery.data} />

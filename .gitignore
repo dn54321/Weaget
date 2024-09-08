@@ -17,6 +17,7 @@ coverage
 # production
 /build
 /built
+/false
 
 # misc
 .DS_Store

@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import { useRouter } from "next/navigation";
 import { Widget } from "@components/containers/widget/widget";
 import { NearbyLocation } from "@features/weaget/nearby-location/nearby-location.types";
-import Grid from "@mui/material/Unstable_Grid2";
+import Grid from "@mui/material/Grid2";
 
 /*
     Provides a grid-like list of the nearest suburbs/cities.
@@ -22,7 +22,7 @@ function Entry(props: EntryProps) {
     }
 
     return (
-        <Grid component="li" xs={12} sm={4} md={6}>
+        <Grid component="li" size={{ xs: 12, sm: 4, md: 6 }}>
             <Card>
                 <CardActionArea
                     sx={{
