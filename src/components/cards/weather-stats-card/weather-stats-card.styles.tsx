@@ -1,7 +1,6 @@
-import { Box } from "@mui/material";
 import { styled } from "@mui/system";
 
-export const StatContainer = styled(Box)(({ theme }) => ({
+export const StatContainerListItem = styled("li")(({ theme }) => ({
     "width": "150px",
     "margin": "10px",
     "display": "inline-grid",
@@ -26,9 +25,10 @@ export const StatContainer = styled(Box)(({ theme }) => ({
     },
 }));
 
-export const CardContainer = styled(Box)(() => ({
+export const CardUnorderedList = styled("ul")(() => ({
     display: "grid",
     justifyContent: "space-around",
     gridTemplateColumns: "repeat(auto-fill, 170px)",
+    width: "100%",
     padding: "10px 0px",
 }));

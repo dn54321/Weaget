@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import React from "react";
-import { CardContainer, StatContainer } from "./weather-stats-card.styles";
+import { CardUnorderedList, StatContainerListItem } from "./weather-stats-card.styles";
 import { Card, SxProps } from "@mui/material";
 
 export interface ItemContainerProps {
@@ -17,14 +17,14 @@ export interface WeatherStats {
 
 function IconCard(props: WeatherStats) {
     return (
-        <StatContainer component="li">
+        <StatContainerListItem>
             {props.statIcon}
             <Box>{props.name}</Box>
             <Box fontSize="0.9em">
                 {props.value}
                 {props.unit}
             </Box>
-        </StatContainer>
+        </StatContainerListItem>
     );
 }
 
@@ -38,13 +38,13 @@ export default function WeatherStatsCard(props: WeatherStatsCardProps) {
     const component = props.transparent ? Box : Card;
     return (
         <Box component={component}>
-            <CardContainer component="ul" aria-live="polite" sx={props.sx}>
+            <CardUnorderedList aria-live="polite" sx={props.sx}>
                 {
                     props.stats
                         .filter(item => item.value !== undefined)
                         .map(stat => <IconCard key={stat.name} {...stat} />)
                 }
-            </CardContainer>
+            </CardUnorderedList>
         </Box>
     );
 }

@@ -73,7 +73,9 @@ export async function getLocationDetailsByIp(ip: string, retry = true): Promise<
  */
 export async function getNearbyLocationDetails(lat: number, lng: number): Promise<GeonamesNearbyLocation> {
     const geonamesLocationLookupUrl = URL_GET_NEARBY_LOCATION(lat, lng);
-    const response = await fetch(geonamesLocationLookupUrl, { next: { revalidate: LOCATION_LOOKUP_CACHE_SECONDS } });
+    const response = await fetch(geonamesLocationLookupUrl, {
+        next: { revalidate: LOCATION_LOOKUP_CACHE_SECONDS },
+    });
 
     if (!response.ok) {
         throw new Error(`[Location Service] Could not fetch nearby location data.  (lat: '${lat}', lng: '${lng}')`);
