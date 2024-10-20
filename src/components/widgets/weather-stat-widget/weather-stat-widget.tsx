@@ -6,7 +6,6 @@ import { WeatherStatsCard } from "@components/cards/weather-stats-card";
 import { parseWeatherDetailStats } from "@components/cards/weather-stats-card/weather-stats-card.utils";
 import { Widget } from "@components/containers/widget/widget";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
-import { useSystemSettings } from "@src/hooks/use-system-settings";
 export interface WeatherStatWidgetProps {
     weatherData?: OneCallWeatherDetails;
     sx?: SxProps;
