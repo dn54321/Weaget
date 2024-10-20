@@ -24,9 +24,6 @@
   },
   "component": {
     "widget": {
-      "compactWeatherCard": {
-        "title": "コンパクト天気カード"
-      },
       "suggestedLocations": {
         "title": "おすすめの場所",
         "description": "任意のカードをクリックすると、詳細な天気情報が表示されます！"
@@ -45,9 +42,6 @@
           "high": "高い",
           "veryHigh": "非常に高い"
         }
-      },
-      "dailyCompactWeatherWidget": {
-        "button": "詳細な天気情報を見る"
       },
       "dailyCompactWeather": {
         "button": "天気の詳細を取得する",

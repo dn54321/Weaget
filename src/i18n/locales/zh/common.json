@@ -1,19 +1,129 @@
 {
   "webapp": {
-    "name": "",
-    "description": ""
+    "name": "微气特",
+    "description": "通过我们先进的天气网站，获取任何地点的准确的每分钟、每小时和每日天气预报。\n随时了解当前状况、温度、降水、风力等。\n充满信心地计划您的一天！",
+    "logoFirst": "微气",
+    "logoSecond": "特"
   },
   "component": {
     "localisationDropdownButton": {
-      "chooseLanguage": ""
+      "chooseLanguage": "选择区域设置语言"
     },
     "searchBar": {
-      "search": "",
-      "useCurrentLocation": "",
-      "placeholder": ""
+      "search": "搜索天气",
+      "useCurrentLocation": "使用当前位置",
+      "placeholder": "搜索天气位置",
+      "error": {
+        "internalServerError": "内部服务器错误。\n请稍后再试！",
+        "invalidCurrentLocation": "无法检索当前位置。\n请手动输入！",
+        "invalidLocation": "郊区位置无效！"
+      }
+    },
+    "settingsFab": {
+      "switchCelsius": "更改为摄氏度",
+      "switchFahrenheit": "更改为华氏度",
+      "switchImperial": "更改为英制",
+      "switchMetric": "更改为公制"
+    },
+    "themeToggleButton": {
+      "toggleDarkTheme": "切换到深色主题",
+      "toggleLightTheme": "切换到浅色主题"
+    },
+    "widget": {
+      "dailyCompactWeather": {
+        "button": "获取更多天气详情",
+        "description": "查看每日天气详细信息",
+        "title": "紧凑型天气卡"
+      },
+
+      "dailyWeatherCard": {
+        "description": "单击下面的任意卡片可查看天气卡片的更多详细说明。",
+        "title": "每日卡"
+      },
+      "hourlyWeatherStrip": {
+        "title": "每小时天气详情"
+      },
+      "locationGrid": {
+        "description": "单击某个位置以获取更多天气详细信息！",
+        "title": "建议地点"
+      },
+      "pollution": {
+        "airQualityIndex": "空气质量指数",
+        "aqiLevel": "空气质量指数",
+        "hideAdvancedPollutionDetails": "隐藏高级污染详细信息",
+        "levels": {
+          "extreme": "极端",
+          "high": "高的",
+          "low": "低的",
+          "moderate": "缓和",
+          "veryHigh": "非常高"
+        },
+        "title": "污染等级",
+        "particle": "粒子",
+        "showAdvancedPollutionDetails": "显示高级污染详细信息"
+      },
+      "suggestedLocations": {
+        "description": "单击任意卡片即可获取更多天气详细信息！",
+        "title": "建议地点"
+      },
+      "weatherStat": {
+        "title": "天气详情"
+      }
     }
   },
   "footer": {
-    "copyright": "@{{year, datetime}} DN54321。"
+    "copyright": "@{{year, datetime}} DN54321。",
+    "reserveNotice": "版权所有。"
+  },
+  "date": {
+    "friday": "星期五",
+    "monday": "周一",
+    "sunday": "星期日",
+    "thursday": "周四",
+    "today": "今天",
+    "tomorrow": "明天",
+    "tuesday": "周二",
+    "wednesday": "周三"
+  },
+  "language": {
+    "chinese": "中国人",
+    "english": "英语",
+    "japanese": "日本人",
+    "korean": "韩国人"
+  },
+  "measurement": {
+    "imperial": "帝国",
+    "metersPerSecond": {
+      "unit": "多发性硬化症"
+    },
+    "metric": "公制"
+  },
+  "temperature": {
+    "celsius": {
+      "text": "塞尔丘斯",
+      "unit": "℃"
+    },
+    "fahrenheit": {
+      "text": "华氏度",
+      "unit": "°f"
+    }
+  },
+  "weather": {
+    "loader": "正在获取天气...",
+    "localWeather": "当地天气",
+    "stats": {
+      "rainfall": "雨量",
+      "snowfall": "降雪",
+      "sunrise": "日出",
+      "sunset": "日落",
+      "uvIndex": "紫外线指数",
+      "clouds": "云",
+      "dewPoint": "露点",
+      "humidity": "湿度",
+      "precipitation": "沉淀",
+      "pressure": "压力",
+      "visibility": "能见度",
+      "wind": "风"
+    }
   }
 }

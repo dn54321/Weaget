@@ -1,19 +1,129 @@
 {
   "webapp": {
-    "name": "",
-    "description": ""
+    "logoFirst": "웨더",
+    "logoSecond": "기",
+    "description": "당사의 고급 날씨 웹사이트를 통해 모든 위치에 대한 정확한 분별, 시간별, 일별 일기 예보를 받아보세요. \n현재 상태, 기온, 강수량, 바람 등에 대한 정보를 받아보세요. \n자신있게 하루를 계획해보세요!",
+    "name": "웨더기"
   },
   "component": {
     "localisationDropdownButton": {
-      "chooseLanguage": ""
+      "chooseLanguage": "로케일 언어 선택"
     },
     "searchBar": {
-      "search": "",
-      "useCurrentLocation": "",
-      "placeholder": ""
+      "error": {
+        "internalServerError": "내부 서버 오류입니다. \n나중에 다시 시도해 주세요!",
+        "invalidCurrentLocation": "현재 위치를 검색할 수 없습니다. \n수동으로 입력해주세요!",
+        "invalidLocation": "교외 위치가 잘못되었습니다!"
+      },
+      "placeholder": "날씨 위치 검색",
+      "search": "날씨 검색",
+      "useCurrentLocation": "현재 위치 사용"
+    },
+    "settingsFab": {
+      "switchCelsius": "섭씨로 변경",
+      "switchFahrenheit": "화씨로 변경",
+      "switchImperial": "황실제로 변경",
+      "switchMetric": "미터법으로 변경"
+    },
+    "themeToggleButton": {
+      "toggleDarkTheme": "어두운 테마로 전환",
+      "toggleLightTheme": "밝은 테마로 전환"
+    },
+    "widget": {
+      "dailyCompactWeather": {
+        "button": "자세한 날씨 정보 보기",
+        "description": "일일 날씨 세부정보 보기",
+        "title": "소형 날씨 카드"
+      },
+
+      "dailyWeatherCard": {
+        "description": "날씨 카드에 대한 자세한 설명을 보려면 아래 카드를 클릭하세요.",
+        "title": "일일 카드"
+      },
+      "hourlyWeatherStrip": {
+        "title": "시간별 날씨 세부정보"
+      },
+      "locationGrid": {
+        "description": "자세한 날씨 정보를 보려면 해당 위치를 클릭하세요!",
+        "title": "추천 위치"
+      },
+      "pollution": {
+        "airQualityIndex": "대기 질 지수",
+        "aqiLevel": "AQI 수준",
+        "hideAdvancedPollutionDetails": "고급 오염 세부정보 숨기기",
+        "levels": {
+          "extreme": "극심한",
+          "high": "높은",
+          "low": "낮은",
+          "moderate": "보통의",
+          "veryHigh": "매우 높음"
+        },
+        "particle": "입자",
+        "showAdvancedPollutionDetails": "고급 오염 세부정보 표시",
+        "title": "오염 수준"
+      },
+      "suggestedLocations": {
+        "description": "자세한 날씨 정보를 보려면 카드를 클릭하세요!",
+        "title": "추천 위치"
+      },
+      "weatherStat": {
+        "title": "날씨 세부정보"
+      }
     }
   },
   "footer": {
-    "copyright": "@{{year, datetime}} DN54321."
+    "copyright": "@{{year, datetime}} DN54321.",
+    "reserveNotice": "모든 권리 보유."
+  },
+  "date": {
+    "friday": "금요일",
+    "monday": "월요일",
+    "sunday": "일요일",
+    "thursday": "목요일",
+    "today": "오늘",
+    "tomorrow": "내일",
+    "tuesday": "화요일",
+    "wednesday": "수요일"
+  },
+  "language": {
+    "chinese": "중국인",
+    "english": "영어",
+    "japanese": "일본어",
+    "korean": "한국인"
+  },
+  "measurement": {
+    "imperial": "장엄한",
+    "metersPerSecond": {
+      "unit": "밀리미터/초"
+    },
+    "metric": "미터법"
+  },
+  "temperature": {
+    "celsius": {
+      "text": "켈시우스",
+      "unit": "℃"
+    },
+    "fahrenheit": {
+      "text": "화씨",
+      "unit": "°f"
+    }
+  },
+  "weather": {
+    "loader": "날씨를 가져오는 중...",
+    "localWeather": "현지 날씨",
+    "stats": {
+      "clouds": "구름",
+      "dewPoint": "이슬점",
+      "humidity": "습기",
+      "precipitation": "강수량",
+      "pressure": "압력",
+      "rainfall": "강우",
+      "snowfall": "강설량",
+      "sunrise": "해돋이",
+      "sunset": "일몰",
+      "uvIndex": "자외선 지수",
+      "visibility": "시계",
+      "wind": "바람"
+    }
   }
 }
