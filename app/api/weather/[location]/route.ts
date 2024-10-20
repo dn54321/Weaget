@@ -9,8 +9,9 @@ export async function GET(
     try {
         const queryParams = extractQueryParams(`${req.url}`);
         const region = queryParams.region;
+        const lang = queryParams.lang;
         const location = params.location;
-        const weatherData = await getWeatherByRegion(location, region);
+        const weatherData = await getWeatherByRegion(location, region, lang);
         return Response.json(weatherData);
     }
     catch (err) {

@@ -17,21 +17,26 @@ import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
 import { DailyCompactWeatherWidget } from "@components/widgets/daily-compact-weather-widget";
 import LocationGridWidget from "@components/widgets/location-grid-widget/location-grid-widget.component";
 import { Footer } from "@components/layout/footer";
-
-const Loader = () => (
-    <Stack
-        data-testid="loader"
-        alignItems="center"
-        sx={{
-            color: "primary.text",
-            height: "100%",
-            mt: "50px",
-        }}
-    >
-        <div className="dot-falling"></div>
-        <Box mt="20px">Fetching Weather...</Box>
-    </Stack>
-);
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import { LocalisationDropdownButton } from "@components/ui/localisation-dropdown-button/localisation-dropdown-button.component";
+import { useSystemSettings } from "@src/hooks/use-system-settings";
+const Loader = () => {
+    const { t } = useSystemTranslation();
+    return (
+        <Stack
+            data-testid="loader"
+            alignItems="center"
+            sx={{
+                color: "primary.text",
+                height: "100%",
+                mt: "50px",
+            }}
+        >
+            <div className="dot-falling"></div>
+            <Box mt="20px">{t("weather.loader")}</Box>
+        </Stack>
+    );
+};
 
 const Section = styled(Container)(({ theme }) => ({
     display: "flex",
@@ -87,9 +92,11 @@ const PaddedSearchBar = () => (
 );
 
 export default function Home() {
+    const { locale } = useSystemSettings();
+    const { t } = useSystemTranslation();
     const currentLocationQuery = useGetCurrentLocation();
     const weatherQuery = useGetWeather(currentLocationQuery.data?.city);
-    const locationQuery = useGetNearbyLocation(currentLocationQuery.data?.lat, currentLocationQuery.data?.lng);
+    const locationQuery = useGetNearbyLocation(currentLocationQuery.data?.lat, currentLocationQuery.data?.lng, locale);
     const location = `${currentLocationQuery.data?.city}, ${currentLocationQuery.data?.region}, ${currentLocationQuery.data?.country}`;
     const resetWeather = useWidgetStore(state => state.resetState);
     const { AlertBox, addAlert } = useAlert();
@@ -120,12 +127,14 @@ export default function Home() {
     return (
         <Box height="100%">
             <Head>
-                <title>Weaget</title>
+                <title>{t("webapp.name")}</title>
+                <meta name="description" content={t("webapp.description")} />
             </Head>
             <Box display="grid" gridTemplateRows="1fr auto" width="100%" height="100%" position="relative">
-                <Box position="absolute" top={10} right={10}>
+                <Stack alignItems="center" direction="row" position="absolute" top={10} right={10}>
+                    <LocalisationDropdownButton />
                     <ThemeToggleButton />
-                </Box>
+                </Stack>
                 <Stack height="100%">
                     <SearchContainer>
                         <ResponsiveLogo />
@@ -142,7 +151,7 @@ export default function Home() {
                             ? (
                                     <>
                                         <DailyCompactWeatherWidget
-                                            title="Local Weather"
+                                            title={t("weather.localWeather")}
                                             subtitle={location}
                                             weatherData={weatherQuery.data}
                                             location={location}

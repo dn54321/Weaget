@@ -1,0 +1,134 @@
+{
+  "webapp": {
+    "name": "ウィゲット",
+    "logoFirst": "ウィ",
+    "logoSecond": "ゲット",
+    "description": "どの場所でも正確な分単位、時間単位、日単位の天気予報を提供する高度な天気ウェブサイトです。現在の状況、気温、降水量、風速などの情報を常に把握できます。自信を持って一日を計画しましょう！"
+  },
+  "temperature": {
+    "celsius": {
+      "unit": "°c",
+      "text": "摂氏"
+    },
+    "fahrenheit": {
+      "unit": "°f",
+      "text": "華氏"
+    }
+  },
+  "measurement": {
+    "metric": "メートル法",
+    "imperial": "ヤードポンド法",
+    "metersPerSecond": {
+      "unit": "m/s"
+    }
+  },
+  "component": {
+    "widget": {
+      "compactWeatherCard": {
+        "title": "コンパクト天気カード"
+      },
+      "suggestedLocations": {
+        "title": "おすすめの場所",
+        "description": "任意のカードをクリックすると、詳細な天気情報が表示されます！"
+      },
+      "pollution": {
+        "title": "汚染レベル",
+        "airQualityIndex": "空気質指数",
+        "particle": "粒子",
+        "aqiLevel": "AQIレベル",
+        "showAdvancedPollutionDetails": "詳細な汚染情報を表示する",
+        "hideAdvancedPollutionDetails": "詳細な汚染情報を隠す",
+        "levels": {
+          "low": "低い",
+          "moderate": "適度",
+          "extreme": "過激",
+          "high": "高い",
+          "veryHigh": "非常に高い"
+        }
+      },
+      "dailyCompactWeatherWidget": {
+        "button": "詳細な天気情報を見る"
+      },
+      "dailyCompactWeather": {
+        "button": "天気の詳細を取得する",
+        "description": "毎日の天気の詳細を表示する",
+        "title": "コンパクト天気カード"
+      },
+      "locationGrid": {
+        "description": "場所をクリックすると天気の詳細が表示されます。",
+        "title": "推奨される場所"
+      },
+      "dailyWeatherCard": {
+        "description": "以下のカードをクリックすると、天気カードの詳細な説明が表示されます。",
+        "title": "デイリーカード"
+      },
+      "hourlyWeatherStrip": {
+        "title": "時間ごとの天気の詳細"
+      },
+      "weatherStat": {
+        "title": "天気の詳細"
+      }
+    },
+    "searchBar": {
+      "search": "天気を検索",
+      "useCurrentLocation": "現在地を使用する",
+      "placeholder": "天気を検索する場所を入力",
+      "error": {
+        "internalServerError": "サーバー内部エラー。後でもう一度お試しください！",
+        "invalidCurrentLocation": "現在の場所を取得できませんでした。手動で入力してください！",
+        "invalidLocation": "無効な場所です！"
+      }
+    },
+    "themeToggleButton": {
+      "toggleLightTheme": "ライトテーマに切り替える",
+      "toggleDarkTheme": "ダークテーマに切り替える"
+    },
+    "localisationDropdownButton": {
+      "chooseLanguage": "ロケール言語を選択"
+    },
+    "settingsFab": {
+      "switchMetric": "メートル法に変更",
+      "switchImperial": "ヤードポンド法に変更",
+      "switchCelsius": "摂氏に変更",
+      "switchFahrenheit": "華氏に変更"
+    }
+  },
+  "date": {
+    "today": "今日",
+    "tomorrow": "明日",
+    "sunday": "日曜日",
+    "monday": "月曜日",
+    "tuesday": "火曜日",
+    "wednesday": "水曜日",
+    "thursday": "木曜日",
+    "friday": "金曜日"
+  },
+  "weather": {
+    "loader": "天気を取得中...",
+    "stats": {
+      "wind": "風",
+      "humidity": "湿度",
+      "pressure": "気圧",
+      "visibility": "視界",
+      "sunrise": "日の出",
+      "sunset": "日の入り",
+      "precipitation": "降水量",
+      "clouds": "雲",
+      "dewPoint": "露点",
+      "uvIndex": "紫外線指数",
+      "rainfall": "降雨",
+      "snowfall": "降雪"
+    },
+    "localWeather": "現地の天気"
+  },
+  "language": {
+    "english": "英語",
+    "korean": "韓国語",
+    "chinese": "中国語",
+    "japanese": "日本語"
+  },
+  "footer": {
+    "reserveNotice": "無断転載を禁じます。",
+    "copyright": "@{{year, datetime}} DN54321。"
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "webapp": {
+    "name": "Weaget",
+    "logoFirst": "Wea",
+    "logoSecond": "get",
+    "description": "Get accurate minutely, hourly, and daily weather forecasts for any location with our advanced weather website. Stay informed about current conditions, temperature, precipitation, wind, and more. Plan your day with confidence!"
+  },
+  "temperature": {
+    "celsius": {
+      "unit": "°c",
+      "text": "Celcius"
+    },
+    "fahrenheit": {
+      "unit": "°f",
+      "text": "Fahrenheit"
+    }
+  },
+  "measurement": {
+    "metric": "Metric",
+    "imperial": "Imperial",
+    "metersPerSecond": {
+      "unit": "m/s"
+    }
+  },
+  "component": {
+    "widget": {
+      "suggestedLocations": {
+        "title": "Suggeted Locations",
+        "description": "Click on any card for more weather details!"
+      },
+      "pollution": {
+        "title": "Pollution Level",
+        "airQualityIndex": "Air Quality Index",
+        "particle": "Particle",
+        "aqiLevel": "AQI Level",
+        "showAdvancedPollutionDetails": "Show advanced pollution details",
+        "hideAdvancedPollutionDetails": "Hide advanced pollution details",
+        "levels": {
+          "low": "Low",
+          "moderate": "Moderate",
+          "high": "High",
+          "veryHigh": "Very high",
+          "extreme": "Extreme"
+        }
+      },
+      "dailyCompactWeather": {
+        "button": "Get more weather details",
+        "title": "Compact Weather Card",
+        "description": "View daily weather details"
+      },
+      "dailyWeatherCard": {
+        "title": "Daily cards",
+        "description": "Click any card below to see more detailed description of the weather card."
+      },
+      "locationGrid": {
+        "title": "Suggested locations",
+        "description": "Click on a location for more weather details!"
+      },
+      "weatherStat": {
+        "title": "Weather Details"
+      },
+      "hourlyWeatherStrip": {
+        "title": "Hourly Weather Details"
+      }
+    },
+    "searchBar": {
+      "search": "Search weather",
+      "useCurrentLocation": "Use current location",
+      "placeholder": "Search weather location",
+      "error": {
+        "invalidLocation": "Invalid suburb location!",
+        "internalServerError": "Internal Server Error. Please try again later!",
+        "invalidCurrentLocation": "Could not retrieve current location. Please enter it manually!"
+      }
+    },
+    "themeToggleButton": {
+      "toggleLightTheme": "Toggle to light theme",
+      "toggleDarkTheme": "Toggle to dark theme"
+    },
+    "localisationDropdownButton": {
+      "chooseLanguage": "Choose locale language"
+    },
+    "settingsFab": {
+      "switchMetric": "Change to metric system",
+      "switchImperial": "Change to imperial system",
+      "switchCelsius": "Change to celsius",
+      "switchFahrenheit": "Change to fahrenheit"
+    }
+  },
+  "date": {
+    "today": "today",
+    "tomorrow": "tomorrow",
+    "sunday": "sunday",
+    "monday": "monday",
+    "tuesday": "tuesday",
+    "wednesday": "wednesday",
+    "thursday": "thursday",
+    "friday": "friday"
+  },
+  "weather": {
+    "loader": "Fetching weather...",
+    "localWeather": "Local weather",
+    "stats": {
+      "wind": "Wind",
+      "humidity": "Humidity",
+      "pressure": "Pressure",
+      "visibility": "Visibility",
+      "sunrise": "Sunrise",
+      "sunset": "Sunset",
+      "uvIndex": "UV Index",
+      "dewPoint": "Dew point",
+      "precipitation": "Precipitation",
+      "clouds": "Clouds",
+      "rainfall": "Rainfall",
+      "snowfall": "Snowfall"
+    },
+    "error": {}
+  },
+  "language": {
+    "english": "English",
+    "korean": "Korean",
+    "chinese": "Chinese",
+    "japanese": "Japanese"
+  },
+  "footer": {
+    "copyright": "@{{year, datetime}} DN54321.",
+    "reserveNotice": "All Rights Reserved."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "webapp": {
+    "name": "",
+    "description": ""
+  },
+  "component": {
+    "localisationDropdownButton": {
+      "chooseLanguage": ""
+    },
+    "searchBar": {
+      "search": "",
+      "useCurrentLocation": "",
+      "placeholder": ""
+    }
+  },
+  "footer": {
+    "copyright": "@{{year, datetime}} DN54321。"
+  }
+}

@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import apicnPollutionSchema from "@features/apicn-pollution/pollution.schema";
-import { coordsSchema } from "@features/weaget/coords.schema";
+import { coordsSchema } from "@features/coords.schema";
 import { getPollutionByCoord } from "@services/pollution.service";
 import { extractQueryParams, handleNextResponseError } from "@utils/next-request-helper";
 

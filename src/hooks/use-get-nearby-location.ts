@@ -3,11 +3,12 @@ import { NearbyLocation } from "@features/weaget/nearby-location/nearby-location
 import { FetchError } from "@errors/fetch-error";
 import { nearbyLocationSchema } from "@features/weaget/nearby-location/nearby-location.schema";
 
-async function fetchNearbyLocations(lat?: number, lng?: number) {
+async function fetchNearbyLocations(lat?: number, lng?: number, lang: string = "local") {
     const url = `/api/location/nearby-search`;
     const queryParams = new URLSearchParams({
         lat: `${lat}`,
         lng: `${lng}`,
+        lang: `${lang}`,
     });
     const data = await fetch(`${url}?${queryParams}`)
         .then(async (data) => {
@@ -19,10 +20,10 @@ async function fetchNearbyLocations(lat?: number, lng?: number) {
     return nearbyLocationSchema.parse(data);
 }
 
-export function useGetNearbyLocation(lat?: number, lng?: number) {
+export function useGetNearbyLocation(lat?: number, lng?: number, lang?: string) {
     return useQuery<Array<NearbyLocation>>({
-        queryKey: ["location-nearby-search", lat, lng],
-        queryFn: () => fetchNearbyLocations(lat, lng),
+        queryKey: ["location-nearby-search", lat, lng, lang],
+        queryFn: () => fetchNearbyLocations(lat, lng, lang),
         enabled: Boolean(lat !== undefined && lng !== undefined),
         staleTime: Infinity,
         retry: 0,

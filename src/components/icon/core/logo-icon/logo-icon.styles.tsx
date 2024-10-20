@@ -35,21 +35,11 @@ export const LogoIconStyle = styled(Box)(({ theme }) => ({
 }));
 
 export const Text = styled(Box) (() => ({
-    "fontSize": "1em",
-    "paddingLeft": "0.1em",
-    "transform": "translateY(15%)",
-    "zIndex": "1",
-    "textShadow": "-1px 1px 2px rgba(0,0,0,0.2)",
-    "whiteSpace": "nowrap",
-    "&:after, &:before": {
-        display: "inline-block",
-    },
-    "&::before": {
-        content: "'Wea'",
-        color: "lightblue",
-    },
-    "&::after": {
-        content: "'get'",
-        color: "lightpink",
-    },
+    fontSize: "1em",
+    paddingLeft: "0.1em",
+    transform: "translateY(15%)",
+    zIndex: "1",
+    textShadow: "-1px 1px 2px rgba(0,0,0,0.2)",
+    whiteSpace: "nowrap",
+    display: "inline-block",
 }));

@@ -16,8 +16,9 @@ import { SystemTheme } from "@src/types/system.types";
 import { TemperatureScale } from "@src/types/weather.types";
 import { useSettingStore } from "@src/hooks//stores/use-setting-store";
 import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
-import { useSystemTheme } from "@src/hooks/use-system-theme";
+import { useSystemSettings } from "@src/hooks/use-system-settings";
 import NextLink from "next/link";
+import { LocalisationDropdownButton } from "@components/ui/localisation-dropdown-button/localisation-dropdown-button.component";
 
 export interface NavbarStateProp {
     mobileBurgerFn?: () => void;
@@ -57,6 +58,7 @@ function DefaultNavbar(props: NavbarStateProp) {
             <NSXContainer ml="60px" width="100%" alignItems="center">
                 <SearchBar maxWidth="400px" />
                 <Box className="seperator" ml="auto" />
+                <LocalisationDropdownButton />
                 <ThemeToggleButton />
             </NSXContainer>
             <SXContainer ml="auto">
@@ -112,7 +114,7 @@ function SettingsDialog(props: SettingsDialogProps) {
     const measurementScale = useSettingStore(state => state.measurementScale);
     const setTemperatureScale = useSettingStore(state => state.setTemperatureScale);
     const setMeasurementScale = useSettingStore(state => state.setMeasurementScale);
-    const { themeColour, toggleTheme } = useSystemTheme();
+    const { themeColour, toggleTheme } = useSystemSettings();
     const handleClose = () => {
         props.setDialog(false);
     };

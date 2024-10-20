@@ -1,21 +1,26 @@
 import { IconButton, IconButtonProps } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import { SystemTheme } from "@src/types/system.types";
-import { useSystemTheme } from "@src/hooks/use-system-theme";
+import { useSystemSettings } from "@src/hooks/use-system-settings";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 export default function ThemeToggleButton(props: IconButtonProps) {
-    let { themeColour, toggleTheme } = useSystemTheme();
-    const nextTheme = themeColour === SystemTheme.LIGHT ? SystemTheme.DARK : SystemTheme.LIGHT;
+    const { themeColour, toggleTheme } = useSystemSettings();
+    const { t } = useSystemTranslation();
+    const nextThemeTranslationKey = themeColour == SystemTheme.LIGHT
+        ? "component.themeToggleButton.toggleDarkTheme"
+        : "component.themeToggleButton.toggleLightTheme";
+
     return (
-        <Tooltip title={`Toggle to ${nextTheme} theme`}>
+        <Tooltip title={t(nextThemeTranslationKey)}>
             <IconButton
-                aria-label={`Toggle to ${nextTheme} theme`}
+                aria-label={t(nextThemeTranslationKey)}
                 onClick={toggleTheme}
                 sx={{
-                    color: "primary.contrastText",
                     ...props.sx,
+                    color: "primary.contrastText",
                 }}
                 {...props}
             >

@@ -4,6 +4,7 @@ import { Widget } from "@components/containers/widget/widget";
 import Grid from "@mui/material/Grid2";
 import { StyledButton } from "./daily-compact-weather-widget.styles";
 import { CompactWeatherCard } from "@components/cards/compact-weather-card";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 // List of Weather Card
 export interface DailyCompactWeatherWidgetProps {
@@ -15,6 +16,7 @@ export interface DailyCompactWeatherWidgetProps {
 }
 
 export default function DailyCompactWeatherWidget(props: DailyCompactWeatherWidgetProps) {
+    const { t } = useSystemTranslation();
     if (!props.weatherData) return null;
 
     const weatherDetails = props.weatherData?.daily?.map(dailyWeather => ({
@@ -39,8 +41,8 @@ export default function DailyCompactWeatherWidget(props: DailyCompactWeatherWidg
 
     return (
         <Widget
-            title={props.title ?? "Compact Weather Widget"}
-            subtitle={props.subtitle ?? "Currently Weekly Weather"}
+            title={props.title ?? t("component.widget.dailyCompactWeather.title")}
+            subtitle={props.subtitle ?? t("component.widget.dailyCompactWeather.description")}
             variant="transparent"
             disableChildrenPadding
             sx={props.sx}
@@ -57,7 +59,7 @@ export default function DailyCompactWeatherWidget(props: DailyCompactWeatherWidg
                     {cards}
                 </Grid>
                 <StyledButton href={`/weather/${props.location}`}>
-                    Get More Weather Details
+                    {t("component.widget.dailyCompactWeather.button")}
                 </StyledButton>
             </Box>
         </Widget>

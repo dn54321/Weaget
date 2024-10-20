@@ -5,6 +5,7 @@ import { parseWeatherDetailStats } from "@components/cards/weather-stats-card/we
 import { Widget } from "@components/containers/widget/widget";
 import { WeatherStrip, type WeatherStripProps } from "@components/ui/weather-strip";
 import { SkeletonProps } from "@src/types/component.types";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 export interface HourlyWeatherStripWidgetProps {
     weatherData?: OneCallWeatherDetails;
@@ -12,6 +13,7 @@ export interface HourlyWeatherStripWidgetProps {
 }
 
 export default function HourlyWeatherStripWidget(props: HourlyWeatherStripWidgetProps) {
+    const { t, locale } = useSystemTranslation();
     const [page, setPage] = useState(1);
     const [activeStrip, setActiveStrip] = useState<number>(0);
 
@@ -27,7 +29,7 @@ export default function HourlyWeatherStripWidget(props: HourlyWeatherStripWidget
                     weatherDescription: hourlyWeather.weather[0].description,
                     temperature: hourlyWeather.temp,
                     rainPercentage: hourlyWeather.pop,
-                    stats: parseWeatherDetailStats(hourlyWeather, props.weatherData!.timezone),
+                    stats: parseWeatherDetailStats(hourlyWeather, props.weatherData!.timezone, t, locale),
                     expanded: activeStrip === time,
                     setExpanded: () => { setActiveStrip((activeStrip === time) ? 0 : time); },
                 } as WeatherStripProps,
@@ -56,7 +58,7 @@ export default function HourlyWeatherStripWidget(props: HourlyWeatherStripWidget
 
     return (
         <Widget
-            title="Hourly Weather Details"
+            title={t("component.widget.hourlyWeatherStrip.title")}
             disableChildrenPadding
             sx={props.sx}
         >

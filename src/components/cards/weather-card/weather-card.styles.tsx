@@ -10,7 +10,7 @@ export const ShortDate = styled(Box)(() => ({
 }));
 
 export const WeatherDescription = styled(Box)(() => ({
-    fontSize: "0.5em",
+    fontSize: "0.65em",
 }));
 
 export const Temperature = styled(Box)(() => ({

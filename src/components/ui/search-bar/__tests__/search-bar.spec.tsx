@@ -10,7 +10,7 @@ import { testQueryClient } from "@utils/query-client";
 import { withRender } from "@utils/render";
 import { SearchBar } from "./..";
 import { server } from "@project/vitest-setup";
-import { SearchErrorMessage } from "@components/ui/search-bar/search-bar.component";
+import { SearchErrorI18NKey } from "@components/ui/search-bar/search-bar.component";
 
 describe("Component: search-bar", async () => {
     const mocks = vi.hoisted(() => {
@@ -41,8 +41,8 @@ describe("Component: search-bar", async () => {
     });
 
     test.each([
-        [404, SearchErrorMessage.INVALID_LOCATION],
-        [500, SearchErrorMessage.INTERNAL_SERVER_ERROR],
+        [404, SearchErrorI18NKey.INVALID_LOCATION],
+        [500, SearchErrorI18NKey.INTERNAL_SERVER_ERROR],
     ])("should display an error if the location endpoint returns status code %d.",
         async (statusCode, errorMessage) => {
             withHandleError(mockLocationLookupHandle, statusCode);

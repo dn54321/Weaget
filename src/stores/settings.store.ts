@@ -1,12 +1,13 @@
 import { createStore } from "zustand";
 import { MeasurementScale } from "@src/types/measurement.types";
-import { SystemTheme } from "@src/types/system.types";
+import { SystemLocale, SystemTheme } from "@src/types/system.types";
 import { TemperatureScale } from "@src/types/weather.types";
 import { persist } from "zustand/middleware";
 
 export interface SettingState {
-    temperatureScale: string;
-    measurementScale: string;
+    temperatureScale: TemperatureScale;
+    measurementScale: MeasurementScale;
+    locale: SystemLocale;
     theme: SystemTheme;
 
 }
@@ -15,6 +16,7 @@ export interface SettingActions {
     setTemperatureScale: (temperatureScale: TemperatureScale) => void;
     setMeasurementScale: (measurementScale: MeasurementScale) => void;
     setTheme: (theme: SystemTheme) => void;
+    setLocale: (locale: SystemLocale) => void;
     toggleTheme: () => void;
 }
 
@@ -24,6 +26,7 @@ export const initialSettingStoreState: SettingState = {
     temperatureScale: TemperatureScale.CELSIUS,
     measurementScale: MeasurementScale.METRIC,
     theme: SystemTheme.SYSTEM,
+    locale: SystemLocale.ENGLISH,
 };
 
 export const createSettingsStore = (
@@ -37,6 +40,7 @@ export const createSettingsStore = (
         setTemperatureScale: (temperatureScale: TemperatureScale) => set(() => ({ temperatureScale: temperatureScale })),
         setMeasurementScale: (measurementScale: MeasurementScale) => set(() => ({ measurementScale: measurementScale })),
         setTheme: (theme: SystemTheme) => set(() => ({ theme: theme })),
+        setLocale: (locale: SystemLocale) => set(() => ({ locale: locale })),
         toggleTheme: () => set((state) => {
             if (state.theme === SystemTheme.LIGHT) {
                 return { theme: SystemTheme.DARK };

@@ -6,6 +6,7 @@ import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCa
 import { Widget } from "@components/containers/widget/widget";
 import { WeatherCard, WeatherCardProps } from "@components/cards/weather-card";
 import { SkeletonProps } from "@src/types/component.types";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 export interface WeatherListProps {
     weatherData?: OneCallWeatherDetails;
@@ -72,6 +73,7 @@ export interface DailyWeatherCardWidgetProps {
 export default function DailyWeatherCardWidget(props: DailyWeatherCardWidgetProps) {
     const [activeCard, setActiveCard] = useState(-1);
     const [hoverCard, setHoverCard] = useState(-1);
+    const { t } = useSystemTranslation();
     const setFocusedWeather = useWidgetStore(state => state.setFocusedWeather);
 
     useEffect(() => {
@@ -88,8 +90,8 @@ export default function DailyWeatherCardWidget(props: DailyWeatherCardWidgetProp
 
     return (
         <Widget
-            title="Daily Cards"
-            subtitle="Click any card below to see more detailed description of the weather card."
+            title={t("component.widget.dailyWeatherCard.title")}
+            subtitle={t("component.widget.dailyWeatherCard.description")}
             sx={props.sx}
         >
             <Box position="relative" height="180px" mt="10px">

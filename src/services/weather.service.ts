@@ -3,7 +3,7 @@ import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCa
 import { getLocationDetails } from "./geolocation.service";
 
 // API ENDPOINTS
-const URL_GET_ONE_WEATHER = (lat: number, lng: number) => `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&appid=${process.env.OPENWEATHER_API}`;
+const URL_GET_ONE_WEATHER = (lat: number, lng: number, lang?: string) => `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lng}&lang=${lang}&appid=${process.env.OPENWEATHER_API}`;
 
 // CONFIGURATIONS
 const WEATHER_CACHE_SECONDS = 30 * 60;
@@ -14,8 +14,8 @@ const WEATHER_CACHE_SECONDS = 30 * 60;
  * @param lng The longitude of the location.
  * @returns A promise that resolves to an instance of OneCallWeatherDetails.
  */
-export async function getWeatherByCoords(lat: number, lng: number): Promise<OneCallWeatherDetails> {
-    const oneWeatherUrl = URL_GET_ONE_WEATHER(lat, lng);
+export async function getWeatherByCoords(lat: number, lng: number, lang?: string): Promise<OneCallWeatherDetails> {
+    const oneWeatherUrl = URL_GET_ONE_WEATHER(lat, lng, lang);
     const response = await fetch(oneWeatherUrl, { next: { revalidate: WEATHER_CACHE_SECONDS } });
 
     if (!response.ok) {
@@ -32,8 +32,8 @@ export async function getWeatherByCoords(lat: number, lng: number): Promise<OneC
  * @param region An optional string representing a specific country or administrative region to narrow down your search.
  * @returns A promise that resolves to an instance of OneCallWeatherDetails.
  */
-export async function getWeatherByRegion(location: string, region?: string): Promise<OneCallWeatherDetails> {
+export async function getWeatherByRegion(location: string, region?: string, lang?: string): Promise<OneCallWeatherDetails> {
     const regionData = await getLocationDetails(location, region);
     const regionCoords = regionData.results[0].geometry.location;
-    return await getWeatherByCoords(regionCoords.lat, regionCoords.lng);
+    return await getWeatherByCoords(regionCoords.lat, regionCoords.lng, lang);
 }

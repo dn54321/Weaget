@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { Widget } from "@components/containers/widget/widget";
 import { NearbyLocation } from "@features/weaget/nearby-location/nearby-location.types";
 import Grid from "@mui/material/Grid2";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 /*
     Provides a grid-like list of the nearest suburbs/cities.
@@ -29,8 +30,9 @@ function Entry(props: EntryProps) {
                         color: "text.primary",
                         display: "grid",
                         placeItems: "center",
-                        padding: "20px",
+                        height: "60px",
                         fontSize: "1em",
+                        textAlign: "center",
                     }}
                     onClick={() => redirect(props)}
                 >
@@ -50,14 +52,15 @@ export interface LocationGridWidgetProps {
 }
 
 export default function LocationGridWidget(props: LocationGridWidgetProps) {
+    const { t } = useSystemTranslation();
     if (!props.locationData) return null;
     const locations = props.locationData.map(loc => (
         <Entry key={loc.name + loc.state + loc.country} {...loc} />
     ));
     return (
         <Widget
-            title={props.title ?? "Suggested Locations"}
-            subtitle={props.subtitle ?? "Click on any card for more weather details!"}
+            title={props.title ?? t("component.widget.locationGrid.title")}
+            subtitle={props.subtitle ?? t("component.widget.locationGrid.description")}
             variant="transparent"
             disableChildrenPadding
             sx={props.sx}

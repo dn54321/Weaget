@@ -4,10 +4,12 @@ import { getDesignTokens } from "@utils/theme";
 import { useSettingStore } from "./stores/use-setting-store";
 import { SystemTheme } from "@src/types/system.types";
 
-export function useSystemTheme() {
+export function useSystemSettings() {
     const storeThemeColour = useSettingStore(state => state.theme);
     const setThemeColour = useSettingStore(state => state.setTheme);
     const toggleTheme = useSettingStore(state => state.toggleTheme);
+    const locale = useSettingStore(state => state.locale);
+    const setLocale = useSettingStore(state => state.setLocale);
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
     let themeColour = storeThemeColour;
 
@@ -21,5 +23,5 @@ export function useSystemTheme() {
         }
         , [themeColour]);
 
-    return { setThemeColour, toggleTheme, themeColour, theme };
+    return { setThemeColour, toggleTheme, themeColour, theme, locale, setLocale };
 }

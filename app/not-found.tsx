@@ -6,6 +6,7 @@ import styled from "@mui/system/styled";
 import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
 import Grid from "@mui/material/Grid2";
 import React from "react";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 interface IconBoxProps {
     children: JSX.Element | Array<JSX.Element>;
@@ -56,10 +57,11 @@ const Page = styled(Box) (() => ({
 }));
 
 export default function NotFound() {
+    const { t } = useSystemTranslation();
     return (
         <Page>
             <Head>
-                <title>Weaget - Not Found</title>
+                <title>{`${t("webapp.name")} - Not Found` }</title>
             </Head>
             <Container maxWidth="lg" sx={{ height: "100%" }} disableGutters>
                 <Box position="absolute" top={10} right={10}>

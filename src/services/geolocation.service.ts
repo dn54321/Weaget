@@ -11,7 +11,7 @@ import { GeonamesNearbyLocation } from "@features/geonames-nearby-search/nearby-
 // API ENDPOINTS
 const URL_GET_LOCATION = (loc: string, region?: string) => `https://maps.googleapis.com/maps/api/geocode/json?address=${loc}&key=${process.env.GOOGLE_APIKEY}${region ? "&region=" + region : ""}`;
 const URL_GET_LOCATION_BY_IP = (ipAddr: string) => `https://ipinfo.io/${ipAddr}?token=${process.env.IPINFO_APIKEY}`;
-const URL_GET_NEARBY_LOCATION = (lat: number, lng: number) => `http://api.geonames.org/findNearbyJSON?lat=${lat}&lng=${lng}&username=${process.env.GEONAMES_USERNAME}&maxRows=9&radius=300&featureCode=PPLX`;
+const URL_GET_NEARBY_LOCATION = (lat: number, lng: number, lang: string = "local") => `http://api.geonames.org/findNearbyJSON?lat=${lat}&lng=${lng}&lang=${lang}&username=${process.env.GEONAMES_USERNAME}&maxRows=9&radius=300&featureCode=PPLX`;
 const URL_GET_LOCATION_SUGGESTIONS = (input: string, optionalParameters: Partial<LocationSuggestionOptional>) => `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${process.env.GOOGLE_APIKEY}&${new URLSearchParams({ input, ...optionalParameters })}`;
 
 // CONFIGURATIONS
@@ -69,16 +69,21 @@ export async function getLocationDetailsByIp(ip: string, retry = true): Promise<
  * Fetches geolocation information for a location near specified coordinates and returns it as an instance of GeonamesGeocode model.
  * @param lat A number representing the latitude you want to search for nearby locations.
  * @param lng A number representing the longitude you want to search for nearby locations.
+ * @param lang The language to use for the names of places.
  * @returns A promise that resolves to an instance of GeonamesGeocode.
  */
-export async function getNearbyLocationDetails(lat: number, lng: number): Promise<GeonamesNearbyLocation> {
-    const geonamesLocationLookupUrl = URL_GET_NEARBY_LOCATION(lat, lng);
+export async function getNearbyLocationDetails(
+    lat: number,
+    lng: number,
+    lang: string = "local"
+): Promise<GeonamesNearbyLocation> {
+    const geonamesLocationLookupUrl = URL_GET_NEARBY_LOCATION(lat, lng, lang);
     const response = await fetch(geonamesLocationLookupUrl, {
         next: { revalidate: LOCATION_LOOKUP_CACHE_SECONDS },
     });
 
     if (!response.ok) {
-        throw new Error(`[Location Service] Could not fetch nearby location data.  (lat: '${lat}', lng: '${lng}')`);
+        throw new Error(`[Location Service] Could not fetch nearby location data.  (lat: '${lat}', lng: '${lng}', lang: '${lang}')`);
     }
 
     const data = await response.json();

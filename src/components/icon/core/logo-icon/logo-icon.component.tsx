@@ -3,6 +3,7 @@ import Stack from "@mui/material/Stack";
 import { BoxProps } from "@mui/system";
 import { Quicksand } from "next/font/google";
 import { LogoIconStyle, Text } from "./logo-icon.styles";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 /*
     Official Logo of the Weaget Website
 */
@@ -12,9 +13,14 @@ const quickSandFont = Quicksand({
     weight: "600",
     display: "swap",
 });
-export default function Logo(props: BoxProps & { hideShadow?: boolean }) {
-    const { hideShadow, ...rest } = props;
 
+export interface LogoProps {
+    hideShadow?: boolean;
+}
+
+export default function Logo(props: BoxProps & LogoProps) {
+    const { hideShadow, ...rest } = props;
+    const { t } = useSystemTranslation();
     return (
         <Box {...rest} role="img" aria-label="Weaget logo">
             <Stack direction="row" alignItems="center">
@@ -25,7 +31,10 @@ export default function Logo(props: BoxProps & { hideShadow?: boolean }) {
                     }),
                 }}
                 />
-                <Text className={quickSandFont.className} />
+                <Text className={quickSandFont.className}>
+                    <Box component="span" color="lightblue">{t("webapp.logoFirst")}</Box>
+                    <Box component="span" color="lightpink">{t("webapp.logoSecond")}</Box>
+                </Text>
             </Stack>
         </Box>
     );

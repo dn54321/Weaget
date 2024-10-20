@@ -6,6 +6,7 @@ import { Box, Container, Stack, Tooltip } from "@mui/material";
 import { ContainerProps, SxProps } from "@mui/system";
 import { useRouter } from "next/navigation";
 import { StyledFooter, StyledIconButton } from "./footer.styles";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 /*
     A very simple footer after many attempts of design .
@@ -19,6 +20,7 @@ export interface FooterProps {
 }
 
 export default function Footer(props: FooterProps) {
+    const { t } = useSystemTranslation();
     const router = useRouter();
     const footerNavigationItems = [
         {
@@ -69,9 +71,20 @@ export default function Footer(props: FooterProps) {
                     {/* Copyright Message */}
                     <Box>
                         <Box py="15px" component="span">
-                            {`@${new Date().getFullYear()} DN54321. `}
+                            {t("footer.copyright", {
+                                year: new Date(),
+                                formatParams: {
+                                    year: { year: "numeric" },
+                                },
+                            }) + " "}
                         </Box>
-                        <Box sx={{ display: { xs: "block", sm: "inline" } }}>All Rights Reserved.</Box>
+                        <Box sx={{
+                            display: { xs: "block", sm: "inline" },
+                            textTransform: "capitalize",
+                        }}
+                        >
+                            {t("footer.reserveNotice")}
+                        </Box>
                     </Box>
 
                     {/* Links to social media / Icons Page */}

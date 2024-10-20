@@ -20,6 +20,7 @@ import { LocationListWidget } from "@components/widgets/location-list-widget";
 import { PollutionWidget } from "@components/widgets/pollution-widget";
 import { RainfallWidget } from "@components/widgets/rainfall-widget";
 import { WeatherStatWidget } from "@components/widgets/weather-stat-widget";
+import { useSystemSettings } from "@src/hooks/use-system-settings";
 
 interface PageProps {
     params: {
@@ -29,7 +30,8 @@ interface PageProps {
 
 export default function Page({ params }: PageProps) {
     const location = params.location;
-    const weatherQuery = useGetWeather(location);
+    const { locale } = useSystemSettings();
+    const weatherQuery = useGetWeather(location, undefined, locale);
     const pollutionQuery = useGetPollution(weatherQuery.data?.lat, weatherQuery.data?.lon);
     const nearbyLocationQuery = useGetNearbyLocation(weatherQuery.data?.lat, weatherQuery.data?.lon);
     const locationQuery = useGetLocation(location);

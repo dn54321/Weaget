@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { getNearbyLocationDetails } from "@services/geolocation.service";
 import { extractQueryParams, handleNextResponseError } from "@utils/next-request-helper";
-import { coordsSchema } from "@features/weaget/coords.schema";
+import { coordsSchema } from "@features/coords.schema";
 
 // Generates a list of autocomplete queries given a string
 export async function GET(req: NextRequest) {
@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
 
     try {
         const { lat, lng } = coordsSchema.parse(queryParams);
-        const locations = await getNearbyLocationDetails(lat, lng);
+        const locations = await getNearbyLocationDetails(lat, lng, queryParams.lang);
         const formattedLocations = locations.geonames.map(location => ({
             name: location.name,
             state: location.adminCodes1?.ISO3166_2 ?? "",

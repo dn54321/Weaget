@@ -1,7 +1,7 @@
 import { act, renderHook } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 import { SystemTheme } from "@src/types/system.types";
-import { useSystemTheme } from "@src/hooks/use-system-theme";
+import { useSystemSettings } from "@src/hooks/use-system-theme";
 import { testWrapper } from "@utils/wrappers";
 
 describe("Hooks - use-system-theme", async () => {
@@ -33,7 +33,7 @@ describe("Hooks - use-system-theme", async () => {
                 removeEventListener: vi.fn(),
             }));
 
-            const { result } = renderHook(() => useSystemTheme(), { wrapper: testWrapper });
+            const { result } = renderHook(() => useSystemSettings(), { wrapper: testWrapper });
             expect(result.current.themeColour).toEqual(colourScheme);
         });
 
@@ -43,7 +43,7 @@ describe("Hooks - use-system-theme", async () => {
                 [SystemTheme.DARK],
             ]
         )("Should return the correct theme colour when set to %s mode.", async (themeColour: SystemTheme) => {
-            const { result } = renderHook(() => useSystemTheme(), { wrapper: testWrapper });
+            const { result } = renderHook(() => useSystemSettings(), { wrapper: testWrapper });
             act(() => {
                 result.current.setThemeColour(themeColour);
             });
@@ -59,7 +59,7 @@ describe("Hooks - use-system-theme", async () => {
             oldThemeColour: SystemTheme,
             newThemeColour: SystemTheme
         ) => {
-            const { result } = renderHook(() => useSystemTheme(), { wrapper: testWrapper });
+            const { result } = renderHook(() => useSystemSettings(), { wrapper: testWrapper });
 
             act(() => {
                 result.current.setThemeColour(oldThemeColour);

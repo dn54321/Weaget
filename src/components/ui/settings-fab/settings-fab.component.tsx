@@ -3,6 +3,7 @@ import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
 import SquareFootIcon from "@mui/icons-material/SquareFoot";
 import { TemperatureScale } from "@src/types/weather.types";
 import { useSettingStore } from "@src/hooks/stores/use-setting-store";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 // Fab icon that exist on the bottom right of the screen.
 // Used to change the measurement/temperature system.
@@ -13,6 +14,7 @@ export interface SettingFabProps {
 }
 
 export default function SettingsFab(props: SettingFabProps & BoxProps) {
+    const { t } = useSystemTranslation();
     const { temperature, measurement, ...boxProps } = props;
     const temperatureScale = useSettingStore(state => state.temperatureScale);
     const measurementScale = useSettingStore(state => state.measurementScale);
@@ -78,7 +80,7 @@ export default function SettingsFab(props: SettingFabProps & BoxProps) {
                             onClick={() => handleTemperatureScaleChange(temperatureScale, setTemperatureScale)}
                         >
                             <DeviceThermostatIcon sx={{ mr: 1 }} />
-                            {temperatureScale}
+                            {t(`temperature.${temperatureScale}.text`)}
                         </Fab>
                     )
                 : null}

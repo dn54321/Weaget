@@ -3,7 +3,7 @@
 import { createContext } from "react";
 import { createSettingsStore } from "@src/stores/settings.store";
 import { ThemeProvider as MuiThemeProvider } from "@mui/system";
-import { useSystemTheme } from "@src/hooks/use-system-theme";
+import { useSystemSettings } from "@src/hooks/use-system-settings";
 import { SystemTheme } from "@src/types/system.types";
 
 export interface SettingProviderProps {
@@ -17,7 +17,7 @@ export const SettingsStoreContext = createContext<SettingStoreApi | undefined>(
 );
 
 export default function SystemThemeProvider(props: SettingProviderProps) {
-    const { theme, setThemeColour } = useSystemTheme();
+    const { theme, setThemeColour } = useSystemSettings();
     if (props.theme) {
         setThemeColour(props.theme);
     }

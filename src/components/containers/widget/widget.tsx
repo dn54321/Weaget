@@ -33,6 +33,7 @@ export function Widget(props: WidgetProps) {
                 display="flex"
                 justifyContent="space-between"
                 pt="15px"
+                pb="5px"
                 px={isTransparent ? "0px" : "15px"}
             >
                 <Box>

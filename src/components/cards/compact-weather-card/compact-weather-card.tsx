@@ -3,6 +3,7 @@ import { TempUnit } from "@components/ui/temperature-unit";
 import { Box, SxProps } from "@mui/material";
 import { High, Low, PaperContainer } from "./compact-weather-card.styles";
 import { WeatherIcon } from "@components/ui/weather-icon";
+import { useSystemSettings } from "@src/hooks/use-system-settings";
 /*
     Compact weather card list is a grid containing simplified weather cards.
     Each weather card is a square box that contains:
@@ -25,11 +26,16 @@ export interface CompactWeatherCardProps {
     maxTemperature: number;
     minTemperature: number;
     sx?: SxProps;
+    locale?: string;
 }
 
 // Compact weather card
 export default function CompactWeatherCard(props: CompactWeatherCardProps) {
-    const date = DateTime.fromJSDate(props.date, { zone: props.timezone });
+    const { locale } = useSystemSettings();
+    const date = DateTime
+        .fromJSDate(props.date, { zone: props.timezone })
+        .setLocale(props.locale ?? locale);
+
     return (
         <PaperContainer data-testid="compact-weather-card" sx={{ overflow: "hidden", ...props.sx }}>
             <Box color="text.secondary">{date.weekdayShort}</Box>

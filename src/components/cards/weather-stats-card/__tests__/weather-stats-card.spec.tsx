@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { HourlyWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { createWeatherHourlyMockData, createWeatherDailyMockData, createWeatherCurrentMockData } from "@features/weaget/__mocks__/weather.mock";
 import { WeatherStatsCard } from "./..";
-import { UVWarning, parseWeatherDetailStats } from "@components/cards/weather-stats-card/weather-stats-card.utils";
+import { getUvLevelTranslationKey, parseWeatherDetailStats } from "@components/cards/weather-stats-card/weather-stats-card.utils";
 import { withRender } from "@utils/render";
 
 describe("Component: Weather Stats Card", () => {
@@ -69,7 +69,7 @@ describe("Component: Weather Stats Card", () => {
             [11, "Extreme (11)"],
         ])("UV Index of %d should output warning \"%s\"",
             (uvIndex: number | undefined, expectedText: string | undefined) => {
-                expect(UVWarning(uvIndex)).toBe(expectedText);
+                expect(getUvLevelTranslationKey(uvIndex)).toBe(expectedText);
             });
     });
 
