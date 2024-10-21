@@ -13,6 +13,7 @@ import TableRow from "@mui/material/TableRow";
 import * as React from "react";
 import { Iaqi, Pollution } from "@features/apicn-pollution/pollution.types";
 import { Widget } from "@components/containers/widget/widget";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 /*
     Pollution Card determines the overall
@@ -139,13 +140,22 @@ function PollutionTable(props: PollutionTableProps) {
     );
 }
 
-const aqiStatus = ["Good", "Moderate", "Unhealthy for sensitive groups", "Unhealthy", "Very Unhealthy", "Hazardous"];
-const warn = ["",
-    "Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.",
-    "Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.",
-    "Active children and adults, and people with respiratory disease, such as asthma, should avoid prolonged outdoor exertion; everyone else, especially children, should limit prolonged outdoor exertion",
-    "Active children and adults, and people with respiratory disease, such as asthma, should avoid all outdoor exertion; everyone else, especially children, should limit outdoor exertion.",
-    "Everyone should avoid all outdoor exertion"];
+const pollutionLevelTranslationKey = [
+    "component.widget.pollution.pollutionLevel.good",
+    "component.widget.pollution.pollutionLevel.moderate",
+    "component.widget.pollution.pollutionLevel.unhealthySensitive",
+    "component.widget.pollution.pollutionLevel.unhealthy",
+    "component.widget.pollution.pollutionLevel.veryUnhealthy",
+    "component.widget.pollution.pollutionLevel.hazardous",
+];
+const pollutionWarningTranslationKey = [
+    "component.widget.pollution.pollutionCaution.good",
+    "component.widget.pollution.pollutionCaution.moderate",
+    "component.widget.pollution.pollutionCaution.unhealthySensitive",
+    "component.widget.pollution.pollutionCaution.unhealthy",
+    "component.widget.pollution.pollutionCaution.veryUnhealthy",
+    "component.widget.pollution.pollutionCaution.hazardous",
+];
 
 const stringToTag: Record<string, JSX.Element> = {
     neph: <span title="visibility">NEPH</span>,
@@ -217,6 +227,7 @@ export interface PollutionWidgetProps {
 }
 
 export default function PollutionWidget(props: PollutionWidgetProps) {
+    const { t } = useSystemTranslation();
     const [show, setShow] = React.useState(false);
     const loaded = props.pollutionData ? true : false;
     const aqi = props.pollutionData ? props.pollutionData.aqi : 0;
@@ -231,7 +242,7 @@ export default function PollutionWidget(props: PollutionWidgetProps) {
             const rating = (
                 <Box sx={{ float: "right" }}>
                     (
-                    {aqiStatus[aqiRating(iaqiData.v)]}
+                    {t(pollutionLevelTranslationKey[aqiRating(iaqiData.v)])}
                     )
                 </Box>
             );
@@ -246,7 +257,7 @@ export default function PollutionWidget(props: PollutionWidgetProps) {
     }
 
     return (
-        <Widget title="Pollution Level" sx={props.sx}>
+        <Widget title={t("component.widget.pollution.title")} sx={props.sx}>
             <Box p="20px" pb="10px">
                 <Stack
                     direction={{ xs: "column", sm: "row", md: "column" }}
@@ -256,15 +267,15 @@ export default function PollutionWidget(props: PollutionWidgetProps) {
                     <Stack direction="row" alignItems="center">
                         <CircularProgressWithLabel value={props.pollutionData?.aqi} loaded={loaded} />
                         <Box ml="20px" width="max-content">
-                            <Box fontSize="16px">Air Quality Index</Box>
+                            <Box fontSize="16px">{t("component.widget.pollution.airQualityIndex")}</Box>
                             <Box sx={{ color: "text.color" }}>
                                 {props.pollutionData?.aqi
-                                    ? aqiStatus[aqRating]
+                                    ? t(pollutionLevelTranslationKey[aqRating])
                                     : <Box ml="20px"><DotLoader /></Box>}
                             </Box>
                         </Box>
                     </Stack>
-                    {aqRating ? <Alert severity="warning">{warn[aqRating]}</Alert> : ""}
+                    {aqRating ? <Alert severity="warning">{t(pollutionWarningTranslationKey[aqRating])}</Alert> : ""}
                 </Stack>
                 { loaded
                     ? (

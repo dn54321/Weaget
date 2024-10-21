@@ -11,11 +11,11 @@ import { TFunction } from "i18next";
 
 export function getUvLevelTranslationKey(scale: number | undefined) {
     if (scale === undefined) return "";
-    else if (scale <= 2) return "component.widget.pollution.levels.low";
-    else if (scale <= 5) return "component.widget.pollution.levels.moderate";
-    else if (scale <= 7) return "component.widget.pollution.levels.high";
-    else if (scale <= 10) return "component.widget.pollution.levels.veryHigh";
-    else return "component.widget.pollution.levels.extreme";
+    else if (scale <= 2) return "weather.uvIndex.low";
+    else if (scale <= 5) return "weather.uvIndex.moderate";
+    else if (scale <= 7) return "weather.uvIndex.high";
+    else if (scale <= 10) return "weather.uvIndex.veryHigh";
+    else return "weather.uvIndex.extreme";
 }
 
 export function parseWeatherDetailStats(

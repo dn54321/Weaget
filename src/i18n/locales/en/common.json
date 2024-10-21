@@ -35,12 +35,29 @@
         "aqiLevel": "AQI Level",
         "showAdvancedPollutionDetails": "Show advanced pollution details",
         "hideAdvancedPollutionDetails": "Hide advanced pollution details",
-        "levels": {
-          "low": "Low",
+        "pollutionLevel": {
+          "good": "Good",
           "moderate": "Moderate",
-          "high": "High",
-          "veryHigh": "Very high",
-          "extreme": "Extreme"
+          "unhealthySensitive": "Unhealthy for sensitive groups",
+          "unhealthy": "Unhealthy",
+          "veryUnhealthy": "Very unhealthy",
+          "hazardous": "Hazardous"
+        },
+        "pollutionCaution": {
+          "good": "",
+          "moderate": "Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.",
+          "unhealthySensitive": "Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.",
+          "unhealthy": "Active children and adults, and people with respiratory disease, such as asthma, should avoid prolonged outdoor exertion; everyone else, especially children, should limit prolonged outdoor exertion",
+          "veryUnhealthy": "Active children and adults, and people with respiratory disease, such as asthma, should avoid all outdoor exertion; everyone else, especially children, should limit outdoor exertion.",
+          "hazardous": "Everyone should avoid all outdoor exertion."
+        },
+        "pollutionHealth": {
+          "good": "Air quality is considered satisfactory, and air pollution poses little or no risk",
+          "moderate": "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution.",
+          "unhealthySensitive": "Members of sensitive groups may experience health effects. The general public is not likely to be affected.",
+          "unhealthy": "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects.",
+          "veryUnhealthy": "Health warnings of emergency conditions. The entire population is more likely to be affected.",
+          "hazardous": "Health alert: everyone may experience more serious health effects."
         }
       },
       "dailyCompactWeather": {
@@ -62,6 +79,9 @@
       "hourlyWeatherStrip": {
         "title": "Hourly Weather Details"
       }
+    },
+    "weatherStrip": {
+      "hourlyWeatherStats": "Hourly weather stats"
     },
     "searchBar": {
       "search": "Search weather",
@@ -87,16 +107,6 @@
       "switchFahrenheit": "Change to fahrenheit"
     }
   },
-  "date": {
-    "today": "today",
-    "tomorrow": "tomorrow",
-    "sunday": "sunday",
-    "monday": "monday",
-    "tuesday": "tuesday",
-    "wednesday": "wednesday",
-    "thursday": "thursday",
-    "friday": "friday"
-  },
   "weather": {
     "loader": "Fetching weather...",
     "localWeather": "Local weather",
@@ -113,6 +123,13 @@
       "clouds": "Clouds",
       "rainfall": "Rainfall",
       "snowfall": "Snowfall"
+    },
+    "uvIndex": {
+      "low": "Low",
+      "moderate": "Moderate",
+      "high": "High",
+      "veryHigh": "Very high",
+      "extreme": "Extreme"
     },
     "error": {}
   },

@@ -35,7 +35,6 @@
         "description": "일일 날씨 세부정보 보기",
         "title": "소형 날씨 카드"
       },
-
       "dailyWeatherCard": {
         "description": "날씨 카드에 대한 자세한 설명을 보려면 아래 카드를 클릭하세요.",
         "title": "일일 카드"
@@ -51,16 +50,25 @@
         "airQualityIndex": "대기 질 지수",
         "aqiLevel": "AQI 수준",
         "hideAdvancedPollutionDetails": "고급 오염 세부정보 숨기기",
-        "levels": {
-          "extreme": "극심한",
-          "high": "높은",
-          "low": "낮은",
-          "moderate": "보통의",
-          "veryHigh": "매우 높음"
-        },
         "particle": "입자",
         "showAdvancedPollutionDetails": "고급 오염 세부정보 표시",
-        "title": "오염 수준"
+        "title": "오염 수준",
+        "pollutionCaution": {
+          "good": " ",
+          "hazardous": "모든 사람은 모든 야외 활동을 피해야 합니다.",
+          "moderate": "활동적인 어린이와 성인, 천식과 같은 호흡기 질환이 있는 사람은 장시간 야외 활동을 자제해야 합니다.",
+          "unhealthy": "활동적인 어린이와 성인, 천식과 같은 호흡기 질환이 있는 사람은 장시간 야외 활동을 피해야 합니다. \n모든 사람, 특히 어린이는 장시간 야외 활동을 자제해야 합니다.",
+          "unhealthySensitive": "활동적인 어린이와 성인, 천식과 같은 호흡기 질환이 있는 사람은 장시간 야외 활동을 자제해야 합니다.",
+          "veryUnhealthy": "활동적인 어린이와 성인, 천식과 같은 호흡기 질환이 있는 사람은 모든 야외 활동을 피해야 합니다. \n다른 모든 사람, 특히 어린이는 야외 활동을 제한해야 합니다."
+        },
+        "pollutionHealth": {
+          "good": "대기 질은 만족스러운 것으로 간주되며 대기 오염으로 인한 위험은 거의 또는 전혀 없습니다.",
+          "hazardous": "건강 경고: 모든 사람이 건강에 더 심각한 영향을 미칠 수 있습니다.",
+          "moderate": "공기질은 괜찮습니다. \n그러나 일부 오염 물질의 경우 대기 오염에 매우 민감한 극소수의 사람들에게는 중간 정도의 건강 문제가 있을 수 있습니다.",
+          "unhealthy": "모든 사람이 건강에 영향을 받기 시작할 수 있습니다. \n민감한 그룹의 구성원은 건강에 더 심각한 영향을 미칠 수 있습니다.",
+          "unhealthySensitive": "민감한 그룹의 구성원은 건강에 영향을 미칠 수 있습니다. \n일반 대중은 영향을 받을 가능성이 없습니다.",
+          "veryUnhealthy": "비상 상황에 대한 건강 경고. \n전체 인구가 영향을 받을 가능성이 더 높습니다."
+        }
       },
       "suggestedLocations": {
         "description": "자세한 날씨 정보를 보려면 카드를 클릭하세요!",
@@ -74,16 +82,6 @@
   "footer": {
     "copyright": "@{{year, datetime}} DN54321.",
     "reserveNotice": "모든 권리 보유."
-  },
-  "date": {
-    "friday": "금요일",
-    "monday": "월요일",
-    "sunday": "일요일",
-    "thursday": "목요일",
-    "today": "오늘",
-    "tomorrow": "내일",
-    "tuesday": "화요일",
-    "wednesday": "수요일"
   },
   "language": {
     "chinese": "중국인",
@@ -124,6 +122,13 @@
       "uvIndex": "자외선 지수",
       "visibility": "시계",
       "wind": "바람"
+    },
+    "uvIndex": {
+      "extreme": "극심한",
+      "high": "높은",
+      "low": "낮은",
+      "moderate": "보통의",
+      "veryHigh": "매우 높음"
     }
   }
 }

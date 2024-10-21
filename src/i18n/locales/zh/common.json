@@ -35,7 +35,6 @@
         "description": "查看每日天气详细信息",
         "title": "紧凑型天气卡"
       },
-
       "dailyWeatherCard": {
         "description": "单击下面的任意卡片可查看天气卡片的更多详细说明。",
         "title": "每日卡"
@@ -51,16 +50,33 @@
         "airQualityIndex": "空气质量指数",
         "aqiLevel": "空气质量指数",
         "hideAdvancedPollutionDetails": "隐藏高级污染详细信息",
-        "levels": {
-          "extreme": "极端",
-          "high": "高的",
-          "low": "低的",
-          "moderate": "缓和",
-          "veryHigh": "非常高"
-        },
         "title": "污染等级",
         "particle": "粒子",
-        "showAdvancedPollutionDetails": "显示高级污染详细信息"
+        "showAdvancedPollutionDetails": "显示高级污染详细信息",
+        "pollutionCaution": {
+          "good": " ",
+          "hazardous": "每个人都应该避免所有户外活动。",
+          "moderate": "活跃的儿童和成人以及患有哮喘等呼吸道疾病的人应限制长时间的户外活动。",
+          "unhealthy": "活跃的儿童和成人以及患有哮喘等呼吸道疾病的人应避免长时间户外活动；\n其他人，尤其是儿童，应限制长时间的户外活动",
+          "unhealthySensitive": "活跃的儿童和成人以及患有哮喘等呼吸道疾病的人应限制长时间的户外活动。",
+          "veryUnhealthy": "活跃的儿童和成人以及患有哮喘等呼吸道疾病的人应避免所有户外活动；\n其他人，尤其是儿童，应该限制户外活动。"
+        },
+        "pollutionHealth": {
+          "good": "空气质量被认为令人满意，空气污染造成的风险很小或没有",
+          "hazardous": "健康警报：每个人都可能会经历更严重的健康影响。",
+          "moderate": "空气质量合格；\n然而，对于某些污染物，极少数对空气污染异常敏感的人可能会产生中等程度的健康问题。",
+          "unhealthy": "每个人都可能开始经历健康影响；\n敏感群体的成员可能会遭受更严重的健康影响。",
+          "unhealthySensitive": "敏感群体的成员可能会受到健康影响。\n普通公众不太可能受到影响。",
+          "veryUnhealthy": "紧急情况的健康警告。\n整个人口更有可能受到影响。"
+        },
+        "pollutionLevel": {
+          "good": "好的",
+          "hazardous": "危险的",
+          "moderate": "缓和",
+          "unhealthy": "不良",
+          "unhealthySensitive": "对敏感群体不健康",
+          "veryUnhealthy": "非常不健康"
+        }
       },
       "suggestedLocations": {
         "description": "单击任意卡片即可获取更多天气详细信息！",
@@ -74,16 +90,6 @@
   "footer": {
     "copyright": "@{{year, datetime}} DN54321。",
     "reserveNotice": "版权所有。"
-  },
-  "date": {
-    "friday": "星期五",
-    "monday": "周一",
-    "sunday": "星期日",
-    "thursday": "周四",
-    "today": "今天",
-    "tomorrow": "明天",
-    "tuesday": "周二",
-    "wednesday": "周三"
   },
   "language": {
     "chinese": "中国人",
@@ -124,6 +130,13 @@
       "pressure": "压力",
       "visibility": "能见度",
       "wind": "风"
+    },
+    "uvIndex": {
+      "extreme": "极端",
+      "high": "高的",
+      "low": "低的",
+      "moderate": "缓和",
+      "veryHigh": "非常高"
     }
   }
 }
