@@ -53,4 +53,4 @@ jobs:
       - name: Rename deployment url
         run: |
           DEPLOYMENT_URL=$(<domain.txt)
-          vercel alias set "$DEPLOYMENT_URL" "staging.weaget.vercel.app"
+          vercel alias set "$DEPLOYMENT_URL" "staging.weaget.vercel.app" --token=${{ secrets.VERCEL_TOKEN }}
