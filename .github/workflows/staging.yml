@@ -48,4 +48,9 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} > domain.txt
+
+      - name: Rename deployment url
+        run: |
+          DEPLOYMENT_URL=$(<domain.txt)
+          vercel alias set "$DEPLOYMENT_URL" "staging.weaget.vercel.app"
