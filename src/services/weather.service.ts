@@ -3,7 +3,7 @@ import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCa
 import { getLocationDetails } from "./geolocation.service";
 
 // API ENDPOINTS
-const URL_GET_ONE_WEATHER = (lat: number, lng: number) => `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&appid=${process.env.OPENWEATHER_API}`;
+const URL_GET_ONE_WEATHER = (lat: number, lng: number) => `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lng}&appid=${process.env.OPENWEATHER_API}`;
 
 // CONFIGURATIONS
 const WEATHER_CACHE_SECONDS = 30 * 60;
