@@ -7,10 +7,13 @@ import { WeatherIcon } from "@components/ui/weather-icon";
 import { weatherIconShowcase } from "@project/app/icons/layout";
 
 export interface PageProps {
-    params: { id: string };
+    params: Promise<{
+        id: string;
+    }>;
 }
 
-export default function Page({ params }: PageProps) {
+export default async function Page(props: PageProps) {
+    const params = await (props.params);
     const weatherId = parseInt(params.id);
     const weatherDetails = weatherIconShowcase.find(weather => weather.id === weatherId);
     return (
