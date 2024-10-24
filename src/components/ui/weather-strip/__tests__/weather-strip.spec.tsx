@@ -50,7 +50,7 @@ describe("Component: weather-strip", async () => {
         ["non-compact value", "nonCompactValuegg"],
     ])("should display the %s on the accordion summary.", (
         _: string,
-        value: string
+        value: string,
     ) => {
         const { getByText } = withRender(<WeatherStrip {...weatherStripProps} />);
         expect(getByText(value)).toBeInTheDocument();

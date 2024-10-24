@@ -3,7 +3,7 @@ import { useTranslation as i18nTranslation, UseTranslationOptions } from "react-
 
 export function useSystemTranslation(
     ns?: string,
-    options?: UseTranslationOptions<undefined> | undefined
+    options?: UseTranslationOptions<undefined> | undefined,
 ) {
     const { locale } = useSystemSettings();
     return { ...i18nTranslation(ns, { lng: locale, ...options }), locale };

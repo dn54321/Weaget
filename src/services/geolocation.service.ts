@@ -75,7 +75,7 @@ export async function getLocationDetailsByIp(ip: string, retry = true): Promise<
 export async function getNearbyLocationDetails(
     lat: number,
     lng: number,
-    lang: string = "local"
+    lang: string = "local",
 ): Promise<GeonamesNearbyLocation> {
     const geonamesLocationLookupUrl = URL_GET_NEARBY_LOCATION(lat, lng, lang);
     const response = await fetch(geonamesLocationLookupUrl, {
@@ -98,7 +98,7 @@ export async function getNearbyLocationDetails(
  */
 export async function getLocationAutocompleteSuggestions(
     input: string,
-    optionalParameters: Partial<LocationSuggestionOptional> = {}
+    optionalParameters: Partial<LocationSuggestionOptional> = {},
 ): Promise<GoogleLocationSuggestion> {
     const queryParameters = {
         ...optionalParameters,

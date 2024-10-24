@@ -13,7 +13,7 @@ import { AutoCompleteSuggestions } from "@features/weaget/auto-complete/auto-com
 import { useGetCurrentLocation } from "@src/hooks/use-get-current-location";
 import { queryLocation } from "@src/hooks/use-get-location";
 import { useGetLocationAutoComplete } from "@src/hooks/use-get-location-auto-complete";
-import { FieldBox, FormContainer, MagnifyIconButtonContainer, SearchComponent, SearchField, SuggestionText } from "./search-bar.styles";
+import { FieldBox, FormContainer, MagnifyIconButtonContainer, SearchComponent, SearchField } from "./search-bar.styles";
 import { debounceFunc, throttleFunc } from "./search-bar.utils";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
@@ -220,24 +220,24 @@ export default function SearchBar(props: BoxProps) {
                     ? (
                             <SuggestionBox listprops={getListboxProps()}>
                                 {(groupedOptions as Array<AutoCompleteSuggestions>).map((option, index: number) => (
-                                    <Box 
-                                        component="li"  
+                                    <Box
+                                        component="li"
                                         {...getOptionProps({ option, index })}
                                         key={option.main + option.secondary + index}
                                         sx={{
-                                            p: "5px 10px",
-                                            userSelect: "none",
-                                            borderBottom: "1px solid",
-                                            borderColor: "divider",
+                                            "p": "5px 10px",
+                                            "userSelect": "none",
+                                            "borderBottom": "1px solid",
+                                            "borderColor": "divider",
                                             "&.Mui-focused": {
-                                                backgroundColor: "action.hover"
-                                            }
-                                        }} 
+                                                backgroundColor: "action.hover",
+                                            },
+                                        }}
                                     >
-                     
-                                            <Box display="inline" color="text.main"><b>{option.main}</b></Box>
-                                            <Box display="inline" color="text.secondary" ml="1ch">{option.secondary}</Box>
-          
+
+                                        <Box display="inline" color="text.main"><b>{option.main}</b></Box>
+                                        <Box display="inline" color="text.secondary" ml="1ch">{option.secondary}</Box>
+
                                     </Box>
                                 ))}
                             </SuggestionBox>

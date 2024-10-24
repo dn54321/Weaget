@@ -18,12 +18,12 @@ export function useAlert() {
 
     const markStaleAlerts = () => {
         setAlerts(oldAlerts => oldAlerts.map(
-            alert => (alert.duration > Date.now()) ? alert : { ...alert, active: false }
+            alert => (alert.duration > Date.now()) ? alert : { ...alert, active: false },
         ));
     };
     const removeAlert = (id: string) => {
         setAlerts(oldAlerts => oldAlerts.map(
-            alert => (alert.id !== id) ? alert : { ...alert, active: false }
+            alert => (alert.id !== id) ? alert : { ...alert, active: false },
         ));
     };
 

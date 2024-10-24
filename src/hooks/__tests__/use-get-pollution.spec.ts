@@ -23,7 +23,7 @@ describe("Hooks - use-get-pollution", async () => {
             server.use(mockPollutionHandle(HttpResponse.json(pollutionMockData)));
             const { result } = renderHook(
                 () => useGetPollution(0, 0),
-                { wrapper: testWrapper }
+                { wrapper: testWrapper },
             );
 
             await waitFor(() => expect(result.current.isSuccess).toBe(true));
@@ -39,7 +39,7 @@ describe("Hooks - use-get-pollution", async () => {
             withResponse(mockPollutionHandle, pollutionMockData);
             const { result } = renderHook(
                 () => useGetPollution(0, 0),
-                { wrapper: testWrapper }
+                { wrapper: testWrapper },
             );
 
             await waitFor(() => expect(result.current.isError).toBe(true));
@@ -51,12 +51,12 @@ describe("Hooks - use-get-pollution", async () => {
             async (statusCode: number) => {
                 const pollutionMockData = createPollutionMockData();
                 server.use(mockPollutionHandle(
-                    HttpResponse.json(pollutionMockData, { status: statusCode })
+                    HttpResponse.json(pollutionMockData, { status: statusCode }),
                 ));
 
                 const { result } = renderHook(
                     () => useGetPollution(0, 0),
-                    { wrapper: testWrapper }
+                    { wrapper: testWrapper },
                 );
 
                 await waitFor(() => expect(result.current.isError).toBe(true));

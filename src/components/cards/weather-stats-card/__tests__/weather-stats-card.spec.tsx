@@ -18,7 +18,7 @@ describe("Component: Weather Stats Card", () => {
                     statIcon: <BugReportIcon aria-label="test-icon" />,
                 },
             ]}
-            />
+            />,
         );
         expect(getByText("mockStat")).toBeInTheDocument();
         expect(getByText("20mm")).toBeInTheDocument();
@@ -35,7 +35,7 @@ describe("Component: Weather Stats Card", () => {
                     statIcon: <BugReportIcon aria-label="test-icon" />,
                 },
             ]}
-            />
+            />,
         );
 
         expect(getByText("mockStat")).toBeInTheDocument();
@@ -53,7 +53,7 @@ describe("Component: Weather Stats Card", () => {
                     statIcon: <BugReportIcon aria-label="test-icon" />,
                 },
             ]}
-            />
+            />,
         );
 
         expect(() => getByText("mockStat")).toThrow();
@@ -83,7 +83,7 @@ describe("Component: Weather Stats Card", () => {
             ["empty object", {}],
         ])("should be able to parse %s.", (
             _: string,
-            data: object
+            data: object,
         ) => {
             expect(() => parseWeatherDetailStats(data as HourlyWeatherDetails, "Australia/Sydney")).not.toThrow();
         });

@@ -10,7 +10,7 @@ interface PageProps {
 
 export async function GET(
     req: NextRequest,
-    props: PageProps
+    props: PageProps,
 ) {
     try {
         const queryParams = extractQueryParams(`${req.url}`);

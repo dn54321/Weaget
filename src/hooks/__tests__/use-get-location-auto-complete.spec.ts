@@ -22,7 +22,7 @@ describe("Hooks - use-get-location-auto-complete", async () => {
             server.use(mockAutoCompleteHandle(HttpResponse.json(locationAutoCompleteMockData)));
             const { result } = renderHook(
                 () => useGetLocationAutoComplete("mockInput"),
-                { wrapper: testWrapper }
+                { wrapper: testWrapper },
             );
 
             await waitFor(() => expect(result.current[0].isSuccess).toBe(true));
@@ -35,7 +35,7 @@ describe("Hooks - use-get-location-auto-complete", async () => {
             server.use(mockAutoCompleteHandle(HttpResponse.json(locationAutoCompleteMockData)));
             const { result } = renderHook(
                 () => useGetLocationAutoComplete("mockInput", "mockLocation"),
-                { wrapper: testWrapper }
+                { wrapper: testWrapper },
             );
 
             await waitFor(() => expect(result.current[0].isSuccess).toBe(true));
@@ -47,11 +47,11 @@ describe("Hooks - use-get-location-auto-complete", async () => {
         ])("should throw error when response provides an invalid status code %i.", async (statusCode: number) => {
             const locationAutoCompleteMockData = createAutoCompleteMockData();
             server.use(
-                mockAutoCompleteHandle(HttpResponse.json(locationAutoCompleteMockData, { status: statusCode })
+                mockAutoCompleteHandle(HttpResponse.json(locationAutoCompleteMockData, { status: statusCode }),
                 ));
             const { result } = renderHook(
                 () => useGetLocationAutoComplete("mockInput"),
-                { wrapper: testWrapper }
+                { wrapper: testWrapper },
             );
 
             await waitFor(() => expect(result.current[0].isError).toBe(true));
@@ -60,7 +60,7 @@ describe("Hooks - use-get-location-auto-complete", async () => {
         it("hook should return the correct data on subsequent requests", async () => {
             const { result } = renderHook(
                 () => useGetLocationAutoComplete("mockInput"),
-                { wrapper: testWrapper }
+                { wrapper: testWrapper },
             );
 
             await waitFor(() => expect(result.current[0].isSuccess).toBe(true));
@@ -77,13 +77,13 @@ describe("Hooks - use-get-location-auto-complete", async () => {
         ])("should throw error on invalid status code %i on errors within subsequent requests.", async (statusCode: number) => {
             const { result } = renderHook(
                 () => useGetLocationAutoComplete("mockInput"),
-                { wrapper: testWrapper }
+                { wrapper: testWrapper },
             );
 
             await waitFor(() => expect(result.current[0].isSuccess).toBe(true));
             const locationAutoCompleteMockData = createAutoCompleteMockData();
             server.use(
-                mockAutoCompleteHandle(HttpResponse.json(locationAutoCompleteMockData, { status: statusCode }))
+                mockAutoCompleteHandle(HttpResponse.json(locationAutoCompleteMockData, { status: statusCode })),
             );
 
             await act(async () => result.current[1]("mockLocation"));

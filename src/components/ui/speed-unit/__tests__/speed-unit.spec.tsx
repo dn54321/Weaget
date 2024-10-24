@@ -16,7 +16,7 @@ describe("Component: speed-unit", async () => {
     ])("should convert %d with %d d.p. to %s. (m/s => m/s)", (
         input: number,
         decimal: number,
-        expected: string
+        expected: string,
     ) => {
         const settings = { measurementScale: MeasurementScale.METRIC };
         const { getByText } = withRender(<SpeedUnit value={input} decimals={decimal} />, { settings });
@@ -30,7 +30,7 @@ describe("Component: speed-unit", async () => {
     ])("should convert %d with %d d.p. to %s. (m/s => mph)", (
         input: number,
         decimal: number,
-        expected: string
+        expected: string,
     ) => {
         const settings = { measurementScale: MeasurementScale.IMPERIAL };
         const { getByText } = withRender(<SpeedUnit value={input} decimals={decimal} />, { settings });

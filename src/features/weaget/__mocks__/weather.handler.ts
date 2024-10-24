@@ -11,6 +11,6 @@ export function mockWeatherHandle(response: HttpResponse, options?: RequestHandl
     return http.get(
         "api/weather/:location",
         () => response,
-        options
+        options,
     );
 }

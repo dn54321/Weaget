@@ -28,7 +28,7 @@ describe("Page: app/icons/page", () => {
     });
 
     it.each(weatherIconShowcase)("should redirect to $name weather icon page when clicked.", async (
-        weatherIcon
+        weatherIcon,
     ) => {
         mocks.mockRouterPush.mockResolvedValue(true);
         const user = userEvent.setup();

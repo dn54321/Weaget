@@ -11,6 +11,6 @@ export function mockIpinfoCurrentLocationHandle(response: HttpResponse, options?
     return http.get(
         "https://ipinfo.io/*",
         () => response,
-        options
+        options,
     );
 }

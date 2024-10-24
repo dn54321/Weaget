@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
     baseDirectory: __dirname,
     recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
+    allConfig: js.configs.all,
 });
 
 export default [{
@@ -35,7 +35,6 @@ export default [{
     languageOptions: {
         parser: tsParser,
     },
-
     rules: {
         "@stylistic/array-bracket-spacing": ["error", "never"],
 
@@ -304,4 +303,9 @@ export default [{
             },
         }],
     },
+    ignores: [
+        "node_modules/",
+        "dist/",
+        "coverage",
+    ],
 }];

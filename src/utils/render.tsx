@@ -43,6 +43,6 @@ export function withRender(element: React.ReactElement, options?: RenderOptions)
                     </SystemThemeProvider>
                 </SettingsStoreProvider>
             </WidgetStoreProvider>
-        </AppRouterCacheProvider>
+        </AppRouterCacheProvider>,
     );
 }

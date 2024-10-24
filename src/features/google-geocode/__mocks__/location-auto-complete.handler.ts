@@ -11,6 +11,6 @@ export function mockGoogleLocationAutoCompleteHandle(response: HttpResponse, opt
     return http.get(
         "https://maps.googleapis.com/maps/api/place/autocomplete/json",
         () => response,
-        options
+        options,
     );
 }

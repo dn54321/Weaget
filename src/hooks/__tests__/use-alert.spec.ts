@@ -62,14 +62,14 @@ describe("Hooks - use-alert", () => {
                     ...createOpenWeatherAlertMessageMockData(),
                     active: true,
                     duration: 100,
-                }
+                },
             );
             result.current.addAlert(
                 {
                     ...createOpenWeatherAlertMessageMockData(),
                     active: true,
                     duration: Infinity,
-                }
+                },
             );
             vi.advanceTimersByTime(200);
         });

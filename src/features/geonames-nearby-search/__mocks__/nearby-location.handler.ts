@@ -11,6 +11,6 @@ export function mockGeonamesNearbyLocationHandle(response: HttpResponse, options
     return http.get(
         "http://api.geonames.org/findNearbyJSON",
         () => response,
-        options
+        options,
     );
 }

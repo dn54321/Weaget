@@ -11,8 +11,8 @@ describe("Utils - msw-resolver", async () => {
         server.use(
             http.get("/test", withSearchParams(
                 params => params.has("mockQuery"),
-                () => HttpResponse.json({ test: "mockMessage" })
-            ))
+                () => HttpResponse.json({ test: "mockMessage" }),
+            )),
         );
 
         const data = await fetch("/test?mockQuery=true").then(res => res.json());
@@ -23,9 +23,9 @@ describe("Utils - msw-resolver", async () => {
         server.use(
             http.get("https://test.com", withSearchParams(
                 params => params.has("mockQuery"),
-                () => HttpResponse.json({ test: "mockMessage" })
+                () => HttpResponse.json({ test: "mockMessage" }),
             )),
-            http.get("https://test.com", () => HttpResponse.json({ test: "fallback message" }))
+            http.get("https://test.com", () => HttpResponse.json({ test: "fallback message" })),
         );
         const response = await fetch("https://test.com?norun=true").then(res => res.json());
         expect(response).toMatchObject({ test: "fallback message" });

@@ -34,7 +34,7 @@ describe("Page: not-found", async () => {
     ])("should display errors when %s data fails to load.", async (
         _,
         mockHandle,
-        expectedErrorMessage
+        expectedErrorMessage,
     ) => {
         withHandleError(mockHandle);
         const { getByText } = withRender(<Home />);

@@ -10,7 +10,7 @@ interface PageProps {
 
 export async function GET(
     req: NextRequest,
-    props: PageProps
+    props: PageProps,
 ) {
     const queryParams = new URL(`${req.url}`).searchParams;
     const region = queryParams.get("region") || undefined;

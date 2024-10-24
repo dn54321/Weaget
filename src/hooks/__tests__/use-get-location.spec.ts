@@ -22,7 +22,7 @@ describe("Hooks - use-get-location", async () => {
             server.use(mockLocationLookupHandle(HttpResponse.json(locationLookupMockData)));
             const { result } = renderHook(
                 () => useGetLocation("mockLocation"),
-                { wrapper: testWrapper }
+                { wrapper: testWrapper },
             );
 
             await waitFor(() => expect(result.current.isSuccess).toBe(true));
@@ -35,7 +35,7 @@ describe("Hooks - use-get-location", async () => {
             server.use(mockLocationLookupHandle(HttpResponse.json(locationLookupMockData)));
             const { result } = renderHook(
                 () => useGetLocation("mockLocation", "mockRegion"),
-                { wrapper: testWrapper }
+                { wrapper: testWrapper },
             );
 
             await waitFor(() => expect(result.current.isSuccess).toBe(true));
@@ -48,12 +48,12 @@ describe("Hooks - use-get-location", async () => {
             async (statusCode: number) => {
                 const locationLookupMockData = createLocationLookupMock();
                 server.use(mockLocationLookupHandle(
-                    HttpResponse.json(locationLookupMockData, { status: statusCode })
+                    HttpResponse.json(locationLookupMockData, { status: statusCode }),
                 ));
 
                 const { result } = renderHook(
                     () => useGetLocation("mockLocation"),
-                    { wrapper: testWrapper }
+                    { wrapper: testWrapper },
                 );
 
                 await waitFor(() => expect(result.current.isError).toBe(true));

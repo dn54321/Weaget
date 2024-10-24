@@ -16,7 +16,7 @@ describe("Component: temperature-unit", async () => {
     ])("should convert %d kelvin with %d decimals to %s celcius.", (
         kelvin: number,
         decimal: number,
-        expected: string
+        expected: string,
     ) => {
         const settings = { temperatureScale: TemperatureScale.CELSIUS };
         const view = withRender(<TempUnit value={kelvin} decimals={decimal} symbol />, { settings });
@@ -30,7 +30,7 @@ describe("Component: temperature-unit", async () => {
     ])("should convert %d kelvin with %d decimals to %s fahrenheit.", (
         kelvin: number,
         decimal: number,
-        expected: string
+        expected: string,
     ) => {
         const settings = { temperatureScale: TemperatureScale.FAHRENHEIT };
         const view = withRender(<TempUnit value={kelvin} decimals={decimal} symbol />, { settings });

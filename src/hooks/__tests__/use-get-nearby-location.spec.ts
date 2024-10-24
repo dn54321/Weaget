@@ -22,7 +22,7 @@ describe("Hooks - use-get-nearby-location", async () => {
             server.use(mockNearbyLocationHandle(HttpResponse.json(nearbyLocationMockData)));
             const { result } = renderHook(
                 () => useGetNearbyLocation(0, 0),
-                { wrapper: testWrapper }
+                { wrapper: testWrapper },
             );
 
             await waitFor(() => expect(result.current.isSuccess).toBe(true));
@@ -35,12 +35,12 @@ describe("Hooks - use-get-nearby-location", async () => {
             async (statusCode: number) => {
                 const nearbyLocationMockData = createNearbyLocationMockData();
                 server.use(mockNearbyLocationHandle(
-                    HttpResponse.json(nearbyLocationMockData, { status: statusCode })
+                    HttpResponse.json(nearbyLocationMockData, { status: statusCode }),
                 ));
 
                 const { result } = renderHook(
                     () => useGetNearbyLocation(0, 0),
-                    { wrapper: testWrapper }
+                    { wrapper: testWrapper },
                 );
 
                 await waitFor(() => expect(result.current.isError).toBe(true));

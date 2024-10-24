@@ -18,7 +18,7 @@ describe("Component: daily-weather-card-widget", async () => {
 
     it("should contain a title.", () => {
         const { getByText } = withRender(
-            <DailyWeatherCardWidget weatherData={weatherData} />
+            <DailyWeatherCardWidget weatherData={weatherData} />,
         );
         expect(getByText("Daily Cards")).toBeInTheDocument();
     });
@@ -43,7 +43,7 @@ describe("Component: daily-weather-card-widget", async () => {
             const widgetProbe = vi.fn();
             const { getAllByTestId } = withRender(
                 <DailyWeatherCardWidget weatherData={weatherData} />,
-                { probes: { widget: widgetProbe } }
+                { probes: { widget: widgetProbe } },
             );
 
             await user.hover(getAllByTestId("weather-card")[0]);
@@ -55,7 +55,7 @@ describe("Component: daily-weather-card-widget", async () => {
         const widgetProbe = vi.fn();
         const { getAllByRole } = withRender(
             <DailyWeatherCardWidget weatherData={weatherData} />,
-            { probes: { widget: widgetProbe } }
+            { probes: { widget: widgetProbe } },
         );
         await user.click(getAllByRole("listitem")[0]);
         await user.unhover(getAllByRole("listitem")[0]);
@@ -69,7 +69,7 @@ describe("Component: daily-weather-card-widget", async () => {
             const widgetProbe = vi.fn();
             const { getAllByRole } = withRender(
                 <DailyWeatherCardWidget weatherData={weatherData} />,
-                { probes: { widget: widgetProbe } }
+                { probes: { widget: widgetProbe } },
             );
 
             await user.click(getAllByRole("listitem")[0]);
@@ -84,7 +84,7 @@ describe("Component: daily-weather-card-widget", async () => {
         const widgetProbe = vi.fn();
         const { getAllByRole, getByText } = withRender(
             <DailyWeatherCardWidget weatherData={weatherData} />,
-            { probes: { widget: widgetProbe } }
+            { probes: { widget: widgetProbe } },
         );
 
         await user.click(getAllByRole("listitem")[0]);
@@ -97,7 +97,7 @@ describe("Component: daily-weather-card-widget", async () => {
 
     it("should return a skeleton if no data is provided.", () => {
         const { getAllByTestId } = withRender(
-            <DailyWeatherCardWidget weatherData={undefined} />
+            <DailyWeatherCardWidget weatherData={undefined} />,
         );
         expect(getAllByTestId("weather-card-skeleton")).toHaveLength(8);
     });

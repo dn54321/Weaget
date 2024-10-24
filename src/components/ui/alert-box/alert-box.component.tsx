@@ -42,7 +42,7 @@ export default function AlertBox(props: AlertBoxProps & BoxProps) {
                         >
                             {alert.message}
                         </Alert>
-                    )
+                    ),
                     )
                 }
             </Stack>

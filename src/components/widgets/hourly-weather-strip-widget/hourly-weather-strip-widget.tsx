@@ -48,7 +48,7 @@ export default function HourlyWeatherStripWidget(props: HourlyWeatherStripWidget
                 <WeatherStrip {...hourlyWeather.props} />
             </Box>
         );
-    }
+    },
 
     );
 

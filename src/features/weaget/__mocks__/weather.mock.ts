@@ -4,7 +4,7 @@ import { createOpenWeatherWeatherMockData } from "@features/open-weather-map-one
 
 export function createWeatherCurrentMockData(
     date = faker.date.anytime(),
-    timezone = faker.location.timeZone()
+    timezone = faker.location.timeZone(),
 ) {
     const dateTime = DateTime.fromJSDate(date, { zone: timezone });
     const startDay = dateTime.startOf("day");
@@ -31,7 +31,7 @@ export function createWeatherCurrentMockData(
 
 export function createWeatherDailyMockData(
     date = faker.date.anytime(),
-    timezone = faker.location.timeZone()
+    timezone = faker.location.timeZone(),
 ) {
     const dateTime = DateTime.fromJSDate(date, { zone: timezone });
     const startDay = dateTime.startOf("day");

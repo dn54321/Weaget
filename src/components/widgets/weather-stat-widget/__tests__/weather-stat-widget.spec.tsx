@@ -43,7 +43,7 @@ describe("Component: weather-stat-widget", () => {
                 },
             }}
             />,
-            { settings }
+            { settings },
         );
 
         expect(getByText("Jan 1, 2023")).toBeInTheDocument();

@@ -23,7 +23,7 @@ describe("Hooks - use-system-theme", async () => {
             [
                 ["light", false],
                 ["dark", true],
-            ]
+            ],
         )("Theme should be set to %s mode if dark mode is %o during initialisation.", (colourScheme, darkModeInitialisation) => {
             window.matchMedia = vi.fn().mockImplementation(() => ({
                 matches: darkModeInitialisation,
@@ -41,7 +41,7 @@ describe("Hooks - use-system-theme", async () => {
             [
                 [SystemTheme.LIGHT],
                 [SystemTheme.DARK],
-            ]
+            ],
         )("Should return the correct theme colour when set to %s mode.", async (themeColour: SystemTheme) => {
             const { result } = renderHook(() => useSystemSettings(), { wrapper: testWrapper });
             act(() => {
@@ -54,10 +54,10 @@ describe("Hooks - use-system-theme", async () => {
             [
                 [SystemTheme.LIGHT, SystemTheme.DARK],
                 [SystemTheme.DARK, SystemTheme.LIGHT],
-            ]
+            ],
         )("Toggling from %s mode should set the theme colour to %s mode.", async (
             oldThemeColour: SystemTheme,
-            newThemeColour: SystemTheme
+            newThemeColour: SystemTheme,
         ) => {
             const { result } = renderHook(() => useSystemSettings(), { wrapper: testWrapper });
 

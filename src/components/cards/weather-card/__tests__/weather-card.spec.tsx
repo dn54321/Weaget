@@ -45,7 +45,7 @@ describe("Component: Weather Card", () => {
         ["Jan 03", 2],
     ])
     ("Compact Weather Cards must display %s when offset %d days from 1st of Jan.", (
-        dateString: string, offset: number
+        dateString: string, offset: number,
     ) => {
         const currentMockDate = DateTime.local(2000, 1, 1, { zone: cardProps.timezone });
         const cardDate = DateTime.local(2000, 1, 1 + offset, { zone: cardProps.timezone });

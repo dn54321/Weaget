@@ -83,7 +83,7 @@ describe("Component: navbar", () => {
         ])("should be able to toggle from %s to %s when clicking temperature button toggle.", async (
             from: string,
             to: string,
-            temperatureSetting: TemperatureScale
+            temperatureSetting: TemperatureScale,
         ) => {
             const user = userEvent.setup();
             window.innerWidth = 500;
@@ -104,7 +104,7 @@ describe("Component: navbar", () => {
         ])("should be able to toggle from %s to %s when clicking measurement button toggle.", async (
             from: string,
             to: string,
-            measurementSetting: MeasurementScale
+            measurementSetting: MeasurementScale,
         ) => {
             const user = userEvent.setup();
             window.innerWidth = 500;
@@ -125,7 +125,7 @@ describe("Component: navbar", () => {
         ])("should be able to toggle from %s to %s when clicking theme button toggle.", async (
             from: string,
             to: string,
-            themeSetting: SystemTheme
+            themeSetting: SystemTheme,
         ) => {
             const user = userEvent.setup();
             window.innerWidth = 500;

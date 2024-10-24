@@ -11,6 +11,6 @@ export function mockGoogleLocationHandle(response: HttpResponse, options?: Reque
     return http.get(
         "https://maps.googleapis.com/maps/api/geocode/json",
         () => response,
-        options
+        options,
     );
 }

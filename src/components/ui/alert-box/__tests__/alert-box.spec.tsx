@@ -19,7 +19,7 @@ describe("Component: alert-box", () => {
                 ]}
                 removeAlert={vi.fn()}
 
-            />
+            />,
         );
 
         expect(getByText("mockMessage")).toBeInTheDocument();
@@ -40,7 +40,7 @@ describe("Component: alert-box", () => {
                     },
                 ]}
                 removeAlert={deleteMessageMock}
-            />
+            />,
         );
 
         expect(getByText("mockMessage")).toBeInTheDocument();
@@ -72,7 +72,7 @@ describe("Component: alert-box", () => {
                     },
                 ]}
                 removeAlert={deleteMessageMock}
-            />
+            />,
         );
         expect(queryByText("messageA")).not.toBeInTheDocument();
         expect(getByText("messageB")).toBeInTheDocument();

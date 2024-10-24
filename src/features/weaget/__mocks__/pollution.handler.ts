@@ -11,6 +11,6 @@ export function mockPollutionHandle(response: HttpResponse, options?: RequestHan
     return http.get(
         "/api/pollution",
         () => response,
-        options
+        options,
     );
 }

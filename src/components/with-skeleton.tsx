@@ -6,7 +6,7 @@ export function withSkeleton<
     V extends (props: any) => React.ReactNode,
 >(
     Component: T,
-    Skeleton: V
+    Skeleton: V,
 ) {
     const component = (props: Parameters<T>[0] | SkeletonProps | Parameters<V>[0]) => {
         if ("skeleton" in props && (props as SkeletonProps).skeleton === true) {

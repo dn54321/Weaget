@@ -41,7 +41,7 @@ export const Component: Story = {
     render: (args) => {
         const { weatherType, ...props } = args;
         const weatherDetails = openWeatherTypes.find(
-            openWeatherType => openWeatherType.main === weatherType
+            openWeatherType => openWeatherType.main === weatherType,
         );
         if (weatherDetails === undefined) throw new Error("No weather details found");
         return (

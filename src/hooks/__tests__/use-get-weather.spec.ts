@@ -22,7 +22,7 @@ describe("Hooks - use-get-weather", async () => {
             server.use(mockWeatherHandle(HttpResponse.json(weatherMockData)));
             const { result } = renderHook(
                 () => useGetWeather("mockLocation"),
-                { wrapper: testWrapper }
+                { wrapper: testWrapper },
             );
 
             await waitFor(() => expect(result.current.isSuccess).toBe(true));
@@ -35,7 +35,7 @@ describe("Hooks - use-get-weather", async () => {
             server.use(mockWeatherHandle(HttpResponse.json(weatherMockData)));
             const { result } = renderHook(
                 () => useGetWeather("mockLocation", "mockRegion"),
-                { wrapper: testWrapper }
+                { wrapper: testWrapper },
             );
 
             await waitFor(() => expect(result.current.isSuccess).toBe(true));
@@ -48,12 +48,12 @@ describe("Hooks - use-get-weather", async () => {
             async (statusCode: number) => {
                 const weatherMockData = createWeatherMockData();
                 server.use(mockWeatherHandle(
-                    HttpResponse.json(weatherMockData, { status: statusCode })
+                    HttpResponse.json(weatherMockData, { status: statusCode }),
                 ));
 
                 const { result } = renderHook(
                     () => useGetWeather("mockLocation"),
-                    { wrapper: testWrapper }
+                    { wrapper: testWrapper },
                 );
 
                 await waitFor(() => expect(result.current.isError).toBe(true));

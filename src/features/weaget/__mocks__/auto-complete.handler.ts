@@ -5,7 +5,7 @@ import { withSearchParams } from "@utils/msw-resolver";
 export const autoCompleteHandler = [
     http.get("/api/location/auto-complete", withSearchParams(
         params => params.has("input"),
-        () => HttpResponse.json(createAutoCompleteMockData())
+        () => HttpResponse.json(createAutoCompleteMockData()),
     )),
     http.get("/api/location/auto-complete", () => {
         return HttpResponse.json({
@@ -19,6 +19,6 @@ export function mockAutoCompleteHandle(response: HttpResponse, options?: Request
     return http.get(
         "/api/location/auto-complete",
         () => response,
-        options
+        options,
     );
 }

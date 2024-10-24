@@ -46,7 +46,7 @@ describe("Component: weather-display-widget", async () => {
                     },
                 }}
             />,
-            { settings }
+            { settings },
         );
         expect(getByText("20°C")).toBeInTheDocument();
         expect(getByText("Feels like 27°")).toBeInTheDocument();
@@ -74,7 +74,7 @@ describe("Component: weather-display-widget", async () => {
         const settings = { temperatureScale: TemperatureScale.CELSIUS };
         const { getByText } = withRender(
             <WeatherDisplayWidget location="testLocation" weatherData={weatherData} />,
-            { settings, widgetState }
+            { settings, widgetState },
         );
         expect(getByText("20°")).toBeInTheDocument();
         expect(getByText("21°")).toBeInTheDocument();

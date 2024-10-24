@@ -26,10 +26,10 @@ describe("Component: pollution-widget", async () => {
             ["Unhealthy", 160],
             ["Very Unhealthy", 210],
             ["Hazardous", 310],
-        ]
+        ],
     )("should display '%s' air quality index when aqi is %d.", (
         quality: string,
-        aqi: number
+        aqi: number,
     ) => {
         const { getByText } = withRender(
             <PollutionWidget pollutionData={{

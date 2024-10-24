@@ -24,7 +24,7 @@ describe("Component: rainfall-widget", async () => {
         ["daily", "14 days"],
     ])("should show rainfall for %s.", (
         rainfallType: string,
-        title: string
+        title: string,
     ) => {
         const rainfallData = weatherData[rainfallType as keyof OneCallWeatherDetails];
         const { getByText } = withRender(
@@ -50,7 +50,7 @@ describe("Component: rainfall-widget", async () => {
                 minutely: undefined,
                 daily: undefined,
             }}
-            />
+            />,
         );
         expect(getAllByRole("button")).toHaveLength(2);
         expect(getAllByRole("button")[0]).toHaveAttribute("aria-label", "See 14 days rainfall");
@@ -75,7 +75,7 @@ describe("Component: rainfall-widget", async () => {
                 daily: [],
                 [key]: value,
             }}
-            />
+            />,
         );
 
         expect(view.getByText("Rainfall")).toBeInTheDocument();

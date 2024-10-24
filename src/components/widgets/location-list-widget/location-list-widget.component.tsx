@@ -54,7 +54,7 @@ export default function LocationListWidget(props: LocationListWidgetProps) {
                         height="40px"
                     />
                 </Box>
-            )
+            ),
             );
     return (
         <Widget title="Suggested Locations" sx={props.sx}>

@@ -251,7 +251,7 @@ export default function PollutionWidget(props: PollutionWidgetProps) {
                     {iaqiData.v}
                     {" "}
                     {rating}
-                </>
+                </>,
             ));
         });
     }

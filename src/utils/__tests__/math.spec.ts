@@ -11,7 +11,7 @@ describe("Utils - math", async () => {
     ])("Number %f rounded down to %f decimal places should return %f.", async (
         number: number,
         decimals: number,
-        expected: number
+        expected: number,
     ) => {
         expect(round(number, decimals)).toBe(expected);
     });

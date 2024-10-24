@@ -11,7 +11,7 @@ describe("Component: Widget", () => {
                 title="mockTitle"
                 subtitle="subTitle"
                 rightDecorum={<BugReportIcon aria-label="test-icon" />}
-            />
+            />,
         );
         expect(getByText("mockTitle")).toBeInTheDocument();
         expect(getByText("subTitle")).toBeInTheDocument();
@@ -22,7 +22,7 @@ describe("Component: Widget", () => {
         const { getByText } = withRender(
             <Widget title="mockTitle">
                 <Box>mockContent</Box>
-            </Widget>
+            </Widget>,
         );
         expect(getByText("mockTitle")).toBeInTheDocument();
         expect(getByText("mockContent")).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe("Component: Widget", () => {
         const { getByText } = withRender(
             <Widget title="mockTitle" variant="transparent">
                 <Box>mockContent</Box>
-            </Widget>
+            </Widget>,
         );
         expect(getByText("mockTitle")).toBeInTheDocument();
         expect(getByText("mockContent")).toBeInTheDocument();
