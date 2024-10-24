@@ -2,13 +2,19 @@ import { getLocationDetails } from "@services/geolocation.service";
 import { NextRequest } from "next/server";
 import { createNextResponseError, handleNextResponseError } from "@utils/next-request-helper";
 
+interface PageProps {
+    params: Promise<{
+        location: string;
+    }>;
+}
+
 export async function GET(
     req: NextRequest,
-    { params }: { params: { location: string } }
+    props: PageProps
 ) {
     const queryParams = new URL(`${req.url}`).searchParams;
     const region = queryParams.get("region") || undefined;
-
+    const params = await props.params;
     try {
         const data = await getLocationDetails(params.location, region);
         if (data.status === "ZERO_RESULTS") {

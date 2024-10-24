@@ -33,7 +33,7 @@ export const createSettingsStore = (
     initState: Partial<SettingState> = {},
     shouldPersist: boolean = true,
 ) => {
-    const checkIsDarkSchemePreferred = () => window.matchMedia("(prefers-color-scheme:dark)").matches;
+    // const checkIsDarkSchemePreferred = () => window.matchMedia("(prefers-color-scheme:dark)").matches;
     return createStore<SettingStore>()(persist(set => ({
         ...initialSettingStoreState,
         ...initState,
@@ -48,7 +48,7 @@ export const createSettingsStore = (
             if (state.theme === SystemTheme.DARK) {
                 return { theme: SystemTheme.LIGHT };
             }
-            const isDarkPreferred = checkIsDarkSchemePreferred();
+            const isDarkPreferred = true; // checkIsDarkSchemePreferred();
             return { theme: isDarkPreferred ? SystemTheme.LIGHT : SystemTheme.DARK };
         }),
     }), { name: "persistentStore", ...(!shouldPersist && { partialize: () => {} }) }));

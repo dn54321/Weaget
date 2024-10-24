@@ -37,11 +37,8 @@ export const FieldBox = styled(InputBase)(({ theme }) => ({
     },
 }));
 
-export const SuggestionText = styled("li")(({ theme }) => ({
+export const SuggestionText = styled(Box)(({ theme }) => ({
     "borderBottom": `1px solid ${theme.palette.divider}`,
     "padding": "5px 10px",
     "userSelect": "none",
-    "&.Mui-focused": {
-        backgroundColor: theme.palette.action.hover,
-    },
 }));

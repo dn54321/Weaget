@@ -10,7 +10,7 @@ import { useAlert } from "@src/hooks/use-alert";
 import { useGetLocation } from "@src/hooks/use-get-location";
 import { useGetPollution } from "@src/hooks/use-get-pollution";
 import { useGetWeather } from "@src/hooks/use-get-weather";
-import { useEffect } from "react";
+import { use, useEffect } from "react";
 import { useGetNearbyLocation } from "@src/hooks/use-get-nearby-location";
 import { Navbar } from "@components/layout/navbar";
 import { Footer } from "@components/layout/footer";
@@ -23,12 +23,13 @@ import { WeatherStatWidget } from "@components/widgets/weather-stat-widget";
 import { useSystemSettings } from "@src/hooks/use-system-settings";
 
 interface PageProps {
-    params: {
+    params: Promise<{
         location: string;
-    };
+    }>;
 }
 
-export default function Page({ params }: PageProps) {
+export default function Page(pageProps: PageProps) {
+    const params = use(pageProps.params);
     const location = params.location;
     const { locale } = useSystemSettings();
     const weatherQuery = useGetWeather(location, undefined, locale);
