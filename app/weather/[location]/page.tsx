@@ -20,7 +20,7 @@ import { LocationListWidget } from "@components/widgets/location-list-widget";
 import { PollutionWidget } from "@components/widgets/pollution-widget";
 import { RainfallWidget } from "@components/widgets/rainfall-widget";
 import { WeatherStatWidget } from "@components/widgets/weather-stat-widget";
-import { useSystemSettings } from "@src/hooks/use-system-settings";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 interface PageProps {
     params: Promise<{
@@ -31,7 +31,7 @@ interface PageProps {
 export default function Page(pageProps: PageProps) {
     const params = use(pageProps.params);
     const location = params.location;
-    const { locale } = useSystemSettings();
+    const { t, locale } = useSystemTranslation();
     const weatherQuery = useGetWeather(location, undefined, locale);
     const pollutionQuery = useGetPollution(weatherQuery.data?.lat, weatherQuery.data?.lon);
     const nearbyLocationQuery = useGetNearbyLocation(weatherQuery.data?.lat, weatherQuery.data?.lon, locale);
@@ -52,7 +52,7 @@ export default function Page(pageProps: PageProps) {
 
     return (
         <Box>
-            <title>{locationShortForm ? `${locationShortForm} - Weaget` : "Weaget" }</title>
+            <title>{locationShortForm ? `${locationShortForm} - ${t("webapp.name")}` : t("webapp.name") }</title>
             <Box display="grid" gridTemplateRows="80px auto max-content" gap={1} height="100%" width="100%">
                 <Box sx={{ gridRow: "1" }}><Navbar /></Box>
                 <Box>

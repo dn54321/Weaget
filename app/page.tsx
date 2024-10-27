@@ -3,7 +3,6 @@ import { Container } from "@mui/material";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import styled from "@mui/system/styled";
-import Head from "next/head";
 import { useEffect } from "react";
 import { SearchBar } from "@components/ui/search-bar";
 import { useWidgetStore } from "@src/hooks/stores/use-widget-store";
@@ -126,10 +125,8 @@ export default function Home() {
 
     return (
         <Box height="100%">
-            <Head>
-                <title>{t("webapp.name")}</title>
-                <meta name="description" content={t("webapp.description")} />
-            </Head>
+            <title>{t("webapp.name")}</title>
+            <meta name="description" content={t("webapp.description")} />
             <Box display="grid" gridTemplateRows="1fr auto" width="100%" height="100%" position="relative">
                 <Stack alignItems="center" direction="row" position="absolute" top={10} right={10}>
                     <LocalisationDropdownButton />

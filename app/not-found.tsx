@@ -1,6 +1,5 @@
 "use client";
 import { Button, Stack, Box, Container } from "@mui/material";
-import Head from "next/head";
 import CloudIcon from "@mui/icons-material/Cloud";
 import styled from "@mui/system/styled";
 import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
@@ -60,9 +59,7 @@ export default function NotFound() {
     const { t } = useSystemTranslation();
     return (
         <Page>
-            <Head>
-                <title>{`${t("webapp.name")} - t("page.404.pageNotFound")` }</title>
-            </Head>
+            <title>{`${t("webapp.name")} - ${t("page.404.pageNotFound")}` }</title>
             <Container maxWidth="lg" sx={{ height: "100%" }} disableGutters>
                 <Box position="absolute" top={10} right={10}>
                     <ThemeToggleButton />

@@ -6,11 +6,5 @@ export function useSystemTranslation(
     options?: UseTranslationOptions<undefined> | undefined,
 ) {
     const { locale } = useSystemSettings();
-    const userLocale = (typeof window !== "undefined")
-        ? navigator.languages.find(lng => lng.startsWith(locale))
-        : undefined;
-
-    const parsedLocale = userLocale || locale;
-
-    return { ...i18nTranslation(ns, { lng: parsedLocale, ...options }), locale };
+    return { ...i18nTranslation(ns, { lng: locale, ...options }), locale };
 }

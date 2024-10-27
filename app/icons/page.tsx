@@ -14,6 +14,7 @@ export default function Page() {
     return (
         <Container maxWidth="lg">
             <Toolbar />
+            <title>{`${t("webapp.name")} - ${t("weather.icon.text")}`}</title>
             <Typography component="h2" variant="h3">{t("weather.icon.text")}</Typography>
             <Divider />
             <Grid container spacing={2} mt="20px">
