@@ -275,10 +275,17 @@
     "measurementScale": "测量尺度",
     "temperatureScale": "温标",
     "themeColor": "主题色",
-    "text": "设置"
+    "text": "设置",
+    "locale": "语言环境"
   },
   "theme": {
     "darkTheme": "深色主题",
     "lightTheme": "浅色主题"
+  },
+  "directions": {
+    "goBack": "回去"
+  },
+  "general": {
+    "logo": "标识"
   }
 }

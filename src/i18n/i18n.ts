@@ -11,7 +11,7 @@ i18n
     .use(resourcesToBackend((lng: string, ns: string) => import(`./locales/${lng}/${ns}.json`)))
     .init({
         fallbackLng: "ja",
-        debug: true,
+        debug: false,
         ns: ["common"],
         defaultNS: "common",
         preload: [],

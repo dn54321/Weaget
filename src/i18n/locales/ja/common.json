@@ -275,10 +275,17 @@
     "measurementScale": "測定スケール",
     "temperatureScale": "温度目盛",
     "themeColor": "テーマカラー",
-    "text": "設定"
+    "text": "設定",
+    "locale": "ロケール"
   },
   "theme": {
     "darkTheme": "ダークテーマ",
     "lightTheme": "ライトテーマ"
+  },
+  "directions": {
+    "goBack": "戻る"
+  },
+  "general": {
+    "logo": "ロゴ"
   }
 }

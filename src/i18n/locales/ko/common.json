@@ -275,10 +275,17 @@
     "measurementScale": "측정 규모",
     "temperatureScale": "온도 눈금",
     "themeColor": "테마 색상",
-    "text": "설정"
+    "text": "설정",
+    "locale": "장소"
   },
   "theme": {
     "darkTheme": "어두운 테마",
     "lightTheme": "밝은 테마"
+  },
+  "directions": {
+    "goBack": "돌아가기"
+  },
+  "general": {
+    "logo": "심벌 마크"
   }
 }
