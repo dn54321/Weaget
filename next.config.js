@@ -14,4 +14,4 @@ const nextConfig = {
     },
 };
 
-export default bundleAnalyzer(nextConfig);
+export default nextConfig;

@@ -18,9 +18,10 @@
   "measurement": {
     "metric": "メートル法",
     "imperial": "ヤードポンド法",
-    "metersPerSecond": {
-      "unit": "m/s"
-    }
+    "inchesPerHour": "インチ/時",
+    "metersPerSecond": "メートル/秒",
+    "milesPerHour": "時速マイル",
+    "millimetersPerHour": "ミリメートル/時"
   },
   "component": {
     "widget": {
@@ -58,7 +59,17 @@
           "unhealthy": "不健康",
           "unhealthySensitive": "敏感なグループにとっては不健康",
           "veryUnhealthy": "非常に不健康"
-        }
+        },
+        "pollutionParticleDescription": {
+          "neph": "可視性",
+          "no2": "二酸化窒素",
+          "o3": "オゾン",
+          "pm10": "直径10マイクロメートル以下の粒子",
+          "co": "一酸化炭素",
+          "nh3": "アンモニア",
+          "pm25": "直径2.5マイクロメートル以下の粒子"
+        },
+        "loading": "汚染の詳細を読み込んでいます..."
       },
       "dailyCompactWeather": {
         "button": "天気の詳細を取得する",
@@ -78,6 +89,25 @@
       },
       "weatherStat": {
         "title": "天気の詳細"
+      },
+      "rainfall": {
+        "120Mins": "120分",
+        "14Days": "14日",
+        "48Hours": "48時間",
+        "see120Mins": "120分間の降雨量を見る",
+        "see14Days": "14日間の降雨量を見る",
+        "see48Hours": "48 時間の降雨量を見る",
+        "title": "降雨"
+      },
+      "locationList": {
+        "noLocations": "近くにスポットが見つかりませんでした...",
+        "title": "推奨される場所"
+      },
+      "weatherDisplay": {
+        "feelsLike": "みたいな感じ",
+        "fetchingLocationDetails": "場所の詳細を取得中...",
+        "updatedAt": "更新日時",
+        "fetchingDetails": "詳細を取得中..."
       }
     },
     "searchBar": {
@@ -101,7 +131,14 @@
       "switchMetric": "メートル法に変更",
       "switchImperial": "ヤードポンド法に変更",
       "switchCelsius": "摂氏に変更",
-      "switchFahrenheit": "華氏に変更"
+      "switchFahrenheit": "華氏に変更",
+      "imperialSystem": "帝国主義",
+      "metricSystem": "メートル法"
+    },
+    "weatherStrip": {
+      "hourlyWeatherStats": "時間ごとの気象統計",
+      "collapse": "アコーディオンを折りたたんで天気の詳細を非表示にします",
+      "expand": "アコーディオンを展開してすべての天気の詳細を表示します"
     }
   },
   "weather": {
@@ -127,6 +164,70 @@
       "low": "低い",
       "moderate": "適度",
       "veryHigh": "非常に高い"
+    },
+    "icon": {
+      "brokenCloud": {
+        "description": "いくつかの雲が太陽で隠れています。",
+        "title": "壊れた雲"
+      },
+      "clearSky": {
+        "title": "晴れた空"
+      },
+      "fewCloud": {
+        "description": "太陽を伴う小さな雲。",
+        "title": "雲が少ない"
+      },
+      "fog": {
+        "title": "霧"
+      },
+      "haze": {
+        "title": "ヘイズ"
+      },
+      "heavyRain": {
+        "title": "大雨"
+      },
+      "lightRain": {
+        "title": "小雨"
+      },
+      "mist": {
+        "description": "太陽を隠す雲の層。",
+        "title": "ミスト"
+      },
+      "moon": {
+        "title": "月"
+      },
+      "overcastCloud": {
+        "description": "雲が多く、小さな太陽が伴います。",
+        "title": "曇り雲"
+      },
+      "rainCloud": {
+        "description": "灰色の雲と激しい雨粒。",
+        "title": "雨雲"
+      },
+      "scatteredCloud": {
+        "description": "太陽を伴う雲が少しありました。",
+        "title": "散在する雲"
+      },
+      "showerRain": {
+        "description": "灰色の雲に軽い雨粒がたくさんあります。",
+        "title": "にわか雨"
+      },
+      "snow": {
+        "title": "雪"
+      },
+      "snowCloud": {
+        "description": "雪の結晶を伴った明るい灰色の雲。",
+        "title": "雪雲"
+      },
+      "sun": {
+        "description": "太陽を表す明るい円。",
+        "title": "太陽"
+      },
+      "text": "天気アイコン",
+      "thunderstorm": {
+        "description": "雲を伴う稲妻。",
+        "title": "雷雨"
+      }
     }
   },
   "language": {
@@ -137,6 +238,47 @@
   },
   "footer": {
     "reserveNotice": "無断転載を禁じます。",
-    "copyright": "@{{year, datetime}} DN54321。"
+    "copyright": "@{{year, datetime}} DN54321。",
+    "iconButton": {
+      "github": {
+        "description": "Github ページにアクセスする",
+        "title": "ギットハブページ"
+      },
+      "icons": {
+        "description": "天気アイコンページにアクセスする",
+        "title": "アイコン"
+      },
+      "linkedIn": {
+        "description": "LinkedIn ページにアクセスする",
+        "title": "LinkedIn ページ"
+      },
+      "sourceCode": {
+        "description": "ソースコードにアクセスする",
+        "title": "ソースコード"
+      }
+    }
+  },
+  "page": {
+    "404": {
+      "description": "お探しのページは見つかりませんでした。",
+      "goBackToHomeButton": "家に帰りなさい",
+      "pageNotFound": "ページが見つかりません"
+    },
+    "iconGallery": {
+      "description": "説明",
+      "gallery": "ギャラリー",
+      "invalidIcon": "無効なIDです。\n後でもう一度試してください。",
+      "name": "名前"
+    }
+  },
+  "settings": {
+    "measurementScale": "測定スケール",
+    "temperatureScale": "温度目盛",
+    "themeColor": "テーマカラー",
+    "text": "設定"
+  },
+  "theme": {
+    "darkTheme": "ダークテーマ",
+    "lightTheme": "ライトテーマ"
   }
 }

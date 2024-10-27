@@ -104,6 +104,7 @@ interface PollutionTableProps {
 }
 
 function PollutionTable(props: PollutionTableProps) {
+    const { t } = useSystemTranslation();
     return (
         <TableContainer component={Box}>
             <Table
@@ -116,12 +117,8 @@ function PollutionTable(props: PollutionTableProps) {
             >
                 <TableHead>
                     <TableRow>
-                        <TableCell>Particle</TableCell>
-                        <TableCell>
-                            <abbr title="Air Quality Index">AQI</abbr>
-                            {" "}
-                            Level
-                        </TableCell>
+                        <TableCell>{t("component.widget.pollution.particle")}</TableCell>
+                        <TableCell>{t("component.widget.pollution.aqiLevel")}</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -158,44 +155,44 @@ const pollutionWarningTranslationKey = [
 ];
 
 const stringToTag: Record<string, JSX.Element> = {
-    neph: <span title="visibility">NEPH</span>,
     pm25: (
-        <span title="particles with a diameter of 2.5 micrometres or less">
+        <React.Fragment>
             PM
             <sub>2.5</sub>
-        </span>
+        </React.Fragment>
     ),
     pm10: (
-        <span title="particles with a diameter of 10 micrometres or less">
+        <React.Fragment>
             PM
             <sub>10</sub>
-        </span>
+        </React.Fragment>
     ),
     o3: (
-        <span title="ozone">
+        <React.Fragment>
             O
             <sub>3</sub>
-        </span>
+        </React.Fragment>
     ),
     no2: (
-        <span title="nitrogen dioxide">
+        <React.Fragment>
             NO
             <sub>2</sub>
-        </span>
+        </React.Fragment>
     ),
     so2: (
-        <span title="sulfur dioxide">
+        <React.Fragment>
             SO
             <sub>2</sub>
-        </span>
+        </React.Fragment>
     ),
     nh3: (
-        <span title="ammonia">
+        <React.Fragment>
             NH
             <sub>3</sub>
-        </span>
+        </React.Fragment>
     ),
-    co: <span title="carbon monoxide">CO</span>,
+    neph: <React.Fragment>NEPH</React.Fragment>,
+    co: <React.Fragment>CO</React.Fragment>,
 };
 
 // Not Used Yet..
@@ -246,7 +243,12 @@ export default function PollutionWidget(props: PollutionWidgetProps) {
                     )
                 </Box>
             );
-            rows.push(createData(stringToTag[key],
+            rows.push(createData(
+                <span
+                    title={t(`component.widget.pollution.pollutionParticleDescription.${key}`)}
+                >
+                    {stringToTag[key]}
+                </span>,
                 <>
                     {iaqiData.v}
                     {" "}
@@ -282,11 +284,15 @@ export default function PollutionWidget(props: PollutionWidgetProps) {
                             <>
                                 <Box mt="20px" color="black">{show && <PollutionTable rows={rows} />}</Box>
                                 <Link mt="10px" component="button" onClick={() => { setShow(!show); }} color="text.color">
-                                    {show ? "Hide Advanced Pollution Details" : "Show Advanced Pollution Details"}
+                                    {
+                                        show
+                                            ? t("component.widget.pollution.hideAdvancedPollutionDetails")
+                                            : t("component.widget.pollution.showAdvancedPollutionDetails")
+                                    }
                                 </Link>
                             </>
                         )
-                    : <Box color="#4682B4" mt="20px">Loading Pollution Details...</Box>}
+                    : <Box color="#4682B4" mt="20px">{t("component.widget.pollution.loading")}</Box>}
             </Box>
         </Widget>
     );

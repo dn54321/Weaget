@@ -4,6 +4,7 @@ import Skeleton from "@mui/material/Skeleton";
 import { NearbyLocation } from "@features/weaget/nearby-location/nearby-location.types";
 import { Widget } from "@components/containers/widget/widget";
 import { useRouter } from "next/navigation";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 /*
     Provides a list of the nearest suburbs/cities.
@@ -16,6 +17,7 @@ export interface LocationListWidgetProps {
 
 export default function LocationListWidget(props: LocationListWidgetProps) {
     const router = useRouter();
+    const { t } = useSystemTranslation();
     const locations = props.locationData
         ? props.locationData.map((location) => {
             const locationLink = encodeURI(`/weather/${location.name} ${location.state}, ${location.country}`);
@@ -57,12 +59,12 @@ export default function LocationListWidget(props: LocationListWidgetProps) {
             ),
             );
     return (
-        <Widget title="Suggested Locations" sx={props.sx}>
+        <Widget title={t("component.widget.locationList.title")} sx={props.sx}>
             <Box sx={{ mt: "10px" }} />
             <List dense component="ul">
                 {locations}
                 {props.locationData && !locations.length
-                    ? <Box pt="5px" mx="5px">No nearby places found...</Box>
+                    ? <Box pt="5px" mx="5px">{t("component.widget.locationList.noLocations")}</Box>
                     : null}
             </List>
         </Widget>

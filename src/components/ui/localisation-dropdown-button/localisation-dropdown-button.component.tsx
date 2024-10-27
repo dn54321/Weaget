@@ -19,8 +19,14 @@ export function LocalisationDropdownButton() {
         setAnchorEl(event.currentTarget);
     };
     const handleMenuClose = () => {
-        setAnchorEl(null);
         setTooltipOpen(false);
+        setAnchorEl(null);
+    };
+
+    const handleTooltipOpen = () => {
+        if (anchorEl === null) {
+            setTooltipOpen(true);
+        }
     };
 
     return (
@@ -29,7 +35,7 @@ export function LocalisationDropdownButton() {
             className="localisation-dropdown"
             open={!anchorEl && tooltipOpen}
             onClose={() => setTooltipOpen(false)}
-            onOpen={() => setTooltipOpen(true)}
+            onOpen={() => handleTooltipOpen()}
         >
             <Box>
                 <IconButton

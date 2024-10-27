@@ -22,7 +22,12 @@ export default function Logo(props: BoxProps & LogoProps) {
     const { hideShadow, ...rest } = props;
     const { t } = useSystemTranslation();
     return (
-        <Box {...rest} role="img" aria-label="Weaget logo">
+        <Box
+            {...rest}
+            role="img"
+            title={`${t("webapp.name")} ${t("general.logo")}`}
+            aria-label={`${t("webapp.name")} ${t("general.logo")}`}
+        >
             <Stack direction="row" alignItems="center">
                 <LogoIconStyle sx={{
                     ...(hideShadow && {

@@ -9,7 +9,7 @@ import geonamesNearbyLocationSchema from "@features/geonames-nearby-search/nearb
 import { GeonamesNearbyLocation } from "@features/geonames-nearby-search/nearby-location.types";
 
 // API ENDPOINTS
-const URL_GET_LOCATION = (loc: string, region?: string) => `https://maps.googleapis.com/maps/api/geocode/json?address=${loc}&key=${process.env.GOOGLE_APIKEY}${region ? "&region=" + region : ""}`;
+const URL_GET_LOCATION = (loc: string, region?: string, lang?: string) => `https://maps.googleapis.com/maps/api/geocode/json?address=${loc}&language=${lang}&key=${process.env.GOOGLE_APIKEY}${region ? "&region=" + region : ""}`;
 const URL_GET_LOCATION_BY_IP = (ipAddr: string) => `https://ipinfo.io/${ipAddr}?token=${process.env.IPINFO_APIKEY}`;
 const URL_GET_NEARBY_LOCATION = (lat: number, lng: number, lang: string = "local") => `http://api.geonames.org/findNearbyJSON?lat=${lat}&lng=${lng}&lang=${lang}&username=${process.env.GEONAMES_USERNAME}&maxRows=9&radius=300&featureCode=PPLX`;
 const URL_GET_LOCATION_SUGGESTIONS = (input: string, optionalParameters: Partial<LocationSuggestionOptional>) => `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${process.env.GOOGLE_APIKEY}&${new URLSearchParams({ input, ...optionalParameters })}`;
@@ -22,14 +22,15 @@ const IP_LOOKUP_CACHE_SECONDS = 60 * 30; // 30 mins
  * Fetches geolocation information for a location specified by region and returns it as an instance of GoogleGeocode model.
  * @param location A string representing the location you want to search for.
  * @param region An optional string representing a specific country or administrative region to narrow down your search.
+ * @param lang An optional string specifying the language you want to use in the response.
  * @returns A promise that resolves to an instance of OneCallWeatherDetails.
  */
-export async function getLocationDetails(location: string, region?: string): Promise<GoogleGeocode> {
-    const googleLocationLookupUrl = URL_GET_LOCATION(location, region);
+export async function getLocationDetails(location: string, region?: string, lang?: string): Promise<GoogleGeocode> {
+    const googleLocationLookupUrl = URL_GET_LOCATION(location, region, lang);
     const response = await fetch(googleLocationLookupUrl, { next: { revalidate: LOCATION_LOOKUP_CACHE_SECONDS } });
 
     if (!response.ok) {
-        throw new Error(`[Location Service] Could not fetch location data. (loc: ${location}, reg: ${region})`);
+        throw new Error(`[Location Service] Could not fetch location data. (loc: ${location}, reg: ${region}, lang: ${lang})`);
     }
 
     const data = await response.json();

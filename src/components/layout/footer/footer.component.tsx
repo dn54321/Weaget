@@ -25,29 +25,29 @@ export default function Footer(props: FooterProps) {
     const footerNavigationItems = [
         {
             icon: <CodeIcon />,
-            title: "Source Code",
-            description: "Access Source Code",
+            title: "footer.iconButton.sourceCode.title",
+            description: "footer.iconButton.sourceCode.description",
             link: "https://github.com/dn54321/Weaget",
             hoverColor: "#006400",
         },
         {
             icon: <GitHubIcon />,
-            title: "Github Page",
-            description: "Access Github Page",
+            title: "footer.iconButton.github.title",
+            description: "footer.iconButton.github.description",
             link: "https://github.com/dn54321/",
             hoverColor: "black",
         },
         {
             icon: <LinkedInIcon />,
-            title: "LinkedIn Page",
-            description: "Access LinkedIn Page",
+            title: "footer.iconButton.linkedIn.title",
+            description: "footer.iconButton.linkedIn.description",
             link: "https://www.linkedin.com/in/daniel-pham-8bba33193/",
             hoverColor: "#2867B2",
         },
         {
             icon: <BrushIcon />,
-            title: "Icons Page",
-            description: "Access Weather Icons Page",
+            title: "footer.iconButton.icons.title",
+            description: "footer.iconButton.icons.description",
             link: "/icons",
             hoverColor: "orange",
         },
@@ -91,7 +91,7 @@ export default function Footer(props: FooterProps) {
                     <Stack direction="row" height="fit-content" gap="10px" component="nav">
                         {footerNavigationItems.map(item => (
                             <StyledIconButton
-                                aria-label={item.description}
+                                aria-label={t(item.description)}
                                 onClick={() => router.push(item.link)}
                                 key={item.title}
                                 sx={{
@@ -100,7 +100,7 @@ export default function Footer(props: FooterProps) {
                                     },
                                 }}
                             >
-                                <Tooltip title={item.title}>{item.icon}</Tooltip>
+                                <Tooltip title={t(item.title)}>{item.icon}</Tooltip>
                             </StyledIconButton>
                         ))}
                     </Stack>

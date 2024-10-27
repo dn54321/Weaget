@@ -6,13 +6,15 @@ import Grid from "@mui/material/Grid2";
 import { weatherIconShowcase } from "./layout";
 import { useRouter } from "next/navigation";
 import { WeatherIcon } from "@components/ui/weather-icon";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 export default function Page() {
     const router = useRouter();
+    const { t } = useSystemTranslation();
     return (
         <Container maxWidth="lg">
             <Toolbar />
-            <Typography component="h2" variant="h3">Weather Icons</Typography>
+            <Typography component="h2" variant="h3">{t("weather.icon.text")}</Typography>
             <Divider />
             <Grid container spacing={2} mt="20px">
                 {weatherIconShowcase.map(weatherIcon => (
@@ -22,7 +24,7 @@ export default function Page() {
                                 <CardContent>
                                     <Stack alignItems="center">
                                         <Box fontSize="8em"><WeatherIcon id={weatherIcon.id} decoration /></Box>
-                                        <Typography variant="body1">{weatherIcon.name}</Typography>
+                                        <Typography variant="body1">{t(weatherIcon.name)}</Typography>
                                     </Stack>
                                 </CardContent>
                             </CardActionArea>

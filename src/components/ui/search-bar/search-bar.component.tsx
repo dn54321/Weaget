@@ -48,7 +48,7 @@ function MagnifyIconButton() {
 function MyLocationButtonIcon(props: { setErrorMessage: (errMessage: SearchErrorI18NKey) => void }) {
     const router = useRouter();
     const currentLocationQuery = useGetCurrentLocation();
-    const { t } = useSystemTranslation();
+    const { t, locale } = useSystemTranslation();
 
     function onClick() {
         const city = currentLocationQuery.data?.city;
@@ -105,14 +105,12 @@ export function SuggestionBox(props: { children: React.ReactNode; listprops: Rea
                 "listStyleType": "none",
                 "p": 0,
                 "m": 0,
-                "mt": 1,
                 "& .Mui-focused": {
                     backgroundColor: "#e9e9e9",
                 },
             }}
-
         >
-            <Paper sx={{ position: "absolute", width: "100%", mt: "10px" }} component="ul" {...props.listprops}>
+            <Paper sx={{ position: "absolute", width: "100%", top: "10px" }} component="ul" {...props.listprops}>
                 <List sx={{ p: 0 }}>
                     {props.children}
                 </List>
@@ -219,27 +217,28 @@ export default function SearchBar(props: BoxProps) {
                 {groupedOptions.length > 0
                     ? (
                             <SuggestionBox listprops={getListboxProps()}>
-                                {(groupedOptions as Array<AutoCompleteSuggestions>).map((option, index: number) => (
-                                    <Box
-                                        component="li"
-                                        {...getOptionProps({ option, index })}
-                                        key={option.main + option.secondary + index}
-                                        sx={{
-                                            "p": "5px 10px",
-                                            "userSelect": "none",
-                                            "borderBottom": "1px solid",
-                                            "borderColor": "divider",
-                                            "&.Mui-focused": {
-                                                backgroundColor: "action.hover",
-                                            },
-                                        }}
-                                    >
-
-                                        <Box display="inline" color="text.main"><b>{option.main}</b></Box>
-                                        <Box display="inline" color="text.secondary" ml="1ch">{option.secondary}</Box>
-
-                                    </Box>
-                                ))}
+                                {(groupedOptions as Array<AutoCompleteSuggestions>).map((option, index: number) => {
+                                    const { key, ...optionProps } = getOptionProps({ option, index });
+                                    return (
+                                        <Box
+                                            component="li"
+                                            key={key}
+                                            {...optionProps}
+                                            sx={{
+                                                "p": "5px 10px",
+                                                "userSelect": "none",
+                                                "borderBottom": "1px solid",
+                                                "borderColor": "divider",
+                                                "&.Mui-focused": {
+                                                    backgroundColor: "action.hover",
+                                                },
+                                            }}
+                                        >
+                                            <Box display="inline" color="text.main"><b>{option.main}</b></Box>
+                                            <Box display="inline" color="text.secondary" ml="1ch">{option.secondary}</Box>
+                                        </Box>
+                                    );
+                                })}
                             </SuggestionBox>
                         )
                     : null }

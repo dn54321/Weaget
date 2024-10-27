@@ -2,7 +2,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { AppBar, Box, Container, Divider, IconButton, Link, ToggleButton, ToggleButtonGroup, Toolbar } from "@mui/material";
+import { AppBar, Box, Container, Divider, IconButton, Link, MenuItem, Select, SelectChangeEvent, ToggleButton, ToggleButtonGroup, Toolbar } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
@@ -12,13 +12,14 @@ import { SearchBar } from "@components/ui/search-bar";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Icon, OutlinedLogo } from "./navbar.styles";
 import { MeasurementScale } from "@src/types/measurement.types";
-import { SystemTheme } from "@src/types/system.types";
+import { SystemLocale, SystemTheme } from "@src/types/system.types";
 import { TemperatureScale } from "@src/types/weather.types";
 import { useSettingStore } from "@src/hooks//stores/use-setting-store";
 import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
 import { useSystemSettings } from "@src/hooks/use-system-settings";
 import NextLink from "next/link";
 import { LocalisationDropdownButton } from "@components/ui/localisation-dropdown-button/localisation-dropdown-button.component";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 export interface NavbarStateProp {
     mobileBurgerFn?: () => void;
@@ -80,10 +81,12 @@ function DefaultNavbar(props: NavbarStateProp) {
 
 // Search Navbar seen only during mobile use when the search icon is pressed.
 function SearchNavbar(props: NavbarStateProp) {
+    const { t } = useSystemTranslation();
     return (
         <>
             <IconButton
-                aria-label="go back"
+                title={t("directions.goBack")}
+                aria-label={t("directions.goBack")}
                 sx={{ color: "white", mr: "20px" }}
                 onClick={() => props.setState(NavbarStates.DEFAULT)}
             >
@@ -110,17 +113,21 @@ export interface SettingsDialogProps {
     open: boolean;
 }
 function SettingsDialog(props: SettingsDialogProps) {
+    const { t } = useSystemTranslation();
     const temperatureScale = useSettingStore(state => state.temperatureScale);
     const measurementScale = useSettingStore(state => state.measurementScale);
     const setTemperatureScale = useSettingStore(state => state.setTemperatureScale);
     const setMeasurementScale = useSettingStore(state => state.setMeasurementScale);
-    const { themeColour, toggleTheme } = useSystemSettings();
+    const { themeColour, toggleTheme, locale, setLocale } = useSystemSettings();
     const handleClose = () => {
         props.setDialog(false);
     };
 
     const deltaTemp = (_: any, v: TemperatureScale) => v && setTemperatureScale(v);
     const deltaMeas = (_: any, v: MeasurementScale) => v && setMeasurementScale(v);
+    const languageNames = new Intl.DisplayNames(["en"], {
+        type: "language",
+    });
 
     return (
         <Dialog
@@ -141,7 +148,7 @@ function SettingsDialog(props: SettingsDialogProps) {
                         <CloseIcon />
                     </IconButton>
                     <Box display="flex" justifyContent="center" width="100%">
-                        Settings
+                        {t("settings.text")}
                     </Box>
                 </Toolbar>
             </AppBar>
@@ -163,24 +170,51 @@ function SettingsDialog(props: SettingsDialogProps) {
                     },
                 }}
             >
-                <Box sx={{ m: "5px" }}><b>Temperature Scale</b></Box>
+                <Box sx={{ m: "5px" }}><b>{t("settings.temperatureScale")}</b></Box>
                 <ToggleButtonGroup value={temperatureScale} onChange={deltaTemp} exclusive>
-                    <ToggleButton value={TemperatureScale.CELSIUS}>Celcius (C°)</ToggleButton>
-                    <ToggleButton value={TemperatureScale.FAHRENHEIT}>Fahrenenheit (F°)</ToggleButton>
+                    <ToggleButton value={TemperatureScale.CELSIUS}>
+                        {t("temperature.celsius.text")}
+                        {" (°C)"}
+                    </ToggleButton>
+                    <ToggleButton value={TemperatureScale.FAHRENHEIT}>
+                        {t("temperature.fahrenheit.text")}
+                        {" (°F)"}
+                    </ToggleButton>
                 </ToggleButtonGroup>
                 <Divider sx={{ mt: "15px" }} />
-                <Box sx={{ m: "5px" }}><b>Measurement System</b></Box>
+                <Box sx={{ m: "5px" }}><b>{t("settings.measurementScale")}</b></Box>
                 <ToggleButtonGroup value={measurementScale} onChange={deltaMeas} exclusive>
-                    <ToggleButton value={MeasurementScale.METRIC}>Metric (M/S)</ToggleButton>
-                    <ToggleButton value={MeasurementScale.IMPERIAL}>Imperial (MPH)</ToggleButton>
+                    <ToggleButton value={MeasurementScale.METRIC}>
+                        {t("measurement.metric")}
+                        {" (M/S)"}
+                    </ToggleButton>
+                    <ToggleButton value={MeasurementScale.IMPERIAL}>
+                        {t("measurement.imperial")}
+                        {" (MPH)"}
+                    </ToggleButton>
                 </ToggleButtonGroup>
                 <Divider sx={{ mt: "15px" }} />
-                <Box sx={{ m: "5px" }}><b>Theme Colour</b></Box>
+                <Box sx={{ m: "5px" }}><b>{t("settings.themeColor")}</b></Box>
                 <ToggleButtonGroup value={themeColour} onChange={toggleTheme} exclusive>
-                    <ToggleButton value={SystemTheme.DARK}>Dark Theme</ToggleButton>
-                    <ToggleButton value={SystemTheme.LIGHT}>Light Theme</ToggleButton>
+                    <ToggleButton value={SystemTheme.DARK}>{t("theme.darkTheme")}</ToggleButton>
+                    <ToggleButton value={SystemTheme.LIGHT}>{t("theme.lightTheme")}</ToggleButton>
                 </ToggleButtonGroup>
                 <Divider sx={{ mt: "15px" }} />
+                <Box sx={{ m: "5px" }}><b>{t("settings.locale")}</b></Box>
+                <Select
+                    value={locale}
+                    onChange={(event: SelectChangeEvent) => setLocale(event.target.value as SystemLocale)}
+                    displayEmpty
+                >
+                    {Object.values(SystemLocale).map(currentLocale => (
+                        <MenuItem
+                            value={currentLocale}
+                            key={currentLocale}
+                        >
+                            {t(`language.${languageNames.of(currentLocale)?.toLowerCase()}`)}
+                        </MenuItem>
+                    ))}
+                </Select>
             </Box>
         </Dialog>
     );

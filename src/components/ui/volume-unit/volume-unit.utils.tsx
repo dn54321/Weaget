@@ -14,10 +14,3 @@ export function getVolumeSymbol(measurementScale: MeasurementScale) {
         case MeasurementScale.METRIC: return "mm/h";
     }
 }
-
-export function getVolumeLabel(measurementScale: MeasurementScale) {
-    switch (measurementScale) {
-        case MeasurementScale.IMPERIAL: return "inches per hour";
-        case MeasurementScale.METRIC: return "millimeters per hour";
-    }
-}

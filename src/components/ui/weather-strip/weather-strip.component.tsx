@@ -70,9 +70,15 @@ export default function WeatherStrip(props: WeatherStripProps) {
                 {...(props.setExpanded && { onChange: () => props.setExpanded!() })}
             >
                 <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
+                    expandIcon={(
+                        <Box title={props.expanded
+                            ? t("component.weatherStrip.collapse")
+                            : t("component.weatherStrip.expand")}
+                        >
+                            <ExpandMoreIcon />
+                        </Box>
+                    )}
                     sx={{
-
                         "paddingLeft": "0px",
                         "boxShadow": "none",
                         "& .MuiAccordionSummary-content": { margin: "0px" },

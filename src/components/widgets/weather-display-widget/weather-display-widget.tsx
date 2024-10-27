@@ -4,6 +4,7 @@ import { TempUnit } from "@components/ui/temperature-unit";
 import { DateTime } from "luxon";
 import { CurrentWeatherDetails, DailyWeatherDetails, OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { useWidgetStore } from "@src/hooks/stores/use-widget-store";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 const CLOUD_COLOR = "white";
 const RAIN_CLOUD_COLOR = "#c9c9c9";
@@ -297,10 +298,13 @@ export function WeatherTemperatureDisplay(props: WeatherTemperatureDisplayProps)
 export default function WeatherDisplayWidget(props: WeatherDisplayWidgetProps) {
     const focusedWeather = useWidgetStore(state => state.focusedWeather) ?? props.weatherData?.current;
     const timezone = props.weatherData?.timezone;
-
+    const { t, locale } = useSystemTranslation();
     const weatherUpdated = focusedWeather
-        ? DateTime.fromJSDate(focusedWeather?.dt, { zone: timezone }).toFormat("LLL d, t")
-        : "Fetching Details...";
+        ? DateTime
+            .fromJSDate(focusedWeather?.dt, { zone: timezone })
+            .setLocale(locale)
+            .toLocaleString(DateTime.DATETIME_MED)
+        : t("component.widget.weatherDisplay.fetchingDetails");
 
     const weatherCode = focusedWeather?.weather[0]?.id ?? 0;
     const weatherDescription = focusedWeather?.weather[0]?.description;
@@ -309,9 +313,11 @@ export default function WeatherDisplayWidget(props: WeatherDisplayWidgetProps) {
     return (
         <Container sx={{ background: getBackgroundColor(weatherCode), ...props.sx }}>
             <CardContent sx={{ height: "100%" }}>
-                <Typography component="h1" variant="h3"><b>{props.location ?? "Fetching Location Details..."}</b></Typography>
+                <Typography component="h1" variant="h3">
+                    <b>{props.location ?? t("component.widget.weatherDisplay.fetchingLocationDetails")}</b>
+                </Typography>
                 <Typography variant="body2">
-                    {`Updated At: ${weatherUpdated}`}
+                    {`${t("component.widget.weatherDisplay.updatedAt")}: ${weatherUpdated}`}
                 </Typography>
                 <Stack direction="row" height="80%">
                     <Box width="150px">
@@ -319,7 +325,7 @@ export default function WeatherDisplayWidget(props: WeatherDisplayWidgetProps) {
                         {typeof (weatherFeelsLike) === "number" && (
                             <Box fontSize="1em">
                                 <b>
-                                    {"Feels like "}
+                                    {t("component.widget.weatherDisplay.feelsLike") + " "}
                                     <TempUnit value={weatherFeelsLike} />
                                 </b>
                             </Box>

@@ -86,7 +86,7 @@ export const getDesignTokens = (mode: PaletteMode) => ({
                         contrastText: "#fff",
                     },
                     text: {
-                        color: "#638087",
+                        color: "#8AA3A8",
                     },
                     error: {
                         main: red.A400,

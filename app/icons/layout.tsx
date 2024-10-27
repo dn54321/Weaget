@@ -17,78 +17,79 @@ import SunIcon from "@components/icon/weather/sun-icon/sun-icon.component";
 import Footer from "@components/layout/footer/footer.component";
 import React, { useState } from "react";
 import { Thunderstorm } from "@components/icon/weather/thunderstorm-icon/thunderstorm-icon.component";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 export const weatherIconShowcase = [
     {
         id: 200,
         icon: <Thunderstorm decoration />,
-        name: "Thunderstorm",
-        description: "A lightning bolt accompanied with a cloud.",
+        name: "weather.icon.thunderstorm.title",
+        description: "weather.icon.thunderstorm.description",
     },
     {
         id: 300,
         icon: <ShowerRain decoration />,
-        name: "Shower Rain",
-        description: "Grey clouds with many light raindrops.",
+        name: "weather.icon.showerRain.title",
+        description: "weather.icon.showerRain.description",
     },
     {
         id: 500,
         icon: <RainCloud decoration />,
-        name: "Rain Cloud",
-        description: "Grey clouds with some heavy raindrops.",
+        name: "weather.icon.rainCloud.title",
+        description: "weather.icon.rainCloud.description",
     },
     {
         id: 600,
         icon: <SnowCloud decoration />,
-        name: "Snow Cloud",
-        description: "Light gray clouds with acommpanying snow flakes.",
+        name: "weather.icon.snowCloud.title",
+        description: "weather.icon.snowCloud.description",
     },
     {
         id: 700,
         icon: <Mist decoration />,
-        name: "Mist",
-        description: "A layer of clouds obscuring the sun.",
+        name: "weather.icon.mist.title",
+        description: "weather.icon.mist.description",
     },
     {
         id: 800,
         icon: <SunIcon decoration />,
-        name: "Sun",
-        description: "A bright circle representing the sun.",
+        name: "weather.icon.sun.title",
+        description: "weather.icon.sun.description",
     },
     {
         id: 801,
         icon: <FewCloudIcon decoration />,
-        name: "Few Clouds",
-        description: "A small cloud accompanied with the sun.",
+        name: "weather.icon.fewCloud.title",
+        description: "weather.icon.fewCloud.description",
     },
     {
         id: 802,
-        name: "Scattered Clouds",
+        name: "weather.icon.scatteredCloud.title",
         icon: <ScatteredCloud decoration />,
-        description: "A few clouds accompanied with the sun.",
+        description: "weather.icon.scatteredCloud.title",
     },
     {
         id: 803,
-        name: "Broken Clouds",
+        name: "weather.icon.brokenCloud.title",
         icon: <BrokenCloud decoration />,
-        description: "A few clouds obscuring with the sun.",
+        description: "weather.icon.brokenCloud.title",
     },
     {
         id: 804,
-        name: "Overcast Clouds",
+        name: "weather.icon.overcastCloud.title",
         icon: <OvercastCloud decoration />,
-        description: "Many clouds accompanied with a small sun.",
+        description: "weather.icon.overcastCloud.title",
     },
 ];
 
 export const menuItem = [
     {
-        name: "Gallery",
+        name: "page.iconGallery.gallery",
         icon: <CollectionsIcon fontSize="small" />,
         to: "/icons",
     },
     {
-        name: "Weather Icons",
+        name: "weather.icon.text",
     },
     ...weatherIconShowcase.map(weather => ({
         name: weather.name,
@@ -100,6 +101,7 @@ export const menuItem = [
 export default function IconLayout(props: { children: React.ReactNode }) {
     const router = useRouter();
     const pathname = usePathname();
+    const { t } = useSystemTranslation();
     const [sideMenuOpen, setSideMenuOpen] = useState(false);
     const toggleSideMenu = () => setSideMenuOpen(menuOpen => !menuOpen);
     const sidebarWidth = "280px";
@@ -151,12 +153,12 @@ export default function IconLayout(props: { children: React.ReactNode }) {
                                             >
                                                 {menu.icon}
                                             </ListItemIcon>
-                                            <ListItemText primary={menu.name} />
+                                            <ListItemText primary={t(menu.name)} />
                                         </ListItemButton>
                                     );
                                 }
                                 else {
-                                    return (<ListSubheader key={menu.name}>{menu.name}</ListSubheader>);
+                                    return (<ListSubheader key={menu.name}>{t(menu.name)}</ListSubheader>);
                                 }
                             })
                         }

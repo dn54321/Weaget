@@ -15,12 +15,30 @@
       "text": "Fahrenheit"
     }
   },
+  "general": {
+    "logo": "logo"
+  },
+  "theme": {
+    "darkTheme": "Dark theme",
+    "lightTheme": "Light theme"
+  },
+  "settings": {
+    "text": "Settings",
+    "temperatureScale": "Temperature scale",
+    "measurementScale": "Measurement scale",
+    "themeColor": "Theme color",
+    "locale": "Locale"
+  },
+  "directions": {
+    "goBack": "Go back"
+  },
   "measurement": {
     "metric": "Metric",
     "imperial": "Imperial",
-    "metersPerSecond": {
-      "unit": "m/s"
-    }
+    "metersPerSecond": "Meters per second",
+    "milesPerHour": "Miles per hour",
+    "millimetersPerHour": "Millimeters per hour",
+    "inchesPerHour": "Inches per hour"
   },
   "component": {
     "widget": {
@@ -33,6 +51,7 @@
         "airQualityIndex": "Air Quality Index",
         "particle": "Particle",
         "aqiLevel": "AQI Level",
+        "loading": "Loading Pollution Details...",
         "showAdvancedPollutionDetails": "Show advanced pollution details",
         "hideAdvancedPollutionDetails": "Hide advanced pollution details",
         "pollutionLevel": {
@@ -44,7 +63,7 @@
           "hazardous": "Hazardous"
         },
         "pollutionCaution": {
-          "good": "",
+          "good": " ",
           "moderate": "Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.",
           "unhealthySensitive": "Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.",
           "unhealthy": "Active children and adults, and people with respiratory disease, such as asthma, should avoid prolonged outdoor exertion; everyone else, especially children, should limit prolonged outdoor exertion",
@@ -58,7 +77,26 @@
           "unhealthy": "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects.",
           "veryUnhealthy": "Health warnings of emergency conditions. The entire population is more likely to be affected.",
           "hazardous": "Health alert: everyone may experience more serious health effects."
+        },
+        "pollutionParticleDescription": {
+          "neph": "visibility",
+          "pm25": "particles with a diameter of 2.5 micrometres or less",
+          "pm10": "particles with a diameter of 10 micrometres or less",
+          "o3": "Ozone",
+          "no2": "Nitrogen dioxide",
+          "co": "Carbon monoxide",
+          "nh3": "Ammonia"
         }
+      },
+      "locationList": {
+        "title": "Suggested locations",
+        "noLocations": "No nearby places found..."
+      },
+      "weatherDisplay": {
+        "feelsLike": "Feels like",
+        "updatedAt": "Updated at",
+        "fetchingLocationDetails": "Fetching Location Details...",
+        "fetchingDetails": "Fetching Details..."
       },
       "dailyCompactWeather": {
         "button": "Get more weather details",
@@ -78,10 +116,21 @@
       },
       "hourlyWeatherStrip": {
         "title": "Hourly Weather Details"
+      },
+      "rainfall": {
+        "title": "Rainfall",
+        "see120Mins": "See 120 minutes of rainfall",
+        "see14Days": "See 14 days of rainfall",
+        "see48Hours": "See 48 hours of rainfall",
+        "120Mins": "120 mins",
+        "14Days": "14 days",
+        "48Hours": "48 hours"
       }
     },
     "weatherStrip": {
-      "hourlyWeatherStats": "Hourly weather stats"
+      "hourlyWeatherStats": "Hourly weather stats",
+      "expand": "Expand accordion to view all weather details",
+      "collapse": "Collapse accordion to hide weather details"
     },
     "searchBar": {
       "search": "Search weather",
@@ -104,7 +153,9 @@
       "switchMetric": "Change to metric system",
       "switchImperial": "Change to imperial system",
       "switchCelsius": "Change to celsius",
-      "switchFahrenheit": "Change to fahrenheit"
+      "switchFahrenheit": "Change to fahrenheit",
+      "imperialSystem": "Imperial system",
+      "metricSystem": "Metric system"
     }
   },
   "weather": {
@@ -124,14 +175,77 @@
       "rainfall": "Rainfall",
       "snowfall": "Snowfall"
     },
+    "icon": {
+      "brokenCloud": {
+        "title": "Broken clouds",
+        "description": "A few clouds obscuring with the sun."
+      },
+      "clearSky": {
+        "title": "Clear sky"
+      },
+      "fewCloud": {
+        "title": "Few clouds",
+        "description": "A small cloud accompanied with the sun."
+      },
+      "fog": {
+        "title": "Fog"
+      },
+      "haze": {
+        "title": "Haze"
+      },
+      "heavyRain": {
+        "title": "Heavy rain"
+      },
+      "lightRain": {
+        "title": "Light rain"
+      },
+      "overcastCloud": {
+        "title": "Overcast clouds",
+        "description": "Many clouds accompanied with a small sun."
+      },
+      "scatteredCloud": {
+        "title": "Scattered clouds",
+        "description": "A few clouds accompanied with the sun."
+      },
+      "rainCloud": {
+        "title": "Rain clouds",
+        "description": "Grey clouds with some heavy raindrops."
+      },
+      "showerRain": {
+        "title": "Shower rain",
+        "description": "Grey clouds with many light raindrops."
+      },
+      "snow": {
+        "title": "Snow"
+      },
+      "thunderstorm": {
+        "title": "Thunderstorm",
+        "description": "A lightning bolt accompanied with a cloud."
+      },
+      "moon": {
+        "title": "Moon"
+      },
+      "mist": {
+        "title": "Mist",
+        "description": "A layer of clouds obscuring the sun."
+      },
+      "sun": {
+        "title": "Sun",
+        "description": "A bright circle representing the sun."
+      },
+      "snowCloud": {
+        "title": "Snow cloud",
+        "description": "Light gray clouds with acommpanying snow flakes."
+      },
+      "text": "Weather Icons"
+    },
     "uvIndex": {
       "low": "Low",
       "moderate": "Moderate",
       "high": "High",
       "veryHigh": "Very high",
       "extreme": "Extreme"
-    },
-    "error": {}
+    }
   },
   "language": {
     "english": "English",
@@ -139,8 +253,39 @@
     "chinese": "Chinese",
     "japanese": "Japanese"
   },
+  "page": {
+    "iconGallery": {
+      "gallery": "Gallery",
+      "name": "Name",
+      "description": "Description",
+      "invalidIcon": "Invalid ID. Please try again later."
+    },
+    "404": {
+      "description": "The page you have been looking for could not be found.",
+      "goBackToHomeButton": "Go back to home",
+      "pageNotFound": "Page not found"
+    }
+  },
   "footer": {
     "copyright": "@{{year, datetime}} DN54321.",
-    "reserveNotice": "All Rights Reserved."
+    "reserveNotice": "All Rights Reserved.",
+    "iconButton": {
+      "sourceCode": {
+        "title": "Source Code",
+        "description": "Access Source Code"
+      },
+      "github": {
+        "title": "Github Page",
+        "description": "Access Github Page"
+      },
+      "linkedIn": {
+        "title": "LinkedIn Page",
+         "description": "Access LinkedIn Page"
+      },
+      "icons": {
+        "title": "Icons",
+        "description": "Access Weather Icons Page"
+      }
+    }
   }
 }

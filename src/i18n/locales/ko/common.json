@@ -23,7 +23,9 @@
       "switchCelsius": "섭씨로 변경",
       "switchFahrenheit": "화씨로 변경",
       "switchImperial": "황실제로 변경",
-      "switchMetric": "미터법으로 변경"
+      "switchMetric": "미터법으로 변경",
+      "imperialSystem": "제국 시스템",
+      "metricSystem": "미터법"
     },
     "themeToggleButton": {
       "toggleDarkTheme": "어두운 테마로 전환",
@@ -68,7 +70,25 @@
           "unhealthy": "모든 사람이 건강에 영향을 받기 시작할 수 있습니다. \n민감한 그룹의 구성원은 건강에 더 심각한 영향을 미칠 수 있습니다.",
           "unhealthySensitive": "민감한 그룹의 구성원은 건강에 영향을 미칠 수 있습니다. \n일반 대중은 영향을 받을 가능성이 없습니다.",
           "veryUnhealthy": "비상 상황에 대한 건강 경고. \n전체 인구가 영향을 받을 가능성이 더 높습니다."
-        }
+        },
+        "pollutionLevel": {
+          "good": "좋은",
+          "hazardous": "위험한",
+          "moderate": "보통의",
+          "unhealthy": "위험한",
+          "unhealthySensitive": "민감한 그룹에게는 건강에 해로움",
+          "veryUnhealthy": "매우 건강에 해로움"
+        },
+        "pollutionParticleDescription": {
+          "neph": "시계",
+          "no2": "이산화질소",
+          "o3": "오존",
+          "pm10": "직경이 10마이크로미터 이하인 입자",
+          "co": "일산화탄소",
+          "nh3": "암모니아",
+          "pm25": "직경 2.5마이크로미터 이하의 입자"
+        },
+        "loading": "오염 세부정보 로드 중..."
       },
       "suggestedLocations": {
         "description": "자세한 날씨 정보를 보려면 카드를 클릭하세요!",
@@ -76,12 +96,54 @@
       },
       "weatherStat": {
         "title": "날씨 세부정보"
+      },
+      "rainfall": {
+        "120Mins": "120분",
+        "14Days": "14일",
+        "48Hours": "48시간",
+        "see120Mins": "120분 동안의 강수량 보기",
+        "see14Days": "14일간의 강수량 보기",
+        "see48Hours": "48시간 동안의 강수량 보기",
+        "title": "강우"
+      },
+      "locationList": {
+        "noLocations": "주변 장소를 찾을 수 없습니다...",
+        "title": "추천 위치"
+      },
+      "weatherDisplay": {
+        "feelsLike": "같은 느낌",
+        "fetchingLocationDetails": "위치 세부정보를 가져오는 중...",
+        "updatedAt": "업데이트 날짜",
+        "fetchingDetails": "세부정보를 가져오는 중..."
       }
+    },
+    "weatherStrip": {
+      "hourlyWeatherStats": "시간별 날씨 통계",
+      "collapse": "날씨 세부정보를 숨기려면 아코디언을 접으세요.",
+      "expand": "모든 날씨 세부정보를 보려면 아코디언을 확장하세요."
     }
   },
   "footer": {
     "copyright": "@{{year, datetime}} DN54321.",
-    "reserveNotice": "모든 권리 보유."
+    "reserveNotice": "모든 권리 보유.",
+    "iconButton": {
+      "github": {
+        "description": "Github 페이지에 접속",
+        "title": "Github 페이지"
+      },
+      "icons": {
+        "description": "날씨 아이콘 페이지에 액세스",
+        "title": "아이콘"
+      },
+      "linkedIn": {
+        "description": "LinkedIn 페이지에 액세스",
+        "title": "링크드인 페이지"
+      },
+      "sourceCode": {
+        "description": "소스 코드에 액세스",
+        "title": "소스 코드"
+      }
+    }
   },
   "language": {
     "chinese": "중국인",
@@ -91,10 +153,11 @@
   },
   "measurement": {
     "imperial": "장엄한",
-    "metersPerSecond": {
-      "unit": "밀리미터/초"
-    },
-    "metric": "미터법"
+    "metric": "미터법",
+    "inchesPerHour": "시간당 인치",
+    "metersPerSecond": "초당 미터",
+    "milesPerHour": "시간당 마일",
+    "millimetersPerHour": "시간당 밀리미터"
   },
   "temperature": {
     "celsius": {
@@ -129,6 +192,93 @@
       "low": "낮은",
       "moderate": "보통의",
       "veryHigh": "매우 높음"
+    },
+    "icon": {
+      "brokenCloud": {
+        "description": "태양으로 인해 구름 몇 개가 가려졌습니다.",
+        "title": "부서진 구름"
+      },
+      "clearSky": {
+        "title": "맑은 하늘"
+      },
+      "fewCloud": {
+        "description": "태양과 함께 작은 구름.",
+        "title": "구름이 거의 없음"
+      },
+      "fog": {
+        "title": "안개"
+      },
+      "haze": {
+        "title": "안개"
+      },
+      "heavyRain": {
+        "title": "폭우"
+      },
+      "lightRain": {
+        "title": "가벼운 비"
+      },
+      "mist": {
+        "description": "태양을 가리는 구름층.",
+        "title": "안개"
+      },
+      "moon": {
+        "title": "달"
+      },
+      "overcastCloud": {
+        "description": "작은 태양과 함께 많은 구름.",
+        "title": "흐린 구름"
+      },
+      "rainCloud": {
+        "description": "약간의 빗방울이 있는 회색 구름.",
+        "title": "비구름"
+      },
+      "scatteredCloud": {
+        "description": "태양과 함께 구름 몇 개.",
+        "title": "흩어진 구름"
+      },
+      "showerRain": {
+        "description": "많은 가벼운 빗방울이 있는 회색 구름.",
+        "title": "샤워 비"
+      },
+      "snow": {
+        "title": "눈"
+      },
+      "snowCloud": {
+        "description": "눈 조각과 함께 밝은 회색 구름입니다.",
+        "title": "눈구름"
+      },
+      "sun": {
+        "description": "태양을 나타내는 밝은 원입니다.",
+        "title": "해"
+      },
+      "text": "날씨 아이콘",
+      "thunderstorm": {
+        "description": "구름과 함께 번개.",
+        "title": "뇌우"
+      }
     }
+  },
+  "page": {
+    "404": {
+      "description": "찾고 계신 페이지를 찾을 수 없습니다.",
+      "goBackToHomeButton": "집으로 돌아가세요",
+      "pageNotFound": "페이지를 찾을 수 없습니다"
+    },
+    "iconGallery": {
+      "description": "설명",
+      "gallery": "갱도",
+      "invalidIcon": "잘못된 신분증입니다. \n나중에 다시 시도해 주세요.",
+      "name": "이름"
+    }
+  },
+  "settings": {
+    "measurementScale": "측정 규모",
+    "temperatureScale": "온도 눈금",
+    "themeColor": "테마 색상",
+    "text": "설정"
+  },
+  "theme": {
+    "darkTheme": "어두운 테마",
+    "lightTheme": "밝은 테마"
   }
 }

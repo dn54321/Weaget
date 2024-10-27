@@ -1,14 +1,16 @@
 import { BoxProps } from "@mui/system";
 import { Bolt, GreyCloud, Rain, WeatherIconContainer } from "@components/icon/weather/weather-icon.styles";
 import { WeatherIconProps } from "@components/icon/weather/weather-icon.types";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 export function Thunderstorm(props: BoxProps & WeatherIconProps) {
     const { decoration, ...rest } = props;
+    const { t } = useSystemTranslation();
 
     return (
         <WeatherIconContainer
             {...rest}
-            {...(!decoration && { "aria-label": "Thunderstorm" })}
+            {...(!decoration && { title: t("weather.icon.thunderstorm.title") })}
             role="img"
         >
             <Rain width="0.3em" top="75%" left="35%" />

@@ -14,9 +14,10 @@ export async function GET(
 ) {
     const queryParams = new URL(`${req.url}`).searchParams;
     const region = queryParams.get("region") || undefined;
+    const lang = queryParams.get("lang") || undefined;
     const params = await props.params;
     try {
-        const data = await getLocationDetails(params.location, region);
+        const data = await getLocationDetails(params.location, region, lang);
         if (data.status === "ZERO_RESULTS") {
             return createNextResponseError("No results found", 404);
         }

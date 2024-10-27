@@ -4,6 +4,7 @@ import SquareFootIcon from "@mui/icons-material/SquareFoot";
 import { TemperatureScale } from "@src/types/weather.types";
 import { useSettingStore } from "@src/hooks/stores/use-setting-store";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import { MeasurementScale } from "@src/types/measurement.types";
 
 // Fab icon that exist on the bottom right of the screen.
 // Used to change the measurement/temperature system.
@@ -26,7 +27,7 @@ export default function SettingsFab(props: SettingFabProps & BoxProps) {
     }
 
     function toggleMeasurementSystem(measScale: string) {
-        return (measScale === "metric") ? "imperial" : "metric";
+        return (measScale === MeasurementScale.METRIC) ? MeasurementScale.IMPERIAL : MeasurementScale.METRIC;
     }
 
     function handleTemperatureScaleChange(measScale: string, setSystemState: Function) {
@@ -57,14 +58,18 @@ export default function SettingsFab(props: SettingFabProps & BoxProps) {
                 ? (
                         <Fab
                             color="primary"
-                            aria-label={"Change to " + toggleMeasurementSystem(measurementScale) + " system"}
+                            aria-label={measurementScale === MeasurementScale.METRIC
+                                ? t("component.settingsFab.switchImperial")
+                                : t("component.settingsFab.switchMetric")}
                             size="large"
                             variant="extended"
                             sx={{ pointerEvents: "all" }}
                             onClick={() => handleMeasurementScaleChange(measurementScale, setMeasurementScale)}
                         >
                             <SquareFootIcon sx={{ mr: 1 }} />
-                            {`${measurementScale} system`}
+                            {measurementScale === MeasurementScale.METRIC
+                                ? t("component.settingsFab.metricSystem")
+                                : t("component.settingsFab.imperialSystem")}
                         </Fab>
                     )
                 : null}
@@ -73,14 +78,18 @@ export default function SettingsFab(props: SettingFabProps & BoxProps) {
                 ? (
                         <Fab
                             color="primary"
-                            aria-label={"Change to " + toggleTemperatureScale(temperatureScale)}
+                            aria-label={temperatureScale === TemperatureScale.CELSIUS
+                                ? t("component.settingsFab.switchFahrenheit")
+                                : t("component.settingsFab.switchCelsius")}
                             size="large"
                             variant="extended"
                             sx={{ pointerEvents: "all" }}
                             onClick={() => handleTemperatureScaleChange(temperatureScale, setTemperatureScale)}
                         >
                             <DeviceThermostatIcon sx={{ mr: 1 }} />
-                            {t(`temperature.${temperatureScale}.text`)}
+                            {temperatureScale === TemperatureScale.CELSIUS
+                                ? t("temperature.celsius.text")
+                                : t("temperature.fahrenheit.text")}
                         </Fab>
                     )
                 : null}

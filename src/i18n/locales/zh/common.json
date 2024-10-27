@@ -23,7 +23,9 @@
       "switchCelsius": "更改为摄氏度",
       "switchFahrenheit": "更改为华氏度",
       "switchImperial": "更改为英制",
-      "switchMetric": "更改为公制"
+      "switchMetric": "更改为公制",
+      "imperialSystem": "帝国制度",
+      "metricSystem": "公制"
     },
     "themeToggleButton": {
       "toggleDarkTheme": "切换到深色主题",
@@ -76,7 +78,17 @@
           "unhealthy": "不良",
           "unhealthySensitive": "对敏感群体不健康",
           "veryUnhealthy": "非常不健康"
-        }
+        },
+        "pollutionParticleDescription": {
+          "neph": "能见度",
+          "no2": "二氧化氮",
+          "o3": "臭氧",
+          "pm10": "直径10微米以下的颗粒",
+          "co": "一氧化碳",
+          "nh3": "氨",
+          "pm25": "直径2.5微米或更小的颗粒"
+        },
+        "loading": "正在加载污染详细信息..."
       },
       "suggestedLocations": {
         "description": "单击任意卡片即可获取更多天气详细信息！",
@@ -84,12 +96,54 @@
       },
       "weatherStat": {
         "title": "天气详情"
+      },
+      "rainfall": {
+        "120Mins": "120分钟",
+        "14Days": "14天",
+        "48Hours": "48小时",
+        "see120Mins": "查看 120 分钟的降雨量",
+        "see14Days": "查看 14 天的降雨量",
+        "see48Hours": "查看 48 小时降雨量",
+        "title": "雨量"
+      },
+      "locationList": {
+        "noLocations": "没有找到附近的地方...",
+        "title": "建议地点"
+      },
+      "weatherDisplay": {
+        "feelsLike": "感觉就像",
+        "fetchingLocationDetails": "正在获取位置详细信息...",
+        "updatedAt": "更新于",
+        "fetchingDetails": "正在获取详细信息..."
       }
+    },
+    "weatherStrip": {
+      "hourlyWeatherStats": "每小时天气统计",
+      "collapse": "折叠手风琴以隐藏天气详细信息",
+      "expand": "展开手风琴以查看所有天气详细信息"
     }
   },
   "footer": {
     "copyright": "@{{year, datetime}} DN54321。",
-    "reserveNotice": "版权所有。"
+    "reserveNotice": "版权所有。",
+    "iconButton": {
+      "github": {
+        "description": "访问 Github 页面",
+        "title": "GitHub页面"
+      },
+      "icons": {
+        "description": "访问天气图标页面",
+        "title": "图标"
+      },
+      "linkedIn": {
+        "description": "访问 LinkedIn 页面",
+        "title": "领英页面"
+      },
+      "sourceCode": {
+        "description": "访问源代码",
+        "title": "源代码"
+      }
+    }
   },
   "language": {
     "chinese": "中国人",
@@ -99,10 +153,11 @@
   },
   "measurement": {
     "imperial": "帝国",
-    "metersPerSecond": {
-      "unit": "多发性硬化症"
-    },
-    "metric": "公制"
+    "metric": "公制",
+    "inchesPerHour": "英寸每小时",
+    "metersPerSecond": "米每秒",
+    "milesPerHour": "英里每小时",
+    "millimetersPerHour": "毫米每小时"
   },
   "temperature": {
     "celsius": {
@@ -137,6 +192,93 @@
       "low": "低的",
       "moderate": "缓和",
       "veryHigh": "非常高"
+    },
+    "icon": {
+      "brokenCloud": {
+        "description": "几朵云遮住了太阳。",
+        "title": "碎云"
+      },
+      "clearSky": {
+        "title": "晴朗的天空"
+      },
+      "fewCloud": {
+        "description": "一片小云与太阳相伴。",
+        "title": "几朵云"
+      },
+      "fog": {
+        "title": "多雾路段"
+      },
+      "haze": {
+        "title": "阴霾"
+      },
+      "heavyRain": {
+        "title": "大雨"
+      },
+      "lightRain": {
+        "title": "小雨"
+      },
+      "mist": {
+        "description": "一层云遮住了太阳。",
+        "title": "薄雾"
+      },
+      "moon": {
+        "title": "月亮"
+      },
+      "overcastCloud": {
+        "description": "许多云伴随着一个小太阳。",
+        "title": "阴云密布"
+      },
+      "rainCloud": {
+        "description": "灰色的云，夹杂着一些大雨点。",
+        "title": "雨云"
+      },
+      "scatteredCloud": {
+        "description": "几朵云伴随着阳光。",
+        "title": "散云"
+      },
+      "showerRain": {
+        "description": "灰色的云彩上有许多小雨滴。",
+        "title": "阵雨"
+      },
+      "snow": {
+        "title": "雪"
+      },
+      "snowCloud": {
+        "description": "浅灰色的云彩伴随着雪花。",
+        "title": "雪云"
+      },
+      "sun": {
+        "description": "代表太阳的明亮圆圈。",
+        "title": "太阳"
+      },
+      "text": "天气图标",
+      "thunderstorm": {
+        "description": "一道闪电伴随着一片云彩。",
+        "title": "雷雨"
+      }
     }
+  },
+  "page": {
+    "404": {
+      "description": "找不到您一直在寻找的页面。",
+      "goBackToHomeButton": "回家吧",
+      "pageNotFound": "找不到页面"
+    },
+    "iconGallery": {
+      "description": "描述",
+      "gallery": "画廊",
+      "invalidIcon": "身份证件无效。\n请稍后重试。",
+      "name": "姓名"
+    }
+  },
+  "settings": {
+    "measurementScale": "测量尺度",
+    "temperatureScale": "温标",
+    "themeColor": "主题色",
+    "text": "设置"
+  },
+  "theme": {
+    "darkTheme": "深色主题",
+    "lightTheme": "浅色主题"
   }
 }

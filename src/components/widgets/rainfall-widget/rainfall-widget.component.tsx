@@ -12,6 +12,8 @@ import { MeasurementScale } from "@src/types/measurement.types";
 import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { Widget } from "@components/containers/widget/widget";
 import { convertVolumeMeasurement, getVolumeSymbol } from "@components/ui/volume-unit/volume-unit.utils";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import { DEFAULT_LOCALE } from "@src/i18n/settings";
 
 /*
     Rainfall card tells us how much rain has fallen
@@ -19,7 +21,18 @@ import { convertVolumeMeasurement, getVolumeSymbol } from "@components/ui/volume
 */
 
 // file constants
-const chartLabel = ["120 mins", "48 hours", "14 days"];
+const chartLabel = [
+    "component.widget.rainfall.120Mins",
+    "component.widget.rainfall.48Hours",
+    "component.widget.rainfall.14Days",
+];
+
+const seeDirection = [
+    "component.widget.rainfall.see120Mins",
+    "component.widget.rainfall.see48Hours",
+    "component.widget.rainfall.see14Days",
+];
+
 const dataLabel = ["minutely", "hourly", "daily"];
 const chartHeight = "250px";
 
@@ -30,13 +43,15 @@ export interface SyledButtonprops {
 
 }
 const StyledButton = (props: SyledButtonprops) => {
+    const { t } = useSystemTranslation();
     const reducerAction = props.decrement ? ReducerActions.DECREMENT : ReducerActions.INCREMENT;
     const incrementCounter = props.decrement ? 2 : 1;
+    const translationRainfallNavigationKey = seeDirection[(props.chart.id + incrementCounter) % 3];
     return (
         <Button
             component="span"
-            aria-label={`See ${chartLabel[(props.chart.id + incrementCounter) % 3]} rainfall`}
-            title={`See ${chartLabel[(props.chart.id + incrementCounter) % 3]} rainfall`}
+            aria-label={t(translationRainfallNavigationKey)}
+            title={t(translationRainfallNavigationKey)}
             onClick={() => props.dispatch({ type: reducerAction })}
             sx={{
                 "backgroundColor": "primary.main",
@@ -124,19 +139,32 @@ function getScore(weatherLabel: string, wtr: OneCallWeatherDetails) {
     return score / arr.length;
 }
 
-function getData(measurementScale: MeasurementScale, weatherLabel: string, wtr: OneCallWeatherDetails) {
+function getData(
+    measurementScale: MeasurementScale,
+    weatherLabel: string,
+    wtr: OneCallWeatherDetails,
+    locale: string = DEFAULT_LOCALE,
+) {
     switch (weatherLabel) {
         case "minutely": return wtr.minutely?.map(x => ({
-            name: DateTime.fromJSDate(x.dt, { zone: wtr.timezone }).toFormat("h:mma"),
             rainfall: convertVolumeMeasurement(measurementScale, x.precipitation ?? 0, 2),
+            name: DateTime
+                .fromJSDate(x.dt, { zone: wtr.timezone })
+                .setLocale(locale)
+                .toLocaleString(DateTime.TIME_SIMPLE),
         })) ?? [];
         case "hourly": return wtr.hourly?.map(x => ({
-            name: DateTime.fromJSDate(x.dt, { zone: wtr.timezone }).toFormat("h:mma"),
             rainfall: convertVolumeMeasurement(measurementScale, (x.rain && x.rain["1h"]) ?? 0, 2),
+            name: DateTime.fromJSDate(x.dt, { zone: wtr.timezone })
+                .setLocale(locale)
+                .toLocaleString(DateTime.TIME_SIMPLE),
         })) ?? [];
         case "daily": return wtr.daily?.map(x => ({
-            name: DateTime.fromJSDate(x.dt, { zone: wtr.timezone }).toFormat("LLL d"),
             rainfall: convertVolumeMeasurement(measurementScale, x.rain ?? 0, 2),
+            name: DateTime
+                .fromJSDate(x.dt, { zone: wtr.timezone })
+                .setLocale(locale)
+                .toLocaleString(DateTime.DATE_FULL),
         })) ?? [];
     }
 }
@@ -192,6 +220,7 @@ export interface RainfallWidgetProps {
 }
 
 export default function RainfallWidget(props: RainfallWidgetProps) {
+    const { t, locale } = useSystemTranslation();
     const measurementScale = useSettingStore(state => state.measurementScale) as MeasurementScale;
     const [chart, dispatch] = React.useReducer(reducer, { id: 0 });
     React.useEffect(() => {
@@ -200,18 +229,25 @@ export default function RainfallWidget(props: RainfallWidgetProps) {
 
     return (
         <Widget
-            title="Rainfall"
+            title={t("component.widget.rainfall.title")}
             sx={props.sx}
             rightDecorum={(
                 <Box display="flex" alignItems="center">
                     <StyledButton chart={chart} dispatch={dispatch} decrement />
-                    <Box width="80px" sx={{ display: "grid", placeItems: "center" }}>{chartLabel[chart?.id]}</Box>
+                    <Box width="80px" sx={{ display: "grid", placeItems: "center" }}>{t(chartLabel[chart?.id])}</Box>
                     <StyledButton chart={chart} dispatch={dispatch} />
                 </Box>
             )}
         >
             {props.weatherData
-                ? <Box mt="15px" mb="-15px"><Chart measurementScale={measurementScale} data={getData(measurementScale, dataLabel[chart?.id], props.weatherData)} /></Box>
+                ? (
+                        <Box mt="15px" mb="-15px">
+                            <Chart
+                                measurementScale={measurementScale}
+                                data={getData(measurementScale, dataLabel[chart?.id], props.weatherData, locale)}
+                            />
+                        </Box>
+                    )
                 : (
                         <Skeleton
                             width="100%"

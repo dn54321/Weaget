@@ -34,8 +34,8 @@ export default function Page(pageProps: PageProps) {
     const { locale } = useSystemSettings();
     const weatherQuery = useGetWeather(location, undefined, locale);
     const pollutionQuery = useGetPollution(weatherQuery.data?.lat, weatherQuery.data?.lon);
-    const nearbyLocationQuery = useGetNearbyLocation(weatherQuery.data?.lat, weatherQuery.data?.lon);
-    const locationQuery = useGetLocation(location);
+    const nearbyLocationQuery = useGetNearbyLocation(weatherQuery.data?.lat, weatherQuery.data?.lon, locale);
+    const locationQuery = useGetLocation(location, undefined, locale);
     const locationShortForm = locationQuery.data?.results[0].addressComponents[0].shortName;
     const locationLongForm = locationQuery.data?.results[0].formattedAddress;
     const { AlertBox, addAlert } = useAlert();

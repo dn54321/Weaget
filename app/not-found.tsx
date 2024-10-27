@@ -61,7 +61,7 @@ export default function NotFound() {
     return (
         <Page>
             <Head>
-                <title>{`${t("webapp.name")} - Not Found` }</title>
+                <title>{`${t("webapp.name")} - t("page.404.pageNotFound")` }</title>
             </Head>
             <Container maxWidth="lg" sx={{ height: "100%" }} disableGutters>
                 <Box position="absolute" top={10} right={10}>
@@ -89,8 +89,8 @@ export default function NotFound() {
                             sx={{ color: "text.primary", px: "10px" }}
                         >
                             <Box component="h1" sx={{ fontSize: "100px", margin: "0px" }}>404</Box>
-                            <Box fontSize="16px" sx={{ textAlign: "center" }}>The page you have been looking for could not be found.</Box>
-                            <Button href="/" variant="contained" sx={{ mt: "40px" }}>Go back to home</Button>
+                            <Box fontSize="16px" sx={{ textAlign: "center" }}>{t("page.404.description")}</Box>
+                            <Button href="/" variant="contained" sx={{ mt: "40px" }}>{t("page.404.goBackToHomeButton")}</Button>
                         </Stack>
                     </Grid>
                 </Grid>

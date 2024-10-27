@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import { useSettingStore } from "@src/hooks/stores/use-setting-store";
 import { MeasurementScale } from "@src/types/measurement.types";
 import { convertVolumeMeasurement } from "./volume-unit.utils";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 /*
      VolumeUnit
@@ -42,12 +43,15 @@ interface VolumeUnitProps {
 export default function VolumeUnit(props: VolumeUnitProps) {
     const decimal = props.decimals ?? 1;
     const symbol = props.symbol ?? true;
+    const { t } = useSystemTranslation();
     const measurementSystem = useSettingStore(state => state.measurementScale) as MeasurementScale;
-
+    const unitType = measurementSystem === MeasurementScale.METRIC
+        ? t("measurement.millimetersPerHour")
+        : t("measurement.inchesPerHour");
     return (
         <>
             {convertVolumeMeasurement(measurementSystem, props.value, decimal)}
-            {symbol && getSymbol(measurementSystem)}
+            <abbr title={unitType}>{symbol && getSymbol(measurementSystem)}</abbr>
         </>
     );
 }

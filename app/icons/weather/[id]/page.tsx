@@ -5,6 +5,8 @@ import React from "react";
 import Grid from "@mui/material/Grid2";
 import { WeatherIcon } from "@components/ui/weather-icon";
 import { weatherIconShowcase } from "@project/app/icons/layout";
+import { use } from "react";
+import { useTranslation } from "react-i18next";
 
 export interface PageProps {
     params: Promise<{
@@ -12,10 +14,11 @@ export interface PageProps {
     }>;
 }
 
-export default async function Page(props: PageProps) {
-    const params = await (props.params);
+export default function Page(props: PageProps) {
+    const params = use(props.params);
     const weatherId = parseInt(params.id);
     const weatherDetails = weatherIconShowcase.find(weather => weather.id === weatherId);
+    const { t } = useTranslation();
     return (
         <Container maxWidth="lg">
             <Toolbar />
@@ -28,12 +31,20 @@ export default async function Page(props: PageProps) {
                             : (
                                     <Box>
                                         <Typography variant="body2">
-                                            <b>Name: </b>
-                                            {weatherDetails.name}
+                                            <b>
+                                                {t("page.iconGallery.name")}
+                                                :
+                                                {" "}
+                                            </b>
+                                            {t(weatherDetails.name)}
                                         </Typography>
                                         <Typography variant="body2">
-                                            <b>Description: </b>
-                                            {weatherDetails.description}
+                                            <b>
+                                                {t("page.iconGallery.description")}
+                                                :
+                                                {" "}
+                                            </b>
+                                            {t(weatherDetails.description)}
                                         </Typography>
                                     </Box>
                                 )

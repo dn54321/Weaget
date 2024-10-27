@@ -1,7 +1,10 @@
-import { Box } from "@mui/material";
 import * as math from "@src/utils/math";
 import { useSettingStore } from "@src/hooks/stores/use-setting-store";
 import { MeasurementScale } from "@src/types/measurement.types";
+import React from "react";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import { convertSpeedMeasurement } from "./speed-unit.utils";
+import { Box } from "@mui/system";
 
 /*
      SpeedUnit
@@ -12,19 +15,17 @@ import { MeasurementScale } from "@src/types/measurement.types";
         - Imperial: mph
 */
 
-function convertMeasurement(value: number, measurementScale: string) {
-    switch (measurementScale) {
-        case MeasurementScale.METRIC: return value;
-        case MeasurementScale.IMPERIAL: return value * 2.23694;
-        default: return value;
-    }
+interface MeasurementUnitProps {
+    decimals?: number;
+    symbol?: boolean;
+    value: number;
 }
 
 export function getSymbol(temperatureScale: string) {
     switch (temperatureScale) {
-        case MeasurementScale.IMPERIAL: return <abbr title="miles per hour">mph</abbr>;
+        case MeasurementScale.IMPERIAL: return <React.Fragment>mph</React.Fragment>;
         case MeasurementScale.METRIC: return (
-            <abbr title="meters per second">
+            <React.Fragment>
                 ms
                 <Box
                     component="sup"
@@ -36,25 +37,23 @@ export function getSymbol(temperatureScale: string) {
                 >
                     -1
                 </Box>
-            </abbr>
+            </React.Fragment>
         );
     }
-}
-
-interface MeasurementUnitProps {
-    decimals?: number;
-    symbol?: boolean;
-    value: number;
 }
 
 export default function SpeedUnit(props: MeasurementUnitProps) {
     const round = props.decimals ?? 1;
     const symbol = props.symbol ?? true;
     const measurementSystem = useSettingStore(state => state.measurementScale);
+    const { t } = useSystemTranslation();
+    const unitType = measurementSystem === MeasurementScale.METRIC
+        ? t("measurement.metersPerSecond")
+        : t("measurement.milesPerHour");
     return (
         <>
-            {math.round(convertMeasurement(props.value, measurementSystem), round)}
-            {symbol && getSymbol(measurementSystem)}
+            {math.round(convertSpeedMeasurement(props.value, measurementSystem), round)}
+            <abbr title={unitType}>{symbol && getSymbol(measurementSystem)}</abbr>
         </>
     );
 }

@@ -33,7 +33,11 @@ export default function WeatherCard(props: WeatherCardProps) {
                 <Day>{date.weekdayLong}</Day>
                 <ShortDate>{getWeatherCardDateString(date)}</ShortDate>
                 <IconBox fontSize="4em" pt="5px">
-                    <WeatherIcon id={props.weatherCode} rainPercentage={props.rainfallPercentage} />
+                    <WeatherIcon
+                        id={props.weatherCode}
+                        rainPercentage={props.rainfallPercentage}
+                        decoration
+                    />
                 </IconBox>
                 <WeatherDescription>{props.weatherDescription}</WeatherDescription>
                 <Temperature>
