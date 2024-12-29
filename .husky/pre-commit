@@ -1,2 +1,6 @@
 git restore --staged .env.local
+echo "== Running linter."
 pnpm lint
+
+echo "== Running type checker."
+pnpm type-lint
