@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { WeatherCard, type WeatherCardProps } from ".";
-import { SkeletonProps } from "@src/types/component.types";
+import { SkeletonProps } from "@components/with-skeleton";
 import { TemperatureScale } from "@src/types/weather.types";
 import { faker } from "@faker-js/faker";
 import { openWeatherTypes } from "@features/open-weather-map-one-call/oneCall.utils";

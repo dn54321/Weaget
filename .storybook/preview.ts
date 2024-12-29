@@ -1,9 +1,9 @@
-import type { Preview } from "@storybook/react";
-import { MeasurementScale } from "@project/src/types/measurement.types";
-import { TemperatureScale } from "@project/src/types/weather.types";
-import { SystemTheme } from "@project/src/types/system.types";
 import "three-dots/dist/three-dots.css";
 import "@styles/globals.css";
+import { MeasurementScale } from "@project/src/types/measurement.types";
+import type { Preview } from "@storybook/react";
+import { SystemTheme } from "@project/src/types/system.types";
+import { TemperatureScale } from "@project/src/types/weather.types";
 
 const preview: Preview = {
     globalTypes: {

@@ -1,13 +1,14 @@
+import "@src/i18n/i18n";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { CssBaseline } from "@mui/material";
 import { QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import { SettingsStoreProvider } from "@components/provider/settings-provider";
 import { StoryContext } from "@storybook/react";
+import { SystemLocale } from "@project/src/types/system.types";
 import { SystemThemeProvider } from "@components/provider/system-theme-provider";
 import WidgetStoreProvider from "@components/provider/widget-provider/widget-store-provider.component";
 import { testQueryClient } from "./query-client";
-
 export const storybookWrapper = (Story: React.ElementType, context: StoryContext) => {
     return (
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
@@ -18,6 +19,7 @@ export const storybookWrapper = (Story: React.ElementType, context: StoryContext
                         measurementScale: context.globals.measurementScale,
                         temperatureScale: context.globals.temperatureScale,
                         theme: context.globals.theme,
+                        locale: SystemLocale.ENGLISH,
                     }}
                 >
                     <SystemThemeProvider>
