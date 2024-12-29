@@ -1,17 +1,18 @@
-import { googleLocationLookupSchema } from "@features/google-geocode/location-lookup.schema";
-import { googleLocationAutoCompleteSchema } from "@features/google-geocode/location-auto-complete.schema";
-import { ipinfoCurrentLocationSchema } from "@features/ipinfo-current-location/current-location.schema";
-import { LocationSuggestionOptional } from "@features/weaget/nearby-location/nearby-location.types";
-import { GoogleGeocode } from "@features/google-geocode/location-lookup.model";
-import IpinfoGeocode from "@features/ipinfo-current-location/current-location.model";
-import GoogleLocationSuggestion from "@features/google-geocode/location-auto-complete.model";
-import geonamesNearbyLocationSchema from "@features/geonames-nearby-search/nearby-location.schema";
 import { GeonamesNearbyLocation } from "@features/geonames-nearby-search/nearby-location.types";
+import { GoogleGeocode } from "@features/google-geocode/location-lookup.model";
+import GoogleLocationSuggestion from "@features/google-geocode/location-auto-complete.model";
+import IpinfoGeocode from "@features/ipinfo-current-location/current-location.model";
+import { LocationSuggestionOptional } from "@features/weaget/nearby-location/nearby-location.types";
+import geonamesNearbyLocationSchema from "@features/geonames-nearby-search/nearby-location.schema";
+import { googleLocationAutoCompleteSchema } from "@features/google-geocode/location-auto-complete.schema";
+import { googleLocationLookupSchema } from "@features/google-geocode/location-lookup.schema";
+import { ipinfoCurrentLocationSchema } from "@features/ipinfo-current-location/current-location.schema";
+import { revalidateTag } from "next/cache";
 
 // API ENDPOINTS
-const URL_GET_LOCATION = (loc: string, region?: string) => `https://maps.googleapis.com/maps/api/geocode/json?address=${loc}&key=${process.env.GOOGLE_APIKEY}${region ? "&region=" + region : ""}`;
+const URL_GET_LOCATION = (loc: string, region?: string, lang?: string) => `https://maps.googleapis.com/maps/api/geocode/json?address=${loc}&language=${lang}&key=${process.env.GOOGLE_APIKEY}${region ? "&region=" + region : ""}`;
 const URL_GET_LOCATION_BY_IP = (ipAddr: string) => `https://ipinfo.io/${ipAddr}?token=${process.env.IPINFO_APIKEY}`;
-const URL_GET_NEARBY_LOCATION = (lat: number, lng: number) => `http://api.geonames.org/findNearbyJSON?lat=${lat}&lng=${lng}&username=${process.env.GEONAMES_USERNAME}&maxRows=9&radius=300&featureCode=PPLX`;
+const URL_GET_NEARBY_LOCATION = (lat: number, lng: number, lang: string = "local") => `http://api.geonames.org/findNearbyJSON?lat=${lat}&lng=${lng}&lang=${lang}&username=${process.env.GEONAMES_USERNAME}&maxRows=9&radius=300&featureCode=PPLX`;
 const URL_GET_LOCATION_SUGGESTIONS = (input: string, optionalParameters: Partial<LocationSuggestionOptional>) => `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${process.env.GOOGLE_APIKEY}&${new URLSearchParams({ input, ...optionalParameters })}`;
 
 // CONFIGURATIONS
@@ -22,14 +23,15 @@ const IP_LOOKUP_CACHE_SECONDS = 60 * 30; // 30 mins
  * Fetches geolocation information for a location specified by region and returns it as an instance of GoogleGeocode model.
  * @param location A string representing the location you want to search for.
  * @param region An optional string representing a specific country or administrative region to narrow down your search.
+ * @param lang An optional string specifying the language you want to use in the response.
  * @returns A promise that resolves to an instance of OneCallWeatherDetails.
  */
-export async function getLocationDetails(location: string, region?: string): Promise<GoogleGeocode> {
-    const googleLocationLookupUrl = URL_GET_LOCATION(location, region);
+export async function getLocationDetails(location: string, region?: string, lang?: string): Promise<GoogleGeocode> {
+    const googleLocationLookupUrl = URL_GET_LOCATION(location, region, lang);
     const response = await fetch(googleLocationLookupUrl, { next: { revalidate: LOCATION_LOOKUP_CACHE_SECONDS } });
 
     if (!response.ok) {
-        throw new Error(`[Location Service] Could not fetch location data. (loc: ${location}, reg: ${region})`);
+        throw new Error(`[Location Service] Could not fetch location data. (loc: ${location}, reg: ${region}, lang: ${lang})`);
     }
 
     const data = await response.json();
@@ -54,7 +56,7 @@ export async function getLocationDetailsByIp(ip: string, retry = true): Promise<
         throw new Error(`[Location Service] Could not fetch location data. (ip: '${ip}')`);
     }
 
-    let data = await response.json();
+    const data = await response.json();
 
     // Local development
     if (data.bogon && retry) {
@@ -69,20 +71,34 @@ export async function getLocationDetailsByIp(ip: string, retry = true): Promise<
  * Fetches geolocation information for a location near specified coordinates and returns it as an instance of GeonamesGeocode model.
  * @param lat A number representing the latitude you want to search for nearby locations.
  * @param lng A number representing the longitude you want to search for nearby locations.
+ * @param lang The language to use for the names of places.
  * @returns A promise that resolves to an instance of GeonamesGeocode.
  */
-export async function getNearbyLocationDetails(lat: number, lng: number): Promise<GeonamesNearbyLocation> {
-    const geonamesLocationLookupUrl = URL_GET_NEARBY_LOCATION(lat, lng);
+export async function getNearbyLocationDetails(
+    lat: number,
+    lng: number,
+    lang: string = "local",
+): Promise<GeonamesNearbyLocation> {
+    const geonamesLocationLookupUrl = URL_GET_NEARBY_LOCATION(lat, lng, lang);
     const response = await fetch(geonamesLocationLookupUrl, {
-        next: { revalidate: LOCATION_LOOKUP_CACHE_SECONDS },
+        next: {
+            revalidate: LOCATION_LOOKUP_CACHE_SECONDS,
+            tags: ["geonames::nearby-search"],
+        },
     });
 
     if (!response.ok) {
-        throw new Error(`[Location Service] Could not fetch nearby location data.  (lat: '${lat}', lng: '${lng}')`);
+        throw new Error(`[Location Service] Could not fetch nearby location data.  (lat: '${lat}', lng: '${lng}', lang: '${lang}')`);
     }
 
     const data = await response.json();
-    return geonamesNearbyLocationSchema.parse(data);
+    try {
+        return geonamesNearbyLocationSchema.parse(data);
+    }
+    catch (err) {
+        revalidateTag("geonames::nearby-search");
+        throw err;
+    }
 }
 
 /**
@@ -93,12 +109,12 @@ export async function getNearbyLocationDetails(lat: number, lng: number): Promis
  */
 export async function getLocationAutocompleteSuggestions(
     input: string,
-    optionalParameters: Partial<LocationSuggestionOptional> = {}
+    optionalParameters: Partial<LocationSuggestionOptional> = {},
 ): Promise<GoogleLocationSuggestion> {
     const queryParameters = {
         ...optionalParameters,
-        types: "(cities)",
         radius: 500,
+        types: "(cities)",
     };
 
     const locationSuggestionUrl = URL_GET_LOCATION_SUGGESTIONS(input, queryParameters);

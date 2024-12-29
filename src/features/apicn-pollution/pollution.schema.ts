@@ -1,10 +1,10 @@
 import { z } from "zod";
 
 const timeSchema = z.object({
+    iso: z.string(),
     s: z.string(),
     tz: z.string(),
     v: z.number(),
-    iso: z.string(),
 });
 
 const debugSchema = z.object({
@@ -16,8 +16,8 @@ const volumeSchema = z.object({
 });
 
 const attributionSchema = z.object({
-    url: z.string(),
     name: z.string(),
+    url: z.string(),
 });
 
 const iaqiSchema = z.object({
@@ -55,27 +55,27 @@ const forecastSchema = z.object({
 
 const citySchema = z.object({
     geo: z.array(z.number()),
+    location: z.string(),
     name: z.string(),
     url: z.string(),
-    location: z.string(),
 });
 
 export const apicnPollutionSchemaResult = z.object({
     aqi: z.number(),
-    idx: z.number(),
     attributions: z.array(attributionSchema),
     city: citySchema,
-    dominentpol: z.string(),
-    iaqi: iaqiSchema,
-    time: timeSchema,
-    forecast: forecastSchema,
     debug: debugSchema,
+    dominentpol: z.string(),
+    forecast: forecastSchema,
+    iaqi: iaqiSchema,
+    idx: z.number(),
+    time: timeSchema,
 });
 
 export const apicnPollutionSchema = z.object({
-    status: z.string(),
     data: apicnPollutionSchemaResult,
     message: z.string().optional(),
+    status: z.string(),
 });
 
 export default apicnPollutionSchema;

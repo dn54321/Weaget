@@ -1,13 +1,11 @@
 "use client";
 
+import { ThemeProvider as MuiThemeProvider } from "@mui/system";
 import { createContext } from "react";
 import { createSettingsStore } from "@src/stores/settings.store";
-import { ThemeProvider as MuiThemeProvider } from "@mui/system";
-import { useSystemTheme } from "@src/hooks/use-system-theme";
-import { SystemTheme } from "@src/types/system.types";
+import { useSystemSettings } from "@src/hooks/use-system-settings";
 
 export interface SettingProviderProps {
-    theme?: SystemTheme;
     children: React.ReactNode;
 }
 
@@ -17,10 +15,7 @@ export const SettingsStoreContext = createContext<SettingStoreApi | undefined>(
 );
 
 export default function SystemThemeProvider(props: SettingProviderProps) {
-    const { theme, setThemeColour } = useSystemTheme();
-    if (props.theme) {
-        setThemeColour(props.theme);
-    }
+    const { theme } = useSystemSettings();
     return (
         <MuiThemeProvider theme={theme}>
             {props.children}

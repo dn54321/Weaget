@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { weatherIconShowcase } from "./layout";
 import Page from "./page";
 import userEvent from "@testing-library/user-event";
+import { weatherIconShowcase } from "./layout";
 import { withRender } from "@utils/render";
 
 describe("Page: app/icons/page", () => {
@@ -28,7 +28,7 @@ describe("Page: app/icons/page", () => {
     });
 
     it.each(weatherIconShowcase)("should redirect to $name weather icon page when clicked.", async (
-        weatherIcon
+        weatherIcon,
     ) => {
         mocks.mockRouterPush.mockResolvedValue(true);
         const user = userEvent.setup();

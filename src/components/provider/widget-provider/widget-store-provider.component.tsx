@@ -1,5 +1,6 @@
-import { createContext, useRef } from "react";
 import { WidgetState, createWidgetStore } from "@src/stores/widget.store";
+import React from "react";
+import { createContext } from "react";
 
 export interface WidgetProviderProps {
     widgetState?: Partial<WidgetState>;
@@ -12,7 +13,7 @@ export const WidgetStoreContext = createContext<WidgetStoreApi | undefined>(
 );
 
 export default function WidgetStoreProvider(props: WidgetProviderProps) {
-    const storeRef = useRef<WidgetStoreApi>();
+    const storeRef = React.useRef<WidgetStoreApi>();
     if (!storeRef.current) {
         storeRef.current = createWidgetStore(props.widgetState);
     }

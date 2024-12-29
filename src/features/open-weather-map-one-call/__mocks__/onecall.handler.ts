@@ -11,6 +11,6 @@ export function mockOpenWeatherOneCallHandle(response: HttpResponse, options?: R
     return http.get(
         "https://api.openweathermap.org/data/3.0/onecall",
         () => response,
-        options
+        options,
     );
 }

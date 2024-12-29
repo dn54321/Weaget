@@ -1,8 +1,9 @@
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material/";
 import { BoxProps, SxProps, keyframes, styled } from "@mui/system";
-import { TempUnit } from "@components/ui/temperature-unit";
-import { DateTime } from "luxon";
 import { CurrentWeatherDetails, DailyWeatherDetails, OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import { DateTime } from "luxon";
+import { TempUnit } from "@components/ui/temperature-unit";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 import { useWidgetStore } from "@src/hooks/stores/use-widget-store";
 
 const CLOUD_COLOR = "white";
@@ -44,15 +45,15 @@ const Cloud = (props: BoxProps & { rain?: boolean }) => {
             <Box sx={{
                 "--cloud-color": hasRain ? RAIN_CLOUD_COLOR : CLOUD_COLOR,
                 "--cloud-shade": hasRain ? RAIN_CLOUD_GLOW : CLOUD_GLOW,
-                "filter": "drop-shadow(0px 0px 0.3em var(--cloud-shade))",
-                "width": "4em",
-                "borderRadius": ".5em",
-                "opacity": "1",
-                "zIndex": "2",
-                "position": "absolute",
                 "backgroundColor": "var(--cloud-color)",
-                "transform": "translate(-50%,-50%)",
+                "borderRadius": ".5em",
+                "filter": "drop-shadow(0px 0px 0.3em var(--cloud-shade))",
                 "height": "2em",
+                "opacity": "1",
+                "position": "absolute",
+                "transform": "translate(-50%,-50%)",
+                "width": "4em",
+                "zIndex": "2",
             }}
             />
         </Scene>
@@ -60,16 +61,13 @@ const Cloud = (props: BoxProps & { rain?: boolean }) => {
 };
 
 const Sun = styled(Box)(() => ({
-    "fontSize": "0.4em",
-    "background": "linear-gradient(120deg, #FFE5B4, #FFEB3B)",
-    "filter": "drop-shadow(0px 0px 3em yellow)",
-    "width": "8em",
-    "height": "8em",
-    "borderRadius": "4em",
-    "position": "absolute",
-    "right": "0px",
-    "transform": "translate(-20%, -20%)",
-    "opacity": "1",
+    "&:before": {
+        borderRadius: "1em",
+        height: "2em",
+        left: "1em",
+        top: "5em",
+        width: "2em",
+    },
     "&:before,&:after": {
         backgroundColor: "rgba(255, 255, 255, .2)",
         boxShadow: "0 0 .1em 0 rgba(255, 255, 255, .3) inset, -.1em -.1em 0 .2em rgba(255, 255, 255, .1)",
@@ -77,13 +75,16 @@ const Sun = styled(Box)(() => ({
         display: "inline-block",
         position: "absolute",
     },
-    "&:before": {
-        left: "1em",
-        top: "5em",
-        width: "2em",
-        height: "2em",
-        borderRadius: "1em",
-    },
+    "background": "linear-gradient(120deg, #FFE5B4, #FFEB3B)",
+    "borderRadius": "4em",
+    "filter": "drop-shadow(0px 0px 3em yellow)",
+    "fontSize": "0.4em",
+    "height": "8em",
+    "opacity": "1",
+    "position": "absolute",
+    "right": "0px",
+    "transform": "translate(-20%, -20%)",
+    "width": "8em",
 }));
 
 const Rain = (props: BoxProps & { delay: string }) => {
@@ -91,14 +92,14 @@ const Rain = (props: BoxProps & { delay: string }) => {
     return (
         <Scene {...boxProps}>
             <Box sx={{
+                animation: `${rain} 900ms infinite linear`,
+                animationDelay: delay,
+                background: "linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5))",
+                borderRadius: "0.1em",
+                height: "0.7em",
                 position: "absolute",
                 transform: "translate(-50%,-50%) rotate(20deg)",
                 width: "0.1em",
-                height: "0.7em",
-                borderRadius: "0.1em",
-                background: "linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5))",
-                animation: `${rain} 900ms infinite linear`,
-                animationDelay: delay,
             }}
             >
             </Box>
@@ -107,20 +108,20 @@ const Rain = (props: BoxProps & { delay: string }) => {
 };
 
 const Snow = (props: BoxProps & { delay: string }) => {
-    const { delay, ...boxProps } = props;
+    const { delay } = props;
     return (
         <Scene {...props}>
             <Box sx={{
+                animation: `${snow} 3s infinite linear`,
+                animationDelay: delay,
+                backgroundColor: "white",
+                borderRadius: "0.15em",
+                filter: "drop-shadow(0 0 10px white)",
+                height: "0.3em",
+                opacity: "0.1",
                 position: "absolute",
                 transform: "translate(-50%,-50%) rotate(20deg)",
                 width: "0.3em",
-                height: "0.3em",
-                borderRadius: "0.15em",
-                backgroundColor: "white",
-                opacity: "0.1",
-                filter: "drop-shadow(0 0 10px white)",
-                animation: `${snow} 3s infinite linear`,
-                animationDelay: props.delay,
             }}
             >
             </Box>
@@ -168,7 +169,7 @@ function SnowCloud(props: BoxProps) {
     );
 }
 
-function Rainy(props: BoxProps) {
+function Rainy() {
     return (
         <>
             <RainCloud left="75%" top="30%" />
@@ -177,7 +178,7 @@ function Rainy(props: BoxProps) {
     );
 }
 
-function Cloudy(props: BoxProps) {
+function Cloudy() {
     return (
         <>
             <Cloud left="75%" top="30%" />
@@ -189,7 +190,7 @@ function Cloudy(props: BoxProps) {
 function Sunny() {
     return (
         <>
-            <Sun left={{ xs: "55%", sm: "62%", md: "65%" }} top={{ xs: "20%", sm: "0%" }} />
+            <Sun left={{ md: "65%", sm: "62%", xs: "55%" }} top={{ sm: "0%", xs: "20%" }} />
         </>
     );
 }
@@ -197,7 +198,7 @@ function Sunny() {
 function ScatteredClouds() {
     return (
         <>
-            <Sun left={{ xs: "55%", sm: "62%", md: "65%" }} top={{ xs: "20%", sm: "0%" }} />
+            <Sun left={{ md: "65%", sm: "62%", xs: "55%" }} top={{ sm: "0%", xs: "20%" }} />
             <Cloud left="77%" top="40%" fontSize="0.7em" />
             <Cloud left="67%" top="60%" fontSize="0.7em" />
         </>
@@ -207,13 +208,13 @@ function ScatteredClouds() {
 function FewClouds() {
     return (
         <>
-            <Sun left={{ xs: "55%", sm: "62%", md: "65%" }} top={{ xs: "20%", sm: "0%" }} />
+            <Sun left={{ md: "65%", sm: "62%", xs: "55%" }} top={{ sm: "0%", xs: "20%" }} />
             <Cloud left="65%" top="65%" fontSize="0.5em" height="4em" />
         </>
     );
 }
 
-function Snowy(props: BoxProps) {
+function Snowy() {
     return (
         <>
             <SnowCloud left="75%" top="30%" />
@@ -247,22 +248,22 @@ function getBackgroundIcon(id: number): JSX.Element {
     }
 };
 
-const Container = styled(Card)(props => ({
-    position: "relative",
-    height: "320px",
+const Container = styled(Card)(() => ({
     boxShadow: "0 0 .3em -.03em #fff",
     color: "white",
+    height: "320px",
+    position: "relative",
 }));
 
-const High = styled(Box)(({ theme }) => ({
+const High = styled(Box)(() => ({
     display: "inline",
     fontSize: "1em",
 }));
 
 const Low = styled(Box)(({ theme }) => ({
-    fontSize: "0.5em",
-    display: "inline",
     color: theme.palette.grey[200],
+    display: "inline",
+    fontSize: "0.5em",
 }));
 
 export interface WeatherDisplayWidgetProps {
@@ -297,10 +298,13 @@ export function WeatherTemperatureDisplay(props: WeatherTemperatureDisplayProps)
 export default function WeatherDisplayWidget(props: WeatherDisplayWidgetProps) {
     const focusedWeather = useWidgetStore(state => state.focusedWeather) ?? props.weatherData?.current;
     const timezone = props.weatherData?.timezone;
-
+    const { t, locale } = useSystemTranslation();
     const weatherUpdated = focusedWeather
-        ? DateTime.fromJSDate(focusedWeather?.dt, { zone: timezone }).toFormat("LLL d, t")
-        : "Fetching Details...";
+        ? DateTime
+                .fromJSDate(focusedWeather?.dt, { zone: timezone })
+                .setLocale(locale)
+                .toLocaleString(DateTime.DATETIME_MED)
+        : t("component.widget.weatherDisplay.fetchingDetails");
 
     const weatherCode = focusedWeather?.weather[0]?.id ?? 0;
     const weatherDescription = focusedWeather?.weather[0]?.description;
@@ -309,9 +313,11 @@ export default function WeatherDisplayWidget(props: WeatherDisplayWidgetProps) {
     return (
         <Container sx={{ background: getBackgroundColor(weatherCode), ...props.sx }}>
             <CardContent sx={{ height: "100%" }}>
-                <Typography component="h1" variant="h3"><b>{props.location ?? "Fetching Location Details..."}</b></Typography>
+                <Typography component="h1" variant="h3">
+                    <b>{props.location ?? t("component.widget.weatherDisplay.fetchingLocationDetails")}</b>
+                </Typography>
                 <Typography variant="body2">
-                    {`Updated At: ${weatherUpdated}`}
+                    {`${t("component.widget.weatherDisplay.updatedAt")}: ${weatherUpdated}`}
                 </Typography>
                 <Stack direction="row" height="80%">
                     <Box width="150px">
@@ -319,7 +325,7 @@ export default function WeatherDisplayWidget(props: WeatherDisplayWidgetProps) {
                         {typeof (weatherFeelsLike) === "number" && (
                             <Box fontSize="1em">
                                 <b>
-                                    {"Feels like "}
+                                    {t("component.widget.weatherDisplay.feelsLike") + " "}
                                     <TempUnit value={weatherFeelsLike} />
                                 </b>
                             </Box>
@@ -331,7 +337,7 @@ export default function WeatherDisplayWidget(props: WeatherDisplayWidgetProps) {
                         width="100%"
                         height="100%"
                         sx={{
-                            fontSize: { xs: "2em", sm: "3em", md: "4em" },
+                            fontSize: { md: "4em", sm: "3em", xs: "2em" },
                         }}
                     >
                         {getBackgroundIcon(weatherCode)}

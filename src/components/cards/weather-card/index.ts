@@ -1,6 +1,6 @@
-import { withSkeleton } from "@components/with-skeleton";
 import WeatherCard from "./weather-card.component";
 import WeatherCardSkeleton from "./weather-card.skeleton";
+import { withSkeleton } from "@components/with-skeleton";
 
 const weatherCardHOC = withSkeleton(WeatherCard, WeatherCardSkeleton);
 

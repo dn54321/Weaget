@@ -29,32 +29,32 @@ const boundsSchema = z.object({
 });
 
 const geometryCoordinatesSchema = z.object({
+    bounds: boundsSchema.optional(),
     location: coordsSchema,
     location_type: z.string(),
     viewport: boundsSchema,
-    bounds: boundsSchema.optional(),
 }).transform(o => ({
+    bounds: o.bounds,
     location: o.location,
     locationType: o.location_type,
     viewport: o.viewport,
-    bounds: o.bounds,
 }));
 
 const googleGeocodeResultSchema = z.object({
     address_components: z.array(addressComponentSchema),
     formatted_address: z.string(),
     geometry: geometryCoordinatesSchema,
+    partial_match: z.boolean().optional(),
     place_id: z.string(),
     plus_code: plusCodeSchema.optional(),
-    partial_match: z.boolean().optional(),
     types: z.array(z.string()),
 }).transform(o => ({
     addressComponents: o.address_components,
     formattedAddress: o.formatted_address,
     geometry: o.geometry,
+    partialMatch: o.partial_match,
     placeId: o.place_id,
     plusCode: o.plus_code,
-    partialMatch: o.partial_match,
     types: o.types,
 }));
 

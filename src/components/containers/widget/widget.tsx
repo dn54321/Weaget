@@ -1,4 +1,4 @@
-import { Box, Card, Divider, Typography, SxProps } from "@mui/material";
+import { Box, Card, Divider, SxProps, Typography } from "@mui/material";
 import React from "react";
 
 export interface WidgetProps {
@@ -33,6 +33,7 @@ export function Widget(props: WidgetProps) {
                 display="flex"
                 justifyContent="space-between"
                 pt="15px"
+                pb="5px"
                 px={isTransparent ? "0px" : "15px"}
             >
                 <Box>
@@ -45,7 +46,7 @@ export function Widget(props: WidgetProps) {
                 visibility: isTransparent ? "hidden" : "visible",
             }}
             />
-            <Box sx={{ ...(!props.disableChildrenPadding && { px: "15px", pb: "15px" }) }}>
+            <Box sx={{ ...(!props.disableChildrenPadding && { pb: "15px", px: "15px" }) }}>
                 {props.children}
             </Box>
         </Container>

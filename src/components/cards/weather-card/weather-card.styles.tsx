@@ -10,7 +10,7 @@ export const ShortDate = styled(Box)(() => ({
 }));
 
 export const WeatherDescription = styled(Box)(() => ({
-    fontSize: "0.5em",
+    fontSize: "0.65em",
 }));
 
 export const Temperature = styled(Box)(() => ({
@@ -24,8 +24,8 @@ export const High = styled(Box)(() => ({
 }));
 
 export const Low = styled(Box)(({ theme }) => ({
-    display: "inline",
     color: theme.palette.grey?.[200],
+    display: "inline",
 }));
 
 export const IconBox = styled(Box)(() => ({
@@ -33,17 +33,17 @@ export const IconBox = styled(Box)(() => ({
 }));
 
 export const CardContainer = styled(Card)(({ theme }) => ({
-    "backgroundColor": theme.palette.primary.light,
-    "color": theme.palette.primary.contrastText,
-    "boxShadow": theme.shadows?.[3],
-    "minWidth": "120px",
-    "width": "100%",
-    "borderRadius": "10px",
     "& .MuiCardActionArea-root": {
         alignItems: "center",
         display: "flex",
         flexDirection: "column",
-        padding: "10px 5px",
         fontSize: "16px",
+        padding: "10px 5px",
     },
+    "backgroundColor": theme.palette.primary.light,
+    "borderRadius": "10px",
+    "boxShadow": theme.shadows?.[3],
+    "color": theme.palette.primary.contrastText,
+    "minWidth": "120px",
+    "width": "100%",
 }));

@@ -1,14 +1,16 @@
-import { BoxProps } from "@mui/system";
 import { GreyCloud, Snow1, Snow2, WeatherIconContainer } from "@components/icon/weather/weather-icon.styles";
+import { BoxProps } from "@mui/system";
 import { WeatherIconProps } from "@components/icon/weather/weather-icon.types";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 export function SnowCloud(props: BoxProps & WeatherIconProps) {
     const { decoration, ...rest } = props;
+    const { t } = useSystemTranslation();
 
     return (
         <WeatherIconContainer
             {...rest}
-            {...(!decoration && { "aria-label": "Snow cloud" })}
+            {...(!decoration && { title: t("weather.icon.snowCloud.title") })}
             role="img"
         >
             <Snow1 top="70%" left="50%" fontSize="0.5em" angle="20" />

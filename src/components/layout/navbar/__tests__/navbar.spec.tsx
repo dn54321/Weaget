@@ -1,13 +1,14 @@
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, waitFor } from "@testing-library/react";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { withRender } from "@utils/render";
+import { MeasurementScale } from "@src/types/measurement.types";
 import Navbar from "@components/layout/navbar/navbar.component";
+import { SystemTheme } from "@src/types/system.types";
+import { TemperatureScale } from "@src/types/weather.types";
 import { server } from "@project/vitest-setup";
 import { testQueryClient } from "@utils/query-client";
+import { useMobileScreen } from "@project/src/utils/resize-window";
 import userEvent from "@testing-library/user-event";
-import { TemperatureScale } from "@src/types/weather.types";
-import { MeasurementScale } from "@src/types/measurement.types";
-import { SystemTheme } from "@src/types/system.types";
+import { withRender } from "@utils/render";
 
 describe("Component: navbar", () => {
     beforeEach(() => {
@@ -36,19 +37,17 @@ describe("Component: navbar", () => {
 
     it("should have access to settings by clicking the settings icon in mobile view.", async () => {
         const user = userEvent.setup();
-        window.innerWidth = 500;
         fireEvent(window, new Event("resize"));
         const { getByRole, getByText } = withRender(<Navbar />);
         const settingsButton = getByRole("button", { name: /settings/i });
         await user.click(settingsButton);
-        expect(getByText("Measurement System")).toBeInTheDocument();
-        expect(getByText("Temperature Scale")).toBeInTheDocument();
-        expect(getByText("Theme Colour")).toBeInTheDocument();
+        expect(getByText("settings.measurementScale")).toBeInTheDocument();
+        expect(getByText("settings.temperatureScale")).toBeInTheDocument();
+        expect(getByText("settings.themeColor")).toBeInTheDocument();
     });
 
     it("should be able to close settings dialogue in navbar.", async () => {
         const user = userEvent.setup();
-        window.innerWidth = 500;
         fireEvent(window, new Event("resize"));
         const { getByRole } = withRender(<Navbar />);
         await user.click(getByRole("button", { name: /settings/i }));
@@ -58,36 +57,38 @@ describe("Component: navbar", () => {
 
     it("should have access to the search bar in mobile view.", async () => {
         const user = userEvent.setup();
-        window.innerWidth = 500;
         fireEvent(window, new Event("resize"));
         const { getByRole, getByPlaceholderText } = withRender(<Navbar />);
-        const settingsButton = getByRole("button", { name: /Search Weather/i });
+        const settingsButton = getByRole("button", { name: "component.searchBar.search" });
         await user.click(settingsButton);
-        expect(getByPlaceholderText("Search Weather Location")).toBeInTheDocument();
+        expect(getByPlaceholderText("component.searchBar.placeholder")).toBeInTheDocument();
     });
 
     it("should be able to close the search bar in mobile view.", async () => {
         const user = userEvent.setup();
-        window.innerWidth = 500;
-        fireEvent(window, new Event("resize"));
+        useMobileScreen();
         const { getByRole, getByLabelText } = withRender(<Navbar />);
-        await user.click(getByRole("button", { name: /Search Weather/i }));
-        await user.click(getByLabelText("go back"));
-        expect(getByRole("button", { name: /Search Weather/i })).toBeInTheDocument();
+        await user.click(getByRole("button", { name: "component.navbar.openSearchBar" }));
+        await user.click(getByLabelText("component.navbar.goBacktoNavbar"));
+        expect(getByRole("button", { name: "component.searchBar.search" })).toBeInTheDocument();
     });
 
     describe("when the mobile menu is open", async () => {
+        beforeAll(() => {
+            useMobileScreen();
+        });
+
         it.each([
-            ["Celcius (C°)", "Fahrenenheit (F°)", TemperatureScale.CELSIUS],
-            ["Fahrenenheit (F°)", "Celcius (C°)", TemperatureScale.FAHRENHEIT],
+            ["Celsius (C°)", "Fahrenenheit (F°)", TemperatureScale.CELSIUS, "temperature.celsius.text (°C)", "temperature.fahrenheit.text (°F)"],
+            ["Fahrenenheit (F°)", "Celsius (C°)", TemperatureScale.FAHRENHEIT, "temperature.fahrenheit.text (°F)", "temperature.celsius.text (°C)"],
         ])("should be able to toggle from %s to %s when clicking temperature button toggle.", async (
+            _1: string,
+            _2: string,
+            temperatureSetting: TemperatureScale,
             from: string,
             to: string,
-            temperatureSetting: TemperatureScale
         ) => {
             const user = userEvent.setup();
-            window.innerWidth = 500;
-            fireEvent(window, new Event("resize"));
             const settings = { temperatureScale: temperatureSetting };
             const view = withRender(<Navbar />, { settings });
             const settingsButton = view.getByRole("button", { name: /settings/i });
@@ -99,16 +100,16 @@ describe("Component: navbar", () => {
         });
 
         it.each([
-            ["Metric (M/S)", "Imperial (MPH)", MeasurementScale.METRIC],
-            ["Imperial (MPH)", "Metric (M/S)", MeasurementScale.IMPERIAL],
+            ["Metric (M/S)", "Imperial (MPH)", MeasurementScale.METRIC, "measurement.metric (M/S)", "measurement.imperial (MPH)"],
+            ["Imperial (MPH)", "Metric (M/S)", MeasurementScale.IMPERIAL, "measurement.imperial (MPH)", "measurement.metric (M/S)"],
         ])("should be able to toggle from %s to %s when clicking measurement button toggle.", async (
+            _1: string,
+            _2: string,
+            measurementSetting: MeasurementScale,
             from: string,
             to: string,
-            measurementSetting: MeasurementScale
         ) => {
             const user = userEvent.setup();
-            window.innerWidth = 500;
-            fireEvent(window, new Event("resize"));
             const settings = { measurementScale: measurementSetting };
             const view = withRender(<Navbar />, { settings });
             const settingsButton = view.getByRole("button", { name: /settings/i });
@@ -120,16 +121,16 @@ describe("Component: navbar", () => {
         });
 
         it.each([
-            ["Dark Theme", "Light Theme", SystemTheme.DARK],
-            ["Light Theme", "Dark Theme", SystemTheme.LIGHT],
+            ["Dark Theme", "Light Theme", SystemTheme.DARK, "theme.darkTheme", "theme.lightTheme"],
+            ["Light Theme", "Dark Theme", SystemTheme.LIGHT, "theme.lightTheme", "theme.darkTheme"],
         ])("should be able to toggle from %s to %s when clicking theme button toggle.", async (
+            _1: string,
+            _2: string,
+            themeSetting: SystemTheme,
             from: string,
             to: string,
-            themeSetting: SystemTheme
         ) => {
             const user = userEvent.setup();
-            window.innerWidth = 500;
-            fireEvent(window, new Event("resize"));
             const settings = { theme: themeSetting };
             const view = withRender(<Navbar />, { settings });
             const settingsButton = view.getByRole("button", { name: /settings/i });

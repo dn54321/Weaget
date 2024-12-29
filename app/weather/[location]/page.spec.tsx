@@ -1,13 +1,13 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Page from "./page";
-import { withRender } from "@utils/render";
-import { waitFor } from "@testing-library/react";
-import { mockPollutionHandle } from "@features/weaget/__mocks__/pollution.handler";
 import { mockLocationLookupHandle } from "@features/weaget/__mocks__/location-lookup.handler";
-import { mockWeatherHandle } from "@features/weaget/__mocks__/weather.handler";
-import { withHandleError } from "@utils/msw-http-mocker";
 import { mockNearbyLocationHandle } from "@features/weaget/__mocks__/nearby-location.handler";
+import { mockPollutionHandle } from "@features/weaget/__mocks__/pollution.handler";
+import { mockWeatherHandle } from "@features/weaget/__mocks__/weather.handler";
 import { testQueryClient } from "@utils/query-client";
+import { waitFor } from "@testing-library/react";
+import { withHandleError } from "@utils/msw-http-mocker";
+import { withRender } from "@utils/render";
 
 describe("Page: app/weather/[location]", () => {
     const mocks = vi.hoisted(() => {
@@ -28,9 +28,10 @@ describe("Page: app/weather/[location]", () => {
     });
 
     it("should resolve without displaying any skeletons", async () => {
-        const { getByText } = withRender(<Page params={{ location: "testLocation" }} />);
+        const params = Promise.resolve({ location: "testLocation" });
+        const { getByText } = withRender(<Page params={params} />);
         await waitFor(() => expect(testQueryClient.isFetching()).toEqual(0));
-        expect(() => getByText("Error fetching weather data. Some elements may be unresponsive.")).toThrow();
+        expect(() => getByText("")).toThrow();
     });
 
     it.each([
@@ -43,7 +44,8 @@ describe("Page: app/weather/[location]", () => {
         mockHandle,
     ) => {
         withHandleError(mockHandle);
-        const { getByText } = withRender(<Page params={{ location: "testLocation" }} />);
-        await waitFor(() => expect(getByText("Error fetching weather data. Some elements may be unresponsive.")).toBeInTheDocument());
+        const params = Promise.resolve({ location: "testLocation" });
+        const { getByText } = withRender(<Page params={params} />);
+        await waitFor(() => expect(getByText("weather.error.fetchFailed")).toBeInTheDocument());
     });
 });

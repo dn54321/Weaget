@@ -1,11 +1,32 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { storybookWrapper } from "@utils/wrappers";
 import { LocationListWidget, type LocationListWidgetProps } from ".";
+import { Meta, StoryObj } from "@storybook/react";
 import { createNearbyLocationMockData } from "@features/weaget/__mocks__/nearby-location.mock";
+import { storybookWrapper } from "@utils/wrappers";
 type StoryType = LocationListWidgetProps & { width: number };
 
 const meta: Meta<StoryType> = {
-    title: "Widgets/Location List Widget",
+    argTypes: {
+        locationData: {
+            description: "Location data object.",
+            name: "Location Data",
+        },
+        width: {
+            control: {
+                max: 1000,
+                min: 0,
+                step: 1,
+                type: "range",
+            },
+            defaultValue: 400,
+            description: "Card width.",
+            name: "Width",
+            type: { name: "number", required: false },
+        },
+    },
+    args: {
+        locationData: createNearbyLocationMockData({ count: 8 }),
+        width: 400,
+    },
     component: LocationListWidget,
     decorators: [storybookWrapper],
     parameters: {
@@ -15,28 +36,7 @@ const meta: Meta<StoryType> = {
         },
     },
     tags: ["autodocs"],
-    argTypes: {
-        locationData: {
-            name: "Location Data",
-            description: "Location data object.",
-        },
-        width: {
-            name: "Width",
-            description: "Card width.",
-            type: { name: "number", required: false },
-            defaultValue: 400,
-            control: {
-                type: "range",
-                min: 0,
-                max: 1000,
-                step: 1,
-            },
-        },
-    },
-    args: {
-        locationData: createNearbyLocationMockData({ count: 8 }),
-        width: 400,
-    },
+    title: "Widgets/Location List Widget",
 } satisfies Meta<StoryType>;
 
 export default meta;

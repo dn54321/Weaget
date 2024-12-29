@@ -1,16 +1,16 @@
 import { Box, BoxProps } from "@mui/system";
 import { BrokenCloud } from "@components/icon/weather/broken-cloud-icon";
+import { Chip } from "@mui/material";
+import { FewCloudIcon } from "@components/icon/weather/few-cloud-icon/few-cloud-icon.component";
 import { Mist } from "@components/icon/weather/mist-icon";
+import { MoonIcon } from "@components/icon/weather/moon-icon/moon-icon.component";
 import { OvercastCloud } from "@components/icon/weather/overcast-cloud-icon/overcast-cloud-icon.component";
 import { RainCloud } from "@components/icon/weather/rain-cloud-icon";
+import { ScatteredCloud } from "@components/icon/weather/scattered-cloud-icon";
 import { ShowerRain } from "@components/icon/weather/shower-rain-icon/shower-rain-icon.component";
 import { SnowCloud } from "@components/icon/weather/snow-cloud-icon/snow-cloud-icon.component";
 import SunIcon from "@components/icon/weather/sun-icon/sun-icon.component";
 import { Thunderstorm } from "@components/icon/weather/thunderstorm-icon/thunderstorm-icon.component";
-import { FewCloudIcon } from "@components/icon/weather/few-cloud-icon/few-cloud-icon.component";
-import { ScatteredCloud } from "@components/icon/weather/scattered-cloud-icon";
-import { MoonIcon } from "@components/icon/weather/moon-icon/moon-icon.component";
-import { Chip } from "@mui/material";
 import { round } from "@utils/math";
 
 function getWeatherIcon(iconId: number, isDecoration = false) {
@@ -49,14 +49,14 @@ function RainIndicator(props: { rainPercentage: number }) {
             <Chip
                 label={round(props.rainPercentage * 100, 0) + "%"}
                 sx={{
+                    "& .MuiChip-label": {
+                        px: "4px",
+                        py: "3px",
+                    },
                     "backgroundColor": "primary.dark",
                     "color": "primary.contrastText",
                     "fontSize": "0.25em",
                     "height": "auto",
-                    "& .MuiChip-label": {
-                        py: "3px",
-                        px: "4px",
-                    },
                 }}
             />
         </Box>

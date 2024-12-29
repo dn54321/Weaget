@@ -1,9 +1,9 @@
 import { debounce, throttle } from "throttle-debounce";
 
-export const throttleFunc = throttle(500, (func: Function, query?: string) => {
+export const throttleSearchFunc = throttle(500, (func: (query?: string) => void, query?: string) => {
     if (query !== undefined) func(query);
 });
 
-export const debounceFunc = debounce(500, (func: Function, query?: string) => {
+export const debounceSearchFunc = debounce(500, (func: (query?: string) => void, query?: string) => {
     if (query !== undefined) func(query);
 });

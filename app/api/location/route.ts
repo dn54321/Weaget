@@ -1,6 +1,6 @@
-import { getLocationDetailsByIp } from "@services/geolocation.service";
 import { NextRequest } from "next/server";
 import { createNextResponseError } from "@src/utils/next-request-helper";
+import { getLocationDetailsByIp } from "@services/geolocation.service";
 
 export async function GET(req: NextRequest) {
     // Note - it's possible to spoof this header.

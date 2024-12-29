@@ -1,11 +1,11 @@
 "use client";
-import { Button, Stack, Box, Container } from "@mui/material";
-import Head from "next/head";
+import { Box, Button, Container, Stack } from "@mui/material";
 import CloudIcon from "@mui/icons-material/Cloud";
-import styled from "@mui/system/styled";
-import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
 import Grid from "@mui/material/Grid2";
 import React from "react";
+import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
+import styled from "@mui/system/styled";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 interface IconBoxProps {
     children: JSX.Element | Array<JSX.Element>;
@@ -13,36 +13,36 @@ interface IconBoxProps {
 function IconBox(props: IconBoxProps) {
     return (
         <Box
-            sx={{ display: "grid", placeItems: "center",
-                fontSize: {
-                    lg: "562px",
-                    md: "40vw",
-                    sm: "400px",
-                    xs: "300px",
-                } }}
+            sx={{ display: "grid", fontSize: {
+                lg: "562px",
+                md: "40vw",
+                sm: "400px",
+                xs: "300px",
+            },
+            placeItems: "center" }}
             height="100%"
         >
             <Box sx={{
-                "position": "relative",
-                "width": "20rem",
-                "height": "20rem",
                 "& svg": {
                     color: "gray",
                     position: "absolute",
                     transform: "translate(-50%,-50%)",
                 },
                 "& svg:nth-child(1)": {
-                    top: "45%",
-                    left: "50%",
-                    fontSize: "20rem",
                     filter: "brightness(80%) drop-shadow(0px 0px 2em #eee)",
+                    fontSize: "20rem",
+                    left: "50%",
+                    top: "45%",
                 },
                 "& svg:nth-child(2)": {
-                    top: "60%",
-                    left: "60%",
-                    fontSize: "16rem",
                     filter: "drop-shadow(0px 0px 2em #eee)",
+                    fontSize: "16rem",
+                    left: "60%",
+                    top: "60%",
                 },
+                "height": "20rem",
+                "position": "relative",
+                "width": "20rem",
             }}
             >
                 {props.children}
@@ -56,11 +56,10 @@ const Page = styled(Box) (() => ({
 }));
 
 export default function NotFound() {
+    const { t } = useSystemTranslation();
     return (
         <Page>
-            <Head>
-                <title>Weaget - Not Found</title>
-            </Head>
+            <title>{`${t("webapp.name")} - ${t("page.404.pageNotFound")}` }</title>
             <Container maxWidth="lg" sx={{ height: "100%" }} disableGutters>
                 <Box position="absolute" top={10} right={10}>
                     <ThemeToggleButton />
@@ -73,22 +72,22 @@ export default function NotFound() {
                         width: "100%",
                     }}
                 >
-                    <Grid size={{ xs: 12, md: 6 }}>
+                    <Grid size={{ md: 6, xs: 12 }}>
                         <IconBox>
                             <CloudIcon />
                             <CloudIcon />
                         </IconBox>
                     </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
+                    <Grid size={{ md: 6, xs: 12 }}>
                         <Stack
                             alignItems="center"
-                            justifyContent={{ sm: "initial", md: "center" }}
+                            justifyContent={{ md: "center", sm: "initial" }}
                             height="100%"
                             sx={{ color: "text.primary", px: "10px" }}
                         >
                             <Box component="h1" sx={{ fontSize: "100px", margin: "0px" }}>404</Box>
-                            <Box fontSize="16px" sx={{ textAlign: "center" }}>The page you have been looking for could not be found.</Box>
-                            <Button href="/" variant="contained" sx={{ mt: "40px" }}>Go back to home</Button>
+                            <Box fontSize="16px" sx={{ textAlign: "center" }}>{t("page.404.description")}</Box>
+                            <Button href="/" variant="contained" sx={{ mt: "40px" }}>{t("page.404.goBackToHomeButton")}</Button>
                         </Stack>
                     </Grid>
                 </Grid>

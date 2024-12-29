@@ -1,26 +1,25 @@
 "use client";
 
-import MyLocationIcon from "@mui/icons-material/MyLocation";
-import SearchIcon from "@mui/icons-material/Search";
-import { Alert, CircularProgress, IconButton, List, Paper } from "@mui/material";
-import Divider from "@mui/material/Divider";
-import useAutocomplete from "@mui/material/useAutocomplete";
+import { Alert, CircularProgress, Divider, IconButton, List, Paper, Tooltip, useAutocomplete } from "@mui/material";
 import { Box, BoxProps } from "@mui/system";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
-import { FetchError } from "@errors/fetch-error";
+import { FieldBox, FormContainer, MagnifyIconButtonContainer, SearchComponent, SearchField } from "./search-bar.styles";
+import { debounceSearchFunc, throttleSearchFunc } from "./search-bar.utils";
 import { AutoCompleteSuggestions } from "@features/weaget/auto-complete/auto-complete.types";
-import { useGetCurrentLocation } from "@src/hooks/use-get-current-location";
+import { FetchError } from "@errors/fetch-error";
+import MyLocationIcon from "@mui/icons-material/MyLocation";
+import React, { useEffect, useRef, useState } from "react";
+import SearchIcon from "@mui/icons-material/Search";
 import { queryLocation } from "@src/hooks/use-get-location";
+import { useGetCurrentLocation } from "@src/hooks/use-get-current-location";
 import { useGetLocationAutoComplete } from "@src/hooks/use-get-location-auto-complete";
-import { FieldBox, FormContainer, MagnifyIconButtonContainer, SearchComponent, SearchField, SuggestionText } from "./search-bar.styles";
-import { debounceFunc, throttleFunc } from "./search-bar.utils";
+import { useRouter } from "next/navigation";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
-export enum SearchErrorMessage {
+export enum SearchErrorI18NKey {
     EMPTY = "",
-    INVALID_LOCATION = "Invalid Suburb Location!",
-    INTERNAL_SERVER_ERROR = "Internal Server Error. Please try again later!",
-    INVALID_CURRENT_LOCATION = "Could not retrieve current location. Please enter it manually!",
+    INVALID_LOCATION = "component.searchBar.error.invalidLocation",
+    INTERNAL_SERVER_ERROR = "component.searchBar.error.internalServerErr",
+    INVALID_CURRENT_LOCATION = "component.searchBar.error.invalidCurrentLocation",
 }
 
 // React Components
@@ -33,48 +32,54 @@ function Loader() {
 };
 
 function MagnifyIconButton() {
+    const { t } = useSystemTranslation();
+
     return (
-        <MagnifyIconButtonContainer
-            aria-label="Search"
-            type="submit"
-        >
-            <SearchIcon />
-        </MagnifyIconButtonContainer>
+        <Tooltip title={t("component.searchBar.search")}>
+            <MagnifyIconButtonContainer type="submit">
+                <SearchIcon />
+            </MagnifyIconButtonContainer>
+        </Tooltip>
     );
 };
 
-function MyLocationButtonIcon(props: { setErrorMessage: (errMessage: SearchErrorMessage) => void }) {
+function MyLocationButtonIcon(props: { setErrorMessage: (errMessage: SearchErrorI18NKey) => void }) {
     const router = useRouter();
     const currentLocationQuery = useGetCurrentLocation();
+    const { t } = useSystemTranslation();
 
-    function onClick() {
+    function redirectCurrentWeatherLocation() {
         const city = currentLocationQuery.data?.city;
         if (city) {
             router.push(`/weather/${city}`);
         }
         else {
-            props.setErrorMessage(SearchErrorMessage.INVALID_CURRENT_LOCATION);
+            props.setErrorMessage(SearchErrorI18NKey.INVALID_CURRENT_LOCATION);
         }
     }
 
     return (
-        <IconButton
-            aria-label="Use current location"
-            color="primary"
-            type="button"
-            onClick={() => onClick()}
-            disabled={currentLocationQuery.isLoading}
-            sx={{
-                color: "gray",
-                margin: "0px 10px",
-            }}
-        >
-            <MyLocationIcon />
-        </IconButton>
+        <Tooltip title={t("component.searchBar.useCurrentLocation")}>
+            <span>
+                <IconButton
+                    color="primary"
+                    type="button"
+                    onClick={() => redirectCurrentWeatherLocation()}
+                    disabled={currentLocationQuery.isLoading}
+                    sx={{
+                        color: "gray",
+                        margin: "0px 10px",
+                    }}
+                >
+                    <MyLocationIcon />
+                </IconButton>
+            </span>
+        </Tooltip>
     );
 };
 
 export function Error(props: { message: string }) {
+    const { t } = useSystemTranslation();
     if (!props.message) {
         return null;
     }
@@ -82,7 +87,7 @@ export function Error(props: { message: string }) {
         <Box position="relative" height="0">
             <Box position="absolute" mt={1}>
                 <Alert variant="filled" severity="error" sx={{ pr: "25px" }}>
-                    {props.message}
+                    {t(props.message)}
                 </Alert>
             </Box>
         </Box>
@@ -92,20 +97,18 @@ export function Error(props: { message: string }) {
 export function SuggestionBox(props: { children: React.ReactNode; listprops: React.HTMLAttributes<HTMLUListElement> }) {
     return (
         <Box
-            component="ul"
             sx={{
-                "position": "relative",
-                "zIndex": "1",
-                "listStyleType": "none",
-                "p": 0,
-                "m": 0,
                 "& .Mui-focused": {
                     backgroundColor: "#e9e9e9",
                 },
+                "listStyleType": "none",
+                "m": 0,
+                "p": 0,
+                "position": "relative",
+                "zIndex": "1",
             }}
-            {...props.listprops}
         >
-            <Paper sx={{ position: "absolute", width: "100%", mt: "10px" }}>
+            <Paper sx={{ position: "absolute", top: "10px", width: "100%" }} component="ul" {...props.listprops}>
                 <List sx={{ p: 0 }}>
                     {props.children}
                 </List>
@@ -116,9 +119,10 @@ export function SuggestionBox(props: { children: React.ReactNode; listprops: Rea
 
 export default function SearchBar(props: BoxProps) {
     const currentLocationQuery = useGetCurrentLocation();
+    const { t } = useSystemTranslation();
     const coords = `${currentLocationQuery.data?.lat},${currentLocationQuery.data?.lng}`;
     const [searchQuery, setQuery] = useGetLocationAutoComplete("", coords);
-    const [searchError, setSearchError] = useState(SearchErrorMessage.EMPTY);
+    const [searchError, setSearchError] = useState(SearchErrorI18NKey.EMPTY);
     const [icon, setIcon] = useState(<MyLocationButtonIcon setErrorMessage={setSearchError} />);
     const mounted = useRef(false);
     const router = useRouter();
@@ -133,19 +137,18 @@ export default function SearchBar(props: BoxProps) {
         const target = e.target as typeof e.target & { elements: { suburb: { value: string } } };
         const location = target.elements.suburb.value;
         await queryLocation(location)
-            .then((_) => {
+            .then(() => {
                 router.push(`/weather/${location}`);
             })
             .catch((err: FetchError) => {
                 if (err.res.status === 404) {
-                    return setSearchError(SearchErrorMessage.INVALID_LOCATION);
+                    return setSearchError(SearchErrorI18NKey.INVALID_LOCATION);
                 }
 
-                if (err.res.status === 500) {
-                    return setSearchError(SearchErrorMessage.INTERNAL_SERVER_ERROR);
-                }
+                return setSearchError(SearchErrorI18NKey.INTERNAL_SERVER_ERROR);
             })
-            .finally(() => mounted && setIcon(<MyLocationButtonIcon setErrorMessage={setSearchError} />));
+            .finally(() => mounted && setIcon(
+                <MyLocationButtonIcon setErrorMessage={setSearchError} />));
     }
 
     // Get a location query and finds location that match the query.
@@ -157,12 +160,12 @@ export default function SearchBar(props: BoxProps) {
     // Debounce && Throttle Queries for Reduce API Calls.
     function DebounceAndThrottleAutoComplete(query: string) {
         if (query.length < 5) {
-            debounceFunc(getSuggestion, undefined);
-            throttleFunc(getSuggestion, query);
+            debounceSearchFunc(getSuggestion, undefined);
+            throttleSearchFunc(getSuggestion, query);
         }
         else {
-            throttleFunc(getSuggestion, undefined);
-            debounceFunc(getSuggestion, query);
+            throttleSearchFunc(getSuggestion, undefined);
+            debounceSearchFunc(getSuggestion, query);
         }
     }
 
@@ -181,13 +184,13 @@ export default function SearchBar(props: BoxProps) {
         getOptionProps,
         groupedOptions,
     } = useAutocomplete<AutoCompleteSuggestions>({
-        id: "search-menu",
-        options: searchQuery.data ?? [],
-        onInputChange: (_, v) => DebounceAndThrottleAutoComplete(v),
-        onChange: (_, v) => (v && router.push(`/weather/${v.main} ${v.secondary}`)),
-        getOptionLabel: x => `${x.main} ${x.secondary}`,
         clearOnBlur: false,
+        getOptionLabel: x => `${x.main} ${x.secondary}`,
+        id: "search-menu",
         isOptionEqualToValue: (i, o) => (i.main === o.main && i.secondary === o.secondary),
+        onChange: (_, v) => (v && router.push(`/weather/${v.main} ${v.secondary}`)),
+        onInputChange: (_, v) => DebounceAndThrottleAutoComplete(v),
+        options: searchQuery.data ?? [],
     });
 
     return (
@@ -197,7 +200,7 @@ export default function SearchBar(props: BoxProps) {
                     <SearchField>
                         <FieldBox
                             name="suburb"
-                            placeholder="Search Weather Location"
+                            placeholder={t("component.searchBar.placeholder")}
                             required
                             inputProps={{ ...getInputProps() }}
                         />
@@ -211,14 +214,25 @@ export default function SearchBar(props: BoxProps) {
                     ? (
                             <SuggestionBox listprops={getListboxProps()}>
                                 {(groupedOptions as Array<AutoCompleteSuggestions>).map((option, index: number) => {
+                                    const { key, ...optionProps } = getOptionProps({ index, option });
                                     return (
-                                        <SuggestionText
-                                            {...getOptionProps({ option, index })}
-                                            key={option.main + option.secondary}
+                                        <Box
+                                            component="li"
+                                            key={key}
+                                            {...optionProps}
+                                            sx={{
+                                                "&.Mui-focused": {
+                                                    backgroundColor: "action.hover",
+                                                },
+                                                "borderBottom": "1px solid",
+                                                "borderColor": "divider",
+                                                "p": "5px 10px",
+                                                "userSelect": "none",
+                                            }}
                                         >
                                             <Box display="inline" color="text.main"><b>{option.main}</b></Box>
                                             <Box display="inline" color="text.secondary" ml="1ch">{option.secondary}</Box>
-                                        </SuggestionText>
+                                        </Box>
                                     );
                                 })}
                             </SuggestionBox>

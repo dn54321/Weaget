@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { AlertBox, AlertBoxProps } from "@components/ui/alert-box";
+import { useState } from "react";
 
 export interface AlertMessage {
     message: string;
@@ -18,12 +18,12 @@ export function useAlert() {
 
     const markStaleAlerts = () => {
         setAlerts(oldAlerts => oldAlerts.map(
-            alert => (alert.duration > Date.now()) ? alert : { ...alert, active: false }
+            alert => (alert.duration > Date.now()) ? alert : { ...alert, active: false },
         ));
     };
     const removeAlert = (id: string) => {
         setAlerts(oldAlerts => oldAlerts.map(
-            alert => (alert.id !== id) ? alert : { ...alert, active: false }
+            alert => (alert.id !== id) ? alert : { ...alert, active: false },
         ));
     };
 
@@ -38,10 +38,10 @@ export function useAlert() {
 
             const newAlert = {
                 ...alert,
-                duration: Date.now() + duration,
-                unclosable: Boolean(alert.unclosable),
                 active: true,
+                duration: Date.now() + duration,
                 id: id,
+                unclosable: Boolean(alert.unclosable),
             };
 
             return [...oldAlerts, newAlert];
@@ -54,5 +54,5 @@ export function useAlert() {
 
     const alertBox = (props: useAlertInterface) => AlertBox({ ...props, alerts: activeAlerts, removeAlert });
 
-    return { alerts: activeAlerts, addAlert, removeAlert, AlertBox: alertBox } as const;
+    return { AlertBox: alertBox, addAlert, alerts: activeAlerts, removeAlert } as const;
 }

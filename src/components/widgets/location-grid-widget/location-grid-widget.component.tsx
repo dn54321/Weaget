@@ -1,9 +1,10 @@
 import { Card, CardActionArea, SxProps } from "@mui/material";
 import Box from "@mui/material/Box";
-import { useRouter } from "next/navigation";
-import { Widget } from "@components/containers/widget/widget";
-import { NearbyLocation } from "@features/weaget/nearby-location/nearby-location.types";
 import Grid from "@mui/material/Grid2";
+import { NearbyLocation } from "@features/weaget/nearby-location/nearby-location.types";
+import { Widget } from "@components/containers/widget/widget";
+import { useRouter } from "next/navigation";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 /*
     Provides a grid-like list of the nearest suburbs/cities.
@@ -22,15 +23,16 @@ function Entry(props: EntryProps) {
     }
 
     return (
-        <Grid component="li" size={{ xs: 12, sm: 4, md: 6 }}>
+        <Grid component="li" size={{ md: 6, sm: 4, xs: 12 }}>
             <Card>
                 <CardActionArea
                     sx={{
                         color: "text.primary",
                         display: "grid",
-                        placeItems: "center",
-                        padding: "20px",
                         fontSize: "1em",
+                        height: "60px",
+                        placeItems: "center",
+                        textAlign: "center",
                     }}
                     onClick={() => redirect(props)}
                 >
@@ -50,14 +52,15 @@ export interface LocationGridWidgetProps {
 }
 
 export default function LocationGridWidget(props: LocationGridWidgetProps) {
+    const { t } = useSystemTranslation();
     if (!props.locationData) return null;
     const locations = props.locationData.map(loc => (
         <Entry key={loc.name + loc.state + loc.country} {...loc} />
     ));
     return (
         <Widget
-            title={props.title ?? "Suggested Locations"}
-            subtitle={props.subtitle ?? "Click on any card for more weather details!"}
+            title={props.title ?? t("component.widget.locationGrid.title")}
+            subtitle={props.subtitle ?? t("component.widget.locationGrid.description")}
             variant="transparent"
             disableChildrenPadding
             sx={props.sx}

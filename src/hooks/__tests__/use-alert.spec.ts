@@ -1,7 +1,7 @@
 import { act, renderHook } from "@testing-library/react";
-import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
-import { useAlert } from "@src/hooks/use-alert";
+import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
 import { createOpenWeatherAlertMessageMockData } from "@src/hooks/__mocks__/alert.mock";
+import { useAlert } from "@src/hooks/use-alert";
 
 describe("Hooks - use-alert", () => {
     beforeEach(() => {
@@ -26,7 +26,7 @@ describe("Hooks - use-alert", () => {
         expect(result.current.alerts).toHaveLength(1);
     });
 
-    test("Adding an inactive alert should not place an alert in the alerts array.", () => {
+    it("Adding an inactive alert should not place an alert in the alerts array.", () => {
         const { result } = renderHook(() => useAlert());
         const alert = {
             ...createOpenWeatherAlertMessageMockData(),
@@ -40,7 +40,7 @@ describe("Hooks - use-alert", () => {
         expect(result.current.alerts).toHaveLength(1);
     });
 
-    test("Adding a duplicate alert should place not put the alert in the alerts array.", () => {
+    it("Adding a duplicate alert should place not put the alert in the alerts array.", () => {
         const { result } = renderHook(() => useAlert());
         const alert = {
             ...createOpenWeatherAlertMessageMockData(),
@@ -54,7 +54,7 @@ describe("Hooks - use-alert", () => {
         expect(result.current.alerts).toHaveLength(1);
     });
 
-    test("Stale alerts should be removed from the alerts array.", () => {
+    it("Stale alerts should be removed from the alerts array.", () => {
         const { result } = renderHook(() => useAlert());
         act(() => {
             result.current.addAlert(
@@ -62,14 +62,14 @@ describe("Hooks - use-alert", () => {
                     ...createOpenWeatherAlertMessageMockData(),
                     active: true,
                     duration: 100,
-                }
+                },
             );
             result.current.addAlert(
                 {
                     ...createOpenWeatherAlertMessageMockData(),
                     active: true,
                     duration: Infinity,
-                }
+                },
             );
             vi.advanceTimersByTime(200);
         });
@@ -77,7 +77,7 @@ describe("Hooks - use-alert", () => {
         expect(result.current.alerts).toHaveLength(1);
     });
 
-    test("should remove expired alerts from the alerts array.", () => {
+    it("should remove expired alerts from the alerts array.", () => {
         const { result } = renderHook(() => useAlert());
         const alert = {
             ...createOpenWeatherAlertMessageMockData(),
@@ -100,7 +100,7 @@ describe("Hooks - use-alert", () => {
         expect(result.current.alerts).toHaveLength(2);
     });
 
-    test("Alert hook should have a alert element", () => {
+    it("Alert hook should have a alert element", () => {
         const { result } = renderHook(() => useAlert());
         expect(result.current.AlertBox).toBeInstanceOf(Function);
     });

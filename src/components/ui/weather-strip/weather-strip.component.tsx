@@ -1,25 +1,26 @@
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Divider, Typography, styled } from "@mui/material";
-import MuiAccordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
 import { DateTime } from "luxon";
-import WeatherStatsCard, { WeatherStats } from "@components/cards/weather-stats-card/weather-stats-card.component";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MuiAccordion from "@mui/material/Accordion";
+import React from "react";
+import Stack from "@mui/material/Stack";
 import { TempUnit } from "@components/ui/temperature-unit";
 import WeatherIcon from "@components/ui/weather-icon/weather-icon.component";
-import React from "react";
+import WeatherStatsCard, { WeatherStats } from "@components/cards/weather-stats-card/weather-stats-card.component";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 const Day = styled(Box)(() => ({
-    textTransform: "uppercase",
     fontSize: "0.5em",
+    textTransform: "uppercase",
 }));
 
 const WeatherDescription = styled(Box) ({
+    fontSize: "0.6em",
     textTransform: "capitalize",
     width: "100px",
-    fontSize: "0.6em",
 });
 
 export interface AccordionProps {
@@ -34,10 +35,10 @@ const Accordion = (props: AccordionProps) => {
             data-testid="weather-strip"
             disableGutters
             elevation={0}
-            slotProps={{ transition: { unmountOnExit: true, timeout: 0 } }}
+            slotProps={{ transition: { timeout: 0, unmountOnExit: true } }}
             expanded={props.expanded}
             onChange={props.onChange}
-            sx={{ color: "text.color", backgroundColor: "initial" }}
+            sx={{ backgroundColor: "initial", color: "text.color" }}
         >
             {props.children}
         </MuiAccordion>
@@ -57,7 +58,10 @@ export interface WeatherStripProps {
 }
 
 export default function WeatherStrip(props: WeatherStripProps) {
-    const date = DateTime.fromJSDate(props.date, { zone: props.timezone });
+    const { t, locale } = useSystemTranslation();
+    const date = DateTime
+        .fromJSDate(props.date, { zone: props.timezone })
+        .setLocale(locale);
 
     return (
         <Box>
@@ -66,20 +70,26 @@ export default function WeatherStrip(props: WeatherStripProps) {
                 {...(props.setExpanded && { onChange: () => props.setExpanded!() })}
             >
                 <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
+                    expandIcon={(
+                        <Box title={props.expanded
+                            ? t("component.weatherStrip.collapse")
+                            : t("component.weatherStrip.expand")}
+                        >
+                            <ExpandMoreIcon />
+                        </Box>
+                    )}
                     sx={{
-
-                        "paddingLeft": "0px",
-                        "boxShadow": "none",
                         "& .MuiAccordionSummary-content": { margin: "0px" },
                         "& .MuiStack-root": { bgcolor: "initial !important" },
+                        "boxShadow": "none",
+                        "paddingLeft": "0px",
                     }}
                 >
                     <Stack
                         sx={{
-                            width: "100%",
                             alignItems: "center",
                             bgcolor: "#121212",
+                            width: "100%",
                         }}
                         direction="row"
                     >
@@ -88,10 +98,10 @@ export default function WeatherStrip(props: WeatherStripProps) {
                             p="10px"
                             fontSize="48px"
                             sx={{
-                                position: "relative",
                                 div: {
                                     filter: "initial",
                                 },
+                                position: "relative",
                             }}
                         >
                             <WeatherIcon
@@ -110,20 +120,20 @@ export default function WeatherStrip(props: WeatherStripProps) {
                                 gap="20px"
                                 sx={{
                                     alignItems: "center",
-                                    position: "absolute",
+                                    bottom: "0px",
                                     left: "0px",
+                                    position: "absolute",
                                     right: "0px",
                                     top: "0px",
-                                    bottom: "0px",
                                 }}
                             >
                                 <Stack
                                     component="ul"
                                     direction="row"
                                     sx={{
+                                        flexWrap: "wrap",
                                         height: "40.8px",
                                         overflow: "hidden",
-                                        flexWrap: "wrap",
                                         width: "100%",
                                     }}
                                 >
@@ -136,7 +146,7 @@ export default function WeatherStrip(props: WeatherStripProps) {
                                                 title={stat.name}
                                                 alignItems="center"
                                                 width="60px"
-                                                sx={{ display: { xs: "none", sm: "block" } }}
+                                                sx={{ display: { sm: "block", xs: "none" } }}
                                             >
                                                 <Box sx={{ color: "primary.light" }}>{stat.statIcon}</Box>
                                                 <Box fontSize="0.7em">
@@ -148,14 +158,14 @@ export default function WeatherStrip(props: WeatherStripProps) {
                                 </Stack>
                             </Stack>
                         </Box>
-                        <Stack ml="auto" alignItems="flex-end" mr="5px">
-                            <Box>{date.toFormat("ha").toLowerCase()}</Box>
+                        <Stack ml="auto" alignItems="flex-end" mr="5px" minWidth="70px">
+                            <Box>{date.toLocaleString({ hour: "numeric", hour12: true }).toLowerCase()}</Box>
                             <Day>{date.toFormat("cccc")}</Day>
                         </Stack>
                     </Stack>
                 </AccordionSummary>
                 <AccordionDetails sx={{ color: "text.primary" }}>
-                    <Typography variant="body2" mt="10px"><b>Hourly Weather Stats</b></Typography>
+                    <Typography variant="body2" mt="10px"><b>{t("component.weatherStrip.hourlyWeatherStats")}</b></Typography>
                     <WeatherStatsCard stats={props.stats} transparent />
                 </AccordionDetails>
             </Accordion>

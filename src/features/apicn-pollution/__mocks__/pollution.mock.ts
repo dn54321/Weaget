@@ -1,11 +1,11 @@
-import { faker } from "@faker-js/faker";
 import { DateTime } from "luxon";
+import { faker } from "@faker-js/faker";
 
 function createApicnPollutionAttributionMockData() {
     return {
-        url: faker.internet.url({ appendSlash: true }),
-        name: faker.company.name(),
         logo: faker.system.commonFileName("png"),
+        name: faker.company.name(),
+        url: faker.internet.url({ appendSlash: true }),
     };
 }
 
@@ -15,7 +15,7 @@ function createApicnPollutionRollingAverage() {
     const lb = Math.min(a, b);
     const ub = Math.max(a, b);
     return {
-        avg: faker.number.int({ min: lb, max: ub }),
+        avg: faker.number.int({ max: ub, min: lb }),
         day: DateTime.fromJSDate(faker.date.anytime()).toFormat("y-LL-dd"),
         max: ub,
         min: lb,
@@ -25,63 +25,21 @@ function createApicnPollutionRollingAverage() {
 export function createApicnPollutionResultMockData() {
     const randDate = DateTime.fromJSDate(faker.date.anytime());
     return {
-        aqi: faker.number.int({ min: 0, max: 200 }),
-        idx: faker.number.int(),
-        attributions: faker.helpers.multiple(createApicnPollutionAttributionMockData, { count: { min: 1, max: 3 } }),
+        aqi: faker.number.int({ max: 200, min: 0 }),
+        attributions: faker.helpers.multiple(createApicnPollutionAttributionMockData, { count: { max: 3, min: 1 } }),
         city: {
             geo: [
                 faker.location.latitude({ precision: 6 }),
                 faker.location.longitude({ precision: 6 }),
             ],
+            location: "",
             name: faker.location.city(),
             url: faker.internet.url(),
-            location: "",
+        },
+        debug: {
+            sync: faker.date.past(),
         },
         dominentpol: "pm25",
-        iaqi: {
-            co: {
-                v: faker.number.float({ min: 0, max: 200, fractionDigits: 1 }),
-            },
-            h: {
-                v: faker.number.float({ min: 0, max: 200, fractionDigits: 1 }),
-            },
-            neph: {
-                v: faker.number.float({ min: 0, max: 200, fractionDigits: 1 }),
-            },
-            no2: {
-                v: faker.number.float({ min: 0, max: 200, fractionDigits: 1 }),
-            },
-            o3: {
-                v: faker.number.float({ min: 0, max: 200, fractionDigits: 1 }),
-            },
-            p: {
-                v: faker.number.float({ min: 0, max: 200, fractionDigits: 1 }),
-            },
-            pm10: {
-                v: faker.number.float({ min: 0, max: 200, fractionDigits: 1 }),
-            },
-            pm25: {
-                v: faker.number.float({ min: 0, max: 200, fractionDigits: 1 }),
-            },
-            so2: {
-                v: faker.number.float({ min: 0, max: 200, fractionDigits: 1 }),
-            },
-            t: {
-                v: faker.number.float({ min: 0, max: 200, fractionDigits: 1 }),
-            },
-            w: {
-                v: faker.number.float({ min: 0, max: 200, fractionDigits: 1 }),
-            },
-            wg: {
-                v: faker.number.float({ min: 0, max: 200, fractionDigits: 1 }),
-            },
-        },
-        time: {
-            s: randDate.toFormat("y-LL-dd TT"),
-            tz: randDate.toFormat("ZZ"),
-            v: randDate.toSeconds(),
-            iso: `${randDate.toISO()}`,
-        },
         forecast: {
             daily: {
                 o3: faker.helpers.multiple(createApicnPollutionRollingAverage, { count: 7 }),
@@ -89,15 +47,57 @@ export function createApicnPollutionResultMockData() {
                 pm25: faker.helpers.multiple(createApicnPollutionRollingAverage, { count: 7 }),
             },
         },
-        debug: {
-            sync: faker.date.past(),
+        iaqi: {
+            co: {
+                v: faker.number.float({ fractionDigits: 1, max: 200, min: 0 }),
+            },
+            h: {
+                v: faker.number.float({ fractionDigits: 1, max: 200, min: 0 }),
+            },
+            neph: {
+                v: faker.number.float({ fractionDigits: 1, max: 200, min: 0 }),
+            },
+            no2: {
+                v: faker.number.float({ fractionDigits: 1, max: 200, min: 0 }),
+            },
+            o3: {
+                v: faker.number.float({ fractionDigits: 1, max: 200, min: 0 }),
+            },
+            p: {
+                v: faker.number.float({ fractionDigits: 1, max: 200, min: 0 }),
+            },
+            pm10: {
+                v: faker.number.float({ fractionDigits: 1, max: 200, min: 0 }),
+            },
+            pm25: {
+                v: faker.number.float({ fractionDigits: 1, max: 200, min: 0 }),
+            },
+            so2: {
+                v: faker.number.float({ fractionDigits: 1, max: 200, min: 0 }),
+            },
+            t: {
+                v: faker.number.float({ fractionDigits: 1, max: 200, min: 0 }),
+            },
+            w: {
+                v: faker.number.float({ fractionDigits: 1, max: 200, min: 0 }),
+            },
+            wg: {
+                v: faker.number.float({ fractionDigits: 1, max: 200, min: 0 }),
+            },
+        },
+        idx: faker.number.int(),
+        time: {
+            iso: `${randDate.toISO()}`,
+            s: randDate.toFormat("y-LL-dd TT"),
+            tz: randDate.toFormat("ZZ"),
+            v: randDate.toSeconds(),
         },
     };
 }
 
 export function createApicnPollutionMockData() {
     return {
-        status: "ok",
         data: createApicnPollutionResultMockData(),
+        status: "ok",
     };
 }

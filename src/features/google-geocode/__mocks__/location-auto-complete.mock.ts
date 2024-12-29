@@ -1,5 +1,5 @@
-import { faker } from "@faker-js/faker";
 import { AddressTypes } from "@features/google-geocode/location-lookup.model";
+import { faker } from "@faker-js/faker";
 
 function createGoogleLocationAutoCompleteMatchedSubstringMock() {
     return ({
@@ -36,8 +36,8 @@ function createGoogleLocationAutoCompletePredictionMock() {
 export function createGoogleLocationAutoCompleteMockData() {
     return (
         {
-            status: "OK",
             predictions: faker.helpers.multiple(createGoogleLocationAutoCompletePredictionMock),
+            status: "OK",
         }
     );
 }

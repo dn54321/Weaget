@@ -1,12 +1,12 @@
-import { CssBaseline } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
-import { testQueryClient } from "./query-client";
+import { CssBaseline } from "@mui/material";
+import { QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import { SettingsStoreProvider } from "@components/provider/settings-provider";
+import { StoryContext } from "@storybook/react";
 import { SystemThemeProvider } from "@components/provider/system-theme-provider";
 import WidgetStoreProvider from "@components/provider/widget-provider/widget-store-provider.component";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { StoryContext } from "@storybook/react";
+import { testQueryClient } from "./query-client";
 
 export const storybookWrapper = (Story: React.ElementType, context: StoryContext) => {
     return (
@@ -15,9 +15,9 @@ export const storybookWrapper = (Story: React.ElementType, context: StoryContext
                 <SettingsStoreProvider
                     temporary
                     settings={{
-                        theme: context.globals.theme,
                         measurementScale: context.globals.measurementScale,
                         temperatureScale: context.globals.temperatureScale,
+                        theme: context.globals.theme,
                     }}
                 >
                     <SystemThemeProvider>

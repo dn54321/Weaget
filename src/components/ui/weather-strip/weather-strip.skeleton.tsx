@@ -1,4 +1,4 @@
-import { Box, Skeleton, Stack, Divider } from "@mui/material";
+import { Box, Divider, Skeleton, Stack } from "@mui/material";
 
 export function WeatherStripSkeleton() {
     return (
@@ -17,21 +17,21 @@ export function WeatherStripSkeleton() {
                         gap="20px"
                         sx={{
                             alignItems: "center",
-                            position: "absolute",
+                            bottom: "0px",
                             left: "0px",
+                            position: "absolute",
                             right: "0px",
                             top: "0px",
-                            bottom: "0px",
                         }}
                     >
                         <Stack
                             direction="row"
                             sx={{
-                                overflow: "hidden",
                                 flexWrap: "wrap",
-                                width: "100%",
-                                height: "40px",
                                 gap: "20px",
+                                height: "40px",
+                                overflow: "hidden",
+                                width: "100%",
                             }}
                         >
                             {[...Array(7)].map((_, i) => (

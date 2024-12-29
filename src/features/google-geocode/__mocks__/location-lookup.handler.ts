@@ -1,4 +1,4 @@
-import { http, HttpResponse, RequestHandlerOptions } from "msw";
+import { HttpResponse, RequestHandlerOptions, http } from "msw";
 import { createGoogleLocationLookupMock } from "./location-lookup.mock";
 
 export const googleLocationLookupHandler = [
@@ -11,6 +11,6 @@ export function mockGoogleLocationHandle(response: HttpResponse, options?: Reque
     return http.get(
         "https://maps.googleapis.com/maps/api/geocode/json",
         () => response,
-        options
+        options,
     );
 }

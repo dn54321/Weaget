@@ -1,14 +1,16 @@
+import { Cloud, Sun, WeatherIconContainer } from "@components/icon/weather/weather-icon.styles";
 import { BoxProps } from "@mui/system";
-import { WeatherIconContainer, Sun, Cloud } from "@components/icon/weather/weather-icon.styles";
 import { WeatherIconProps } from "@components/icon/weather/weather-icon.types";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 export function OvercastCloud(props: BoxProps & WeatherIconProps) {
     const { decoration, ...rest } = props;
+    const { t } = useSystemTranslation();
 
     return (
         <WeatherIconContainer
             {...rest}
-            {...(!decoration && { "aria-label": "Overcast cloud" })}
+            {...(!decoration && { title: t("weather.icon.overcastCloud.title") })}
             role="img"
         >
             <Sun fontSize="0.3em" top="40%" left="70%" />

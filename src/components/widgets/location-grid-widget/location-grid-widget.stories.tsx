@@ -1,11 +1,20 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { storybookWrapper } from "@utils/wrappers";
 import { LocationGridWidget, type LocationGridWidgetProps } from ".";
+import { Meta, StoryObj } from "@storybook/react";
 import { createNearbyLocationMockData } from "@features/weaget/__mocks__/nearby-location.mock";
+import { storybookWrapper } from "@utils/wrappers";
 type StoryType = LocationGridWidgetProps & { width: number };
 
 const meta: Meta<StoryType> = {
-    title: "Widgets/Location Grid Widget",
+    argTypes: {
+        locationData: {
+            description: "Location data object.",
+            name: "Location Data",
+        },
+    },
+    args: {
+        locationData: createNearbyLocationMockData({ count: 8 }),
+        sx: { maxWidth: 500 },
+    },
     component: LocationGridWidget,
     decorators: [storybookWrapper],
     parameters: {
@@ -15,16 +24,7 @@ const meta: Meta<StoryType> = {
         },
     },
     tags: ["autodocs"],
-    argTypes: {
-        locationData: {
-            name: "Location Data",
-            description: "Location data object.",
-        },
-    },
-    args: {
-        locationData: createNearbyLocationMockData({ count: 8 }),
-        sx: { maxWidth: 500 },
-    },
+    title: "Widgets/Location Grid Widget",
 } satisfies Meta<StoryType>;
 
 export default meta;

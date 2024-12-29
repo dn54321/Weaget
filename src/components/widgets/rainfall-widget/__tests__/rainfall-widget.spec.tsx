@@ -1,9 +1,9 @@
 import { beforeAll, describe, expect, it, test } from "vitest";
-import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { createWeatherDailyMockData, createWeatherHourlyMockData, createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
+import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { RainfallWidget } from "./..";
-import { withRender } from "@utils/render";
 import userEvent from "@testing-library/user-event";
+import { withRender } from "@utils/render";
 
 describe("Component: rainfall-widget", async () => {
     let weatherData: OneCallWeatherDetails;
@@ -15,24 +15,24 @@ describe("Component: rainfall-widget", async () => {
             <RainfallWidget weatherData={weatherData} />,
         );
 
-        expect(getByText("Rainfall")).toBeInTheDocument();
+        expect(getByText("component.widget.rainfall.title")).toBeInTheDocument();
     });
 
     test.each([
-        ["minutely", "120 mins"],
-        ["hourly", "48 hours"],
-        ["daily", "14 days"],
-    ])("should show rainfall for %s.", (
+        ["minutely", "component.widget.rainfall.120Mins"],
+        ["hourly", "component.widget.rainfall.48Hours"],
+        ["daily", "component.widget.rainfall.14Days"],
+    ])("should show rainfall title for %s rainfall.", (
         rainfallType: string,
-        title: string
+        title: string,
     ) => {
         const rainfallData = weatherData[rainfallType as keyof OneCallWeatherDetails];
         const { getByText } = withRender(
             <RainfallWidget weatherData={{
                 ...weatherData,
+                daily: undefined,
                 hourly: undefined,
                 minutely: undefined,
-                daily: undefined,
                 [rainfallType]: rainfallData,
             }}
             />,
@@ -46,20 +46,20 @@ describe("Component: rainfall-widget", async () => {
         const { getAllByRole } = withRender(
             <RainfallWidget weatherData={{
                 ...weatherData,
+                daily: undefined,
                 hourly: undefined,
                 minutely: undefined,
-                daily: undefined,
             }}
-            />
+            />,
         );
         expect(getAllByRole("button")).toHaveLength(2);
-        expect(getAllByRole("button")[0]).toHaveAttribute("aria-label", "See 14 days rainfall");
+        expect(getAllByRole("button")[0]).toHaveAttribute("aria-label", "component.widget.rainfall.see14Days");
         await user.click(getAllByRole("button")[0]);
-        expect(getAllByRole("button")[0]).toHaveAttribute("aria-label", "See 48 hours rainfall");
+        expect(getAllByRole("button")[0]).toHaveAttribute("aria-label", "component.widget.rainfall.see48Hours");
         await user.click(getAllByRole("button")[0]);
-        expect(getAllByRole("button")[0]).toHaveAttribute("aria-label", "See 120 mins rainfall");
+        expect(getAllByRole("button")[0]).toHaveAttribute("aria-label", "component.widget.rainfall.see120Mins");
         await user.click(getAllByRole("button")[1]);
-        expect(getAllByRole("button")[0]).toHaveAttribute("aria-label", "See 48 hours rainfall");
+        expect(getAllByRole("button")[0]).toHaveAttribute("aria-label", "component.widget.rainfall.see48Hours");
     });
 
     it.each([
@@ -70,15 +70,15 @@ describe("Component: rainfall-widget", async () => {
         const view = withRender(
             <RainfallWidget weatherData={{
                 ...weatherData,
-                hourly: [],
-                minutely: [],
                 daily: [],
+                hourly: [],
                 [key]: value,
+                minutely: [],
             }}
-            />
+            />,
         );
 
-        expect(view.getByText("Rainfall")).toBeInTheDocument();
+        expect(view.getByText("component.widget.rainfall.title")).toBeInTheDocument();
     });
 
     it("should return a skeleton if no data is provided.", () => {

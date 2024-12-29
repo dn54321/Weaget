@@ -1,10 +1,10 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { mockGeonamesNearbyLocationHandle } from "@features/geonames-nearby-search/__mocks__/nearby-location.handler";
 import { withHandleError, withResponse } from "@utils/msw-http-mocker";
-import { createMockRequest } from "@utils/next-mock-request-builder";
 import { GET } from "./route";
-import { server } from "@project/vitest-setup";
 import { createGeonameMockData } from "@features/geonames-nearby-search/__mocks__/nearby-location.mock";
+import { createMockRequest } from "@utils/next-mock-request-builder";
+import { mockGeonamesNearbyLocationHandle } from "@features/geonames-nearby-search/__mocks__/nearby-location.handler";
+import { server } from "@project/vitest-setup";
 ;
 
 describe("Route: api/location/nearby-search", async () => {
@@ -14,8 +14,8 @@ describe("Route: api/location/nearby-search", async () => {
 
     it("should return 200 OK with correct payload and query params.", async () => {
         const request = createMockRequest({
-            path: "/api/location/nearby-search",
             params: { lat: "1", lng: "2" },
+            path: "/api/location/nearby-search",
         });
 
         const response = await GET(request);
@@ -37,8 +37,8 @@ describe("Route: api/location/nearby-search", async () => {
             ],
         });
         const request = createMockRequest({
-            path: "/api/location/nearby-search",
             params: { lat: "1", lng: "2" },
+            path: "/api/location/nearby-search",
         });
 
         const response = await GET(request);
@@ -48,8 +48,8 @@ describe("Route: api/location/nearby-search", async () => {
     it("should return 500 when unexpected error occurs.", async () => {
         withHandleError(mockGeonamesNearbyLocationHandle);
         const request = createMockRequest({
-            path: "/api/location/nearby-search",
             params: { lat: "1", lng: "2" },
+            path: "/api/location/nearby-search",
         });
 
         const response = await GET(request);

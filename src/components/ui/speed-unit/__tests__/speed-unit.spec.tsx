@@ -1,8 +1,9 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { MeasurementScale } from "@src/types/measurement.types";
+import { SpeedUnit } from "./..";
+import { getSpeedSymbol } from "@components/ui/speed-unit/speed-unit.utils";
 import { testQueryClient } from "@utils/query-client";
 import { withRender } from "@utils/render";
-import { SpeedUnit } from "./..";
 
 describe("Component: speed-unit", async () => {
     afterEach(() => {
@@ -16,7 +17,7 @@ describe("Component: speed-unit", async () => {
     ])("should convert %d with %d d.p. to %s. (m/s => m/s)", (
         input: number,
         decimal: number,
-        expected: string
+        expected: string,
     ) => {
         const settings = { measurementScale: MeasurementScale.METRIC };
         const { getByText } = withRender(<SpeedUnit value={input} decimals={decimal} />, { settings });
@@ -30,7 +31,7 @@ describe("Component: speed-unit", async () => {
     ])("should convert %d with %d d.p. to %s. (m/s => mph)", (
         input: number,
         decimal: number,
-        expected: string
+        expected: string,
     ) => {
         const settings = { measurementScale: MeasurementScale.IMPERIAL };
         const { getByText } = withRender(<SpeedUnit value={input} decimals={decimal} />, { settings });
@@ -46,8 +47,23 @@ describe("Component: speed-unit", async () => {
 
     it("should default to m/s if measurement scale is unknown.", (
     ) => {
-        const settings = { measurementScale: "unknownScale" };
+        const settings = { measurementScale: "unknownScale" as MeasurementScale };
         const { getByText } = withRender(<SpeedUnit value={1} />, { settings });
         expect(getByText(1)).toBeInTheDocument();
+    });
+});
+
+describe("Utils: speed-unit", async () => {
+    describe("Function: getSpeedSymbol", async () => {
+        it.each([
+            ["m/s", MeasurementScale.METRIC],
+            ["mph", MeasurementScale.IMPERIAL],
+        ])(
+            "should return %s for measurement scale %s.",
+            (expected, measurementScale) => {
+                const result = getSpeedSymbol(measurementScale);
+                expect(result).toEqual(expected);
+            },
+        );
     });
 });

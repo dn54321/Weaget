@@ -1,98 +1,99 @@
 "use client";
 import { List, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Toolbar } from "@mui/material";
-import { Box } from "@mui/system";
-import Navbar from "@components/layout/navbar/navbar.component";
-import { Sidebar } from "@components/layout/sidebar";
-import CollectionsIcon from "@mui/icons-material/Collections";
 import { usePathname, useRouter } from "next/navigation";
+import { Box } from "@mui/system";
 import { BrokenCloud } from "@components/icon/weather/broken-cloud-icon";
+import CollectionsIcon from "@mui/icons-material/Collections";
 import { FewCloudIcon } from "@components/icon/weather/few-cloud-icon/few-cloud-icon.component";
+import Footer from "@components/layout/footer/footer.component";
 import { Mist } from "@components/icon/weather/mist-icon";
+import Navbar from "@components/layout/navbar/navbar.component";
 import { OvercastCloud } from "@components/icon/weather/overcast-cloud-icon/overcast-cloud-icon.component";
 import { RainCloud } from "@components/icon/weather/rain-cloud-icon";
+import React, { useState } from "react";
 import { ScatteredCloud } from "@components/icon/weather/scattered-cloud-icon";
 import { ShowerRain } from "@components/icon/weather/shower-rain-icon/shower-rain-icon.component";
+import { Sidebar } from "@components/layout/sidebar";
 import { SnowCloud } from "@components/icon/weather/snow-cloud-icon/snow-cloud-icon.component";
 import SunIcon from "@components/icon/weather/sun-icon/sun-icon.component";
-import Footer from "@components/layout/footer/footer.component";
-import React, { useState } from "react";
 import { Thunderstorm } from "@components/icon/weather/thunderstorm-icon/thunderstorm-icon.component";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 export const weatherIconShowcase = [
     {
-        id: 200,
+        description: "weather.icon.thunderstorm.description",
         icon: <Thunderstorm decoration />,
-        name: "Thunderstorm",
-        description: "A lightning bolt accompanied with a cloud.",
+        id: 200,
+        name: "weather.icon.thunderstorm.title",
     },
     {
-        id: 300,
+        description: "weather.icon.showerRain.description",
         icon: <ShowerRain decoration />,
-        name: "Shower Rain",
-        description: "Grey clouds with many light raindrops.",
+        id: 300,
+        name: "weather.icon.showerRain.title",
     },
     {
-        id: 500,
+        description: "weather.icon.rainCloud.description",
         icon: <RainCloud decoration />,
-        name: "Rain Cloud",
-        description: "Grey clouds with some heavy raindrops.",
+        id: 500,
+        name: "weather.icon.rainCloud.title",
     },
     {
-        id: 600,
+        description: "weather.icon.snowCloud.description",
         icon: <SnowCloud decoration />,
-        name: "Snow Cloud",
-        description: "Light gray clouds with acommpanying snow flakes.",
+        id: 600,
+        name: "weather.icon.snowCloud.title",
     },
     {
-        id: 700,
+        description: "weather.icon.mist.description",
         icon: <Mist decoration />,
-        name: "Mist",
-        description: "A layer of clouds obscuring the sun.",
+        id: 700,
+        name: "weather.icon.mist.title",
     },
     {
-        id: 800,
+        description: "weather.icon.sun.description",
         icon: <SunIcon decoration />,
-        name: "Sun",
-        description: "A bright circle representing the sun.",
+        id: 800,
+        name: "weather.icon.sun.title",
     },
     {
-        id: 801,
+        description: "weather.icon.fewCloud.description",
         icon: <FewCloudIcon decoration />,
-        name: "Few Clouds",
-        description: "A small cloud accompanied with the sun.",
+        id: 801,
+        name: "weather.icon.fewCloud.title",
     },
     {
-        id: 802,
-        name: "Scattered Clouds",
+        description: "weather.icon.scatteredCloud.title",
         icon: <ScatteredCloud decoration />,
-        description: "A few clouds accompanied with the sun.",
+        id: 802,
+        name: "weather.icon.scatteredCloud.title",
     },
     {
-        id: 803,
-        name: "Broken Clouds",
+        description: "weather.icon.brokenCloud.title",
         icon: <BrokenCloud decoration />,
-        description: "A few clouds obscuring with the sun.",
+        id: 803,
+        name: "weather.icon.brokenCloud.title",
     },
     {
-        id: 804,
-        name: "Overcast Clouds",
+        description: "weather.icon.overcastCloud.title",
         icon: <OvercastCloud decoration />,
-        description: "Many clouds accompanied with a small sun.",
+        id: 804,
+        name: "weather.icon.overcastCloud.title",
     },
 ];
 
 export const menuItem = [
     {
-        name: "Gallery",
         icon: <CollectionsIcon fontSize="small" />,
+        name: "page.iconGallery.gallery",
         to: "/icons",
     },
     {
-        name: "Weather Icons",
+        name: "weather.icon.text",
     },
     ...weatherIconShowcase.map(weather => ({
-        name: weather.name,
         icon: weather.icon,
+        name: weather.name,
         to: `/icons/weather/${weather.id}`,
     })),
 ];
@@ -100,6 +101,7 @@ export const menuItem = [
 export default function IconLayout(props: { children: React.ReactNode }) {
     const router = useRouter();
     const pathname = usePathname();
+    const { t } = useSystemTranslation();
     const [sideMenuOpen, setSideMenuOpen] = useState(false);
     const toggleSideMenu = () => setSideMenuOpen(menuOpen => !menuOpen);
     const sidebarWidth = "280px";
@@ -132,7 +134,6 @@ export default function IconLayout(props: { children: React.ReactNode }) {
                                             }}
                                             selected={menu.to === pathname}
                                             sx={{
-                                                "color": "text.primary",
                                                 "&.Mui-selected": {
                                                     backgroundColor: "secondary.dark",
                                                     color: "secondary.contrastText",
@@ -141,6 +142,7 @@ export default function IconLayout(props: { children: React.ReactNode }) {
                                                     backgroundColor: "secondary.dark",
                                                     color: "secondary.contrastText",
                                                 },
+                                                "color": "text.primary",
                                             }}
                                         >
                                             <ListItemIcon sx={{
@@ -151,18 +153,18 @@ export default function IconLayout(props: { children: React.ReactNode }) {
                                             >
                                                 {menu.icon}
                                             </ListItemIcon>
-                                            <ListItemText primary={menu.name} />
+                                            <ListItemText primary={t(menu.name)} />
                                         </ListItemButton>
                                     );
                                 }
                                 else {
-                                    return (<ListSubheader key={menu.name}>{menu.name}</ListSubheader>);
+                                    return (<ListSubheader key={menu.name}>{t(menu.name)}</ListSubheader>);
                                 }
                             })
                         }
                     </List>
                 </Sidebar>
-                <Box component="main" sx={{ flexGrow: 1, p: 3, minHeight: "calc(100vh - 80px)" }}>
+                <Box component="main" sx={{ flexGrow: 1, minHeight: "calc(100vh - 80px)", p: 3 }}>
                     <Toolbar />
                     {props.children}
                 </Box>

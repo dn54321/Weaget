@@ -1,36 +1,52 @@
 "use client";
 import { Box, Container, Toolbar, Typography } from "@mui/material";
-import Stack from "@mui/material/Stack";
-import React from "react";
 import Grid from "@mui/material/Grid2";
+import React from "react";
+import Stack from "@mui/material/Stack";
 import { WeatherIcon } from "@components/ui/weather-icon";
+import { use } from "react";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 import { weatherIconShowcase } from "@project/app/icons/layout";
 
 export interface PageProps {
-    params: { id: string };
+    params: Promise<{
+        id: string;
+    }>;
 }
 
-export default function Page({ params }: PageProps) {
+export default function Page(props: PageProps) {
+    const params = use(props.params);
     const weatherId = parseInt(params.id);
     const weatherDetails = weatherIconShowcase.find(weather => weather.id === weatherId);
+    const { t } = useSystemTranslation();
+    const weatherName = weatherDetails ? t(weatherDetails.name) : "";
     return (
         <Container maxWidth="lg">
             <Toolbar />
-            <Stack direction={{ xs: "column", md: "row" }} alignItems="center">
+            <title>{`${weatherName} - ${t("webapp.name")}`}</title>
+            <Stack direction={{ md: "row", xs: "column" }} alignItems="center">
                 <Box fontSize="15em"><WeatherIcon id={weatherId} /></Box>
-                <Grid size={{ xs: 12, sm: 6 }} fontSize="20em">
+                <Grid size={{ sm: 6, xs: 12 }} fontSize="20em">
                     {
                         weatherDetails === undefined
-                            ? <Typography variant="body2">Invalid ID. Please try again later.</Typography>
+                            ? <Typography variant="body2">{t("page.iconGallery.invalidIcon")}</Typography>
                             : (
                                     <Box>
                                         <Typography variant="body2">
-                                            <b>Name: </b>
-                                            {weatherDetails.name}
+                                            <b>
+                                                {t("page.iconGallery.name")}
+                                                :
+                                                {" "}
+                                            </b>
+                                            {weatherName}
                                         </Typography>
                                         <Typography variant="body2">
-                                            <b>Description: </b>
-                                            {weatherDetails.description}
+                                            <b>
+                                                {t("page.iconGallery.description")}
+                                                :
+                                                {" "}
+                                            </b>
+                                            {t(weatherDetails.description)}
                                         </Typography>
                                     </Box>
                                 )

@@ -11,6 +11,6 @@ export function mockLocationLookupHandle(response: HttpResponse, options?: Reque
     return http.get(
         "/api/location/:id",
         () => response,
-        options
+        options,
     );
 }

@@ -24,8 +24,8 @@ export default function WeatherStatsCardSkeleton(props: WeatherStatsCardSkeleton
                             component="li"
                             key={idx}
                             sx={{
-                                width: "150px",
                                 margin: "10px",
+                                width: "150px",
                             }}
                         >
                             <Box width="40px" height="40px">

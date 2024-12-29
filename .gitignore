@@ -9,6 +9,8 @@ coverage
 
 # testing
 /coverage
+.vitest-preview
+/test-runner-profile
 
 # next.js
 /.next/

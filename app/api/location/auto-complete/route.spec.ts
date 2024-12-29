@@ -1,9 +1,9 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { mockGoogleLocationAutoCompleteHandle } from "@features/google-geocode/__mocks__/location-auto-complete.handler";
-import { withHandleError } from "@utils/msw-http-mocker";
-import { createMockRequest } from "@utils/next-mock-request-builder";
 import { GET } from "./route";
+import { createMockRequest } from "@utils/next-mock-request-builder";
+import { mockGoogleLocationAutoCompleteHandle } from "@features/google-geocode/__mocks__/location-auto-complete.handler";
 import { server } from "@project/vitest-setup";
+import { withHandleError } from "@utils/msw-http-mocker";
 
 describe("Route: api/location/auto-complete", async () => {
     afterEach(() => {
@@ -12,8 +12,8 @@ describe("Route: api/location/auto-complete", async () => {
 
     it("should return 200 OK with correct payload and query params.", async () => {
         const request = createMockRequest({
-            path: "/api/location/auto-complete",
             params: { input: "mockInput", sessiontoken: "mockToken" },
+            path: "/api/location/auto-complete",
         });
 
         const response = await GET(request);
@@ -29,8 +29,8 @@ describe("Route: api/location/auto-complete", async () => {
     it("should return 500 when unexpected error occurs.", async () => {
         withHandleError(mockGoogleLocationAutoCompleteHandle);
         const request = createMockRequest({
-            path: "/api/location/auto-complete",
             params: { input: "mockInput", sessiontoken: "mockToken" },
+            path: "/api/location/auto-complete",
         });
 
         const response = await GET(request);

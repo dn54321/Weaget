@@ -1,5 +1,5 @@
-import { Skeleton } from "@mui/material";
 import { CardContainer } from "./weather-card.styles";
+import { Skeleton } from "@mui/material";
 
 export default function WeatherCardSkeleton() {
     return (
@@ -7,11 +7,11 @@ export default function WeatherCardSkeleton() {
             <Skeleton
                 variant="rectangular"
                 sx={{
-                    width: "100%",
-                    minWidth: "120px",
-                    height: "173px",
-                    opacity: "20%",
                     borderRadius: "10px",
+                    height: "173px",
+                    minWidth: "120px",
+                    opacity: "20%",
+                    width: "100%",
                 }}
             />
         </CardContainer>

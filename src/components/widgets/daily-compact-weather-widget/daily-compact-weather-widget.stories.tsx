@@ -1,11 +1,22 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { storybookWrapper } from "@utils/wrappers";
 import { DailyCompactWeatherWidget, type DailyCompactWeatherWidgetProps } from ".";
+import { Meta, StoryObj } from "@storybook/react";
 import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
+import { storybookWrapper } from "@utils/wrappers";
 type StoryType = DailyCompactWeatherWidgetProps;
 
 const meta: Meta<StoryType> = {
-    title: "Widgets/Daily Compact Weather Widget",
+    argTypes: {
+        weatherData: {
+            description: "Weather data object.",
+            name: "Weather Data",
+        },
+    },
+    args: {
+        sx: {
+            maxWidth: "500px",
+        },
+        weatherData: createWeatherMockData(),
+    },
     component: DailyCompactWeatherWidget,
     decorators: [storybookWrapper],
     parameters: {
@@ -15,18 +26,7 @@ const meta: Meta<StoryType> = {
         },
     },
     tags: ["autodocs"],
-    argTypes: {
-        weatherData: {
-            name: "Weather Data",
-            description: "Weather data object.",
-        },
-    },
-    args: {
-        weatherData: createWeatherMockData(),
-        sx: {
-            maxWidth: "500px",
-        },
-    },
+    title: "Widgets/Daily Compact Weather Widget",
 } satisfies Meta<StoryType>;
 
 export default meta;

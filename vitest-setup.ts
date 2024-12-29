@@ -14,6 +14,7 @@ import { pollutionHandler } from "./src/features/weaget/__mocks__/pollution.hand
 import { weatherHandler } from "./src/features/weaget/__mocks__/weather.handler";
 import { afterEach, vi } from "vitest";
 import { cleanup } from "@testing-library/react";
+import { useState } from "react";
 
 // Mock every endpoint possible.
 export const server = setupServer(
@@ -29,7 +30,7 @@ export const server = setupServer(
     ...currentLocationHandler,
     ...locationLookupHandler,
     ...pollutionHandler,
-    ...weatherHandler
+    ...weatherHandler,
 );
 
 server.listen();
@@ -42,26 +43,56 @@ afterEach(() => {
 vi.mock("zustand");
 
 vi.mock("next/font/google", () => ({
-    Roboto: () => ({
-        style: {
-            fontFamily: "mocked",
-        },
-    }),
     Quicksand: () => ({
         style: {
             fontFamily: "mocked",
         },
     }),
+    Roboto: () => ({
+        style: {
+            fontFamily: "mocked",
+        },
+    }),
 }));
 
-const resizeObserverMock = vi.fn(() => ({
-    observe: vi.fn(),
-    unobserve: vi.fn(),
-    disconnect: vi.fn(),
+// BUG: use is not recognised by react-testing-library.
+vi.mock("react", async importOriginal => ({
+    ...await importOriginal<typeof import("react")>(),
+    use: (obj: Promise<object>) => {
+        const [effect, setEffect] = useState<object | undefined>(obj);
+        obj.then(resolved => setEffect(resolved));
+        return effect;
+    },
 }));
 
-// Stub the global ResizeObserver
-vi.stubGlobal("ResizeObserver", resizeObserverMock);
+vi.mock("react-i18next", async importOriginal => ({
+    // this mock makes sure any components using the translate hook can use it without a warning being shown
+    ...await importOriginal<typeof import("react-i18next")>(),
+    useTranslation: () => {
+        return {
+            i18n: {
+                changeLanguage: () => new Promise(() => {}),
+            },
+            t: (str: string) => str,
+        };
+    },
+}));
+
+// Required to make react-charts pass.
+// https://github.com/jsdom/jsdom/issues/3368
+global.ResizeObserver = class ResizeObserver {
+    observe() {
+        // do nothing
+    }
+
+    unobserve() {
+        // do nothing
+    }
+
+    disconnect() {
+        // do nothing
+    }
+};
 
 const originalConsoleError = console.error;
 const jsDomCssError = "Error: Could not parse CSS stylesheet";
@@ -72,36 +103,39 @@ console.error = (...params: Array<string>) => {
 };
 
 // Basic Logging
-
-// server.events.on('request:start', ({ request }) => {
-//     if (process.env.NODE_ENV === 'test') {
-//         console.log('Outgoing:', request.method, request.url);
-//     }
-// });
+if (process.env.LOG && process.env.LOG.toLowerCase() === "basic") {
+    server.events.on("request:start", ({ request }) => {
+        if (process.env.NODE_ENV === "test") {
+            console.log("Outgoing:", request.method, request.url);
+        }
+    });
+}
 
 // Verbose Logging
-
-// server.events.on('response:mocked', async ({ request, requestId, response }) => {
-//     const data = await response.json();
-//     console.log(
-//         '%s %s received %s %s',
-//         request.method,
-//         request.url,
-//         response.status,
-//         response.statusText,
-//     )
-// })
+if (process.env.LOG && process.env.LOG.toLowerCase() === "standard") {
+    server.events.on("response:mocked", async ({ request, response }) => {
+        const data = await response.json();
+        console.log(
+            "%s %s received %s %s",
+            request.method,
+            request.url,
+            response.status,
+            response.statusText,
+        );
+    });
+}
 
 // Extremely Verbose Logging
-
-// server.events.on('response:mocked', async ({ request, requestId, response }) => {
-//     const data = await response.json();
-//     console.log(
-//         '%s %s received %s %s %s',
-//         request.method,
-//         request.url,
-//         response.status,
-//         response.statusText,
-//         JSON.stringify(data),
-//     )
-// })
+if (process.env.LOG && process.env.LOG.toLowerCase() === "verbose") {
+    server.events.on("response:mocked", async ({ request, requestId, response }) => {
+        const data = await response.json();
+        console.log(
+            "%s %s received %s %s %s",
+            request.method,
+            request.url,
+            response.status,
+            response.statusText,
+            JSON.stringify(data),
+        );
+    });
+}

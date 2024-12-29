@@ -1,11 +1,12 @@
+import { Box, Container, Stack, Tooltip } from "@mui/material";
+import { ContainerProps, SxProps } from "@mui/system";
+import { StyledFooter, StyledIconButton } from "./footer.styles";
 import BrushIcon from "@mui/icons-material/Brush";
 import CodeIcon from "@mui/icons-material/Code";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import { Box, Container, Stack, Tooltip } from "@mui/material";
-import { ContainerProps, SxProps } from "@mui/system";
 import { useRouter } from "next/navigation";
-import { StyledFooter, StyledIconButton } from "./footer.styles";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 /*
     A very simple footer after many attempts of design .
@@ -19,35 +20,36 @@ export interface FooterProps {
 }
 
 export default function Footer(props: FooterProps) {
+    const { t } = useSystemTranslation();
     const router = useRouter();
     const footerNavigationItems = [
         {
-            icon: <CodeIcon />,
-            title: "Source Code",
-            description: "Access Source Code",
-            link: "https://github.com/dn54321/Weaget",
+            description: "footer.iconButton.sourceCode.description",
             hoverColor: "#006400",
+            icon: <CodeIcon />,
+            link: "https://github.com/dn54321/Weaget",
+            title: "footer.iconButton.sourceCode.title",
         },
         {
-            icon: <GitHubIcon />,
-            title: "Github Page",
-            description: "Access Github Page",
-            link: "https://github.com/dn54321/",
+            description: "footer.iconButton.github.description",
             hoverColor: "black",
+            icon: <GitHubIcon />,
+            link: "https://github.com/dn54321/",
+            title: "footer.iconButton.github.title",
         },
         {
-            icon: <LinkedInIcon />,
-            title: "LinkedIn Page",
-            description: "Access LinkedIn Page",
-            link: "https://www.linkedin.com/in/daniel-pham-8bba33193/",
+            description: "footer.iconButton.linkedIn.description",
             hoverColor: "#2867B2",
+            icon: <LinkedInIcon />,
+            link: "https://www.linkedin.com/in/daniel-pham-8bba33193/",
+            title: "footer.iconButton.linkedIn.title",
         },
         {
-            icon: <BrushIcon />,
-            title: "Icons Page",
-            description: "Access Weather Icons Page",
-            link: "/icons",
+            description: "footer.iconButton.icons.description",
             hoverColor: "orange",
+            icon: <BrushIcon />,
+            link: "/icons",
+            title: "footer.iconButton.icons.title",
         },
     ];
 
@@ -69,16 +71,27 @@ export default function Footer(props: FooterProps) {
                     {/* Copyright Message */}
                     <Box>
                         <Box py="15px" component="span">
-                            {`@${new Date().getFullYear()} DN54321. `}
+                            {t("footer.copyright", {
+                                formatParams: {
+                                    year: { year: "numeric" },
+                                },
+                                year: new Date(),
+                            }) + " "}
                         </Box>
-                        <Box sx={{ display: { xs: "block", sm: "inline" } }}>All Rights Reserved.</Box>
+                        <Box sx={{
+                            display: { sm: "inline", xs: "block" },
+                            textTransform: "capitalize",
+                        }}
+                        >
+                            {t("footer.reserveNotice")}
+                        </Box>
                     </Box>
 
                     {/* Links to social media / Icons Page */}
                     <Stack direction="row" height="fit-content" gap="10px" component="nav">
                         {footerNavigationItems.map(item => (
                             <StyledIconButton
-                                aria-label={item.description}
+                                aria-label={t(item.description)}
                                 onClick={() => router.push(item.link)}
                                 key={item.title}
                                 sx={{
@@ -87,7 +100,7 @@ export default function Footer(props: FooterProps) {
                                     },
                                 }}
                             >
-                                <Tooltip title={item.title}>{item.icon}</Tooltip>
+                                <Tooltip title={t(item.title)}>{item.icon}</Tooltip>
                             </StyledIconButton>
                         ))}
                     </Stack>

@@ -13,8 +13,8 @@ export const testQueryClient = new QueryClient({
 export const testOfflineQueryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            retry: false,
             networkMode: "offlineFirst",
+            retry: false,
         },
     },
 });

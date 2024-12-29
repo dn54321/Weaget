@@ -1,8 +1,8 @@
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
-import { withRender } from "@utils/render";
+import { LocationGridWidget } from "..";
 import { NearbyLocations } from "@features/weaget/nearby-location/nearby-location.types";
 import userEvent from "@testing-library/user-event";
-import { LocationGridWidget } from "..";
+import { withRender } from "@utils/render";
 
 describe("Component: location-grid-widget", async () => {
     let nearbyLocations: NearbyLocations;
@@ -15,14 +15,14 @@ describe("Component: location-grid-widget", async () => {
 
     beforeAll(() => {
         nearbyLocations = [{
+            country: "mockCountry",
             name: "mockName",
             state: "mockState",
-            country: "mockCountry",
         },
         {
+            country: "mockCountry2",
             name: "mockName2",
             state: "mockState2",
-            country: "mockCountry2",
         }];
     });
 
@@ -36,14 +36,14 @@ describe("Component: location-grid-widget", async () => {
         const { getByText } = withRender(
             <LocationGridWidget locationData={nearbyLocations} />,
         );
-        expect(getByText("Suggested Locations")).toBeInTheDocument();
+        expect(getByText("component.widget.locationGrid.title")).toBeInTheDocument();
     });
 
     it("should contain a subtitle.", () => {
         const { getByText } = withRender(
             <LocationGridWidget locationData={nearbyLocations} />,
         );
-        expect(getByText("Click on any card for more weather details!")).toBeInTheDocument();
+        expect(getByText("component.widget.locationGrid.description")).toBeInTheDocument();
     });
 
     it("should contains a list of locations.", () => {

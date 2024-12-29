@@ -1,26 +1,22 @@
 import { Box, Paper, styled } from "@mui/material";
 
 export const High = styled(Box)(() => ({
-    fontSize: "1em",
     display: "inline",
+    fontSize: "1em",
 }));
 
 export const Low = styled(Box)(({ theme }) => ({
-    fontSize: "0.8em",
-    display: "inline",
     color: theme.palette.grey[600],
+    display: "inline",
+    fontSize: "0.8em",
 }));
 
 export const PaperContainer = styled(Paper)(({ theme }) => ({
+    alignItems: "center",
+    aspectRatio: "1",
     color: theme.palette.text.primary,
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
-    position: "relative",
-    aspectRatio: "1",
     justifyContent: "center",
-}));
-
-export const ResponsiveIconContainer = styled(Box)(() => ({
-    fontSize: "3em",
+    position: "relative",
 }));

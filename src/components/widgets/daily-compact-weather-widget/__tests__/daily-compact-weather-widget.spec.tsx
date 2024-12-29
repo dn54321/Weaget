@@ -1,8 +1,8 @@
 import { beforeAll, describe, expect, it } from "vitest";
+import { DailyCompactWeatherWidget } from "./..";
+import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 import { withRender } from "@utils/render";
-import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
-import { DailyCompactWeatherWidget } from "./..";
 
 describe("Component: daily-compact-weather-widget", () => {
     let weatherData: OneCallWeatherDetails;
@@ -14,14 +14,14 @@ describe("Component: daily-compact-weather-widget", () => {
         const { getByText } = withRender(
             <DailyCompactWeatherWidget weatherData={weatherData} location="testLocation" />,
         );
-        expect(getByText("Compact Weather Widget")).toBeInTheDocument();
+        expect(getByText("component.widget.dailyCompactWeather.title")).toBeInTheDocument();
     });
 
     it("should contain a subtitle.", () => {
         const { getByText } = withRender(
             <DailyCompactWeatherWidget weatherData={weatherData} location="testLocation" />,
         );
-        expect(getByText("Currently Weekly Weather")).toBeInTheDocument();
+        expect(getByText("component.widget.dailyCompactWeather.description")).toBeInTheDocument();
     });
 
     it("should contains a card for each day.", () => {
@@ -35,7 +35,7 @@ describe("Component: daily-compact-weather-widget", () => {
         const { getByText } = withRender(
             <DailyCompactWeatherWidget weatherData={weatherData} location="testLocation" />,
         );
-        expect(getByText("Get More Weather Details")).toHaveAttribute("href", "/weather/testLocation");
+        expect(getByText("component.widget.dailyCompactWeather.button")).toHaveAttribute("href", "/weather/testLocation");
     });
 
     it("should should return null if no data is provided.", () => {

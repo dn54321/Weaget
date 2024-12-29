@@ -11,6 +11,6 @@ export function mockNearbyLocationHandle(response: HttpResponse, options?: Reque
     return http.get(
         "/api/location/nearby-search",
         () => response,
-        options
+        options,
     );
 }

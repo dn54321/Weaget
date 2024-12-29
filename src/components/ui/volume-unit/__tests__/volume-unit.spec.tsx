@@ -1,9 +1,9 @@
 import { afterEach, describe, expect, it } from "vitest";
+import { convertVolumeMeasurement, getVolumeSymbol } from "@components/ui/volume-unit/volume-unit.utils";
 import { MeasurementScale } from "@src/types/measurement.types";
+import { VolumeUnit } from "./..";
 import { testQueryClient } from "@utils/query-client";
 import { withRender } from "@utils/render";
-import { VolumeUnit } from "./..";
-import { convertVolumeMeasurement, getVolumeSymbol } from "@components/ui/volume-unit/volume-unit.utils";
 
 describe("Component: volume-unit", async () => {
     afterEach(() => {
@@ -17,10 +17,10 @@ describe("Component: volume-unit", async () => {
     ])("should convert %d with %d d.p. to %s. (mmh => mmh)", (
         input: number,
         decimal: number,
-        expected: string
+        expected: string,
     ) => {
         const settings = { measurementScale: MeasurementScale.METRIC };
-        const { getByText } = withRender(<VolumeUnit value={input} decimals={decimal} />);
+        const { getByText } = withRender(<VolumeUnit value={input} decimals={decimal} />, { settings });
         expect(getByText(expected)).toBeInTheDocument();
     });
 
@@ -31,7 +31,7 @@ describe("Component: volume-unit", async () => {
     ])("should convert %d with %d d.p. to %s. (mmh => iph)", (
         input: number,
         decimal: number,
-        expected: string
+        expected: string,
     ) => {
         const settings = { measurementScale: MeasurementScale.IMPERIAL };
         const view = withRender(<VolumeUnit value={input} decimals={decimal} />, { settings });
@@ -49,7 +49,7 @@ describe("Component: volume-unit", async () => {
         ["iph", MeasurementScale.IMPERIAL],
     ])("should return %s unit given the measurement scale is set to %s.", (
         symbol: string,
-        measurementScale: MeasurementScale
+        measurementScale: MeasurementScale,
     ) => {
         const settings = { measurementScale: measurementScale };
         const view = withRender(<VolumeUnit value={1} symbol />, { settings });
@@ -62,7 +62,7 @@ describe("Component: volume-unit", async () => {
             ["iph", MeasurementScale.IMPERIAL],
         ])("should return %s unit given %s", (
             symbol: string,
-            measurementScale: MeasurementScale
+            measurementScale: MeasurementScale,
         ) => {
             const element = getVolumeSymbol(measurementScale);
             expect(element).toEqual(symbol);
@@ -77,7 +77,7 @@ describe("Component: volume-unit", async () => {
         ])("should convert %d with %d d.p. to %d. (mmh => iph)", (
             input: number,
             decimal: number,
-            expected: number
+            expected: number,
         ) => {
             const res = convertVolumeMeasurement(MeasurementScale.METRIC, input, decimal);
             expect(res).toEqual(expected);

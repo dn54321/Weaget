@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import Layout, { weatherIconShowcase } from "./layout";
+import { useMobileScreen } from "@project/src/utils/resize-window";
 import userEvent from "@testing-library/user-event";
 import { withRender } from "@utils/render";
 
@@ -12,8 +13,8 @@ describe("Page: app/icons/layout.tsx", async () => {
 
     beforeEach(() => {
         vi.mock("next/navigation", () => ({
-            useRouter: () => ({ push: mocks.mockRouterPush }),
             usePathname: () => "/",
+            useRouter: () => ({ push: mocks.mockRouterPush }),
         }));
     });
 
@@ -26,10 +27,10 @@ describe("Page: app/icons/layout.tsx", async () => {
         expect(getByText("testText")).toBeInTheDocument();
     });
 
-    it("should take me to the gallery page when I click its icon.", async (icon) => {
+    it("should take me to the gallery page when I click its icon.", async () => {
         const user = userEvent.setup();
         const { getByText } = withRender(<Layout>testText</Layout>);
-        await user.click(getByText("Gallery"));
+        await user.click(getByText("page.iconGallery.gallery"));
         expect(mocks.mockRouterPush).toBeCalledWith(`/icons`);
     });
 
@@ -38,5 +39,15 @@ describe("Page: app/icons/layout.tsx", async () => {
         const { getByText } = withRender(<Layout>testText</Layout>);
         await user.click(getByText(icon.name));
         expect(mocks.mockRouterPush).toBeCalledWith(`/icons/weather/${icon.id}`);
+    });
+
+    it("should minimise the side bar on tablet size which is accessible via the burger menu icon.", async () => {
+        const user = userEvent.setup();
+        useMobileScreen();
+        const { getByLabelText, getByText } = withRender(<Layout>testText</Layout>);
+        expect(getByText("page.iconGallery.gallery")).not.toBeVisible();
+        const burgerMenu = getByLabelText("open menu");
+        await user.click(burgerMenu);
+        expect(getByText("page.iconGallery.gallery")).toBeVisible();
     });
 });

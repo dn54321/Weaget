@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, it } from "vitest";
+import { TempUnit } from "./..";
 import { TemperatureScale } from "@src/types/weather.types";
 import { testQueryClient } from "@utils/query-client";
 import { withRender } from "@utils/render";
-import { TempUnit } from "./..";
 
 describe("Component: temperature-unit", async () => {
     afterEach(() => {
@@ -16,11 +16,12 @@ describe("Component: temperature-unit", async () => {
     ])("should convert %d kelvin with %d decimals to %s celcius.", (
         kelvin: number,
         decimal: number,
-        expected: string
+        expected: string,
     ) => {
         const settings = { temperatureScale: TemperatureScale.CELSIUS };
-        const view = withRender(<TempUnit value={kelvin} decimals={decimal} symbol />, { settings });
-        expect(view.getByText(`${expected}°C`)).toBeInTheDocument();
+        const { getByText, getByTitle } = withRender(<TempUnit value={kelvin} decimals={decimal} symbol />, { settings });
+        expect(getByText(`${expected}°`)).toBeInTheDocument();
+        expect(getByTitle("temperature.celsius.text")).toHaveTextContent("C");
     });
 
     it.each([
@@ -30,24 +31,27 @@ describe("Component: temperature-unit", async () => {
     ])("should convert %d kelvin with %d decimals to %s fahrenheit.", (
         kelvin: number,
         decimal: number,
-        expected: string
+        expected: string,
     ) => {
         const settings = { temperatureScale: TemperatureScale.FAHRENHEIT };
-        const view = withRender(<TempUnit value={kelvin} decimals={decimal} symbol />, { settings });
-        expect(view.getByText(`${expected}°F`)).toBeInTheDocument();
+        const { getByText, getByTitle } = withRender(<TempUnit value={kelvin} decimals={decimal} symbol />, { settings });
+        expect(getByText(`${expected}°`)).toBeInTheDocument();
+        expect(getByTitle("temperature.fahrenheit.text")).toHaveTextContent("F");
     });
 
     it("should work without decimal.", (
     ) => {
         const settings = { temperatureScale: TemperatureScale.CELSIUS };
-        const view = withRender(<TempUnit value={274.284} symbol />, { settings });
-        expect(view.getByText(`1°C`)).toBeInTheDocument();
+        const { getByText, getByTitle } = withRender(<TempUnit value={274.284} symbol />, { settings });
+        expect(getByText(`1°`)).toBeInTheDocument();
+        expect(getByTitle("temperature.celsius.text")).toHaveTextContent("C");
     });
 
-    it("should default to kelvin if measurement scale is unknown.", (
+    it("should default to kelvin if measurement scale is not provided.", (
     ) => {
-        const settings = { temperatureScale: "unknownScale" };
-        const view = withRender(<TempUnit value={274.284} symbol />, { settings });
-        expect(view.getByText(`274°K`)).toBeInTheDocument();
+        const settings = { temperatureScale: undefined };
+        const { getByText, getByTitle } = withRender(<TempUnit value={274.284} symbol />, { settings });
+        expect(getByText(`274°`)).toBeInTheDocument();
+        expect(getByTitle("temperature.kelvin.text")).toHaveTextContent("K");
     });
 });

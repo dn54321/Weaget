@@ -1,5 +1,5 @@
-import { createStore } from "zustand";
 import { DailyWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import { createStore } from "zustand";
 
 export interface WidgetState {
     focusedWeather?: DailyWeatherDetails;
@@ -23,7 +23,7 @@ export const createWidgetStore = (
     return createStore<WidgetStore>()(set => ({
         ...initialWidgetStoreState,
         ...initState,
-        setFocusedWeather: state => set(() => ({ focusedWeather: state })),
         resetState: () => set(() => ({ focusedWeather: undefined })),
+        setFocusedWeather: state => set(() => ({ focusedWeather: state })),
     }));
 };

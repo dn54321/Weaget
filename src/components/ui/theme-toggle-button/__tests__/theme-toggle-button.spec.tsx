@@ -1,8 +1,9 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { testQueryClient } from "@utils/query-client";
 import { SystemTheme } from "@src/types/system.types";
-import userEvent from "@testing-library/user-event";
 import ThemeToggleButton from "@components/ui/theme-toggle-button/theme-toggle-button.component";
+import { capitalize } from "@mui/material";
+import { testQueryClient } from "@utils/query-client";
+import userEvent from "@testing-library/user-event";
 import { withRender } from "@utils/render";
 
 describe("Component: theme-toggle-button", async () => {
@@ -18,8 +19,8 @@ describe("Component: theme-toggle-button", async () => {
             const user = userEvent.setup();
             const settings = { theme: initial };
             const view = withRender(<ThemeToggleButton />, { settings });
-            expect(view.getByLabelText(`Toggle to ${expected} theme`)).toBeInTheDocument();
+            expect(view.getByLabelText(`component.themeToggleButton.toggle${capitalize(expected)}Theme`)).toBeInTheDocument();
             await user.click(view.getByRole("button"));
-            expect(view.getByLabelText(`Toggle to ${initial} theme`)).toBeInTheDocument();
+            expect(view.getByLabelText(`component.themeToggleButton.toggle${capitalize(initial)}Theme`)).toBeInTheDocument();
         });
 });

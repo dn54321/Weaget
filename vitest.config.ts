@@ -1,29 +1,33 @@
 import react from "@vitejs/plugin-react";
-import { coverageConfigDefaults, defineConfig, UserConfig } from "vitest/config";
+import { coverageConfigDefaults, defineConfig } from "vitest/config";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-    plugins: [react(), tsconfigPaths()] as UserConfig["plugins"],
+    plugins: [react(), tsconfigPaths()],
     test: {
-        setupFiles: ["vitest-setup.ts"],
-        environment: "jsdom",
         coverage: {
-            thresholds: {
-                lines: 95,
-                functions: 95,
-                branches: 95,
-                statements: 95,
-            },
-            reporter: ["text", "json", "html"],
+            provider: "istanbul", // properly covers type files
+            exclude: [
+                "**/__mocks__/**",
+                "**/*.stories.tsx",
+                "**/*.styles.tsx",
+                ...coverageConfigDefaults.exclude,
+                "src/utils/wrappers.tsx", // Used only for tests and development
+            ],
             include: [
                 "src/**/*.{ts,tsx}",
                 "app/**/*.{ts,tsx}",
             ],
-            exclude: [
-                "**/__mocks__/**",
-                "**/*.stories.tsx",
-                ...coverageConfigDefaults.exclude,
-            ],
+            reporter: ["text", "json", "html"],
+            thresholds: {
+                branches: 95,
+                functions: 95,
+                lines: 95,
+                statements: 95,
+            },
         },
+        css: true,
+        environment: "jsdom",
+        setupFiles: ["vitest-setup.ts"],
     },
 });

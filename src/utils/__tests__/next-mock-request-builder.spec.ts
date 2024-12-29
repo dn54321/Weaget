@@ -1,12 +1,12 @@
-import { describe, expect, it } from "vitest";
 import { MockRequestObject, createMockRequest } from "@utils/next-mock-request-builder";
+import { describe, expect, it } from "vitest";
 
 describe("Utils - next-mock-request-builder", () => {
     describe("createMockRequest", () => {
         it.each([
             [{ path: "/test" }, { url: "https:///test?" }],
-            [{ method: "GET", path: "/test", params: { a: "b" } }, { url: "https:///test?a=b", method: "GET" }],
-            [{ method: "POST", path: "/test", headers: { a: "b" } }, { method: "POST", url: "https:///test?", headers: new Map(Object.entries({ a: "b" })) }],
+            [{ method: "GET", params: { a: "b" }, path: "/test" }, { method: "GET", url: "https:///test?a=b" }],
+            [{ headers: { a: "b" }, method: "POST", path: "/test" }, { headers: new Map(Object.entries({ a: "b" })), method: "POST", url: "https:///test?" }],
         ])("request object %o should result in %o.", (
             requestObject: MockRequestObject,
             result: Record<string, object | string | number>,

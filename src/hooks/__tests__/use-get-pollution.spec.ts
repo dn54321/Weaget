@@ -1,14 +1,14 @@
+import { afterEach, describe, expect, it, test } from "vitest";
 import { renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse } from "msw";
-import { afterEach, describe, expect, it, test } from "vitest";
+import { createPollutionMockData } from "@features/weaget/__mocks__/pollution.mock";
+import { mockPollutionHandle } from "@features/weaget/__mocks__/pollution.handler";
+import { pollutionSchema } from "@features/weaget/pollution/pollution.schema";
 import { server } from "@project/vitest-setup";
 import { testQueryClient } from "@utils/query-client";
-import { mockPollutionHandle } from "@features/weaget/__mocks__/pollution.handler";
-import { createPollutionMockData } from "@features/weaget/__mocks__/pollution.mock";
-import { useGetPollution } from "@src/hooks/use-get-pollution";
 import { testWrapper } from "@utils/wrappers";
+import { useGetPollution } from "@src/hooks/use-get-pollution";
 import { withResponse } from "@utils/msw-http-mocker";
-import { pollutionSchema } from "@features/weaget/pollution/pollution.schema";
 
 describe("Hooks - use-get-pollution", async () => {
     afterEach(() => {
@@ -23,7 +23,7 @@ describe("Hooks - use-get-pollution", async () => {
             server.use(mockPollutionHandle(HttpResponse.json(pollutionMockData)));
             const { result } = renderHook(
                 () => useGetPollution(0, 0),
-                { wrapper: testWrapper }
+                { wrapper: testWrapper },
             );
 
             await waitFor(() => expect(result.current.isSuccess).toBe(true));
@@ -39,7 +39,7 @@ describe("Hooks - use-get-pollution", async () => {
             withResponse(mockPollutionHandle, pollutionMockData);
             const { result } = renderHook(
                 () => useGetPollution(0, 0),
-                { wrapper: testWrapper }
+                { wrapper: testWrapper },
             );
 
             await waitFor(() => expect(result.current.isError).toBe(true));
@@ -51,12 +51,12 @@ describe("Hooks - use-get-pollution", async () => {
             async (statusCode: number) => {
                 const pollutionMockData = createPollutionMockData();
                 server.use(mockPollutionHandle(
-                    HttpResponse.json(pollutionMockData, { status: statusCode })
+                    HttpResponse.json(pollutionMockData, { status: statusCode }),
                 ));
 
                 const { result } = renderHook(
                     () => useGetPollution(0, 0),
-                    { wrapper: testWrapper }
+                    { wrapper: testWrapper },
                 );
 
                 await waitFor(() => expect(result.current.isError).toBe(true));

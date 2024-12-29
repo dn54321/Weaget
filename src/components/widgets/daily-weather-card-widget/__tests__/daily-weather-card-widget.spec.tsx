@@ -1,11 +1,11 @@
 import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
-import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
-import { withRender } from "@utils/render";
-import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { DailyWeatherCardWidget } from "./..";
-import { testQueryClient } from "@utils/query-client";
+import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import React from "react";
+import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
+import { testQueryClient } from "@utils/query-client";
 import userEvent from "@testing-library/user-event";
+import { withRender } from "@utils/render";
 
 describe("Component: daily-weather-card-widget", async () => {
     let weatherData: OneCallWeatherDetails;
@@ -18,16 +18,16 @@ describe("Component: daily-weather-card-widget", async () => {
 
     it("should contain a title.", () => {
         const { getByText } = withRender(
-            <DailyWeatherCardWidget weatherData={weatherData} />
+            <DailyWeatherCardWidget weatherData={weatherData} />,
         );
-        expect(getByText("Daily Cards")).toBeInTheDocument();
+        expect(getByText("component.widget.dailyWeatherCard.title")).toBeInTheDocument();
     });
 
     it("should contain a subtitle.", () => {
         const { getByText } = withRender(
             <DailyWeatherCardWidget weatherData={weatherData} />,
         );
-        expect(getByText("Click any card below to see more detailed description of the weather card.")).toBeInTheDocument();
+        expect(getByText("component.widget.dailyWeatherCard.description")).toBeInTheDocument();
     });
 
     it("should contains a card for each day.", () => {
@@ -43,11 +43,11 @@ describe("Component: daily-weather-card-widget", async () => {
             const widgetProbe = vi.fn();
             const { getAllByTestId } = withRender(
                 <DailyWeatherCardWidget weatherData={weatherData} />,
-                { probes: { widget: widgetProbe } }
+                { probes: { widget: widgetProbe } },
             );
 
             await user.hover(getAllByTestId("weather-card")[0]);
-            expect(widgetProbe.mock.lastCall[0]).toMatchObject({ focusedWeather: weatherData.daily?.[0] });
+            expect(widgetProbe.mock.lastCall?.[0]).toMatchObject({ focusedWeather: weatherData.daily?.[0] });
         });
 
     it("should set the weather in the widget store as active if a card is clicked.", async () => {
@@ -55,12 +55,12 @@ describe("Component: daily-weather-card-widget", async () => {
         const widgetProbe = vi.fn();
         const { getAllByRole } = withRender(
             <DailyWeatherCardWidget weatherData={weatherData} />,
-            { probes: { widget: widgetProbe } }
+            { probes: { widget: widgetProbe } },
         );
         await user.click(getAllByRole("listitem")[0]);
         await user.unhover(getAllByRole("listitem")[0]);
         expect(weatherData.daily?.[0]).toBeDefined();
-        expect(widgetProbe.mock.lastCall[0]).toMatchObject({ focusedWeather: weatherData.daily?.[0] });
+        expect(widgetProbe.mock.lastCall?.[0]).toMatchObject({ focusedWeather: weatherData.daily?.[0] });
     });
 
     it("should set the hovered weather card as active regardless of what card is active.",
@@ -69,14 +69,14 @@ describe("Component: daily-weather-card-widget", async () => {
             const widgetProbe = vi.fn();
             const { getAllByRole } = withRender(
                 <DailyWeatherCardWidget weatherData={weatherData} />,
-                { probes: { widget: widgetProbe } }
+                { probes: { widget: widgetProbe } },
             );
 
             await user.click(getAllByRole("listitem")[0]);
-            expect(widgetProbe.mock.lastCall[0]).toMatchObject({ focusedWeather: weatherData.daily?.[0] });
+            expect(widgetProbe.mock.lastCall?.[0]).toMatchObject({ focusedWeather: weatherData.daily?.[0] });
 
             await user.hover(getAllByRole("listitem")[1]);
-            expect(widgetProbe.mock.lastCall[0]).toMatchObject({ focusedWeather: weatherData.daily?.[1] });
+            expect(widgetProbe.mock.lastCall?.[0]).toMatchObject({ focusedWeather: weatherData.daily?.[1] });
         });
 
     it("should unactivate an active weather card if clicked again.", async () => {
@@ -84,20 +84,20 @@ describe("Component: daily-weather-card-widget", async () => {
         const widgetProbe = vi.fn();
         const { getAllByRole, getByText } = withRender(
             <DailyWeatherCardWidget weatherData={weatherData} />,
-            { probes: { widget: widgetProbe } }
+            { probes: { widget: widgetProbe } },
         );
 
         await user.click(getAllByRole("listitem")[0]);
-        expect(widgetProbe.mock.lastCall[0]).toMatchObject({ focusedWeather: weatherData.daily?.[0] });
+        expect(widgetProbe.mock.lastCall?.[0]).toMatchObject({ focusedWeather: weatherData.daily?.[0] });
 
         await user.click(getAllByRole("listitem")[0]);
-        await user.hover(getByText("Daily Cards"));
-        expect(widgetProbe.mock.lastCall[0]).not.toMatchObject({ focusedWeather: weatherData.daily?.[0] });
+        await user.hover(getByText("component.widget.dailyWeatherCard.title"));
+        expect(widgetProbe.mock.lastCall?.[0]).not.toMatchObject({ focusedWeather: weatherData.daily?.[0] });
     });
 
     it("should return a skeleton if no data is provided.", () => {
         const { getAllByTestId } = withRender(
-            <DailyWeatherCardWidget weatherData={undefined} />
+            <DailyWeatherCardWidget weatherData={undefined} />,
         );
         expect(getAllByTestId("weather-card-skeleton")).toHaveLength(8);
     });

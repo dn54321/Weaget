@@ -1,9 +1,9 @@
+import { afterEach, describe, expect, it, test } from "vitest";
+import { getWeatherByCoords, getWeatherByRegion } from "@services/weather.service";
 import { HttpResponse } from "msw";
-import { afterEach, describe, expect, test } from "vitest";
 import { createOpenWeatherOneCallMockData } from "@features/open-weather-map-one-call/__mocks__/oneCall.mock";
 import { mockOpenWeatherOneCallHandle } from "@features/open-weather-map-one-call/__mocks__/onecall.handler";
 import { oneCallWeatherDetailsSchema } from "@features/open-weather-map-one-call/oneCall.schema";
-import { getWeatherByCoords, getWeatherByRegion } from "@services/weather.service";
 import { server } from "@project/vitest-setup";
 
 describe("Weather Service", async () => {
@@ -12,7 +12,7 @@ describe("Weather Service", async () => {
     });
 
     describe("getWeatherByCoords", async () => {
-        test("Expect function with lat and lng to return valid response.", async () => {
+        it("Expect function with lat and lng to return valid response.", async () => {
             const mockWeatherData = createOpenWeatherOneCallMockData();
             const responseData = oneCallWeatherDetailsSchema.parse(mockWeatherData);
             server.use(mockOpenWeatherOneCallHandle(HttpResponse.json(mockWeatherData)));
@@ -21,7 +21,7 @@ describe("Weather Service", async () => {
                 .toEqual(responseData);
         });
 
-        test("Expect function to throw on unexpected response.", async () => {
+        it("Expect function to throw on unexpected response.", async () => {
             const mockWeatherData = { data: "malformedData" };
             server.use(mockOpenWeatherOneCallHandle(HttpResponse.json(mockWeatherData)));
             await expect(getWeatherByCoords(0, 0))
@@ -42,13 +42,13 @@ describe("Weather Service", async () => {
     });
 
     describe("getWeatherByRegion", async () => {
-        test("Expect function with location to return a valid response", async () => {
+        it("Expect function with location to return a valid response", async () => {
             await expect(getWeatherByRegion("mockLocation"))
                 .resolves
                 .toBeTypeOf("object");
         });
 
-        test("Expect function with location and region to return a valid response", async () => {
+        it("Expect function with location and region to return a valid response", async () => {
             await expect(getWeatherByRegion("mockLocation", "mockRegion"))
                 .resolves
                 .toBeTypeOf("object");

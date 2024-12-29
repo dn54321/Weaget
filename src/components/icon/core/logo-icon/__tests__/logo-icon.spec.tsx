@@ -5,6 +5,6 @@ import { withRender } from "@utils/render";
 describe("Component: logo-icon", () => {
     it("Widget should be able to render.", () => {
         const { getByLabelText } = withRender(<Logo />);
-        expect(getByLabelText("Weaget logo")).toBeInTheDocument();
+        expect(getByLabelText("webapp.name general.logo")).toBeInTheDocument();
     });
 });

@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import { AutoCompleteQueryParams, AutoCompleteSuggestions } from "@features/weaget/auto-complete/auto-complete.types";
 import { FetchError } from "@errors/fetch-error";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { weagetAutoCompleteSchema } from "@features/weaget/auto-complete/auto-complete.schema";
 
 async function fetchAutoComplete(input: string, params?: AutoCompleteQueryParams) {
@@ -17,14 +17,14 @@ async function fetchAutoComplete(input: string, params?: AutoCompleteQueryParams
 }
 
 export function useGetLocationAutoComplete(input: string, location?: string) {
-    const [sessiontoken, _] = useState(crypto.randomUUID());
+    const [sessiontoken] = useState(crypto.randomUUID());
     const [query, setQuery] = useState(input);
     const reactQuery = useQuery<Array<AutoCompleteSuggestions>>({
-        queryKey: ["location-auto-complete", query, { location }],
-        queryFn: () => fetchAutoComplete(query, { location, sessiontoken }),
         enabled: !!query,
-        staleTime: Infinity,
+        queryFn: () => fetchAutoComplete(query, { location, sessiontoken }),
+        queryKey: ["location-auto-complete", query, { location }],
         retry: 0,
+        staleTime: Infinity,
     });
     return [reactQuery, setQuery] as const;
 }

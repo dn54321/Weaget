@@ -1,5 +1,6 @@
-import { createContext, useRef } from "react";
 import { SettingState, createSettingsStore } from "@src/stores/settings.store";
+import React from "react";
+import { createContext } from "react";
 
 export interface SettingProviderProps {
     settings?: Partial<SettingState>;
@@ -13,7 +14,7 @@ export const SettingsStoreContext = createContext<SettingStoreApi | undefined>(
 );
 
 export default function SettingsStoreProvider(props: SettingProviderProps) {
-    const storeRef = useRef<SettingStoreApi>();
+    const storeRef = React.useRef<SettingStoreApi>();
     if (!storeRef.current) {
         storeRef.current = createSettingsStore(props.settings, !props.temporary);
     }

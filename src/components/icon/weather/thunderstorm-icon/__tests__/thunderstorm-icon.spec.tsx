@@ -4,7 +4,14 @@ import { withRender } from "@utils/render";
 
 describe("Component: thunderstorm-icon", () => {
     it("Widget should be able to render.", () => {
-        const { getByLabelText } = withRender(<Thunderstorm />);
-        expect(getByLabelText("Thunderstorm")).toBeInTheDocument();
+        const { getByTitle, getByRole } = withRender(<Thunderstorm />);
+        expect(getByRole("img")).toBeInTheDocument();
+        expect(getByTitle("weather.icon.thunderstorm.title")).toBeInTheDocument();
+    });
+
+    it("Widget should not display title on decoration.", () => {
+        const { queryByTitle, getByRole } = withRender(<Thunderstorm decoration />);
+        expect(getByRole("img")).toBeInTheDocument();
+        expect(queryByTitle("weather.icon.thunderstorm.title")).not.toBeInTheDocument();
     });
 });

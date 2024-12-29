@@ -1,16 +1,16 @@
-import { waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
+import { withHandleError, withResponse } from "@utils/msw-http-mocker";
+import { SearchBar } from "./..";
+import { SearchErrorI18NKey } from "@components/ui/search-bar/search-bar.component";
+import { createCurrentLocationMockData } from "@features/weaget/__mocks__/current-location.mock";
 import { mockAutoCompleteHandle } from "@features/weaget/__mocks__/auto-complete.handler";
 import { mockCurrentLocationHandle } from "@features/weaget/__mocks__/current-location.handler";
-import { createCurrentLocationMockData } from "@features/weaget/__mocks__/current-location.mock";
 import { mockLocationLookupHandle } from "@features/weaget/__mocks__/location-lookup.handler";
-import { withHandleError, withResponse } from "@utils/msw-http-mocker";
-import { testQueryClient } from "@utils/query-client";
-import { withRender } from "@utils/render";
-import { SearchBar } from "./..";
 import { server } from "@project/vitest-setup";
-import { SearchErrorMessage } from "@components/ui/search-bar/search-bar.component";
+import { testQueryClient } from "@utils/query-client";
+import userEvent from "@testing-library/user-event";
+import { waitFor } from "@testing-library/react";
+import { withRender } from "@utils/render";
 
 describe("Component: search-bar", async () => {
     const mocks = vi.hoisted(() => {
@@ -36,13 +36,13 @@ describe("Component: search-bar", async () => {
         const user = userEvent.setup();
         const view = withRender(<SearchBar />);
         await user.type(view.getByRole("combobox"), "mockLocation");
-        await user.click(view.getByLabelText("Search"));
+        await user.click(view.getByLabelText("component.searchBar.search"));
         expect(mocks.mockRouterPush).toHaveBeenCalledWith("/weather/mockLocation");
     });
 
     test.each([
-        [404, SearchErrorMessage.INVALID_LOCATION],
-        [500, SearchErrorMessage.INTERNAL_SERVER_ERROR],
+        [404, SearchErrorI18NKey.INVALID_LOCATION],
+        [500, SearchErrorI18NKey.INTERNAL_SERVER_ERROR],
     ])("should display an error if the location endpoint returns status code %d.",
         async (statusCode, errorMessage) => {
             withHandleError(mockLocationLookupHandle, statusCode);
@@ -51,7 +51,7 @@ describe("Component: search-bar", async () => {
             const view = withRender(<SearchBar />);
 
             await user.type(view.getByRole("combobox"), "invalidSuburb");
-            await user.click(view.getByLabelText("Search"));
+            await user.click(view.getByLabelText("component.searchBar.search"));
             await waitFor(() => expect(view.getByText(errorMessage)).toBeInTheDocument());
         });
 
@@ -61,7 +61,7 @@ describe("Component: search-bar", async () => {
         const user = userEvent.setup();
         const { getByPlaceholderText, getByText } = withRender(<SearchBar />);
 
-        const comboBox = getByPlaceholderText("Search Weather Location");
+        const comboBox = getByPlaceholderText("component.searchBar.placeholder");
         await user.click(comboBox);
         await user.keyboard("m");
         await waitFor(() => expect(getByText("mockLocation")).toBeInTheDocument());
@@ -74,9 +74,9 @@ describe("Component: search-bar", async () => {
         const currentLocationMock = createCurrentLocationMockData();
         withResponse(mockCurrentLocationHandle, currentLocationMock);
         const user = userEvent.setup();
-        const { getByLabelText } = withRender(<SearchBar />);
+        const { getByTestId } = withRender(<SearchBar />);
 
-        const currentLocationButton = getByLabelText("Use current location");
+        const currentLocationButton = getByTestId("MyLocationIcon");
         await user.click(currentLocationButton);
         expect(mocks.mockRouterPush).toHaveBeenCalledWith(`/weather/${currentLocationMock.city}`);
     });
@@ -86,10 +86,10 @@ describe("Component: search-bar", async () => {
         withHandleError(mockCurrentLocationHandle, 500);
         withResponse(mockAutoCompleteHandle, [{ main: "mockLocation", secondary: "mockState" }]);
         const user = userEvent.setup();
-        const { getByLabelText, getByText } = withRender(<SearchBar />);
+        const { getByTestId, getByText } = withRender(<SearchBar />);
 
-        const currentLocationButton = getByLabelText("Use current location");
+        const currentLocationButton = getByTestId("MyLocationIcon");
         await user.click(currentLocationButton);
-        expect(getByText("Could not retrieve current location. Please enter it manually!")).toBeInTheDocument();
+        expect(getByText("component.searchBar.error.invalidCurrentLocation")).toBeInTheDocument();
     });
 });

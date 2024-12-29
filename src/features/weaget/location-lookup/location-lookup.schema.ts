@@ -22,19 +22,19 @@ const boundsSchema = z.object({
 });
 
 const geometryCoordinatesSchema = z.object({
+    bounds: boundsSchema.optional(),
     location: coordsSchema,
     locationType: z.string(),
     viewport: boundsSchema,
-    bounds: boundsSchema.optional(),
 });
 
 const loationLookupResultSchema = z.object({
     addressComponents: z.array(addressComponentSchema),
     formattedAddress: z.string(),
     geometry: geometryCoordinatesSchema,
+    partialMatch: z.boolean().optional(),
     placeId: z.string(),
     plusCode: plusCodeSchema.optional(),
-    partialMatch: z.boolean().optional(),
     types: z.array(z.string()),
 });
 

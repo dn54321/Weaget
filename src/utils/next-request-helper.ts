@@ -11,9 +11,9 @@ export function handleNextResponseError(err: Error, message: string) {
         const errorId = crypto.randomUUID();
         const errorMessage = "Failed to meet API requirements.";
         return Response.json({
+            errors: err.issues,
             id: errorId,
             message: errorMessage,
-            errors: err.issues,
         }, { status: 400 });
     }
 

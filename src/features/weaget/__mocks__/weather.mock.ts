@@ -1,37 +1,37 @@
-import { faker } from "@faker-js/faker";
 import { DateTime } from "luxon";
 import { createOpenWeatherWeatherMockData } from "@features/open-weather-map-one-call/__mocks__/oneCall.mock";
+import { faker } from "@faker-js/faker";
 
 export function createWeatherCurrentMockData(
     date = faker.date.anytime(),
-    timezone = faker.location.timeZone()
+    timezone = faker.location.timeZone(),
 ) {
     const dateTime = DateTime.fromJSDate(date, { zone: timezone });
     const startDay = dateTime.startOf("day");
     const endDay = dateTime.endOf("day");
     const halfDay = startDay.plus({ hours: 12 });
     return {
+        clouds: faker.number.int({ max: 100, min: 0 }),
+        dewPoint: faker.number.float({ fractionDigits: 2, max: 331, min: 186 }),
         dt: date,
+        feelsLike: faker.number.float({ fractionDigits: 2, max: 331, min: 186 }),
+        humidity: faker.number.int({ max: 100, min: 0 }),
+        pressure: faker.number.int({ max: 1030, min: 980 }),
         sunrise: faker.date.between({ from: startDay.toJSDate(), to: halfDay.toJSDate() }),
         sunset: faker.date.between({ from: halfDay.toJSDate(), to: endDay.toJSDate() }),
-        temp: faker.number.float({ min: 186, max: 331, fractionDigits: 2 }),
-        feelsLike: faker.number.float({ min: 186, max: 331, fractionDigits: 2 }),
-        pressure: faker.number.int({ min: 980, max: 1030 }),
-        humidity: faker.number.int({ min: 0, max: 100 }),
-        dewPoint: faker.number.float({ min: 186, max: 331, fractionDigits: 2 }),
-        uvi: faker.number.int({ min: 0, max: 11 }),
-        clouds: faker.number.int({ min: 0, max: 100 }),
-        visibility: faker.number.int({ min: 0, max: 10000 }),
-        windSpeed: faker.number.float({ min: 0, max: 35, fractionDigits: 1 }),
-        windDeg: faker.number.int({ min: 0, max: 360 }),
-        windGust: faker.number.float({ min: 0, max: 113, fractionDigits: 2 }),
-        weather: faker.helpers.multiple(createOpenWeatherWeatherMockData, { count: { min: 1, max: 3 } }),
+        temp: faker.number.float({ fractionDigits: 2, max: 331, min: 186 }),
+        uvi: faker.number.int({ max: 11, min: 0 }),
+        visibility: faker.number.int({ max: 10000, min: 0 }),
+        weather: faker.helpers.multiple(createOpenWeatherWeatherMockData, { count: { max: 3, min: 1 } }),
+        windDeg: faker.number.int({ max: 360, min: 0 }),
+        windGust: faker.number.float({ fractionDigits: 2, max: 113, min: 0 }),
+        windSpeed: faker.number.float({ fractionDigits: 1, max: 35, min: 0 }),
     };
 }
 
 export function createWeatherDailyMockData(
     date = faker.date.anytime(),
-    timezone = faker.location.timeZone()
+    timezone = faker.location.timeZone(),
 ) {
     const dateTime = DateTime.fromJSDate(date, { zone: timezone });
     const startDay = dateTime.startOf("day");
@@ -39,38 +39,38 @@ export function createWeatherDailyMockData(
     const halfDay = startDay.plus({ hours: 12 });
 
     return {
+        clouds: faker.number.int({ max: 100, min: 0 }),
+        dewPoint: faker.number.float({ fractionDigits: 2, max: 331, min: 186 }),
         dt: date,
-        sunrise: faker.date.between({ from: startDay.toJSDate(), to: halfDay.toJSDate() }),
-        sunset: faker.date.between({ from: halfDay.toJSDate(), to: endDay.toJSDate() }),
-        moonrise: faker.date.between({ from: halfDay.toJSDate(), to: endDay.toJSDate() }),
-        moonset: faker.date.between({ from: startDay.toJSDate(), to: halfDay.toJSDate() }),
-        moonPhase: faker.number.float({ min: 0, max: 1, fractionDigits: 2 }),
-        summary: faker.lorem.sentence(),
-        temp: {
-            day: faker.number.float({ min: 186, max: 331, fractionDigits: 2 }),
-            min: faker.number.float({ min: 186, max: 331, fractionDigits: 2 }),
-            max: faker.number.float({ min: 186, max: 331, fractionDigits: 2 }),
-            night: faker.number.float({ min: 186, max: 331, fractionDigits: 2 }),
-            eve: faker.number.float({ min: 186, max: 331, fractionDigits: 2 }),
-            morn: faker.number.float({ min: 186, max: 331, fractionDigits: 2 }),
-        },
         feelsLike: {
-            day: faker.number.float({ min: 186, max: 331, fractionDigits: 2 }),
-            night: faker.number.float({ min: 186, max: 331, fractionDigits: 2 }),
+            day: faker.number.float({ fractionDigits: 2, max: 331, min: 186 }),
             eve: 297.86,
             morn: 292.87,
+            night: faker.number.float({ fractionDigits: 2, max: 331, min: 186 }),
         },
-        pressure: faker.number.int({ min: 980, max: 1030 }),
-        humidity: faker.number.int({ min: 0, max: 100 }),
-        dewPoint: faker.number.float({ min: 186, max: 331, fractionDigits: 2 }),
-        windSpeed: faker.number.float({ min: 0, max: 35, fractionDigits: 1 }),
-        windDeg: faker.number.int({ min: 0, max: 360 }),
-        windGust: faker.number.float({ min: 0, max: 113, fractionDigits: 2 }),
-        weather: faker.helpers.multiple(createOpenWeatherWeatherMockData, { count: { min: 1, max: 3 } }),
-        clouds: faker.number.int({ min: 0, max: 100 }),
-        pop: faker.number.float({ min: 0, max: 1, fractionDigits: 2 }),
-        rain: faker.number.float({ min: 0, max: 600, fractionDigits: 2 }),
-        uvi: faker.number.int({ min: 0, max: 11 }),
+        humidity: faker.number.int({ max: 100, min: 0 }),
+        moonPhase: faker.number.float({ fractionDigits: 2, max: 1, min: 0 }),
+        moonrise: faker.date.between({ from: halfDay.toJSDate(), to: endDay.toJSDate() }),
+        moonset: faker.date.between({ from: startDay.toJSDate(), to: halfDay.toJSDate() }),
+        pop: faker.number.float({ fractionDigits: 2, max: 1, min: 0 }),
+        pressure: faker.number.int({ max: 1030, min: 980 }),
+        rain: faker.number.float({ fractionDigits: 2, max: 600, min: 0 }),
+        summary: faker.lorem.sentence(),
+        sunrise: faker.date.between({ from: startDay.toJSDate(), to: halfDay.toJSDate() }),
+        sunset: faker.date.between({ from: halfDay.toJSDate(), to: endDay.toJSDate() }),
+        temp: {
+            day: faker.number.float({ fractionDigits: 2, max: 331, min: 186 }),
+            eve: faker.number.float({ fractionDigits: 2, max: 331, min: 186 }),
+            max: faker.number.float({ fractionDigits: 2, max: 331, min: 186 }),
+            min: faker.number.float({ fractionDigits: 2, max: 331, min: 186 }),
+            morn: faker.number.float({ fractionDigits: 2, max: 331, min: 186 }),
+            night: faker.number.float({ fractionDigits: 2, max: 331, min: 186 }),
+        },
+        uvi: faker.number.int({ max: 11, min: 0 }),
+        weather: faker.helpers.multiple(createOpenWeatherWeatherMockData, { count: { max: 3, min: 1 } }),
+        windDeg: faker.number.int({ max: 360, min: 0 }),
+        windGust: faker.number.float({ fractionDigits: 2, max: 113, min: 0 }),
+        windSpeed: faker.number.float({ fractionDigits: 1, max: 35, min: 0 }),
     };
 }
 
@@ -78,33 +78,33 @@ export function createWeatherHourlyMockData(
     date = faker.date.anytime(),
 ) {
     return {
+        clouds: faker.number.int({ max: 100, min: 0 }),
+        dewPoint: faker.number.float({ fractionDigits: 2, max: 331, min: 186 }),
         dt: date,
-        temp: faker.number.float({ min: 186, max: 331, fractionDigits: 2 }),
-        feelsLike: faker.number.float({ min: 186, max: 331, fractionDigits: 2 }),
-        pressure: faker.number.int({ min: 980, max: 1030 }),
-        humidity: faker.number.int({ min: 0, max: 100 }),
-        dewPoint: faker.number.float({ min: 186, max: 331, fractionDigits: 2 }),
-        uvi: faker.number.int({ min: 0, max: 11 }),
-        clouds: faker.number.int({ min: 0, max: 100 }),
-        visibility: faker.number.int({ min: 0, max: 10000 }),
-        windSpeed: faker.number.float({ min: 0, max: 35, fractionDigits: 1 }),
-        windDeg: faker.number.int({ min: 0, max: 360 }),
-        windGust: faker.number.float({ min: 0, max: 113, fractionDigits: 2 }),
+        feelsLike: faker.number.float({ fractionDigits: 2, max: 331, min: 186 }),
+        humidity: faker.number.int({ max: 100, min: 0 }),
+        pop: faker.number.float({ fractionDigits: 2, max: 1, min: 0 }),
+        pressure: faker.number.int({ max: 1030, min: 980 }),
         rain: {
-            "1h": faker.number.int({ min: 1, max: 100 }),
+            "1h": faker.number.int({ max: 100, min: 1 }),
         },
-        weather: faker.helpers.multiple(createOpenWeatherWeatherMockData, { count: { min: 1, max: 3 } }),
-        pop: faker.number.float({ min: 0, max: 1, fractionDigits: 2 }),
+        temp: faker.number.float({ fractionDigits: 2, max: 331, min: 186 }),
+        uvi: faker.number.int({ max: 11, min: 0 }),
+        visibility: faker.number.int({ max: 10000, min: 0 }),
+        weather: faker.helpers.multiple(createOpenWeatherWeatherMockData, { count: { max: 3, min: 1 } }),
+        windDeg: faker.number.int({ max: 360, min: 0 }),
+        windGust: faker.number.float({ fractionDigits: 2, max: 113, min: 0 }),
+        windSpeed: faker.number.float({ fractionDigits: 1, max: 35, min: 0 }),
     };
 }
 
 export function createWeatherAlertMockData() {
     return {
-        senderName: faker.person.fullName(),
-        event: faker.lorem.words(),
-        start: faker.date.anytime(),
-        end: faker.date.anytime(),
         description: faker.lorem.sentence(),
+        end: faker.date.anytime(),
+        event: faker.lorem.words(),
+        senderName: faker.person.fullName(),
+        start: faker.date.anytime(),
         tags: faker.helpers.multiple(faker.word.words),
     };
 }
@@ -114,7 +114,7 @@ export function createWeatherMinutelyMockData(
 ) {
     return {
         dt: date,
-        precipitation: faker.number.float({ min: 0, max: 600, fractionDigits: 2 }),
+        precipitation: faker.number.float({ fractionDigits: 2, max: 600, min: 0 }),
     };
 }
 
@@ -133,14 +133,14 @@ export function createWeatherMockData() {
         createWeatherDailyMockData(datetime.plus({ days: idx }).toJSDate(), timezone));
 
     return {
+        alerts: faker.helpers.multiple(createWeatherAlertMockData, { count: { max: 2, min: 0 } }),
+        current: createWeatherCurrentMockData(datetime.toJSDate()),
+        daily: dailyWeather,
+        hourly: hourlyWeather,
         lat: faker.location.longitude({ precision: 4 }),
         lon: faker.location.latitude({ precision: 4 }),
+        minutely: minutelyWeather,
         timezone: timezone,
         timezoneOffset: timezoneOffset,
-        current: createWeatherCurrentMockData(datetime.toJSDate()),
-        minutely: minutelyWeather,
-        hourly: hourlyWeather,
-        daily: dailyWeather,
-        alerts: faker.helpers.multiple(createWeatherAlertMockData, { count: { min: 0, max: 2 } }),
     };
 }

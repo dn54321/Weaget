@@ -1,4 +1,4 @@
-import { http, HttpResponse, RequestHandlerOptions } from "msw";
+import { HttpResponse, RequestHandlerOptions, http } from "msw";
 import { createGoogleLocationAutoCompleteMockData } from "./location-auto-complete.mock";
 
 export const googleLocationAutoCompleteHandler = [
@@ -11,6 +11,6 @@ export function mockGoogleLocationAutoCompleteHandle(response: HttpResponse, opt
     return http.get(
         "https://maps.googleapis.com/maps/api/place/autocomplete/json",
         () => response,
-        options
+        options,
     );
 }

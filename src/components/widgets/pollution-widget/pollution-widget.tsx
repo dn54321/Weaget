@@ -1,7 +1,8 @@
+import * as React from "react";
 import { CircularProgress, SxProps } from "@mui/material";
+import { Iaqi, Pollution } from "@features/apicn-pollution/pollution.types";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
-import { circularProgressClasses } from "@mui/material/CircularProgress";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Table from "@mui/material/Table";
@@ -10,9 +11,9 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import * as React from "react";
-import { Iaqi, Pollution } from "@features/apicn-pollution/pollution.types";
 import { Widget } from "@components/containers/widget/widget";
+import { circularProgressClasses } from "@mui/material/CircularProgress";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 /*
     Pollution Card determines the overall
@@ -23,6 +24,12 @@ interface CircularProgressWithLabelProps {
     value?: number;
     loaded: boolean;
 }
+
+interface PollutionRow {
+    chemical: JSX.Element;
+    amount: JSX.Element;
+}
+
 function CircularProgressWithLabel(props: CircularProgressWithLabelProps) {
     const width = "120px";
     const thickness = 5;
@@ -81,28 +88,29 @@ const DotLoader = () => {
         <Box
             className="dot-pulse"
             sx={{
-                "left": "-9980px",
-                "width": "5px",
-                "height": "5px",
-                "top": "5px",
                 "&:before,&:after": {
-                    width: "5px",
                     height: "5px",
+                    width: "5px",
                 },
+                "height": "5px",
+                "left": "-9980px",
+                "top": "5px",
+                "width": "5px",
             }}
         />
     );
 };
 
 function createData(chemical: JSX.Element, amount: JSX.Element) {
-    return { chemical, amount };
+    return { amount, chemical };
 }
 
 interface PollutionTableProps {
-    rows: Array<{ chemical: JSX.Element; amount: JSX.Element }>;
+    rows: Array<PollutionRow>;
 }
 
 function PollutionTable(props: PollutionTableProps) {
+    const { t } = useSystemTranslation();
     return (
         <TableContainer component={Box}>
             <Table
@@ -115,12 +123,8 @@ function PollutionTable(props: PollutionTableProps) {
             >
                 <TableHead>
                     <TableRow>
-                        <TableCell>Particle</TableCell>
-                        <TableCell>
-                            <abbr title="Air Quality Index">AQI</abbr>
-                            {" "}
-                            Level
-                        </TableCell>
+                        <TableCell>{t("component.widget.pollution.particle")}</TableCell>
+                        <TableCell>{t("component.widget.pollution.aqiLevel")}</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -139,53 +143,62 @@ function PollutionTable(props: PollutionTableProps) {
     );
 }
 
-const aqiStatus = ["Good", "Moderate", "Unhealthy for sensitive groups", "Unhealthy", "Very Unhealthy", "Hazardous"];
-const warn = ["",
-    "Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.",
-    "Active children and adults, and people with respiratory disease, such as asthma, should limit prolonged outdoor exertion.",
-    "Active children and adults, and people with respiratory disease, such as asthma, should avoid prolonged outdoor exertion; everyone else, especially children, should limit prolonged outdoor exertion",
-    "Active children and adults, and people with respiratory disease, such as asthma, should avoid all outdoor exertion; everyone else, especially children, should limit outdoor exertion.",
-    "Everyone should avoid all outdoor exertion"];
+const pollutionLevelTranslationKey = [
+    "component.widget.pollution.pollutionLevel.good",
+    "component.widget.pollution.pollutionLevel.moderate",
+    "component.widget.pollution.pollutionLevel.unhealthySensitive",
+    "component.widget.pollution.pollutionLevel.unhealthy",
+    "component.widget.pollution.pollutionLevel.veryUnhealthy",
+    "component.widget.pollution.pollutionLevel.hazardous",
+];
+const pollutionWarningTranslationKey = [
+    "component.widget.pollution.pollutionCaution.good",
+    "component.widget.pollution.pollutionCaution.moderate",
+    "component.widget.pollution.pollutionCaution.unhealthySensitive",
+    "component.widget.pollution.pollutionCaution.unhealthy",
+    "component.widget.pollution.pollutionCaution.veryUnhealthy",
+    "component.widget.pollution.pollutionCaution.hazardous",
+];
 
 const stringToTag: Record<string, JSX.Element> = {
-    neph: <span title="visibility">NEPH</span>,
-    pm25: (
-        <span title="particles with a diameter of 2.5 micrometres or less">
-            PM
-            <sub>2.5</sub>
-        </span>
-    ),
-    pm10: (
-        <span title="particles with a diameter of 10 micrometres or less">
-            PM
-            <sub>10</sub>
-        </span>
-    ),
-    o3: (
-        <span title="ozone">
-            O
-            <sub>3</sub>
-        </span>
-    ),
-    no2: (
-        <span title="nitrogen dioxide">
-            NO
-            <sub>2</sub>
-        </span>
-    ),
-    so2: (
-        <span title="sulfur dioxide">
-            SO
-            <sub>2</sub>
-        </span>
-    ),
+    co: <React.Fragment>CO</React.Fragment>,
+    neph: <React.Fragment>NEPH</React.Fragment>,
     nh3: (
-        <span title="ammonia">
+        <React.Fragment>
             NH
             <sub>3</sub>
-        </span>
+        </React.Fragment>
     ),
-    co: <span title="carbon monoxide">CO</span>,
+    no2: (
+        <React.Fragment>
+            NO
+            <sub>2</sub>
+        </React.Fragment>
+    ),
+    o3: (
+        <React.Fragment>
+            O
+            <sub>3</sub>
+        </React.Fragment>
+    ),
+    pm10: (
+        <React.Fragment>
+            PM
+            <sub>10</sub>
+        </React.Fragment>
+    ),
+    pm25: (
+        <React.Fragment>
+            PM
+            <sub>2.5</sub>
+        </React.Fragment>
+    ),
+    so2: (
+        <React.Fragment>
+            SO
+            <sub>2</sub>
+        </React.Fragment>
+    ),
 };
 
 // Not Used Yet..
@@ -217,12 +230,13 @@ export interface PollutionWidgetProps {
 }
 
 export default function PollutionWidget(props: PollutionWidgetProps) {
+    const { t } = useSystemTranslation();
     const [show, setShow] = React.useState(false);
     const loaded = props.pollutionData ? true : false;
     const aqi = props.pollutionData ? props.pollutionData.aqi : 0;
     const aqRating = aqiRating(aqi);
 
-    let rows: any = [];
+    const rows: Array<PollutionRow> = [];
 
     if (props.pollutionData) {
         const pollution = props.pollutionData;
@@ -231,51 +245,60 @@ export default function PollutionWidget(props: PollutionWidgetProps) {
             const rating = (
                 <Box sx={{ float: "right" }}>
                     (
-                    {aqiStatus[aqiRating(iaqiData.v)]}
+                    {t(pollutionLevelTranslationKey[aqiRating(iaqiData.v)])}
                     )
                 </Box>
             );
-            rows.push(createData(stringToTag[key],
+            rows.push(createData(
+                <abbr
+                    title={t(`component.widget.pollution.pollutionParticleDescription.${key}`)}
+                >
+                    {stringToTag[key]}
+                </abbr>,
                 <>
                     {iaqiData.v}
                     {" "}
                     {rating}
-                </>
+                </>,
             ));
         });
     }
 
     return (
-        <Widget title="Pollution Level" sx={props.sx}>
+        <Widget title={t("component.widget.pollution.title")} sx={props.sx}>
             <Box p="20px" pb="10px">
                 <Stack
-                    direction={{ xs: "column", sm: "row", md: "column" }}
-                    alignItems={{ xs: "stretch", sm: "center", md: "stretch" }}
+                    direction={{ md: "column", sm: "row", xs: "column" }}
+                    alignItems={{ md: "stretch", sm: "center", xs: "stretch" }}
                     gap={2}
                 >
                     <Stack direction="row" alignItems="center">
                         <CircularProgressWithLabel value={props.pollutionData?.aqi} loaded={loaded} />
                         <Box ml="20px" width="max-content">
-                            <Box fontSize="16px">Air Quality Index</Box>
+                            <Box fontSize="16px">{t("component.widget.pollution.airQualityIndex")}</Box>
                             <Box sx={{ color: "text.color" }}>
                                 {props.pollutionData?.aqi
-                                    ? aqiStatus[aqRating]
+                                    ? t(pollutionLevelTranslationKey[aqRating])
                                     : <Box ml="20px"><DotLoader /></Box>}
                             </Box>
                         </Box>
                     </Stack>
-                    {aqRating ? <Alert severity="warning">{warn[aqRating]}</Alert> : ""}
+                    {aqRating ? <Alert severity="warning">{t(pollutionWarningTranslationKey[aqRating])}</Alert> : ""}
                 </Stack>
                 { loaded
                     ? (
                             <>
                                 <Box mt="20px" color="black">{show && <PollutionTable rows={rows} />}</Box>
                                 <Link mt="10px" component="button" onClick={() => { setShow(!show); }} color="text.color">
-                                    {show ? "Hide Advanced Pollution Details" : "Show Advanced Pollution Details"}
+                                    {
+                                        show
+                                            ? t("component.widget.pollution.hideAdvancedPollutionDetails")
+                                            : t("component.widget.pollution.showAdvancedPollutionDetails")
+                                    }
                                 </Link>
                             </>
                         )
-                    : <Box color="#4682B4" mt="20px">Loading Pollution Details...</Box>}
+                    : <Box color="#4682B4" mt="20px">{t("component.widget.pollution.loading")}</Box>}
             </Box>
         </Widget>
     );

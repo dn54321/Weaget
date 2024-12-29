@@ -1,8 +1,8 @@
-import { beforeAll, describe, expect, it, vi } from "vitest";
-import { DateTime } from "luxon";
-import BugReportIcon from "@mui/icons-material/BugReport";
-import userEvent from "@testing-library/user-event";
 import { WeatherStrip, WeatherStripProps } from "./..";
+import { beforeAll, describe, expect, it, vi } from "vitest";
+import BugReportIcon from "@mui/icons-material/BugReport";
+import { DateTime } from "luxon";
+import userEvent from "@testing-library/user-event";
 import { withRender } from "@utils/render";
 describe("Component: weather-strip", async () => {
     let weatherStripProps: WeatherStripProps;
@@ -10,38 +10,38 @@ describe("Component: weather-strip", async () => {
         const date = DateTime.local(2023, 1, 2, 3, { zone: "Australia/Sydney" });
         weatherStripProps = {
             date: date.toJSDate(),
-            timezone: "Australia/Sydney",
-            weatherCode: 200,
-            weatherDescription: "mockWeatherDescription",
-            temperature: 293.15,
             rainPercentage: 0.16,
             stats: [
                 {
-                    name: "mockName",
-                    value: "mockValue",
-                    statIcon: <BugReportIcon />,
                     compactValue: "mockCompactValue",
+                    name: "mockName",
+                    statIcon: <BugReportIcon />,
                     unit: "mm",
+                    value: "mockValue",
                 },
                 {
                     name: "nonCompact",
-                    value: "nonCompactValue",
                     statIcon: <BugReportIcon />,
                     unit: "gg",
+                    value: "nonCompactValue",
                 },
                 {
-                    name: "mockInvisible",
-                    value: "",
-                    statIcon: <BugReportIcon />,
                     compactValue: "",
+                    name: "mockInvisible",
+                    statIcon: <BugReportIcon />,
                     unit: "ff",
+                    value: "",
                 },
             ],
+            temperature: 293.15,
+            timezone: "Australia/Sydney",
+            weatherCode: 200,
+            weatherDescription: "mockWeatherDescription",
         };
     });
 
     it.each([
-        ["time", "3am"],
+        ["time", "3 am"],
         ["day", "Monday"],
         ["temperature", "20°"],
         ["rain percentage", "16%"],
@@ -50,7 +50,7 @@ describe("Component: weather-strip", async () => {
         ["non-compact value", "nonCompactValuegg"],
     ])("should display the %s on the accordion summary.", (
         _: string,
-        value: string
+        value: string,
     ) => {
         const { getByText } = withRender(<WeatherStrip {...weatherStripProps} />);
         expect(getByText(value)).toBeInTheDocument();
@@ -61,7 +61,7 @@ describe("Component: weather-strip", async () => {
         const { getByText, getByRole } = withRender(<WeatherStrip {...weatherStripProps} />);
         const button = getByRole("button");
         await user.click(button);
-        expect(getByText("Hourly Weather Stats")).toBeInTheDocument();
+        expect(getByText("component.weatherStrip.hourlyWeatherStats")).toBeInTheDocument();
         expect(getByText("mockName")).toBeInTheDocument();
         expect(getByText("mockValuemm")).toBeInTheDocument();
         await user.click(button);

@@ -1,9 +1,9 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { mockGoogleLocationHandle } from "@features/google-geocode/__mocks__/location-lookup.handler";
 import { withHandleError, withResponse } from "@utils/msw-http-mocker";
-import { createMockRequest } from "@utils/next-mock-request-builder";
-import { server } from "@project/vitest-setup";
 import { GET } from "./route";
+import { createMockRequest } from "@utils/next-mock-request-builder";
+import { mockGoogleLocationHandle } from "@features/google-geocode/__mocks__/location-lookup.handler";
+import { server } from "@project/vitest-setup";
 
 describe("Route: api/location/[location]", async () => {
     afterEach(() => {
@@ -21,8 +21,8 @@ describe("Route: api/location/[location]", async () => {
 
     it("should return 200 given valid location and region", async () => {
         const request = createMockRequest({
-            path: `/api/location/mockLocation`,
             params: { region: "mockRegion" },
+            path: `/api/location/mockLocation`,
         });
 
         const response = await GET(request, { params: { location: "mockLocation" } });

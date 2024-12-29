@@ -11,6 +11,6 @@ export function mockApicnPollutionHandle(response: HttpResponse, options?: Reque
     return http.get(
         "https://api.waqi.info/feed/geo*",
         () => response,
-        options
+        options,
     );
 }

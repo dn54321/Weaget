@@ -1,12 +1,12 @@
-import { faker } from "@faker-js/faker";
+import { WeatherCard, WeatherCardProps } from "./..";
+import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
 import { DateTime } from "luxon";
 import React from "react";
-import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
-import { createOpenWeatherWeatherMockData } from "@features/open-weather-map-one-call/__mocks__/oneCall.mock";
 import { TemperatureScale } from "@src/types/weather.types";
-import { withRender } from "@utils/render";
+import { createOpenWeatherWeatherMockData } from "@features/open-weather-map-one-call/__mocks__/oneCall.mock";
+import { faker } from "@faker-js/faker";
 import { testQueryClient } from "@utils/query-client";
-import { WeatherCard, WeatherCardProps } from "./..";
+import { withRender } from "@utils/render";
 
 describe("Component: Weather Card", () => {
     let cardProps: WeatherCardProps;
@@ -15,13 +15,13 @@ describe("Component: Weather Card", () => {
         vi.useFakeTimers();
         const weather = createOpenWeatherWeatherMockData();
         cardProps = {
-            timezone: faker.location.timeZone(),
             date: faker.date.future(),
+            maxTemperature: faker.number.float({ fractionDigits: 2, max: 300.15, min: 273.15 }),
+            minTemperature: faker.number.float({ fractionDigits: 2, max: 325.15, min: 301.15 }),
+            rainfallPercentage: faker.number.float({ fractionDigits: 2, max: 1, min: 0.1 }),
+            timezone: faker.location.timeZone(),
             weatherCode: weather.id,
             weatherDescription: weather.description,
-            rainfallPercentage: faker.number.float({ min: 0.1, max: 1, fractionDigits: 2 }),
-            maxTemperature: faker.number.float({ min: 273.15, max: 300.15, fractionDigits: 2 }),
-            minTemperature: faker.number.float({ min: 301.15, max: 325.15, fractionDigits: 2 }),
         };
 
         weatherCard = (<WeatherCard {...cardProps} />);
@@ -43,16 +43,16 @@ describe("Component: Weather Card", () => {
         ["today", 0],
         ["tomorrow", 1],
         ["Jan 03", 2],
-    ])
-    ("Compact Weather Cards must display %s when offset %d days from 1st of Jan.", (
-        dateString: string, offset: number
-    ) => {
-        const currentMockDate = DateTime.local(2000, 1, 1, { zone: cardProps.timezone });
-        const cardDate = DateTime.local(2000, 1, 1 + offset, { zone: cardProps.timezone });
-        vi.setSystemTime(currentMockDate.toJSDate());
-        const { getByText } = withRender(<WeatherCard {...cardProps} date={cardDate.toJSDate()} />);
-        expect(getByText(dateString)).toBeInTheDocument();
-    });
+    ]) (
+        "Compact Weather Cards must display %s when offset %d days from 1st of Jan.",
+        (dateString: string, offset: number) => {
+            const currentMockDate = DateTime.local(2000, 1, 1, { zone: cardProps.timezone });
+            const cardDate = DateTime.local(2000, 1, 1 + offset, { zone: cardProps.timezone });
+            vi.setSystemTime(currentMockDate.toJSDate());
+            const { getByText } = withRender(<WeatherCard {...cardProps} date={cardDate.toJSDate()} />);
+            expect(getByText(dateString)).toBeInTheDocument();
+        },
+    );
 
     it("Compact Weather Cards must contain the rain percentage if defined.", () => {
         const { getByText } = withRender(weatherCard);

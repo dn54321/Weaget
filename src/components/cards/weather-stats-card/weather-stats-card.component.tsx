@@ -1,7 +1,7 @@
+import { Card, SxProps } from "@mui/material";
+import { CardUnorderedList, StatContainerListItem } from "./weather-stats-card.styles";
 import Box from "@mui/material/Box";
 import React from "react";
-import { CardUnorderedList, StatContainerListItem } from "./weather-stats-card.styles";
-import { Card, SxProps } from "@mui/material";
 
 export interface ItemContainerProps {
     children: React.ReactElement;
@@ -10,7 +10,7 @@ export interface ItemContainerProps {
 export interface WeatherStats {
     name: string;
     statIcon: JSX.Element | number | string;
-    value: any;
+    value?: JSX.Element | number | string;
     compactValue?: JSX.Element | number | string;
     unit?: string;
 }

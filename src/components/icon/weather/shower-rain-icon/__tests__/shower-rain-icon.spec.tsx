@@ -4,8 +4,14 @@ import { withRender } from "@utils/render";
 
 describe("Component: shower-rain-icon", () => {
     it("Widget should be able to render.", () => {
-        const { getByLabelText } = withRender(<ShowerRain />);
+        const { getByRole, getByTitle } = withRender(<ShowerRain />);
+        expect(getByRole("img")).toBeInTheDocument();
+        expect(getByTitle("weather.icon.showerRain.title")).toBeInTheDocument();
+    });
 
-        expect(getByLabelText("Shower rain")).toBeInTheDocument();
+    it("Widget should not display title on decoration.", () => {
+        const { queryByTitle, getByRole } = withRender(<ShowerRain decoration />);
+        expect(getByRole("img")).toBeInTheDocument();
+        expect(queryByTitle("weather.icon.showerRain.title")).not.toBeInTheDocument();
     });
 });

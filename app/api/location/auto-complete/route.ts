@@ -1,6 +1,6 @@
+import { extractQueryParams, handleNextResponseError } from "@utils/next-request-helper";
 import { NextRequest } from "next/server";
 import { getLocationAutocompleteSuggestions } from "@services/geolocation.service";
-import { extractQueryParams, handleNextResponseError } from "@utils/next-request-helper";
 import { googleLocationSuggestionInputSchema } from "@features/google-geocode/location-auto-complete.schema";
 
 // Generates a list of autocomplete queries given a string
@@ -17,8 +17,6 @@ export async function GET(req: NextRequest) {
         return Response.json(formattedSuggestions);
     }
     catch (err) {
-        if (err instanceof Error) {
-            return handleNextResponseError(err, "Failed to retrieve location suggestion.");
-        }
+        return handleNextResponseError(err as Error, "Failed to retrieve location suggestion.");
     }
 }

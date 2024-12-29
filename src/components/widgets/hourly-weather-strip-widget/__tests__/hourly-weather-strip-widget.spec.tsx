@@ -1,9 +1,9 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
-import { withRender } from "@utils/render";
-import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
-import userEvent from "@testing-library/user-event";
 import { HourlyWeatherStripWidget } from "./..";
+import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
+import userEvent from "@testing-library/user-event";
+import { withRender } from "@utils/render";
 
 describe("Component: hourly-weather-card-widget", async () => {
     let weatherData: OneCallWeatherDetails;
@@ -15,7 +15,7 @@ describe("Component: hourly-weather-card-widget", async () => {
         const { getByText } = withRender(
             <HourlyWeatherStripWidget weatherData={weatherData} />,
         );
-        expect(getByText("Hourly Weather Details")).toBeInTheDocument();
+        expect(getByText("component.widget.hourlyWeatherStrip.title")).toBeInTheDocument();
     });
 
     it("should contains a total of 12 weather strips.", () => {

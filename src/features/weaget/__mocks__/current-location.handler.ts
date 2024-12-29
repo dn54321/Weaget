@@ -11,6 +11,6 @@ export function mockCurrentLocationHandle(response: HttpResponse, options?: Requ
     return http.get(
         "/api/location",
         () => response,
-        options
+        options,
     );
 }

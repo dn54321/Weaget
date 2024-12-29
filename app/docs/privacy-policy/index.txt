@@ -1,0 +1,43 @@
+
+Here's the updated policy that incorporates telemetry data usage with Vercel and Sentry.
+
+Weaget Website Policy
+1. Introduction
+Welcome to Weaget. By accessing or using our services, you agree to the following terms and policies, designed to protect both our users and ourselves. This policy may be updated periodically, and it is your responsibility to review these terms for updates.
+
+2. Data Collection and Use
+Weaget collects and processes data to enhance your experience, including:
+
+Weather Data: Using the OpenWeather API, we provide real-time weather updates at hourly, daily, and minutely intervals.
+Location Data: GeoNames and IPInfo APIs help suggest nearby locations and detect rough location data to improve personalization.
+Autocomplete Services: Google’s API improves location search functionality.
+Pollution Data: We use APICN to provide pollution information for specific locations.
+Preferences and Settings: User preferences like theme, temperature units, system scale, and preferred language are stored locally in your browser.
+Weaget does not store personally identifiable information (PII) on our servers, and data remains within your browser session.
+
+3. Data Caching and Non-Persistence
+To improve response times, Weaget caches responses locally in the browser and, on occasion, on the server, with a cache lifespan of up to one hour. Weaget does not maintain a persistent database; all data is session-based and exists only within the duration of your active session.
+
+For users in the European Union, if you decline the cookie consent banner, Weaget will refrain from storing or persisting data during your session.
+
+4. Managing Local Data
+As all data is stored in your browser’s local storage, you can control or delete data directly through your browser’s settings. Clearing local storage will remove all preferences and cached data associated with Weaget.
+
+5. Cookies and Consent
+Weaget uses local storage for user preferences such as temperature units, system scale, theme, and language. For users in the EU, a cookie consent banner is displayed based on IP location, in compliance with GDPR. If consent is not given, Weaget will not store or persist any data for that session.
+
+6. Security
+While we use industry-standard practices to protect your data, we cannot guarantee its absolute security. Use of Weaget is at your own risk, and we recommend taking appropriate security measures when using online services.
+
+7. Third-Party Services
+Weaget uses several third-party services to provide functionality and improve performance, including but not limited to:
+
+OpenWeather (for weather data)
+GeoNames (for nearby location data)
+IPInfo (for location estimation)
+Google API (for autocomplete services)
+APICN (for pollution data)
+Vercel (for performance monitoring)
+Sentry (for error detection and fault resolution)
+These tools may collect non-personal telemetry data, such as device type, browser information, and error reports, which help us enhance site performance and address issues. Each of these third-party services has its own privacy policies and terms of service, which govern their data-handling practices.
+

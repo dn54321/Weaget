@@ -1,7 +1,7 @@
-import { NextRequest } from "next/server";
-import { getNearbyLocationDetails } from "@services/geolocation.service";
 import { extractQueryParams, handleNextResponseError } from "@utils/next-request-helper";
-import { coordsSchema } from "@features/weaget/coords.schema";
+import { NextRequest } from "next/server";
+import { coordsSchema } from "@features/coords.schema";
+import { getNearbyLocationDetails } from "@services/geolocation.service";
 
 // Generates a list of autocomplete queries given a string
 export async function GET(req: NextRequest) {
@@ -9,17 +9,15 @@ export async function GET(req: NextRequest) {
 
     try {
         const { lat, lng } = coordsSchema.parse(queryParams);
-        const locations = await getNearbyLocationDetails(lat, lng);
+        const locations = await getNearbyLocationDetails(lat, lng, queryParams.lang);
         const formattedLocations = locations.geonames.map(location => ({
+            country: location.countryName,
             name: location.name,
             state: location.adminCodes1?.ISO3166_2 ?? "",
-            country: location.countryName,
         }));
         return Response.json(formattedLocations);
     }
     catch (err) {
-        if (err instanceof Error) {
-            return handleNextResponseError(err, "Failed to retrieve nearby locations.");
-        }
+        return handleNextResponseError(err as Error, "Failed to retrieve nearby locations.");
     }
 }

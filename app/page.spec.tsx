@@ -1,13 +1,13 @@
-import { waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import Home from "./page";
 import { testOfflineQueryClient, testQueryClient } from "@utils/query-client";
-import { withRender } from "@utils/render";
-import { server } from "@project/vitest-setup";
-import { mockWeatherHandle } from "@features/weaget/__mocks__/weather.handler";
+import Home from "./page";
 import { mockCurrentLocationHandle } from "@features/weaget/__mocks__/current-location.handler";
 import { mockNearbyLocationHandle } from "@features/weaget/__mocks__/nearby-location.handler";
+import { mockWeatherHandle } from "@features/weaget/__mocks__/weather.handler";
+import { server } from "@project/vitest-setup";
+import { waitFor } from "@testing-library/react";
 import { withHandleError } from "@utils/msw-http-mocker";
+import { withRender } from "@utils/render";
 
 describe("Page: not-found", async () => {
     beforeEach(() => {
@@ -34,7 +34,7 @@ describe("Page: not-found", async () => {
     ])("should display errors when %s data fails to load.", async (
         _,
         mockHandle,
-        expectedErrorMessage
+        expectedErrorMessage,
     ) => {
         withHandleError(mockHandle);
         const { getByText } = withRender(<Home />);
@@ -42,10 +42,10 @@ describe("Page: not-found", async () => {
     });
 
     it.each([
-        ["Local Weather"],
-        ["Suggested Locations"],
-    ])("should display %s when widgets have loaded.", async (widgetName) => {
+        ["Local Weather", "weather.localWeather"],
+        ["Suggested Locations", "component.widget.locationGrid.title"],
+    ])("should display %s when widgets have loaded.", async (_, widgetTitle) => {
         const { getByText } = withRender(<Home />);
-        await waitFor(() => expect(getByText(widgetName)).toBeInTheDocument());
+        await waitFor(() => expect(getByText(widgetTitle)).toBeInTheDocument());
     });
 });

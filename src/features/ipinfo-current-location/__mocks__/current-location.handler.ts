@@ -1,4 +1,4 @@
-import { http, HttpResponse, RequestHandlerOptions } from "msw";
+import { HttpResponse, RequestHandlerOptions, http } from "msw";
 import { createIpInfoCurrentLocationMock } from "./current-location.mock";
 
 export const ipinfoCurrentLocationHandler = [
@@ -11,6 +11,6 @@ export function mockIpinfoCurrentLocationHandle(response: HttpResponse, options?
     return http.get(
         "https://ipinfo.io/*",
         () => response,
-        options
+        options,
     );
 }

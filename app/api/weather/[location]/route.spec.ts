@@ -3,8 +3,8 @@ import { afterEach, describe, expect, it } from "vitest";
 import { GET } from "./route";
 import { createMockRequest } from "@utils/next-mock-request-builder";
 import { mockOpenWeatherOneCallHandle } from "@features/open-weather-map-one-call/__mocks__/onecall.handler";
-import { withHandleError } from "@utils/msw-http-mocker";
 import { server } from "@project/vitest-setup";
+import { withHandleError } from "@utils/msw-http-mocker";
 
 describe("Route: api/weather/[location]", async () => {
     afterEach(() => {
@@ -22,8 +22,8 @@ describe("Route: api/weather/[location]", async () => {
 
     it("should return 200 status when location and region is set.", async () => {
         const request = createMockRequest({
-            path: "/api/location/mockLocation",
             params: { region: "mockRegion" },
+            path: "/api/location/mockLocation",
         });
 
         const response = await GET(request, { params: { location: "mockLocation" } });

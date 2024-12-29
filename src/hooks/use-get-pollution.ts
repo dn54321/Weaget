@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import { Pollution } from "@features/apicn-pollution/pollution.types";
 import { FetchError } from "@errors/fetch-error";
+import { Pollution } from "@features/apicn-pollution/pollution.types";
 import { pollutionSchema } from "@features/weaget/pollution/pollution.schema";
+import { useQuery } from "@tanstack/react-query";
 
 async function fetchPollution(lat?: number, lng?: number) {
     const url = `/api/pollution`;
@@ -26,9 +26,9 @@ async function fetchPollution(lat?: number, lng?: number) {
 
 export function useGetPollution(lat?: number, lng?: number) {
     return useQuery<Pollution>({
-        queryKey: ["pollution", lat, lng],
-        queryFn: () => fetchPollution(lat, lng),
         enabled: Boolean(lat !== undefined && lng !== undefined),
+        queryFn: () => fetchPollution(lat, lng),
+        queryKey: ["pollution", lat, lng],
         retry: 0,
     });
 }

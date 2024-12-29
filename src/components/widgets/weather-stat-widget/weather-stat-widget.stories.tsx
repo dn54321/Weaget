@@ -1,27 +1,27 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { storybookWrapper } from "@utils/wrappers";
 import { WeatherStatWidget, WeatherStatWidgetProps } from ".";
 import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
+import { storybookWrapper } from "@utils/wrappers";
 type StoryType = WeatherStatWidgetProps;
 
 const meta: Meta<StoryType> = {
-    title: "Widgets/Weather Stat Widget",
+    argTypes: {
+        weatherData: {
+            description: "Weather data object.",
+            name: "Weather Data",
+        },
+    },
+    args: {
+        sx: { maxWidth: 800 },
+        weatherData: createWeatherMockData(),
+    },
     component: WeatherStatWidget,
     decorators: [storybookWrapper],
     parameters: {
         layout: "padded",
     },
     tags: ["autodocs"],
-    argTypes: {
-        weatherData: {
-            name: "Weather Data",
-            description: "Weather data object.",
-        },
-    },
-    args: {
-        weatherData: createWeatherMockData(),
-        sx: { maxWidth: 800 },
-    },
+    title: "Widgets/Weather Stat Widget",
 } satisfies Meta<StoryType>;
 
 export default meta;

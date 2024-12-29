@@ -1,24 +1,24 @@
-import { faker } from "@faker-js/faker";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import CompactWeatherCard, { CompactWeatherCardProps } from "@components/cards/compact-weather-card/compact-weather-card";
 import { DateTime } from "luxon";
 import React from "react";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { createOpenWeatherWeatherMockData } from "@features/open-weather-map-one-call/__mocks__/oneCall.mock";
 import { TemperatureScale } from "@src/types/weather.types";
-import { withRender } from "@utils/render";
+import { createOpenWeatherWeatherMockData } from "@features/open-weather-map-one-call/__mocks__/oneCall.mock";
+import { faker } from "@faker-js/faker";
 import { testQueryClient } from "@utils/query-client";
-import CompactWeatherCard, { CompactWeatherCardProps } from "@components/cards/compact-weather-card/compact-weather-card";
+import { withRender } from "@utils/render";
 
 describe("Component: Compact Weather Card", () => {
     let cardProps: CompactWeatherCardProps;
     let weatherCard: React.ReactElement;
     beforeEach(() => {
         cardProps = {
-            timezone: faker.location.timeZone(),
             date: faker.date.future(),
+            maxTemperature: faker.number.float({ fractionDigits: 2, max: 300.15, min: 273.15 }),
+            minTemperature: faker.number.float({ fractionDigits: 2, max: 325.15, min: 301.15 }),
+            rainfallPercentage: faker.number.float({ fractionDigits: 2, max: 1, min: 0.1 }),
+            timezone: faker.location.timeZone(),
             weatherCode: createOpenWeatherWeatherMockData().id,
-            rainfallPercentage: faker.number.float({ min: 0.1, max: 1, fractionDigits: 2 }),
-            maxTemperature: faker.number.float({ min: 273.15, max: 300.15, fractionDigits: 2 }),
-            minTemperature: faker.number.float({ min: 301.15, max: 325.15, fractionDigits: 2 }),
         };
 
         weatherCard = (<CompactWeatherCard {...cardProps} />);

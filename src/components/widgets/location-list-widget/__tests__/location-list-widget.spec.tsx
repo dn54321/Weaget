@@ -1,8 +1,8 @@
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
-import { withRender } from "@utils/render";
-import { NearbyLocations } from "@features/weaget/nearby-location/nearby-location.types";
 import { LocationListWidget } from "./..";
+import { NearbyLocations } from "@features/weaget/nearby-location/nearby-location.types";
 import userEvent from "@testing-library/user-event";
+import { withRender } from "@utils/render";
 
 describe("Component: location-list-widget", async () => {
     let nearbyLocations: NearbyLocations;
@@ -15,14 +15,14 @@ describe("Component: location-list-widget", async () => {
 
     beforeAll(() => {
         nearbyLocations = [{
+            country: "mockCountry",
             name: "mockName",
             state: "mockState",
-            country: "mockCountry",
         },
         {
+            country: "mockCountry2",
             name: "mockName2",
             state: "mockState2",
-            country: "mockCountry2",
         }];
     });
 
@@ -36,7 +36,7 @@ describe("Component: location-list-widget", async () => {
         const { getByText } = withRender(
             <LocationListWidget locationData={nearbyLocations} />,
         );
-        expect(getByText("Suggested Locations")).toBeInTheDocument();
+        expect(getByText("component.widget.locationList.title")).toBeInTheDocument();
     });
 
     it("should contains a list of locations.", () => {
@@ -73,6 +73,6 @@ describe("Component: location-list-widget", async () => {
                 <LocationListWidget locationData={[]} />,
             );
 
-            expect(getByText("No nearby places found...")).toBeInTheDocument();
+            expect(getByText("component.widget.locationList.noLocations")).toBeInTheDocument();
         });
 });

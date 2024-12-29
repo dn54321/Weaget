@@ -1,16 +1,16 @@
 import { z } from "zod";
 
 export const ipinfoCurrentLocationSchema = z.object({
-    ip: z.string(),
-    hostname: z.string().optional(),
+    bogon: z.boolean().optional(),
     city: z.string(),
-    region: z.string(),
     country: z.string(),
+    hostname: z.string().optional(),
+    ip: z.string(),
     loc: z.string(),
     org: z.string(),
-    timezone: z.string(),
     postal: z.string().optional(),
-    bogon: z.boolean().optional(),
+    region: z.string(),
+    timezone: z.string(),
 }).transform(o => ({
     ...o,
     lat: Number.parseFloat(o.loc.split(",")[0]),

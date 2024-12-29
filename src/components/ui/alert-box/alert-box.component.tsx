@@ -18,15 +18,15 @@ export default function AlertBox(props: AlertBoxProps & BoxProps) {
     return (
         <Box
             sx={{
-                position: "fixed",
-                bottom: { xs: "initial", md: 30 },
-                top: { xs: 30, md: "initial" },
-                right: 0,
-                left: 0,
+                alignItems: "center",
+                bottom: { md: 30, xs: "initial" },
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
+                left: 0,
                 pointerEvents: "none",
+                position: "fixed",
+                right: 0,
+                top: { md: "initial", xs: 30 },
             }}
             zIndex={1400}
         >
@@ -42,7 +42,7 @@ export default function AlertBox(props: AlertBoxProps & BoxProps) {
                         >
                             {alert.message}
                         </Alert>
-                    )
+                    ),
                     )
                 }
             </Stack>

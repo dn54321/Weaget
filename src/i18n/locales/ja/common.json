@@ -1,0 +1,291 @@
+{
+  "webapp": {
+    "name": "ウィゲット",
+    "logoFirst": "ウィ",
+    "logoSecond": "ゲット",
+    "description": "どの場所でも正確な分単位、時間単位、日単位の天気予報を提供する高度な天気ウェブサイトです。現在の状況、気温、降水量、風速などの情報を常に把握できます。自信を持って一日を計画しましょう！"
+  },
+  "temperature": {
+    "celsius": {
+      "unit": "°c",
+      "text": "摂氏"
+    },
+    "fahrenheit": {
+      "unit": "°f",
+      "text": "華氏"
+    }
+  },
+  "measurement": {
+    "metric": "メートル法",
+    "imperial": "ヤードポンド法",
+    "inchesPerHour": "インチ/時",
+    "metersPerSecond": "メートル/秒",
+    "milesPerHour": "時速マイル",
+    "millimetersPerHour": "ミリメートル/時"
+  },
+  "component": {
+    "widget": {
+      "suggestedLocations": {
+        "title": "おすすめの場所",
+        "description": "任意のカードをクリックすると、詳細な天気情報が表示されます！"
+      },
+      "pollution": {
+        "title": "汚染レベル",
+        "airQualityIndex": "空気質指数",
+        "particle": "粒子",
+        "aqiLevel": "AQIレベル",
+        "showAdvancedPollutionDetails": "詳細な汚染情報を表示する",
+        "hideAdvancedPollutionDetails": "詳細な汚染情報を隠す",
+        "pollutionCaution": {
+          "good": " ",
+          "hazardous": "誰もが屋外での運動をすべて避けるべきです。",
+          "moderate": "活動的な子供や大人、喘息などの呼吸器疾患のある人は、屋外での長時間の運動を制限する必要があります。",
+          "unhealthy": "活動的な子供や大人、喘息などの呼吸器疾患のある人は、屋外での長時間の運動を避けるべきです。\n他の人、特に子供は屋外での長時間の運動を制限する必要があります",
+          "unhealthySensitive": "活動的な子供や大人、喘息などの呼吸器疾患のある人は、屋外での長時間の運動を制限する必要があります。",
+          "veryUnhealthy": "活動的な子供や大人、喘息などの呼吸器疾患のある人は、屋外での運動をすべて避けるべきです。\n他の人、特に子供たちは屋外での運動を制限する必要があります。"
+        },
+        "pollutionHealth": {
+          "good": "大気の質は満足のいくものであると考えられており、大気汚染によるリスクはほとんど、またはまったくありません。",
+          "hazardous": "健康に関する警告: 誰もがより深刻な健康影響を経験する可能性があります。",
+          "moderate": "空気の質は許容範囲内です。\nただし、一部の汚染物質については、大気汚染に異常に敏感なごく少数の人々にとって、中程度の健康上の懸念がある可能性があります。",
+          "unhealthy": "誰もが健康への影響を経験し始める可能性があります。\n敏感なグループのメンバーは、より深刻な健康影響を経験する可能性があります。",
+          "unhealthySensitive": "敏感なグループのメンバーは健康への影響を経験する可能性があります。\n一般人への影響は考えられません。",
+          "veryUnhealthy": "緊急事態に関する健康上の警告。\n人口全体が影響を受ける可能性が高くなります。"
+        },
+        "pollutionLevel": {
+          "good": "良い",
+          "hazardous": "危険",
+          "moderate": "適度",
+          "unhealthy": "不健康",
+          "unhealthySensitive": "敏感なグループにとっては不健康",
+          "veryUnhealthy": "非常に不健康"
+        },
+        "pollutionParticleDescription": {
+          "neph": "可視性",
+          "no2": "二酸化窒素",
+          "o3": "オゾン",
+          "pm10": "直径10マイクロメートル以下の粒子",
+          "co": "一酸化炭素",
+          "nh3": "アンモニア",
+          "pm25": "直径2.5マイクロメートル以下の粒子"
+        },
+        "loading": "汚染の詳細を読み込んでいます..."
+      },
+      "dailyCompactWeather": {
+        "button": "天気の詳細を取得する",
+        "description": "毎日の天気の詳細を表示する",
+        "title": "コンパクト天気カード"
+      },
+      "locationGrid": {
+        "description": "場所をクリックすると天気の詳細が表示されます。",
+        "title": "推奨される場所"
+      },
+      "dailyWeatherCard": {
+        "description": "以下のカードをクリックすると、天気カードの詳細な説明が表示されます。",
+        "title": "デイリーカード"
+      },
+      "hourlyWeatherStrip": {
+        "title": "時間ごとの天気の詳細"
+      },
+      "weatherStat": {
+        "title": "天気の詳細"
+      },
+      "rainfall": {
+        "120Mins": "120分",
+        "14Days": "14日",
+        "48Hours": "48時間",
+        "see120Mins": "120分間の降雨量を見る",
+        "see14Days": "14日間の降雨量を見る",
+        "see48Hours": "48 時間の降雨量を見る",
+        "title": "降雨"
+      },
+      "locationList": {
+        "noLocations": "近くにスポットが見つかりませんでした...",
+        "title": "推奨される場所"
+      },
+      "weatherDisplay": {
+        "feelsLike": "みたいな感じ",
+        "fetchingLocationDetails": "場所の詳細を取得中...",
+        "updatedAt": "更新日時",
+        "fetchingDetails": "詳細を取得中..."
+      }
+    },
+    "searchBar": {
+      "search": "天気を検索",
+      "useCurrentLocation": "現在地を使用する",
+      "placeholder": "天気を検索する場所を入力",
+      "error": {
+        "internalServerError": "サーバー内部エラー。後でもう一度お試しください！",
+        "invalidCurrentLocation": "現在の場所を取得できませんでした。手動で入力してください！",
+        "invalidLocation": "無効な場所です！"
+      }
+    },
+    "themeToggleButton": {
+      "toggleLightTheme": "ライトテーマに切り替える",
+      "toggleDarkTheme": "ダークテーマに切り替える"
+    },
+    "localisationDropdownButton": {
+      "chooseLanguage": "ロケール言語を選択"
+    },
+    "settingsFab": {
+      "switchMetric": "メートル法に変更",
+      "switchImperial": "ヤードポンド法に変更",
+      "switchCelsius": "摂氏に変更",
+      "switchFahrenheit": "華氏に変更",
+      "imperialSystem": "帝国主義",
+      "metricSystem": "メートル法"
+    },
+    "weatherStrip": {
+      "hourlyWeatherStats": "時間ごとの気象統計",
+      "collapse": "アコーディオンを折りたたんで天気の詳細を非表示にします",
+      "expand": "アコーディオンを展開してすべての天気の詳細を表示します"
+    }
+  },
+  "weather": {
+    "loader": "天気を取得中...",
+    "stats": {
+      "wind": "風",
+      "humidity": "湿度",
+      "pressure": "気圧",
+      "visibility": "視界",
+      "sunrise": "日の出",
+      "sunset": "日の入り",
+      "precipitation": "降水量",
+      "clouds": "雲",
+      "dewPoint": "露点",
+      "uvIndex": "紫外線指数",
+      "rainfall": "降雨",
+      "snowfall": "降雪"
+    },
+    "localWeather": "現地の天気",
+    "uvIndex": {
+      "extreme": "過激",
+      "high": "高い",
+      "low": "低い",
+      "moderate": "適度",
+      "veryHigh": "非常に高い"
+    },
+    "icon": {
+      "brokenCloud": {
+        "description": "いくつかの雲が太陽で隠れています。",
+        "title": "壊れた雲"
+      },
+      "clearSky": {
+        "title": "晴れた空"
+      },
+      "fewCloud": {
+        "description": "太陽を伴う小さな雲。",
+        "title": "雲が少ない"
+      },
+      "fog": {
+        "title": "霧"
+      },
+      "haze": {
+        "title": "ヘイズ"
+      },
+      "heavyRain": {
+        "title": "大雨"
+      },
+      "lightRain": {
+        "title": "小雨"
+      },
+      "mist": {
+        "description": "太陽を隠す雲の層。",
+        "title": "ミスト"
+      },
+      "moon": {
+        "title": "月"
+      },
+      "overcastCloud": {
+        "description": "雲が多く、小さな太陽が伴います。",
+        "title": "曇り雲"
+      },
+      "rainCloud": {
+        "description": "灰色の雲と激しい雨粒。",
+        "title": "雨雲"
+      },
+      "scatteredCloud": {
+        "description": "太陽を伴う雲が少しありました。",
+        "title": "散在する雲"
+      },
+      "showerRain": {
+        "description": "灰色の雲に軽い雨粒がたくさんあります。",
+        "title": "にわか雨"
+      },
+      "snow": {
+        "title": "雪"
+      },
+      "snowCloud": {
+        "description": "雪の結晶を伴った明るい灰色の雲。",
+        "title": "雪雲"
+      },
+      "sun": {
+        "description": "太陽を表す明るい円。",
+        "title": "太陽"
+      },
+      "text": "天気アイコン",
+      "thunderstorm": {
+        "description": "雲を伴う稲妻。",
+        "title": "雷雨"
+      }
+    }
+  },
+  "language": {
+    "english": "英語",
+    "korean": "韓国語",
+    "chinese": "中国語",
+    "japanese": "日本語"
+  },
+  "footer": {
+    "reserveNotice": "無断転載を禁じます。",
+    "copyright": "@{{year, datetime}} DN54321。",
+    "iconButton": {
+      "github": {
+        "description": "Github ページにアクセスする",
+        "title": "ギットハブページ"
+      },
+      "icons": {
+        "description": "天気アイコンページにアクセスする",
+        "title": "アイコン"
+      },
+      "linkedIn": {
+        "description": "LinkedIn ページにアクセスする",
+        "title": "LinkedIn ページ"
+      },
+      "sourceCode": {
+        "description": "ソースコードにアクセスする",
+        "title": "ソースコード"
+      }
+    }
+  },
+  "page": {
+    "404": {
+      "description": "お探しのページは見つかりませんでした。",
+      "goBackToHomeButton": "家に帰りなさい",
+      "pageNotFound": "ページが見つかりません"
+    },
+    "iconGallery": {
+      "description": "説明",
+      "gallery": "ギャラリー",
+      "invalidIcon": "無効なIDです。\n後でもう一度試してください。",
+      "name": "名前"
+    }
+  },
+  "settings": {
+    "measurementScale": "測定スケール",
+    "temperatureScale": "温度目盛",
+    "themeColor": "テーマカラー",
+    "text": "設定",
+    "locale": "ロケール"
+  },
+  "theme": {
+    "darkTheme": "ダークテーマ",
+    "lightTheme": "ライトテーマ"
+  },
+  "directions": {
+    "goBack": "戻る"
+  },
+  "general": {
+    "logo": "ロゴ"
+  }
+}

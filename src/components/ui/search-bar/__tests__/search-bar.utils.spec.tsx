@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { debounceFunc, throttleFunc } from "@components/ui/search-bar/search-bar.utils";
+import { debounceSearchFunc, throttleSearchFunc } from "@components/ui/search-bar/search-bar.utils";
 
 describe("Component: search-bar-utils", async () => {
     beforeEach(() => {
@@ -13,8 +13,8 @@ describe("Component: search-bar-utils", async () => {
     describe("throttleFunc", () => {
         it("should throttle a called function", async () => {
             const mockFn = vi.fn();
-            throttleFunc(mockFn, "initial");
-            throttleFunc(mockFn, "throttled");
+            throttleSearchFunc(mockFn, "initial");
+            throttleSearchFunc(mockFn, "throttled");
             expect(mockFn).toBeCalledTimes(1);
             expect(mockFn).toBeCalledWith("initial");
             vi.runAllTimers();
@@ -24,7 +24,7 @@ describe("Component: search-bar-utils", async () => {
 
         it("should not call throttle function if query is undefined", async () => {
             const mockFn = vi.fn();
-            throttleFunc(mockFn, undefined);
+            throttleSearchFunc(mockFn, undefined);
             vi.runAllTimers();
             expect(mockFn).toBeCalledTimes(0);
         });
@@ -33,18 +33,18 @@ describe("Component: search-bar-utils", async () => {
     describe("debounceFunc", () => {
         it("should debounce a called function", async () => {
             const mockFn = vi.fn();
-            debounceFunc(mockFn, "initial");
-            debounceFunc(mockFn, "debounces");
+            debounceSearchFunc(mockFn, "initial");
+            debounceSearchFunc(mockFn, "debounces");
             expect(mockFn).toBeCalledTimes(0);
             vi.runAllTimers();
-            debounceFunc(mockFn, "second");
+            debounceSearchFunc(mockFn, "second");
             expect(mockFn).toBeCalledTimes(1);
             expect(mockFn).toBeCalledWith("debounces");
         });
 
         it("should not call throttle function if query is undefined", async () => {
             const mockFn = vi.fn();
-            debounceFunc(mockFn, undefined);
+            debounceSearchFunc(mockFn, undefined);
             vi.runAllTimers();
             expect(mockFn).toBeCalledTimes(0);
         });

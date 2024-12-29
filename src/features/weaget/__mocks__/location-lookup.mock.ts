@@ -1,5 +1,5 @@
-import { faker } from "@faker-js/faker";
 import { AddressTypes } from "@features/google-geocode/location-lookup.model";
+import { faker } from "@faker-js/faker";
 
 function createLocationLookupAddressComponentMock() {
     return {
