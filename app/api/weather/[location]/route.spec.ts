@@ -16,7 +16,8 @@ describe("Route: api/weather/[location]", async () => {
             path: "/api/location/mockLocation",
         });
 
-        const response = await GET(request, { params: { location: "mockLocation" } });
+        const params = Promise.resolve({ location: "mockLocation" });
+        const response = await GET(request, { params });
         expect(response?.status).toBe(200);
     });
 
@@ -26,7 +27,8 @@ describe("Route: api/weather/[location]", async () => {
             path: "/api/location/mockLocation",
         });
 
-        const response = await GET(request, { params: { location: "mockLocation" } });
+        const params = Promise.resolve({ location: "mockLocation" });
+        const response = await GET(request, { params });
         expect(response?.status).toBe(200);
     });
 
@@ -36,7 +38,8 @@ describe("Route: api/weather/[location]", async () => {
             path: "/api/location/mockLocation",
         });
 
-        const response = await GET(request, { params: { location: "mockLocation" } });
+        const params = Promise.resolve({ location: "mockLocation" });
+        const response = await GET(request, { params });
         expect(response?.status).toBe(500);
     });
 });

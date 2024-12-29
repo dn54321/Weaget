@@ -153,7 +153,7 @@ export default function SearchBar(props: BoxProps) {
 
     // Get a location query and finds location that match the query.
     // Bia results based on user's location via lat, lon.
-    function getSuggestion(query: string) {
+    function getSuggestion(query: string | undefined) {
         setQuery(query);
     }
 

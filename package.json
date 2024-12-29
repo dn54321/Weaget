@@ -11,6 +11,7 @@
     "build": "NODE_OPTIONS='--max-old-space-size=4096' next build",
     "start": "next start",
     "lint": "next lint --fix",
+    "type-lint": "tsc --noEmit",
     "test": "LOG='standard' NODE_ENV='test' vitest --coverage --reporter=verbose",
     "test:visual": "LOG='standard' NODE_ENV='test' vitest --coverage --reporter=verbose --ui",
     "test:visual:css": "LOG='standard' NODE_ENV='test' vitest-preview",

@@ -105,7 +105,7 @@ export function createWeatherAlertMockData() {
         event: faker.lorem.words(),
         senderName: faker.person.fullName(),
         start: faker.date.anytime(),
-        tags: faker.helpers.multiple(faker.word.words),
+        tags: faker.helpers.multiple(() => faker.word.words()),
     };
 }
 

@@ -10,6 +10,7 @@ import { DateTime } from "luxon";
 import { MeasurementScale } from "@src/types/measurement.types";
 import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import Skeleton from "@mui/material/Skeleton";
+import { SystemLocale } from "@project/src/types/system.types";
 import { Widget } from "@components/containers/widget/widget";
 import { useSettingStore } from "@src/hooks/stores/use-setting-store";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
@@ -193,6 +194,7 @@ function reducer(state: ReducerState, action: ReducerAction): ReducerState {
         case "set":
             return { id: action.val };
     }
+    return state;
 }
 
 // Get index of graph based on score

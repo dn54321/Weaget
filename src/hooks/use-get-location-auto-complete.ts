@@ -18,10 +18,10 @@ async function fetchAutoComplete(input: string, params?: AutoCompleteQueryParams
 
 export function useGetLocationAutoComplete(input: string, location?: string) {
     const [sessiontoken] = useState(crypto.randomUUID());
-    const [query, setQuery] = useState(input);
+    const [query, setQuery] = useState<string | undefined>(input);
     const reactQuery = useQuery<Array<AutoCompleteSuggestions>>({
         enabled: !!query,
-        queryFn: () => fetchAutoComplete(query, { location, sessiontoken }),
+        queryFn: () => fetchAutoComplete(query as string, { location, sessiontoken }),
         queryKey: ["location-auto-complete", query, { location }],
         retry: 0,
         staleTime: Infinity,

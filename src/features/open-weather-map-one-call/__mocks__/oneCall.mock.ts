@@ -85,7 +85,7 @@ export function createOpenWeatherAlertMockData() {
         event: faker.lorem.words(),
         sender_name: faker.person.fullName(),
         start: faker.number.int(),
-        tags: faker.helpers.multiple(faker.word.words),
+        tags: faker.helpers.multiple(() => faker.word.words()),
     };
 }
 
