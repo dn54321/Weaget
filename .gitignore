@@ -49,3 +49,5 @@ yarn-error.log*
 # Others
 .vscode
 *storybook.log
+dist
+playwright*
