@@ -1,5 +1,5 @@
 import { extractQueryParams, handleNextResponseError } from "@utils/next-request-helper";
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { getWeatherByRegion } from "@services/weather.service";
 
 interface PageProps {

@@ -1,4 +1,5 @@
-import { Box, BoxProps } from "@mui/system";
+import { Box } from "@mui/system";
+import type { BoxProps } from "@mui/system";
 import { BrokenCloud } from "@components/icon/weather/broken-cloud-icon";
 import { Chip } from "@mui/material";
 import { FewCloudIcon } from "@components/icon/weather/few-cloud-icon/few-cloud-icon.component";

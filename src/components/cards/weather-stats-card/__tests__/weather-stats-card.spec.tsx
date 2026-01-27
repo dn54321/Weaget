@@ -2,7 +2,7 @@ import { createWeatherCurrentMockData, createWeatherDailyMockData, createWeather
 import { describe, expect, it } from "vitest";
 import { getUvLevelTranslationKey, parseWeatherDetailStats } from "@components/cards/weather-stats-card/weather-stats-card.utils";
 import BugReportIcon from "@mui/icons-material/BugReport";
-import { HourlyWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import type { HourlyWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { WeatherStatsCard } from "./..";
 import { renderHook } from "@testing-library/react";
 import { testWrapper } from "@project/src/utils/wrappers";

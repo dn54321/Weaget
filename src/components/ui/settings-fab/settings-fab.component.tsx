@@ -1,4 +1,5 @@
-import { Box, BoxProps, Fab } from "@mui/material";
+import { Box, Fab } from "@mui/material";
+import type { BoxProps } from "@mui/material";
 import DeviceThermostatIcon from "@mui/icons-material/DeviceThermostat";
 import { MeasurementScale } from "@src/types/measurement.types";
 import SquareFootIcon from "@mui/icons-material/SquareFoot";

@@ -263,6 +263,7 @@ export default tseslint.config(
             "sort-imports-requires/sort-imports": ["error", { unsafeAutofix: true }],
             "unused-imports/no-unused-imports": "error",
             "@typescript-eslint/no-unused-vars": "warn",
+            "@typescript-eslint/consistent-type-imports": "error",
         },
     },
 );

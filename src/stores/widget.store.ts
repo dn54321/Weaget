@@ -1,4 +1,4 @@
-import { DailyWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import type { DailyWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { createStore } from "zustand";
 
 export interface WidgetState {

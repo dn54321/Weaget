@@ -1,6 +1,6 @@
 import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 import { DailyWeatherCardWidget } from "./..";
-import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import type { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import React from "react";
 import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 import { testQueryClient } from "@utils/query-client";

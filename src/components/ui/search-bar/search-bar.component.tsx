@@ -1,11 +1,12 @@
 "use client";
 
 import { Alert, CircularProgress, Divider, IconButton, List, Paper, Tooltip, useAutocomplete } from "@mui/material";
-import { Box, BoxProps } from "@mui/system";
 import { FieldBox, FormContainer, MagnifyIconButtonContainer, SearchComponent, SearchField } from "./search-bar.styles";
 import { debounceSearchFunc, throttleSearchFunc } from "./search-bar.utils";
-import { AutoCompleteSuggestions } from "@features/weaget/auto-complete/auto-complete.types";
-import { FetchError } from "@errors/fetch-error";
+import type { AutoCompleteSuggestions } from "@features/weaget/auto-complete/auto-complete.types";
+import { Box } from "@mui/system";
+import type { BoxProps } from "@mui/system";
+import type { FetchError } from "@errors/fetch-error";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import React, { useEffect, useRef, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";

@@ -1,6 +1,6 @@
 import { LogoIconStyle, Text } from "./logo-icon.styles";
 import Box from "@mui/material/Box";
-import { BoxProps } from "@mui/system";
+import type { BoxProps } from "@mui/system";
 import { Quicksand } from "next/font/google";
 import Stack from "@mui/material/Stack";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";

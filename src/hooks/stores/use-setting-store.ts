@@ -1,4 +1,4 @@
-import { SettingStore } from "@src/stores/settings.store";
+import type { SettingStore } from "@src/stores/settings.store";
 import { SettingsStoreContext } from "@components/provider/settings-provider";
 import { shallow } from "zustand/shallow";
 import { useContext } from "react";

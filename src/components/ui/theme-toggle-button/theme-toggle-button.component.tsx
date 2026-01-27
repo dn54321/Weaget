@@ -1,5 +1,6 @@
-import { IconButton, IconButtonProps } from "@mui/material";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { IconButton } from "@mui/material";
+import type { IconButtonProps } from "@mui/material";
 import { SystemTheme } from "@src/types/system.types";
 import Tooltip from "@mui/material/Tooltip";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";

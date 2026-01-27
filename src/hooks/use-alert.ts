@@ -1,4 +1,5 @@
-import { AlertBox, AlertBoxProps } from "@components/ui/alert-box";
+import { AlertBox } from "@components/ui/alert-box";
+import type { AlertBoxProps } from "@components/ui/alert-box";
 import { useState } from "react";
 
 export interface AlertMessage {

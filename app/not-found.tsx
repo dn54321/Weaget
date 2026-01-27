@@ -1,7 +1,7 @@
 "use client";
 import { Box, Button, Container, Stack } from "@mui/material";
 import CloudIcon from "@mui/icons-material/Cloud";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import React from "react";
 import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
 import styled from "@mui/system/styled";

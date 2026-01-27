@@ -1,8 +1,9 @@
-import { Box, SxProps } from "@mui/material";
+import { Box } from "@mui/material";
 import { CompactWeatherCard } from "@components/cards/compact-weather-card";
-import Grid from "@mui/material/Grid2";
-import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import Grid from "@mui/material/Grid";
+import type { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { StyledButton } from "./daily-compact-weather-widget.styles";
+import type { SxProps } from "@mui/material";
 import { Widget } from "@components/containers/widget/widget";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
 

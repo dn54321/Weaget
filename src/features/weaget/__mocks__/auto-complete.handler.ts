@@ -1,4 +1,5 @@
-import { HttpResponse, RequestHandlerOptions, http } from "msw";
+import { HttpResponse, http } from "msw";
+import type { JsonBodyType, RequestHandlerOptions } from "msw";
 import { createAutoCompleteMockData } from "./auto-complete.mock";
 import { withSearchParams } from "@utils/msw-resolver";
 
@@ -15,7 +16,7 @@ export const autoCompleteHandler = [
     }),
 ];
 
-export function mockAutoCompleteHandle(response: HttpResponse, options?: RequestHandlerOptions) {
+export function mockAutoCompleteHandle(response: HttpResponse<JsonBodyType>, options?: RequestHandlerOptions) {
     return http.get(
         "/api/location/auto-complete",
         () => response,

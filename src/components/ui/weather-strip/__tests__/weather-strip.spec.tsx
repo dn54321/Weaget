@@ -1,7 +1,8 @@
-import { WeatherStrip, WeatherStripProps } from "./..";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import { DateTime } from "luxon";
+import { WeatherStrip } from "./..";
+import type { WeatherStripProps } from "./..";
 import userEvent from "@testing-library/user-event";
 import { withRender } from "@utils/render";
 describe("Component: weather-strip", async () => {

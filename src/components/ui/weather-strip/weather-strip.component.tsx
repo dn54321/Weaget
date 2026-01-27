@@ -9,7 +9,8 @@ import React from "react";
 import Stack from "@mui/material/Stack";
 import { TempUnit } from "@components/ui/temperature-unit";
 import WeatherIcon from "@components/ui/weather-icon/weather-icon.component";
-import WeatherStatsCard, { WeatherStats } from "@components/cards/weather-stats-card/weather-stats-card.component";
+import type { WeatherStats } from "@components/cards/weather-stats-card/weather-stats-card.component";
+import WeatherStatsCard from "@components/cards/weather-stats-card/weather-stats-card.component";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 const Day = styled(Box)(() => ({

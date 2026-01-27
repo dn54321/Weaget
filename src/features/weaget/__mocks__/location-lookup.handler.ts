@@ -1,4 +1,5 @@
-import { HttpResponse, RequestHandlerOptions, http } from "msw";
+import { HttpResponse, http } from "msw";
+import type { JsonBodyType, RequestHandlerOptions } from "msw";
 import { createLocationLookupMock } from "./location-lookup.mock";
 
 export const locationLookupHandler = [
@@ -7,7 +8,7 @@ export const locationLookupHandler = [
     }),
 ];
 
-export function mockLocationLookupHandle(response: HttpResponse, options?: RequestHandlerOptions) {
+export function mockLocationLookupHandle(response: HttpResponse<JsonBodyType>, options?: RequestHandlerOptions) {
     return http.get(
         "/api/location/:id",
         () => response,

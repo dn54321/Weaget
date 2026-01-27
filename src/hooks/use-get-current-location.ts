@@ -1,7 +1,8 @@
-import { QueryClient, useQuery } from "@tanstack/react-query";
 import { FetchError } from "@errors/fetch-error";
-import IpinfoGeocode from "@features/ipinfo-current-location/current-location.model";
+import type IpinfoGeocode from "@features/ipinfo-current-location/current-location.model";
+import type { QueryClient } from "@tanstack/react-query";
 import { queryClient } from "@utils/query-client";
+import { useQuery } from "@tanstack/react-query";
 import weagetCurrentLocationSchema from "@features/weaget/current-location/current-location.schema";
 
 async function fetchCurrentLocation() {

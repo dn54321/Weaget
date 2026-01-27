@@ -1,5 +1,5 @@
 import { CompactWeatherCard, type CompactWeatherCardProps } from ".";
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { faker } from "@faker-js/faker";
 import { openWeatherTypes } from "@features/open-weather-map-one-call/oneCall.utils";
 import { storybookWrapper } from "@utils/wrappers";

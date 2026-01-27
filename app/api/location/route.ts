@@ -1,4 +1,4 @@
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { createNextResponseError } from "@src/utils/next-request-helper";
 import { getLocationDetailsByIp } from "@services/geolocation.service";
 

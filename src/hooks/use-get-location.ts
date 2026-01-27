@@ -1,5 +1,5 @@
 import { FetchError } from "@errors/fetch-error";
-import { GoogleGeocode } from "@features/google-geocode/location-lookup.model";
+import type { GoogleGeocode } from "@features/google-geocode/location-lookup.model";
 import { locationLookupSchema } from "@features/weaget/location-lookup/location-lookup.schema";
 import { queryClient } from "@utils/query-client";
 import { useQuery } from "@tanstack/react-query";

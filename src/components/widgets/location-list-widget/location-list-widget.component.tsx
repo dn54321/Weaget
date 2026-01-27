@@ -1,7 +1,8 @@
-import { List, ListItem, ListItemButton, ListItemText, SxProps } from "@mui/material";
+import { List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import Box from "@mui/material/Box";
-import { NearbyLocation } from "@features/weaget/nearby-location/nearby-location.types";
+import type { NearbyLocation } from "@features/weaget/nearby-location/nearby-location.types";
 import Skeleton from "@mui/material/Skeleton";
+import type { SxProps } from "@mui/material";
 import { Widget } from "@components/containers/widget/widget";
 import { useRouter } from "next/navigation";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";

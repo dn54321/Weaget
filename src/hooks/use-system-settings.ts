@@ -1,4 +1,5 @@
-import { PaletteMode, createTheme, responsiveFontSizes, useMediaQuery } from "@mui/material";
+import { createTheme, responsiveFontSizes, useMediaQuery } from "@mui/material";
+import type { PaletteMode } from "@mui/material";
 import React from "react";
 import { SystemTheme } from "@src/types/system.types";
 import { getDesignTokens } from "@utils/theme";

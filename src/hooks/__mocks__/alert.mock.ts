@@ -1,4 +1,4 @@
-import { AlertMessage } from "@src/hooks/use-alert";
+import type { AlertMessage } from "@src/hooks/use-alert";
 import { faker } from "@faker-js/faker";
 
 export function createOpenWeatherAlertMessageMockData(): AlertMessage {

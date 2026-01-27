@@ -1,5 +1,6 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { WeatherStatWidget, WeatherStatWidgetProps } from ".";
+import type { Meta, StoryObj } from "@storybook/react";
+import { WeatherStatWidget } from ".";
+import type { WeatherStatWidgetProps } from ".";
 import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 import { storybookWrapper } from "@utils/wrappers";
 type StoryType = WeatherStatWidgetProps;

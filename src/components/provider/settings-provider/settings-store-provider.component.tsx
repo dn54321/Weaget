@@ -1,6 +1,7 @@
-import { SettingState, createSettingsStore } from "@src/stores/settings.store";
 import React from "react";
+import type { SettingState } from "@src/stores/settings.store";
 import { createContext } from "react";
+import { createSettingsStore } from "@src/stores/settings.store";
 
 export interface SettingProviderProps {
     settings?: Partial<SettingState>;

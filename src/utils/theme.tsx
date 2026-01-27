@@ -1,6 +1,6 @@
 "use client";
 import NextLink from "next/link";
-import { PaletteMode } from "@mui/material";
+import type { PaletteMode } from "@mui/material";
 import { Roboto } from "next/font/google";
 import { forwardRef } from "react";
 import { red } from "@mui/material/colors";

@@ -1,4 +1,5 @@
-import { IconButton, Theme, styled } from "@mui/material";
+import { IconButton, styled } from "@mui/material";
+import type { Theme } from "@mui/material";
 
 export const StyledFooter = styled("footer")((props: { theme: Theme }) => ({
     backgroundColor: props.theme.palette.primary.dark,

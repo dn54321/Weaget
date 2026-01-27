@@ -1,5 +1,5 @@
 import { extractQueryParams, handleNextResponseError } from "@utils/next-request-helper";
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { getLocationAutocompleteSuggestions } from "@services/geolocation.service";
 import { googleLocationSuggestionInputSchema } from "@features/google-geocode/location-auto-complete.schema";
 

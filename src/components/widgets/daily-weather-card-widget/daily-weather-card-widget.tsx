@@ -1,9 +1,11 @@
-import { Stack, SxProps } from "@mui/material";
-import { WeatherCard, WeatherCardProps } from "@components/cards/weather-card";
 import Box from "@mui/material/Box";
-import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import type { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import React, { useEffect, useState } from "react";
-import { SkeletonProps } from "@components/with-skeleton";
+import type { SkeletonProps } from "@components/with-skeleton";
+import { Stack } from "@mui/material";
+import type { SxProps } from "@mui/material";
+import { WeatherCard } from "@components/cards/weather-card";
+import type { WeatherCardProps } from "@components/cards/weather-card";
 import { Widget } from "@components/containers/widget/widget";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
 import { useWidgetStore } from "@src/hooks/stores/use-widget-store";

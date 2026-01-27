@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import { WeatherParticleProps } from "./weather-icon.types";
+import type { WeatherParticleProps } from "./weather-icon.types";
 import { styled } from "@mui/material";
 
 export const WeatherIconContainer = styled(Box) ({

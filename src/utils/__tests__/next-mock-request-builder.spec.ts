@@ -1,5 +1,6 @@
-import { MockRequestObject, createMockRequest } from "@utils/next-mock-request-builder";
 import { describe, expect, it } from "vitest";
+import type { MockRequestObject } from "@utils/next-mock-request-builder";
+import { createMockRequest } from "@utils/next-mock-request-builder";
 
 describe("Utils - next-mock-request-builder", () => {
     describe("createMockRequest", () => {

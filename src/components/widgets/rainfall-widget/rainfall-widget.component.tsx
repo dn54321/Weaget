@@ -1,16 +1,17 @@
 import * as React from "react";
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from "recharts";
-import { Button, SxProps } from "@mui/material";
 import { convertVolumeMeasurement, getVolumeSymbol } from "@components/ui/volume-unit/volume-unit.utils";
 import Box from "@mui/material/Box";
+import { Button } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { DateTime } from "luxon";
+import type { MeasurementScale } from "@src/types/measurement.types";
 
-import { MeasurementScale } from "@src/types/measurement.types";
-import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import type { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import Skeleton from "@mui/material/Skeleton";
-import { SystemLocale } from "@project/src/types/system.types";
+import type { SxProps } from "@mui/material";
+import type { SystemLocale } from "@project/src/types/system.types";
 import { Widget } from "@components/containers/widget/widget";
 import { useSettingStore } from "@src/hooks/stores/use-setting-store";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";

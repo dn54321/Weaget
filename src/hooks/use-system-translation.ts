@@ -1,4 +1,5 @@
-import { UseTranslationOptions, useTranslation as i18nTranslation } from "react-i18next";
+import type { UseTranslationOptions } from "react-i18next";
+import { useTranslation as i18nTranslation } from "react-i18next";
 import { useSystemSettings } from "./use-system-settings";
 
 export function useSystemTranslation(

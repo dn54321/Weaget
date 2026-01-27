@@ -1,5 +1,5 @@
 import { extractQueryParams, handleNextResponseError } from "@utils/next-request-helper";
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { coordsSchema } from "@features/coords.schema";
 import { getNearbyLocationDetails } from "@services/geolocation.service";
 

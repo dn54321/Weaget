@@ -1,6 +1,7 @@
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material/";
-import { BoxProps, SxProps, keyframes, styled } from "@mui/system";
-import { CurrentWeatherDetails, DailyWeatherDetails, OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import type { BoxProps, SxProps } from "@mui/system";
+import type { CurrentWeatherDetails, DailyWeatherDetails, OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import { keyframes, styled } from "@mui/system";
 import { DateTime } from "luxon";
 import { TempUnit } from "@components/ui/temperature-unit";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";

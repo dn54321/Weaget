@@ -1,4 +1,5 @@
-import { HttpResponse, RequestHandlerOptions, http } from "msw";
+import { HttpResponse, http } from "msw";
+import type { JsonBodyType, RequestHandlerOptions } from "msw";
 import { createWeatherMockData } from "./weather.mock";
 
 export const weatherHandler = [
@@ -7,7 +8,7 @@ export const weatherHandler = [
     }),
 ];
 
-export function mockWeatherHandle(response: HttpResponse, options?: RequestHandlerOptions) {
+export function mockWeatherHandle(response: HttpResponse<JsonBodyType>, options?: RequestHandlerOptions) {
     return http.get(
         "api/weather/:location",
         () => response,

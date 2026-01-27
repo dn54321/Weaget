@@ -1,4 +1,4 @@
-import ApicnPollutionModel from "@features/apicn-pollution/pollution.types";
+import type ApicnPollutionModel from "@features/apicn-pollution/pollution.types";
 import { apicnPollutionSchema } from "@features/apicn-pollution/pollution.schema";
 
 // API ENDPOINTS

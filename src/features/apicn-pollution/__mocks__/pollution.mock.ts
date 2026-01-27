@@ -1,3 +1,4 @@
+import type ApicnPollutionModel from "@features/apicn-pollution/pollution.types";
 import { DateTime } from "luxon";
 import { faker } from "@faker-js/faker";
 
@@ -95,7 +96,7 @@ export function createApicnPollutionResultMockData() {
     };
 }
 
-export function createApicnPollutionMockData() {
+export function createApicnPollutionMockData(): ApicnPollutionModel {
     return {
         data: createApicnPollutionResultMockData(),
         status: "ok",

@@ -1,5 +1,5 @@
 import { afterEach, beforeAll, describe, expect, it } from "vitest";
-import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import type { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { TemperatureScale } from "@src/types/weather.types";
 import { WeatherDisplayWidget } from "./..";
 import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";

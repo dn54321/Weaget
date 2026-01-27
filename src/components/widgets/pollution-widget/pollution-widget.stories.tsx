@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { PollutionWidget, type PollutionWidgetProps } from ".";
 import { createPollutionMockData } from "@features/weaget/__mocks__/pollution.mock";
 import { storybookWrapper } from "@utils/wrappers";

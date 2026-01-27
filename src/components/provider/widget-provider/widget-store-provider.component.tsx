@@ -1,6 +1,7 @@
-import { WidgetState, createWidgetStore } from "@src/stores/widget.store";
 import React from "react";
+import type { WidgetState } from "@src/stores/widget.store";
 import { createContext } from "react";
+import { createWidgetStore } from "@src/stores/widget.store";
 
 export interface WidgetProviderProps {
     widgetState?: Partial<WidgetState>;

@@ -1,5 +1,5 @@
 import { FetchError } from "@errors/fetch-error";
-import { NearbyLocation } from "@features/weaget/nearby-location/nearby-location.types";
+import type { NearbyLocation } from "@features/weaget/nearby-location/nearby-location.types";
 import { nearbyLocationSchema } from "@features/weaget/nearby-location/nearby-location.schema";
 import { useQuery } from "@tanstack/react-query";
 

@@ -1,5 +1,6 @@
-import { Alert, Box, BoxProps, Stack } from "@mui/material";
-import { AlertMessage } from "@src/hooks/use-alert";
+import { Alert, Box, Stack } from "@mui/material";
+import type { AlertMessage } from "@src/hooks/use-alert";
+import type { BoxProps } from "@mui/material";
 
 export interface AlertBoxProps {
     maxAlerts?: number;

@@ -1,7 +1,8 @@
-import { Card, SxProps } from "@mui/material";
 import { CardUnorderedList, StatContainerListItem } from "./weather-stats-card.styles";
 import Box from "@mui/material/Box";
+import { Card } from "@mui/material";
 import React from "react";
+import type { SxProps } from "@mui/material";
 
 export interface ItemContainerProps {
     children: React.ReactElement;

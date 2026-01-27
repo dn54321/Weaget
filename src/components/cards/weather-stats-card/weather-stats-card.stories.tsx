@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { WeatherStatsCard, type WeatherStatsCardProps } from ".";
 import { createWeatherStatsCardStatMockData } from "./__mocks__/weather-stats-card.mock";
 import { storybookWrapper } from "@utils/wrappers";

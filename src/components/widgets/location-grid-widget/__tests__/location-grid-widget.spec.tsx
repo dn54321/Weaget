@@ -1,6 +1,6 @@
 import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { LocationGridWidget } from "..";
-import { NearbyLocations } from "@features/weaget/nearby-location/nearby-location.types";
+import type { NearbyLocations } from "@features/weaget/nearby-location/nearby-location.types";
 import userEvent from "@testing-library/user-event";
 import { withRender } from "@utils/render";
 

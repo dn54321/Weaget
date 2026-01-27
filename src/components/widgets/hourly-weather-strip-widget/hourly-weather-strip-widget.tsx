@@ -1,11 +1,13 @@
-import { Box, Pagination, SxProps } from "@mui/material";
-import { ChangeEvent, useState } from "react";
+import { Box, Pagination } from "@mui/material";
 import { WeatherStrip, type WeatherStripProps } from "@components/ui/weather-strip";
-import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import type { ChangeEvent } from "react";
+import type { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import type { SkeletonProps } from "@components/with-skeleton";
+import type { SxProps } from "@mui/material";
 
-import { SkeletonProps } from "@components/with-skeleton";
 import { Widget } from "@components/containers/widget/widget";
 import { parseWeatherDetailStats } from "@components/cards/weather-stats-card/weather-stats-card.utils";
+import { useState } from "react";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 export interface HourlyWeatherStripWidgetProps {

@@ -1,4 +1,5 @@
-import { HttpResponse, RequestHandlerOptions, http } from "msw";
+import { HttpResponse, http } from "msw";
+import type { JsonBodyType, RequestHandlerOptions } from "msw";
 import { createNearbyLocationMockData } from "./nearby-location.mock";
 
 export const nearbyLocationHandler = [
@@ -7,7 +8,7 @@ export const nearbyLocationHandler = [
     }),
 ];
 
-export function mockNearbyLocationHandle(response: HttpResponse, options?: RequestHandlerOptions) {
+export function mockNearbyLocationHandle(response: HttpResponse<JsonBodyType>, options?: RequestHandlerOptions) {
     return http.get(
         "/api/location/nearby-search",
         () => response,

@@ -1,4 +1,5 @@
-import { HttpResponse, RequestHandlerOptions, http } from "msw";
+import { HttpResponse, http } from "msw";
+import type { JsonBodyType, RequestHandlerOptions } from "msw";
 import { createApicnPollutionMockData } from "./pollution.mock";
 
 export const apicnPollutionHandler = [
@@ -7,7 +8,7 @@ export const apicnPollutionHandler = [
     }),
 ];
 
-export function mockApicnPollutionHandle(response: HttpResponse, options?: RequestHandlerOptions) {
+export function mockApicnPollutionHandle(response: HttpResponse<JsonBodyType>, options?: RequestHandlerOptions) {
     return http.get(
         "https://api.waqi.info/feed/geo*",
         () => response,

@@ -2,7 +2,7 @@
 
 import { ThemeProvider as MuiThemeProvider } from "@mui/system";
 import { createContext } from "react";
-import { createSettingsStore } from "@src/stores/settings.store";
+import type { createSettingsStore } from "@src/stores/settings.store";
 import { useSystemSettings } from "@src/hooks/use-system-settings";
 
 export interface SettingProviderProps {

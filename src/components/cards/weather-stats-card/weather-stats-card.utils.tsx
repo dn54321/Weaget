@@ -1,11 +1,11 @@
-import { CurrentWeatherDetails, DailyWeatherDetails, HourlyWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import type { CurrentWeatherDetails, DailyWeatherDetails, HourlyWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { mdiThermometerWater, mdiWaterPercent, mdiWeatherCloudy, mdiWeatherPouring, mdiWeatherSnowy, mdiWeatherSunnyAlert, mdiWeatherSunsetDown, mdiWeatherSunsetUp } from "@mdi/js";
 import Air from "@mui/icons-material/Air";
 import { DateTime } from "luxon";
 import Icon from "@mdi/react";
 import React from "react";
 import { SpeedUnit } from "@components/ui/speed-unit";
-import { TFunction } from "i18next";
+import type { TFunction } from "i18next";
 import { TempUnit } from "@components/ui/temperature-unit";
 import VolumeUnit from "@components/ui/volume-unit/volume-unit.component";
 

@@ -1,4 +1,5 @@
-import { HttpResponse, RequestHandlerOptions, http } from "msw";
+import { HttpResponse, http } from "msw";
+import type { JsonBodyType, RequestHandlerOptions } from "msw";
 import { createGeonamesNearbyLocationMockData } from "./nearby-location.mock";
 
 export const geonamesNearbyLocationHandler = [
@@ -7,7 +8,7 @@ export const geonamesNearbyLocationHandler = [
     }),
 ];
 
-export function mockGeonamesNearbyLocationHandle(response: HttpResponse, options?: RequestHandlerOptions) {
+export function mockGeonamesNearbyLocationHandle(response: HttpResponse<JsonBodyType>, options?: RequestHandlerOptions) {
     return http.get(
         "http://api.geonames.org/findNearbyJSON",
         () => response,

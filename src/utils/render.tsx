@@ -1,16 +1,17 @@
-import { Mock, vi } from "vitest";
 import { SettingsStoreContext, SettingsStoreProvider } from "@components/provider/settings-provider";
 import { testOfflineQueryClient, testQueryClient } from "./query-client";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { CssBaseline } from "@mui/material";
+import type { Mock } from "vitest";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { SettingState } from "@src/stores/settings.store";
+import type { SettingState } from "@src/stores/settings.store";
 import { SystemLocale } from "@project/src/types/system.types";
 import { SystemThemeProvider } from "@components/provider/system-theme-provider";
-import { WidgetState } from "@src/stores/widget.store";
+import type { WidgetState } from "@src/stores/widget.store";
 import { WidgetStoreContext } from "@components/provider/widget-provider";
 import WidgetStoreProvider from "@components/provider/widget-provider/widget-store-provider.component";
 import { render } from "@testing-library/react";
+import { vi } from "vitest";
 
 export interface RenderOptions {
     settings?: Partial<SettingState>;

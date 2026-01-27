@@ -1,5 +1,5 @@
 import { DailyWeatherCardWidget, type DailyWeatherCardWidgetProps } from ".";
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 import { storybookWrapper } from "@utils/wrappers";
 type StoryType = DailyWeatherCardWidgetProps;

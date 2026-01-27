@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
-import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
-import { SxProps } from "@mui/material";
+import type { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import type { SxProps } from "@mui/material";
 import { WeatherStatsCard } from "@components/cards/weather-stats-card";
 import { Widget } from "@components/containers/widget/widget";
 import { parseWeatherDetailStats } from "@components/cards/weather-stats-card/weather-stats-card.utils";

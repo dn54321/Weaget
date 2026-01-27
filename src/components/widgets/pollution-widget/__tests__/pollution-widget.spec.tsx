@@ -1,5 +1,5 @@
 import { beforeAll, describe, expect, it } from "vitest";
-import { Pollution } from "@features/apicn-pollution/pollution.types";
+import type { Pollution } from "@features/apicn-pollution/pollution.types";
 import { PollutionWidget } from "./..";
 import { createApicnPollutionResultMockData } from "@features/apicn-pollution/__mocks__/pollution.mock";
 import userEvent from "@testing-library/user-event";

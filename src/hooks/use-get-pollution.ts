@@ -1,5 +1,5 @@
 import { FetchError } from "@errors/fetch-error";
-import { Pollution } from "@features/apicn-pollution/pollution.types";
+import type { Pollution } from "@features/apicn-pollution/pollution.types";
 import { pollutionSchema } from "@features/weaget/pollution/pollution.schema";
 import { useQuery } from "@tanstack/react-query";
 

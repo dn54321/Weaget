@@ -1,4 +1,5 @@
-import { HttpResponse, RequestHandlerOptions, http } from "msw";
+import { HttpResponse, http } from "msw";
+import type { JsonBodyType, RequestHandlerOptions } from "msw";
 import { createPollutionMockData } from "./pollution.mock";
 
 export const pollutionHandler = [
@@ -7,7 +8,7 @@ export const pollutionHandler = [
     }),
 ];
 
-export function mockPollutionHandle(response: HttpResponse, options?: RequestHandlerOptions) {
+export function mockPollutionHandle(response: HttpResponse<JsonBodyType>, options?: RequestHandlerOptions) {
     return http.get(
         "/api/pollution",
         () => response,

@@ -1,5 +1,6 @@
-import { Box, Card, Skeleton, Stack, SxProps } from "@mui/material";
+import { Box, Card, Skeleton, Stack } from "@mui/material";
 import { CardUnorderedList } from "./weather-stats-card.styles";
+import type { SxProps } from "@mui/material";
 
 export interface WeatherStatsCardSkeletonProps {
     statsCount?: number;

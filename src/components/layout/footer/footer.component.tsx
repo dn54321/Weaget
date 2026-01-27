@@ -1,5 +1,5 @@
 import { Box, Container, Stack, Tooltip } from "@mui/material";
-import { ContainerProps, SxProps } from "@mui/system";
+import type { ContainerProps, SxProps } from "@mui/system";
 import { StyledFooter, StyledIconButton } from "./footer.styles";
 import BrushIcon from "@mui/icons-material/Brush";
 import CodeIcon from "@mui/icons-material/Code";

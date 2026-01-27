@@ -1,5 +1,5 @@
 import { createNextResponseError, handleNextResponseError } from "@utils/next-request-helper";
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { getLocationDetails } from "@services/geolocation.service";
 
 interface PageProps {

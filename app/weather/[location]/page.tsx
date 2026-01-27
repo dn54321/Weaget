@@ -6,7 +6,7 @@ import { DailyWeatherCardWidget } from "@components/widgets/daily-weather-card-w
 
 import { Footer } from "@components/layout/footer";
 
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { HourlyWeatherStripWidget } from "@components/widgets/hourly-weather-strip-widget";
 import { LocationListWidget } from "@components/widgets/location-list-widget";
 import { Navbar } from "@components/layout/navbar";

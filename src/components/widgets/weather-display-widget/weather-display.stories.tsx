@@ -1,5 +1,6 @@
-import { Meta, StoryObj } from "@storybook/react";
-import { WeatherDisplayWidget, WeatherDisplayWidgetProps } from ".";
+import type { Meta, StoryObj } from "@storybook/react";
+import { WeatherDisplayWidget } from ".";
+import type { WeatherDisplayWidgetProps } from ".";
 import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 import { faker } from "@faker-js/faker";
 import { openWeatherTypes } from "@features/open-weather-map-one-call/oneCall.utils";

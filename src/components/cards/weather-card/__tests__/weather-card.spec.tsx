@@ -1,8 +1,9 @@
-import { WeatherCard, WeatherCardProps } from "./..";
 import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
 import { DateTime } from "luxon";
 import React from "react";
 import { TemperatureScale } from "@src/types/weather.types";
+import { WeatherCard } from "./..";
+import type { WeatherCardProps } from "./..";
 import { createOpenWeatherWeatherMockData } from "@features/open-weather-map-one-call/__mocks__/oneCall.mock";
 import { faker } from "@faker-js/faker";
 import { testQueryClient } from "@utils/query-client";

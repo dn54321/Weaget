@@ -1,4 +1,5 @@
-import { HttpResponse, RequestHandlerOptions, http } from "msw";
+import { HttpResponse, http } from "msw";
+import type { JsonBodyType, RequestHandlerOptions } from "msw";
 import { createOpenWeatherOneCallMockData } from "./oneCall.mock";
 
 export const openWeatherOneCallHandler = [
@@ -7,7 +8,7 @@ export const openWeatherOneCallHandler = [
     }),
 ];
 
-export function mockOpenWeatherOneCallHandle(response: HttpResponse, options?: RequestHandlerOptions) {
+export function mockOpenWeatherOneCallHandle(response: HttpResponse<JsonBodyType>, options?: RequestHandlerOptions) {
     return http.get(
         "https://api.openweathermap.org/data/3.0/onecall",
         () => response,

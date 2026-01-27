@@ -1,5 +1,5 @@
 import { LocationGridWidget, type LocationGridWidgetProps } from ".";
-import { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { createNearbyLocationMockData } from "@features/weaget/__mocks__/nearby-location.mock";
 import { storybookWrapper } from "@utils/wrappers";
 type StoryType = LocationGridWidgetProps & { width: number };

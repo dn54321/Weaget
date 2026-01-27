@@ -1,6 +1,7 @@
-import { Box, SxProps } from "@mui/material";
 import { High, Low, PaperContainer } from "./compact-weather-card.styles";
+import { Box } from "@mui/material";
 import { DateTime } from "luxon";
+import type { SxProps } from "@mui/material";
 import { TempUnit } from "@components/ui/temperature-unit";
 import { WeatherIcon } from "@components/ui/weather-icon";
 import { useSystemSettings } from "@src/hooks/use-system-settings";

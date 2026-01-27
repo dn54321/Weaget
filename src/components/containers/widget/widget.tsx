@@ -1,5 +1,6 @@
-import { Box, Card, Divider, SxProps, Typography } from "@mui/material";
+import { Box, Card, Divider, Typography } from "@mui/material";
 import React from "react";
+import type { SxProps } from "@mui/material";
 
 export interface WidgetProps {
     title: string;

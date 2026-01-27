@@ -1,5 +1,5 @@
 import { extractQueryParams, handleNextResponseError } from "@utils/next-request-helper";
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import apicnPollutionSchema from "@features/apicn-pollution/pollution.schema";
 import { coordsSchema } from "@features/coords.schema";
 import { getPollutionByCoord } from "@services/pollution.service";

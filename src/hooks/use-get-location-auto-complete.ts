@@ -1,4 +1,4 @@
-import { AutoCompleteQueryParams, AutoCompleteSuggestions } from "@features/weaget/auto-complete/auto-complete.types";
+import type { AutoCompleteQueryParams, AutoCompleteSuggestions } from "@features/weaget/auto-complete/auto-complete.types";
 import { FetchError } from "@errors/fetch-error";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";

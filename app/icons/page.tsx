@@ -1,6 +1,6 @@
 "use client";
 import { Box, Card, CardActionArea, CardContent, Container, Divider, Toolbar, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import React from "react";
 import Stack from "@mui/material/Stack";
 import { WeatherIcon } from "@components/ui/weather-icon";

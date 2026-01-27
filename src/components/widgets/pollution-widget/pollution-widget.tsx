@@ -1,10 +1,11 @@
 import * as React from "react";
-import { CircularProgress, SxProps } from "@mui/material";
-import { Iaqi, Pollution } from "@features/apicn-pollution/pollution.types";
+import type { Iaqi, Pollution } from "@features/apicn-pollution/pollution.types";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
+import { CircularProgress } from "@mui/material";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
+import type { SxProps } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";

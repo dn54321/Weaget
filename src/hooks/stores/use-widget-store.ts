@@ -1,4 +1,4 @@
-import { WidgetStore } from "@src/stores/widget.store";
+import type { WidgetStore } from "@src/stores/widget.store";
 import { WidgetStoreContext } from "@components/provider/widget-provider";
 import { shallow } from "zustand/shallow";
 import { useContext } from "react";

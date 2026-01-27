@@ -4,7 +4,7 @@ import { CssBaseline } from "@mui/material";
 import { QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import { SettingsStoreProvider } from "@components/provider/settings-provider";
-import { StoryContext } from "@storybook/react";
+import type { StoryContext } from "@storybook/react";
 import { SystemLocale } from "@project/src/types/system.types";
 import { SystemThemeProvider } from "@components/provider/system-theme-provider";
 import WidgetStoreProvider from "@components/provider/widget-provider/widget-store-provider.component";

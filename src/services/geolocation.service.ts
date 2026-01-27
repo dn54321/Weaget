@@ -1,8 +1,8 @@
-import { GeonamesNearbyLocation } from "@features/geonames-nearby-search/nearby-location.types";
-import { GoogleGeocode } from "@features/google-geocode/location-lookup.model";
-import GoogleLocationSuggestion from "@features/google-geocode/location-auto-complete.model";
-import IpinfoGeocode from "@features/ipinfo-current-location/current-location.model";
-import { LocationSuggestionOptional } from "@features/weaget/nearby-location/nearby-location.types";
+import type { GeonamesNearbyLocation } from "@features/geonames-nearby-search/nearby-location.types";
+import type { GoogleGeocode } from "@features/google-geocode/location-lookup.model";
+import type GoogleLocationSuggestion from "@features/google-geocode/location-auto-complete.model";
+import type IpinfoGeocode from "@features/ipinfo-current-location/current-location.model";
+import type { LocationSuggestionOptional } from "@features/weaget/nearby-location/nearby-location.types";
 import geonamesNearbyLocationSchema from "@features/geonames-nearby-search/nearby-location.schema";
 import { googleLocationAutoCompleteSchema } from "@features/google-geocode/location-auto-complete.schema";
 import { googleLocationLookupSchema } from "@features/google-geocode/location-lookup.schema";

@@ -1,4 +1,4 @@
-import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import type { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { getLocationDetails } from "./geolocation.service";
 import { oneCallWeatherDetailsSchema } from "@features/open-weather-map-one-call/oneCall.schema";
 

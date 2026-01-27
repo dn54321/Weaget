@@ -1,6 +1,6 @@
 import { GreyCloud, Rain, WeatherIconContainer } from "@components/icon/weather/weather-icon.styles";
-import { BoxProps } from "@mui/system";
-import { WeatherIconProps } from "@components/icon/weather/weather-icon.types";
+import type { BoxProps } from "@mui/system";
+import type { WeatherIconProps } from "@components/icon/weather/weather-icon.types";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 export function RainCloud(props: BoxProps & WeatherIconProps) {
