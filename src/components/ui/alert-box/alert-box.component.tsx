@@ -2,9 +2,9 @@ import { Alert, Box, BoxProps, Stack } from "@mui/material";
 import { AlertMessage } from "@src/hooks/use-alert";
 
 export interface AlertBoxProps {
-    maxAlerts?: number;
-    alerts: Array<Required<AlertMessage>>;
-    removeAlert: (id: string) => void;
+    alerts: Array<Required<AlertMessage>>
+    maxAlerts?: number
+    removeAlert: (id: string) => void
 
 }
 
@@ -12,7 +12,7 @@ export interface AlertBoxProps {
 // The useAlert hook contains an AlertBox component that should be used.
 
 export default function AlertBox(props: AlertBoxProps & BoxProps) {
-    const { maxAlerts, alerts, removeAlert } = props;
+    const { alerts, maxAlerts, removeAlert } = props;
     const maxAlertsCount = maxAlerts || 3;
     const alertSliceIndex = Math.max(0, alerts.length - maxAlertsCount);
     return (
@@ -26,7 +26,7 @@ export default function AlertBox(props: AlertBoxProps & BoxProps) {
                 pointerEvents: "none",
                 position: "fixed",
                 right: 0,
-                top: { md: "initial", xs: 30 },
+                top: { md: "initial", xs: 30 }
             }}
             zIndex={1400}
         >
@@ -35,14 +35,14 @@ export default function AlertBox(props: AlertBoxProps & BoxProps) {
                     alerts.slice(alertSliceIndex).map(alert => (
                         <Alert
                             key={alert.id}
-                            variant="filled"
                             severity={alert.type}
                             sx={{ pointerEvents: "all" }}
+                            variant="filled"
                             {...(!alert.unclosable && { onClose: () => removeAlert(alert.id) })}
                         >
                             {alert.message}
                         </Alert>
-                    ),
+                    )
                     )
                 }
             </Stack>

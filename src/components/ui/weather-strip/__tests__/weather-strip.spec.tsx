@@ -1,9 +1,10 @@
-import { WeatherStrip, WeatherStripProps } from "./..";
-import { beforeAll, describe, expect, it, vi } from "vitest";
 import BugReportIcon from "@mui/icons-material/BugReport";
-import { DateTime } from "luxon";
 import userEvent from "@testing-library/user-event";
 import { withRender } from "@utils/render";
+import { DateTime } from "luxon";
+import { beforeAll, describe, expect, it, vi } from "vitest";
+
+import { WeatherStrip, WeatherStripProps } from "./..";
 describe("Component: weather-strip", async () => {
     let weatherStripProps: WeatherStripProps;
     beforeAll(() => {
@@ -17,26 +18,26 @@ describe("Component: weather-strip", async () => {
                     name: "mockName",
                     statIcon: <BugReportIcon />,
                     unit: "mm",
-                    value: "mockValue",
+                    value: "mockValue"
                 },
                 {
                     name: "nonCompact",
                     statIcon: <BugReportIcon />,
                     unit: "gg",
-                    value: "nonCompactValue",
+                    value: "nonCompactValue"
                 },
                 {
                     compactValue: "",
                     name: "mockInvisible",
                     statIcon: <BugReportIcon />,
                     unit: "ff",
-                    value: "",
-                },
+                    value: ""
+                }
             ],
             temperature: 293.15,
             timezone: "Australia/Sydney",
             weatherCode: 200,
-            weatherDescription: "mockWeatherDescription",
+            weatherDescription: "mockWeatherDescription"
         };
     });
 
@@ -47,10 +48,10 @@ describe("Component: weather-strip", async () => {
         ["rain percentage", "16%"],
         ["weather description", "mockWeatherDescription"],
         ["stat value", "mockCompactValuemm"],
-        ["non-compact value", "nonCompactValuegg"],
+        ["non-compact value", "nonCompactValuegg"]
     ])("should display the %s on the accordion summary.", (
         _: string,
-        value: string,
+        value: string
     ) => {
         const { getByText } = withRender(<WeatherStrip {...weatherStripProps} />);
         expect(getByText(value)).toBeInTheDocument();
@@ -58,7 +59,7 @@ describe("Component: weather-strip", async () => {
 
     it("should be openable/closable, displaying additional stats.", async () => {
         const user = userEvent.setup();
-        const { getByText, getByRole } = withRender(<WeatherStrip {...weatherStripProps} />);
+        const { getByRole, getByText } = withRender(<WeatherStrip {...weatherStripProps} />);
         const button = getByRole("button");
         await user.click(button);
         expect(getByText("component.weatherStrip.hourlyWeatherStats")).toBeInTheDocument();
@@ -77,7 +78,7 @@ describe("Component: weather-strip", async () => {
 
     it.each([
         ["open", true],
-        ["closed", false],
+        ["closed", false]
     ])("should initially be %s if expanded prop is %o ", (_, isExpanded: boolean) => {
         const view = withRender(<WeatherStrip {...weatherStripProps} expanded={isExpanded} />);
         expect(view.getByRole("button", { expanded: isExpanded })).toBeInTheDocument();

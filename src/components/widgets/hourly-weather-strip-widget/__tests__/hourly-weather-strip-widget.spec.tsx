@@ -1,9 +1,10 @@
-import { beforeAll, describe, expect, it } from "vitest";
-import { HourlyWeatherStripWidget } from "./..";
-import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
-import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
+import { OneCallWeatherDetails } from "@src/apis/open-weather-map/one-call/one-call.type";
+import { createWeatherMockData } from "@src/apis/weaget/weather/__mocks__/weather.mock";
 import userEvent from "@testing-library/user-event";
 import { withRender } from "@utils/render";
+import { beforeAll, describe, expect, it } from "vitest";
+
+import { HourlyWeatherStripWidget } from "./..";
 
 describe("Component: hourly-weather-card-widget", async () => {
     let weatherData: OneCallWeatherDetails;
@@ -13,14 +14,14 @@ describe("Component: hourly-weather-card-widget", async () => {
 
     it("should contain a title.", () => {
         const { getByText } = withRender(
-            <HourlyWeatherStripWidget weatherData={weatherData} />,
+            <HourlyWeatherStripWidget weatherData={weatherData} />
         );
         expect(getByText("component.widget.hourlyWeatherStrip.title")).toBeInTheDocument();
     });
 
     it("should contains a total of 12 weather strips.", () => {
         const { getAllByTestId } = withRender(
-            <HourlyWeatherStripWidget weatherData={weatherData} />,
+            <HourlyWeatherStripWidget weatherData={weatherData} />
         );
         expect(getAllByTestId("weather-strip")).toHaveLength(12);
     });
@@ -28,7 +29,7 @@ describe("Component: hourly-weather-card-widget", async () => {
     it("should be expandable.", async () => {
         const user = userEvent.setup();
         const { getAllByTestId, getByRole } = withRender(
-            <HourlyWeatherStripWidget weatherData={weatherData} />,
+            <HourlyWeatherStripWidget weatherData={weatherData} />
         );
 
         const accordion = getAllByTestId("ExpandMoreIcon")[0];
@@ -42,7 +43,7 @@ describe("Component: hourly-weather-card-widget", async () => {
         async () => {
             const user = userEvent.setup();
             const { getAllByTestId, getByLabelText } = withRender(
-                <HourlyWeatherStripWidget weatherData={weatherData} />,
+                <HourlyWeatherStripWidget weatherData={weatherData} />
             );
             const weatherStripPage1 = getAllByTestId("weather-strip");
             await user.click(getByLabelText("Go to next page"));
@@ -54,7 +55,7 @@ describe("Component: hourly-weather-card-widget", async () => {
 
     it("should return a skeleton if no data is provided.", () => {
         const { getAllByTestId } = withRender(
-            <HourlyWeatherStripWidget weatherData={undefined} />,
+            <HourlyWeatherStripWidget weatherData={undefined} />
         );
         expect(getAllByTestId("weather-stat-skeleton")).toHaveLength(12);
     });

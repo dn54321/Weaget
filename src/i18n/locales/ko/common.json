@@ -121,6 +121,10 @@
       "hourlyWeatherStats": "시간별 날씨 통계",
       "collapse": "날씨 세부정보를 숨기려면 아코디언을 접으세요.",
       "expand": "모든 날씨 세부정보를 보려면 아코디언을 확장하세요."
+    },
+    "navbar": {
+      "openSearchBar": "검색창 열기",
+      "goBacktoNavbar": "네비게이션바로 돌아가기"
     }
   },
   "footer": {
@@ -256,6 +260,9 @@
         "description": "구름과 함께 번개.",
         "title": "뇌우"
       }
+    },
+    "error": {
+      "fetchFailed": "날씨 데이터를 가져오는 중 오류가 발생했습니다. 일부 요소가 응답하지 않을 수 있습니다."
     }
   },
   "page": {
@@ -281,9 +288,6 @@
   "theme": {
     "darkTheme": "어두운 테마",
     "lightTheme": "밝은 테마"
-  },
-  "directions": {
-    "goBack": "돌아가기"
   },
   "general": {
     "logo": "심벌 마크"

@@ -1,4 +1,4 @@
-import { IconButton, Theme, styled } from "@mui/material";
+import { IconButton, styled, Theme } from "@mui/material";
 
 export const StyledFooter = styled("footer")((props: { theme: Theme }) => ({
     backgroundColor: props.theme.palette.primary.dark,
@@ -9,13 +9,13 @@ export const StyledFooter = styled("footer")((props: { theme: Theme }) => ({
     left: "0px",
     position: "relative",
     right: "0px",
-    zIndex: 1300,
+    zIndex: 1300
 }));
 
 export const StyledIconButton = styled(IconButton)((props: { theme: Theme }) => ({
     "&:hover": {
-        color: "white",
+        color: "white"
     },
     "backgroundColor": props.theme.palette.background.paper,
-    "fontSize": "30px",
+    "fontSize": "30px"
 }));

@@ -1,7 +1,7 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
-import { useDesktopScreen, useMobileScreen } from "@project/src/utils/resize-window";
 import Sidebar from "@components/layout/sidebar/sidebar.component";
-import { withRender } from "@project/src/utils/render";
+import { withRender } from "@src/utils/render";
+import { useDesktopScreen, useMobileScreen } from "@src/utils/resize-window";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 describe("Component: siderbar", async () => {
     afterEach(() => {

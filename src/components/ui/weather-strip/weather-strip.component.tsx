@@ -1,32 +1,31 @@
-import { Divider, Typography, styled } from "@mui/material";
+import WeatherStatsCard, { WeatherStats } from "@components/cards/weather-stats-card/weather-stats-card.component";
+import { TempUnit } from "@components/ui/temperature-unit";
+import WeatherIcon from "@components/ui/weather-icon/weather-icon.component";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Divider, styled, Typography } from "@mui/material";
+import MuiAccordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Box from "@mui/material/Box";
-import { DateTime } from "luxon";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import MuiAccordion from "@mui/material/Accordion";
-import React from "react";
 import Stack from "@mui/material/Stack";
-import { TempUnit } from "@components/ui/temperature-unit";
-import WeatherIcon from "@components/ui/weather-icon/weather-icon.component";
-import WeatherStatsCard, { WeatherStats } from "@components/cards/weather-stats-card/weather-stats-card.component";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import { DateTime } from "luxon";
 
 const Day = styled(Box)(() => ({
     fontSize: "0.5em",
-    textTransform: "uppercase",
+    textTransform: "uppercase"
 }));
 
 const WeatherDescription = styled(Box) ({
     fontSize: "0.6em",
     textTransform: "capitalize",
-    width: "100px",
+    width: "100px"
 });
 
 export interface AccordionProps {
-    expanded?: boolean;
-    onChange?: () => void;
-    children: JSX.Element | JSX.Element[];
+    children: JSX.Element | JSX.Element[]
+    expanded?: boolean
+    onChange?: () => void
 }
 
 const Accordion = (props: AccordionProps) => {
@@ -35,9 +34,9 @@ const Accordion = (props: AccordionProps) => {
             data-testid="weather-strip"
             disableGutters
             elevation={0}
-            slotProps={{ transition: { timeout: 0, unmountOnExit: true } }}
             expanded={props.expanded}
             onChange={props.onChange}
+            slotProps={{ transition: { timeout: 0, unmountOnExit: true } }}
             sx={{ backgroundColor: "initial", color: "text.color" }}
         >
             {props.children}
@@ -46,19 +45,19 @@ const Accordion = (props: AccordionProps) => {
 };
 
 export interface WeatherStripProps {
-    date: Date;
-    timezone: string;
-    weatherCode: number;
-    weatherDescription: string;
-    temperature: number;
-    rainPercentage: number;
-    stats: Array<WeatherStats>;
-    expanded?: boolean;
-    setExpanded?: () => void;
+    date: Date
+    expanded?: boolean
+    rainPercentage: number
+    setExpanded?: () => void
+    stats: Array<WeatherStats>
+    temperature: number
+    timezone: string
+    weatherCode: number
+    weatherDescription: string
 }
 
 export default function WeatherStrip(props: WeatherStripProps) {
-    const { t, locale } = useSystemTranslation();
+    const { locale, t } = useSystemTranslation();
     const date = DateTime
         .fromJSDate(props.date, { zone: props.timezone })
         .setLocale(locale);
@@ -82,39 +81,39 @@ export default function WeatherStrip(props: WeatherStripProps) {
                         "& .MuiAccordionSummary-content": { margin: "0px" },
                         "& .MuiStack-root": { bgcolor: "initial !important" },
                         "boxShadow": "none",
-                        "paddingLeft": "0px",
+                        "paddingLeft": "0px"
                     }}
                 >
                     <Stack
+                        direction="row"
                         sx={{
                             alignItems: "center",
                             bgcolor: "#121212",
-                            width: "100%",
+                            width: "100%"
                         }}
-                        direction="row"
                     >
                         <Stack
                             alignItems="center"
-                            p="10px"
                             fontSize="48px"
+                            p="10px"
                             sx={{
                                 div: {
-                                    filter: "initial",
+                                    filter: "initial"
                                 },
-                                position: "relative",
+                                position: "relative"
                             }}
                         >
                             <WeatherIcon
+                                decoration
                                 id={props.weatherCode}
                                 rainPercentage={props.rainPercentage}
-                                decoration
                             />
                         </Stack>
                         <Box ml="15px">
                             <Box><b><TempUnit value={props.temperature} /></b></Box>
                             <WeatherDescription>{props.weatherDescription}</WeatherDescription>
                         </Box>
-                        <Box position="relative" width="100%" height="100%" mr="30px">
+                        <Box height="100%" mr="30px" position="relative" width="100%">
                             <Stack
                                 direction="row"
                                 gap="20px"
@@ -124,7 +123,7 @@ export default function WeatherStrip(props: WeatherStripProps) {
                                     left: "0px",
                                     position: "absolute",
                                     right: "0px",
-                                    top: "0px",
+                                    top: "0px"
                                 }}
                             >
                                 <Stack
@@ -134,19 +133,19 @@ export default function WeatherStrip(props: WeatherStripProps) {
                                         flexWrap: "wrap",
                                         height: "40.8px",
                                         overflow: "hidden",
-                                        width: "100%",
+                                        width: "100%"
                                     }}
                                 >
                                     {props.stats
                                         .filter(stats => stats.compactValue || stats.value)
                                         .map(stat => (
                                             <Stack
-                                                key={stat.name}
-                                                component="li"
-                                                title={stat.name}
                                                 alignItems="center"
-                                                width="60px"
+                                                component="li"
+                                                key={stat.name}
                                                 sx={{ display: { sm: "block", xs: "none" } }}
+                                                title={stat.name}
+                                                width="60px"
                                             >
                                                 <Box sx={{ color: "primary.light" }}>{stat.statIcon}</Box>
                                                 <Box fontSize="0.7em">
@@ -158,14 +157,14 @@ export default function WeatherStrip(props: WeatherStripProps) {
                                 </Stack>
                             </Stack>
                         </Box>
-                        <Stack ml="auto" alignItems="flex-end" mr="5px" minWidth="70px">
+                        <Stack alignItems="flex-end" minWidth="70px" ml="auto" mr="5px">
                             <Box>{date.toLocaleString({ hour: "numeric", hour12: true }).toLowerCase()}</Box>
                             <Day>{date.toFormat("cccc")}</Day>
                         </Stack>
                     </Stack>
                 </AccordionSummary>
                 <AccordionDetails sx={{ color: "text.primary" }}>
-                    <Typography variant="body2" mt="10px"><b>{t("component.weatherStrip.hourlyWeatherStats")}</b></Typography>
+                    <Typography mt="10px" variant="body2"><b>{t("component.weatherStrip.hourlyWeatherStats")}</b></Typography>
                     <WeatherStatsCard stats={props.stats} transparent />
                 </AccordionDetails>
             </Accordion>

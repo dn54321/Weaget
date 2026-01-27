@@ -1,27 +1,28 @@
-import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
-import { withHandleError, withResponse } from "@utils/msw-http-mocker";
-import { SearchBar } from "./..";
 import { SearchErrorI18NKey } from "@components/ui/search-bar/search-bar.component";
-import { createCurrentLocationMockData } from "@features/weaget/__mocks__/current-location.mock";
-import { mockAutoCompleteHandle } from "@features/weaget/__mocks__/auto-complete.handler";
-import { mockCurrentLocationHandle } from "@features/weaget/__mocks__/current-location.handler";
-import { mockLocationLookupHandle } from "@features/weaget/__mocks__/location-lookup.handler";
 import { server } from "@project/vitest-setup";
-import { testQueryClient } from "@utils/query-client";
-import userEvent from "@testing-library/user-event";
+import { mockAutoCompleteHandle } from "@src/apis/weaget/auto-complete/__mocks__/auto-complete.handler";
+import { mockCurrentLocationHandle } from "@src/apis/weaget/current-location/__mocks__/current-location.handler";
+import { createCurrentLocationMockData } from "@src/apis/weaget/current-location/__mocks__/current-location.mock";
+import { mockLocationLookupHandle } from "@src/apis/weaget/location-lookup/__mocks__/location-lookup.handler";
 import { waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { withHandleError, withResponse } from "@utils/msw-http-mocker";
+import { testQueryClient } from "@utils/query-client";
 import { withRender } from "@utils/render";
+import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
+
+import { SearchBar } from "./..";
 
 describe("Component: search-bar", async () => {
     const mocks = vi.hoisted(() => {
         return {
-            mockRouterPush: vi.fn(),
+            mockRouterPush: vi.fn()
         };
     });
 
     beforeEach(() => {
         vi.mock("next/navigation", () => ({
-            useRouter: () => ({ push: mocks.mockRouterPush }),
+            useRouter: () => ({ push: mocks.mockRouterPush })
         }));
     });
 
@@ -42,7 +43,7 @@ describe("Component: search-bar", async () => {
 
     test.each([
         [404, SearchErrorI18NKey.INVALID_LOCATION],
-        [500, SearchErrorI18NKey.INTERNAL_SERVER_ERROR],
+        [500, SearchErrorI18NKey.INTERNAL_SERVER_ERROR]
     ])("should display an error if the location endpoint returns status code %d.",
         async (statusCode, errorMessage) => {
             withHandleError(mockLocationLookupHandle, statusCode);

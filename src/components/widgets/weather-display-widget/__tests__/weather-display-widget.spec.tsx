@@ -1,10 +1,11 @@
-import { afterEach, beforeAll, describe, expect, it } from "vitest";
-import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import { OneCallWeatherDetails } from "@src/apis/open-weather-map/one-call/one-call.type";
+import { createWeatherMockData } from "@src/apis/weaget/weather/__mocks__/weather.mock";
 import { TemperatureScale } from "@src/types/weather.types";
-import { WeatherDisplayWidget } from "./..";
-import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 import { testQueryClient } from "@utils/query-client";
 import { withRender } from "@utils/render";
+import { afterEach, beforeAll, describe, expect, it } from "vitest";
+
+import { WeatherDisplayWidget } from "./..";
 describe("Component: weather-display-widget", async () => {
     let weatherData: OneCallWeatherDetails;
     beforeAll(() => {
@@ -17,13 +18,13 @@ describe("Component: weather-display-widget", async () => {
 
     it("should contain the location.", () => {
         const { getByText } = withRender(
-            <WeatherDisplayWidget weatherData={weatherData} location="testLocation" />,
+            <WeatherDisplayWidget location="testLocation" weatherData={weatherData} />
         );
         expect(getByText("testLocation")).toBeInTheDocument();
     });
 
     it.each([
-        [200], [300], [500], [600], [700], [800], [801], [802], [803], [804], [-1],
+        [200], [300], [500], [600], [700], [800], [801], [802], [803], [804], [-1]
     ])("should contain the weather details for %d.", (weatherId: number) => {
         const settings = { temperatureScale: TemperatureScale.CELSIUS };
         const { getByText } = withRender(
@@ -40,13 +41,13 @@ describe("Component: weather-display-widget", async () => {
                                 description: "testDescription",
                                 icon: "5d",
                                 id: weatherId,
-                                main: "testMain",
-                            },
-                        ],
-                    },
+                                main: "testMain"
+                            }
+                        ]
+                    }
                 }}
             />,
-            { settings },
+            { settings }
         );
         expect(getByText("20°")).toBeInTheDocument();
         expect(getByText("component.widget.weatherDisplay.feelsLike 27°")).toBeInTheDocument();
@@ -62,19 +63,19 @@ describe("Component: weather-display-widget", async () => {
                 max: 294.15,
                 min: 293.15,
                 morn: 0,
-                night: 0,
+                night: 0
             },
             weather: [{
                 description: "testDescription",
                 icon: "5d",
                 id: 200,
-                main: "testMain",
-            }],
+                main: "testMain"
+            }]
         } };
         const settings = { temperatureScale: TemperatureScale.CELSIUS };
         const { getByText } = withRender(
             <WeatherDisplayWidget location="testLocation" weatherData={weatherData} />,
-            { settings, widgetState },
+            { settings, widgetState }
         );
         expect(getByText("20°")).toBeInTheDocument();
         expect(getByText("21°")).toBeInTheDocument();
@@ -83,7 +84,7 @@ describe("Component: weather-display-widget", async () => {
 
     it("should display a loading message when data is being fetched.", () => {
         const { getByText } = withRender(
-            <WeatherDisplayWidget weatherData={undefined} location={undefined} />,
+            <WeatherDisplayWidget location={undefined} weatherData={undefined} />
         );
         expect(getByText("component.widget.weatherDisplay.fetchingLocationDetails")).toBeInTheDocument();
         expect(getByText("component.widget.weatherDisplay.updatedAt: component.widget.weatherDisplay.fetchingDetails")).toBeInTheDocument();

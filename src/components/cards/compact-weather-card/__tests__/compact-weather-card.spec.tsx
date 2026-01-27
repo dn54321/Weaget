@@ -1,12 +1,12 @@
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import CompactWeatherCard, { CompactWeatherCardProps } from "@components/cards/compact-weather-card/compact-weather-card";
-import { DateTime } from "luxon";
-import React from "react";
-import { TemperatureScale } from "@src/types/weather.types";
-import { createOpenWeatherWeatherMockData } from "@features/open-weather-map-one-call/__mocks__/oneCall.mock";
 import { faker } from "@faker-js/faker";
+import { createOpenWeatherWeatherMockData } from "@src/apis/open-weather-map/one-call/__mocks__/one-call.mock";
+import { TemperatureScale } from "@src/types/weather.types";
 import { testQueryClient } from "@utils/query-client";
 import { withRender } from "@utils/render";
+import { DateTime } from "luxon";
+import React from "react";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 describe("Component: Compact Weather Card", () => {
     let cardProps: CompactWeatherCardProps;
@@ -18,7 +18,7 @@ describe("Component: Compact Weather Card", () => {
             minTemperature: faker.number.float({ fractionDigits: 2, max: 325.15, min: 301.15 }),
             rainfallPercentage: faker.number.float({ fractionDigits: 2, max: 1, min: 0.1 }),
             timezone: faker.location.timeZone(),
-            weatherCode: createOpenWeatherWeatherMockData().id,
+            weatherCode: createOpenWeatherWeatherMockData().id
         };
 
         weatherCard = (<CompactWeatherCard {...cardProps} />);

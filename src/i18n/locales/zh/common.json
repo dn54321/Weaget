@@ -121,6 +121,10 @@
       "hourlyWeatherStats": "每小时天气统计",
       "collapse": "折叠手风琴以隐藏天气详细信息",
       "expand": "展开手风琴以查看所有天气详细信息"
+    },
+    "navbar": {
+      "openSearchBar": "打开搜索栏",
+      "goBacktoNavbar": "返回导航栏"
     }
   },
   "footer": {
@@ -256,6 +260,9 @@
         "description": "一道闪电伴随着一片云彩。",
         "title": "雷雨"
       }
+    },
+    "error": {
+      "fetchFailed": "获取天气数据时出错。某些元素可能无响应。"
     }
   },
   "page": {
@@ -281,9 +288,6 @@
   "theme": {
     "darkTheme": "深色主题",
     "lightTheme": "浅色主题"
-  },
-  "directions": {
-    "goBack": "回去"
   },
   "general": {
     "logo": "标识"

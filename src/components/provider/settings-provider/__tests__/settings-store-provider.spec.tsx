@@ -1,8 +1,8 @@
-import * as SettingsStore from "@src/stores/settings.store";
-import { afterEach, describe, expect, it, vi } from "vitest";
-import React from "react";
 import SettingsStoreProvider from "@components/provider/settings-provider/settings-store-provider.component";
+import * as SettingsStore from "@src/stores/settings.store";
 import { render } from "@testing-library/react";
+import React from "react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 describe("Component: settings-store-provider", async () => {
     afterEach(() => {

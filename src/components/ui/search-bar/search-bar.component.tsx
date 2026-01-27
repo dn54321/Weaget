@@ -1,82 +1,27 @@
 "use client";
 
-import { Alert, CircularProgress, Divider, IconButton, List, Paper, Tooltip, useAutocomplete } from "@mui/material";
-import { Box, BoxProps } from "@mui/system";
-import { FieldBox, FormContainer, MagnifyIconButtonContainer, SearchComponent, SearchField } from "./search-bar.styles";
-import { debounceSearchFunc, throttleSearchFunc } from "./search-bar.utils";
-import { AutoCompleteSuggestions } from "@features/weaget/auto-complete/auto-complete.types";
 import { FetchError } from "@errors/fetch-error";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
-import React, { useEffect, useRef, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { queryLocation } from "@src/hooks/use-get-location";
+import { Alert, CircularProgress, Divider, IconButton, List, Paper, Tooltip, useAutocomplete } from "@mui/material";
+import { Box, BoxProps } from "@mui/system";
+import { AutoCompleteSuggestions } from "@src/apis/weaget/auto-complete/auto-complete.types";
 import { useGetCurrentLocation } from "@src/hooks/use-get-current-location";
+import { queryLocation } from "@src/hooks/use-get-location";
 import { useGetLocationAutoComplete } from "@src/hooks/use-get-location-auto-complete";
-import { useRouter } from "next/navigation";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useRef, useState } from "react";
+
+import { FieldBox, FormContainer, MagnifyIconButtonContainer, SearchComponent, SearchField } from "./search-bar.styles";
+import { debounceSearchFunc, throttleSearchFunc } from "./search-bar.utils";
 
 export enum SearchErrorI18NKey {
     EMPTY = "",
-    INVALID_LOCATION = "component.searchBar.error.invalidLocation",
     INTERNAL_SERVER_ERROR = "component.searchBar.error.internalServerErr",
     INVALID_CURRENT_LOCATION = "component.searchBar.error.invalidCurrentLocation",
+    INVALID_LOCATION = "component.searchBar.error.invalidLocation"
 }
-
-// React Components
-function Loader() {
-    return (
-        <Box px="8px" mx="12px" display="flex">
-            <CircularProgress size={25} />
-        </Box>
-    );
-};
-
-function MagnifyIconButton() {
-    const { t } = useSystemTranslation();
-
-    return (
-        <Tooltip title={t("component.searchBar.search")}>
-            <MagnifyIconButtonContainer type="submit">
-                <SearchIcon />
-            </MagnifyIconButtonContainer>
-        </Tooltip>
-    );
-};
-
-function MyLocationButtonIcon(props: { setErrorMessage: (errMessage: SearchErrorI18NKey) => void }) {
-    const router = useRouter();
-    const currentLocationQuery = useGetCurrentLocation();
-    const { t } = useSystemTranslation();
-
-    function redirectCurrentWeatherLocation() {
-        const city = currentLocationQuery.data?.city;
-        if (city) {
-            router.push(`/weather/${city}`);
-        }
-        else {
-            props.setErrorMessage(SearchErrorI18NKey.INVALID_CURRENT_LOCATION);
-        }
-    }
-
-    return (
-        <Tooltip title={t("component.searchBar.useCurrentLocation")}>
-            <span>
-                <IconButton
-                    color="primary"
-                    type="button"
-                    onClick={() => redirectCurrentWeatherLocation()}
-                    disabled={currentLocationQuery.isLoading}
-                    sx={{
-                        color: "gray",
-                        margin: "0px 10px",
-                    }}
-                >
-                    <MyLocationIcon />
-                </IconButton>
-            </span>
-        </Tooltip>
-    );
-};
 
 export function Error(props: { message: string }) {
     const { t } = useSystemTranslation();
@@ -84,35 +29,12 @@ export function Error(props: { message: string }) {
         return null;
     }
     return (
-        <Box position="relative" height="0">
-            <Box position="absolute" mt={1}>
-                <Alert variant="filled" severity="error" sx={{ pr: "25px" }}>
+        <Box height="0" position="relative">
+            <Box mt={1} position="absolute">
+                <Alert severity="error" sx={{ pr: "25px" }} variant="filled">
                     {t(props.message)}
                 </Alert>
             </Box>
-        </Box>
-    );
-}
-
-export function SuggestionBox(props: { children: React.ReactNode; listprops: React.HTMLAttributes<HTMLUListElement> }) {
-    return (
-        <Box
-            sx={{
-                "& .Mui-focused": {
-                    backgroundColor: "#e9e9e9",
-                },
-                "listStyleType": "none",
-                "m": 0,
-                "p": 0,
-                "position": "relative",
-                "zIndex": "1",
-            }}
-        >
-            <Paper sx={{ position: "absolute", top: "10px", width: "100%" }} component="ul" {...props.listprops}>
-                <List sx={{ p: 0 }}>
-                    {props.children}
-                </List>
-            </Paper>
         </Box>
     );
 };
@@ -178,11 +100,11 @@ export default function SearchBar(props: BoxProps) {
     }, []);
     // Autocomplete Props from MaterialUI
     const {
-        getRootProps,
         getInputProps,
         getListboxProps,
         getOptionProps,
-        groupedOptions,
+        getRootProps,
+        groupedOptions
     } = useAutocomplete<AutoCompleteSuggestions>({
         clearOnBlur: false,
         getOptionLabel: x => `${x.main} ${x.secondary}`,
@@ -190,7 +112,7 @@ export default function SearchBar(props: BoxProps) {
         isOptionEqualToValue: (i, o) => (i.main === o.main && i.secondary === o.secondary),
         onChange: (_, v) => (v && router.push(`/weather/${v.main} ${v.secondary}`)),
         onInputChange: (_, v) => DebounceAndThrottleAutoComplete(v),
-        options: searchQuery.data ?? [],
+        options: searchQuery.data ?? []
     });
 
     return (
@@ -199,10 +121,10 @@ export default function SearchBar(props: BoxProps) {
                 <SearchComponent>
                     <SearchField>
                         <FieldBox
+                            inputProps={{ ...getInputProps() }}
                             name="suburb"
                             placeholder={t("component.searchBar.placeholder")}
                             required
-                            inputProps={{ ...getInputProps() }}
                         />
                         <MagnifyIconButton />
                     </SearchField>
@@ -212,34 +134,113 @@ export default function SearchBar(props: BoxProps) {
 
                 {groupedOptions.length > 0
                     ? (
-                            <SuggestionBox listprops={getListboxProps()}>
-                                {(groupedOptions as Array<AutoCompleteSuggestions>).map((option, index: number) => {
-                                    const { key, ...optionProps } = getOptionProps({ index, option });
-                                    return (
-                                        <Box
-                                            component="li"
-                                            key={key}
-                                            {...optionProps}
-                                            sx={{
-                                                "&.Mui-focused": {
-                                                    backgroundColor: "action.hover",
-                                                },
-                                                "borderBottom": "1px solid",
-                                                "borderColor": "divider",
-                                                "p": "5px 10px",
-                                                "userSelect": "none",
-                                            }}
-                                        >
-                                            <Box display="inline" color="text.main"><b>{option.main}</b></Box>
-                                            <Box display="inline" color="text.secondary" ml="1ch">{option.secondary}</Box>
-                                        </Box>
-                                    );
-                                })}
-                            </SuggestionBox>
-                        )
+                        <SuggestionBox listprops={getListboxProps()}>
+                            {(groupedOptions as Array<AutoCompleteSuggestions>).map((option, index: number) => {
+                                const { key, ...optionProps } = getOptionProps({ index, option });
+                                return (
+                                    <Box
+                                        component="li"
+                                        key={key}
+                                        {...optionProps}
+                                        sx={{
+                                            "&.Mui-focused": {
+                                                backgroundColor: "action.hover"
+                                            },
+                                            "borderBottom": "1px solid",
+                                            "borderColor": "divider",
+                                            "p": "5px 10px",
+                                            "userSelect": "none"
+                                        }}
+                                    >
+                                        <Box color="text.main" display="inline"><b>{option.main}</b></Box>
+                                        <Box color="text.secondary" display="inline" ml="1ch">{option.secondary}</Box>
+                                    </Box>
+                                );
+                            })}
+                        </SuggestionBox>
+                    )
                     : null }
                 <Error message={searchError} />
             </Box>
         </FormContainer>
+    );
+};
+
+export function SuggestionBox(props: { children: React.ReactNode, listprops: React.HTMLAttributes<HTMLUListElement> }) {
+    return (
+        <Box
+            sx={{
+                "& .Mui-focused": {
+                    backgroundColor: "#e9e9e9"
+                },
+                "listStyleType": "none",
+                "m": 0,
+                "p": 0,
+                "position": "relative",
+                "zIndex": "1"
+            }}
+        >
+            <Paper component="ul" sx={{ position: "absolute", top: "10px", width: "100%" }} {...props.listprops}>
+                <List sx={{ p: 0 }}>
+                    {props.children}
+                </List>
+            </Paper>
+        </Box>
+    );
+};
+
+// React Components
+function Loader() {
+    return (
+        <Box display="flex" mx="12px" px="8px">
+            <CircularProgress size={25} />
+        </Box>
+    );
+}
+
+function MagnifyIconButton() {
+    const { t } = useSystemTranslation();
+
+    return (
+        <Tooltip title={t("component.searchBar.search")}>
+            <MagnifyIconButtonContainer type="submit">
+                <SearchIcon />
+            </MagnifyIconButtonContainer>
+        </Tooltip>
+    );
+};
+
+function MyLocationButtonIcon(props: { setErrorMessage: (errMessage: SearchErrorI18NKey) => void }) {
+    const router = useRouter();
+    const currentLocationQuery = useGetCurrentLocation();
+    const { t } = useSystemTranslation();
+
+    function redirectCurrentWeatherLocation() {
+        const city = currentLocationQuery.data?.city;
+        if (city) {
+            router.push(`/weather/${city}`);
+        }
+        else {
+            props.setErrorMessage(SearchErrorI18NKey.INVALID_CURRENT_LOCATION);
+        }
+    }
+
+    return (
+        <Tooltip title={t("component.searchBar.useCurrentLocation")}>
+            <span>
+                <IconButton
+                    color="primary"
+                    disabled={currentLocationQuery.isLoading}
+                    onClick={() => redirectCurrentWeatherLocation()}
+                    sx={{
+                        color: "gray",
+                        margin: "0px 10px"
+                    }}
+                    type="button"
+                >
+                    <MyLocationIcon />
+                </IconButton>
+            </span>
+        </Tooltip>
     );
 }

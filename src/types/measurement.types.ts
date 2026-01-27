@@ -1,9 +1,9 @@
 export enum MeasurementScale {
-    METRIC = "metric",
     IMPERIAL = "imperial",
+    METRIC = "metric"
 }
 
 export enum Metric {
-    MILLIMETERS_PER_HOUR = "millimetersPerHour",
     METERS_PER_SECOND = "metersPerSecond",
+    MILLIMETERS_PER_HOUR = "millimetersPerHour"
 }

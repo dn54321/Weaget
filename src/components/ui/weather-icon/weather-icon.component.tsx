@@ -1,6 +1,4 @@
-import { Box, BoxProps } from "@mui/system";
 import { BrokenCloud } from "@components/icon/weather/broken-cloud-icon";
-import { Chip } from "@mui/material";
 import { FewCloudIcon } from "@components/icon/weather/few-cloud-icon/few-cloud-icon.component";
 import { Mist } from "@components/icon/weather/mist-icon";
 import { MoonIcon } from "@components/icon/weather/moon-icon/moon-icon.component";
@@ -11,7 +9,25 @@ import { ShowerRain } from "@components/icon/weather/shower-rain-icon/shower-rai
 import { SnowCloud } from "@components/icon/weather/snow-cloud-icon/snow-cloud-icon.component";
 import SunIcon from "@components/icon/weather/sun-icon/sun-icon.component";
 import { Thunderstorm } from "@components/icon/weather/thunderstorm-icon/thunderstorm-icon.component";
+import { Chip } from "@mui/material";
+import { Box, BoxProps } from "@mui/system";
 import { round } from "@utils/math";
+
+export type WeatherIconProps = Omit<BoxProps, "id"> & {
+    decoration?: boolean
+    id: number
+    rainPercentage?: number
+};
+
+export default function WeatherIcon(props: WeatherIconProps) {
+    const WeatherIcon = getWeatherIcon(props.id, Boolean(props.decoration));
+    return (
+        <Box position="relative">
+            {WeatherIcon}
+            {props.rainPercentage ? <RainIndicator rainPercentage={props.rainPercentage} /> : ""}
+        </Box>
+    );
+}
 
 function getWeatherIcon(iconId: number, isDecoration = false) {
     switch (iconId) {
@@ -31,44 +47,28 @@ function getWeatherIcon(iconId: number, isDecoration = false) {
     }
 }
 
-export type WeatherIconProps = Omit<BoxProps, "id"> & {
-    id: number;
-    rainPercentage?: number;
-    decoration?: boolean;
-};
-
 function RainIndicator(props: { rainPercentage: number }) {
     return (
         <Box
-            position="absolute"
+            aria-label="Probability of Precipitation"
             bottom="-30%"
+            position="absolute"
             right="-25%"
             title="Probability of Precipitation"
-            aria-label="Probability of Precipitation"
         >
             <Chip
                 label={round(props.rainPercentage * 100, 0) + "%"}
                 sx={{
                     "& .MuiChip-label": {
                         px: "4px",
-                        py: "3px",
+                        py: "3px"
                     },
                     "backgroundColor": "primary.dark",
                     "color": "primary.contrastText",
                     "fontSize": "0.25em",
-                    "height": "auto",
+                    "height": "auto"
                 }}
             />
-        </Box>
-    );
-}
-
-export default function WeatherIcon(props: WeatherIconProps) {
-    const WeatherIcon = getWeatherIcon(props.id, Boolean(props.decoration));
-    return (
-        <Box position="relative">
-            {WeatherIcon}
-            {props.rainPercentage ? <RainIndicator rainPercentage={props.rainPercentage} /> : ""}
         </Box>
     );
 }

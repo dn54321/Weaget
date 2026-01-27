@@ -1,29 +1,29 @@
-import { DailyWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
+import { DailyWeatherDetails } from "@src/apis/open-weather-map/one-call/one-call.type";
 import { createStore } from "zustand";
 
-export interface WidgetState {
-    focusedWeather?: DailyWeatherDetails;
-
-}
-
 export interface WidgetActions {
-    setFocusedWeather: (weather?: DailyWeatherDetails) => void;
-    resetState: () => void;
+    resetState: () => void
+    setFocusedWeather: (weather?: DailyWeatherDetails) => void
 }
 
-export type WidgetStore = WidgetState & WidgetActions;
+export interface WidgetState {
+    focusedWeather?: DailyWeatherDetails
+
+}
+
+export type WidgetStore = WidgetActions & WidgetState;
 
 export const initialWidgetStoreState: WidgetState = {
-    focusedWeather: undefined,
+    focusedWeather: undefined
 };
 
 export const createWidgetStore = (
-    initState: Partial<WidgetState> = {},
+    initState: Partial<WidgetState> = {}
 ) => {
     return createStore<WidgetStore>()(set => ({
         ...initialWidgetStoreState,
         ...initState,
         resetState: () => set(() => ({ focusedWeather: undefined })),
-        setFocusedWeather: state => set(() => ({ focusedWeather: state })),
+        setFocusedWeather: state => set(() => ({ focusedWeather: state }))
     }));
 };

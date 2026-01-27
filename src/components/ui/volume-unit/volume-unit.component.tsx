@@ -1,8 +1,9 @@
 import { Box } from "@mui/material";
-import { MeasurementScale } from "@src/types/measurement.types";
-import { convertVolumeMeasurement } from "./volume-unit.utils";
 import { useSettingStore } from "@src/hooks/stores/use-setting-store";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import { MeasurementScale } from "@src/types/measurement.types";
+
+import { convertVolumeMeasurement } from "./volume-unit.utils";
 
 /*
      VolumeUnit
@@ -13,31 +14,10 @@ import { useSystemTranslation } from "@src/hooks/use-system-translation";
         - Imperial: inches/h
 */
 
-function getSymbol(temperatureScale: string) {
-    switch (temperatureScale) {
-        case MeasurementScale.IMPERIAL: return <abbr title="inches per hour">iph</abbr>;
-        case MeasurementScale.METRIC: return (
-            <abbr title="millimeters per hour">
-                mmh
-                <Box
-                    component="sup"
-                    sx={{
-                        position: "relative",
-                        top: "-0.5em",
-                        verticalAlign: "top",
-                    }}
-                >
-                    -1
-                </Box>
-            </abbr>
-        );
-    }
-}
-
 interface VolumeUnitProps {
-    decimals?: number;
-    symbol?: boolean;
-    value: number;
+    decimals?: number
+    symbol?: boolean
+    value: number
 }
 
 export default function VolumeUnit(props: VolumeUnitProps) {
@@ -54,4 +34,25 @@ export default function VolumeUnit(props: VolumeUnitProps) {
             <abbr title={unitType}>{symbol && getSymbol(measurementSystem)}</abbr>
         </>
     );
+}
+
+function getSymbol(temperatureScale: string) {
+    switch (temperatureScale) {
+        case MeasurementScale.IMPERIAL: return <abbr title="inches per hour">iph</abbr>;
+        case MeasurementScale.METRIC: return (
+            <abbr title="millimeters per hour">
+                mmh
+                <Box
+                    component="sup"
+                    sx={{
+                        position: "relative",
+                        top: "-0.5em",
+                        verticalAlign: "top"
+                    }}
+                >
+                    -1
+                </Box>
+            </abbr>
+        );
+    }
 }

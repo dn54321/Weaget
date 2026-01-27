@@ -1,25 +1,26 @@
+import { createWeatherMockData } from "@src/apis/weaget/weather/__mocks__/weather.mock";
 import { Meta, StoryObj } from "@storybook/react";
-import { RainfallWidget, type RainfallWidgetProps } from ".";
-import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 import { storybookWrapper } from "@utils/wrappers";
+
+import { RainfallWidget, type RainfallWidgetProps } from ".";
 type StoryType = RainfallWidgetProps;
 
 const meta: Meta<StoryType> = {
+    args: {
+        weatherData: createWeatherMockData()
+
+    },
     argTypes: {
         weatherData: {
             description: "Weather data object.",
-            name: "Weather Data",
-        },
-    },
-    args: {
-        weatherData: createWeatherMockData(),
-
+            name: "Weather Data"
+        }
     },
     component: RainfallWidget,
 
     decorators: [storybookWrapper],
     tags: ["autodocs"],
-    title: "Widgets/Rainfall Widget",
+    title: "Widgets/Rainfall Widget"
 } satisfies Meta<StoryType>;
 
 export default meta;
@@ -29,7 +30,7 @@ export const Component: Story = {};
 
 export const Skeleton: Story = {
     args: {
-        weatherData: undefined,
-    },
+        weatherData: undefined
+    }
 
 };

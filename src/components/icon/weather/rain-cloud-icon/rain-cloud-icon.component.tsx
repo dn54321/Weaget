@@ -1,6 +1,6 @@
 import { GreyCloud, Rain, WeatherIconContainer } from "@components/icon/weather/weather-icon.styles";
-import { BoxProps } from "@mui/system";
 import { WeatherIconProps } from "@components/icon/weather/weather-icon.types";
+import { BoxProps } from "@mui/system";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 export function RainCloud(props: BoxProps & WeatherIconProps) {
@@ -13,12 +13,12 @@ export function RainCloud(props: BoxProps & WeatherIconProps) {
             {...(!decoration && { title: t("weather.icon.rainCloud.title") })}
             role="img"
         >
-            <GreyCloud width="0.5em" height="0.5em" top="30%" left="40%" />
-            <GreyCloud width="0.3em" height="0.3em" top="40%" left="70%" />
-            <GreyCloud width="0.9em" top="50%" left="50%" />
-            <Rain width="0.3em" top="75%" left="35%" />
-            <Rain width="0.3em" top="75%" left="55%" />
-            <Rain width="0.3em" top="75%" left="75%" />
+            <GreyCloud height="0.5em" left="40%" top="30%" width="0.5em" />
+            <GreyCloud height="0.3em" left="70%" top="40%" width="0.3em" />
+            <GreyCloud left="50%" top="50%" width="0.9em" />
+            <Rain left="35%" top="75%" width="0.3em" />
+            <Rain left="55%" top="75%" width="0.3em" />
+            <Rain left="75%" top="75%" width="0.3em" />
         </WeatherIconContainer>
     );
 }

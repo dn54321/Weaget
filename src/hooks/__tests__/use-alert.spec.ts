@@ -1,7 +1,7 @@
-import { act, renderHook } from "@testing-library/react";
-import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
 import { createOpenWeatherAlertMessageMockData } from "@src/hooks/__mocks__/alert.mock";
 import { useAlert } from "@src/hooks/use-alert";
+import { act, renderHook } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
 
 describe("Hooks - use-alert", () => {
     beforeEach(() => {
@@ -15,7 +15,7 @@ describe("Hooks - use-alert", () => {
     test.each([
         [{ ...createOpenWeatherAlertMessageMockData(), active: true }],
         [{ ...createOpenWeatherAlertMessageMockData(), active: true, duration: undefined }],
-        [{ ...createOpenWeatherAlertMessageMockData(), active: true, id: undefined }],
+        [{ ...createOpenWeatherAlertMessageMockData(), active: true, id: undefined }]
     ])("(#%#) Adding an active alert should place an alert in the alerts array.", (alert) => {
         const { result } = renderHook(() => useAlert());
 
@@ -30,7 +30,7 @@ describe("Hooks - use-alert", () => {
         const { result } = renderHook(() => useAlert());
         const alert = {
             ...createOpenWeatherAlertMessageMockData(),
-            active: false,
+            active: false
         };
 
         act(() => {
@@ -44,7 +44,7 @@ describe("Hooks - use-alert", () => {
         const { result } = renderHook(() => useAlert());
         const alert = {
             ...createOpenWeatherAlertMessageMockData(),
-            active: true,
+            active: true
         };
         act(() => {
             result.current.addAlert(alert);
@@ -61,15 +61,15 @@ describe("Hooks - use-alert", () => {
                 {
                     ...createOpenWeatherAlertMessageMockData(),
                     active: true,
-                    duration: 100,
-                },
+                    duration: 100
+                }
             );
             result.current.addAlert(
                 {
                     ...createOpenWeatherAlertMessageMockData(),
                     active: true,
-                    duration: Infinity,
-                },
+                    duration: Infinity
+                }
             );
             vi.advanceTimersByTime(200);
         });
@@ -82,7 +82,7 @@ describe("Hooks - use-alert", () => {
         const alert = {
             ...createOpenWeatherAlertMessageMockData(),
             active: true,
-            id: "test-id",
+            id: "test-id"
         };
 
         act(() => {

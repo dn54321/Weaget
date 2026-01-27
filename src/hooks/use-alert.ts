@@ -2,12 +2,12 @@ import { AlertBox, AlertBoxProps } from "@components/ui/alert-box";
 import { useState } from "react";
 
 export interface AlertMessage {
-    message: string;
-    type: "success" | "info" | "warning" | "error";
-    duration?: number;
-    unclosable?: boolean;
-    id?: string;
-    active?: boolean;
+    active?: boolean
+    duration?: number
+    id?: string
+    message: string
+    type: "error" | "info" | "success" | "warning"
+    unclosable?: boolean
 }
 
 export type useAlertInterface = Omit<AlertBoxProps, "alerts" | "removeAlert">;
@@ -18,12 +18,12 @@ export function useAlert() {
 
     const markStaleAlerts = () => {
         setAlerts(oldAlerts => oldAlerts.map(
-            alert => (alert.duration > Date.now()) ? alert : { ...alert, active: false },
+            alert => (alert.duration > Date.now()) ? alert : { ...alert, active: false }
         ));
     };
     const removeAlert = (id: string) => {
         setAlerts(oldAlerts => oldAlerts.map(
-            alert => (alert.id !== id) ? alert : { ...alert, active: false },
+            alert => (alert.id !== id) ? alert : { ...alert, active: false }
         ));
     };
 
@@ -41,7 +41,7 @@ export function useAlert() {
                 active: true,
                 duration: Date.now() + duration,
                 id: id,
-                unclosable: Boolean(alert.unclosable),
+                unclosable: Boolean(alert.unclosable)
             };
 
             return [...oldAlerts, newAlert];
@@ -54,5 +54,5 @@ export function useAlert() {
 
     const alertBox = (props: useAlertInterface) => AlertBox({ ...props, alerts: activeAlerts, removeAlert });
 
-    return { AlertBox: alertBox, addAlert, alerts: activeAlerts, removeAlert } as const;
+    return { addAlert, AlertBox: alertBox, alerts: activeAlerts, removeAlert } as const;
 }

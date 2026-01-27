@@ -1,8 +1,8 @@
-import * as widgetStore from "@src/stores/widget.store";
-import { afterEach, describe, expect, it, vi } from "vitest";
-import React from "react";
 import WidgetStoreProvider from "@components/provider/widget-provider/widget-store-provider.component";
+import * as widgetStore from "@src/stores/widget.store";
 import { render } from "@testing-library/react";
+import React from "react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 describe("Component: widget-store-provider", async () => {
     afterEach(() => {

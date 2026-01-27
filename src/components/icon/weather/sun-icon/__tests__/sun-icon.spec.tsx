@@ -1,16 +1,17 @@
-import { describe, expect, it } from "vitest";
-import { SunIcon } from "..";
 import { withRender } from "@utils/render";
+import { describe, expect, it } from "vitest";
+
+import { SunIcon } from "..";
 
 describe("Component: sun-icon", () => {
     it("Widget should be able to render.", () => {
-        const { getByTitle, getByRole } = withRender(<SunIcon />);
+        const { getByRole, getByTitle } = withRender(<SunIcon />);
         expect(getByRole("img")).toBeInTheDocument();
         expect(getByTitle("weather.icon.sun.title")).toBeInTheDocument();
     });
 
     it("Widget should not display title on decoration.", () => {
-        const { queryByTitle, getByRole } = withRender(<SunIcon decoration />);
+        const { getByRole, queryByTitle } = withRender(<SunIcon decoration />);
         expect(getByRole("img")).toBeInTheDocument();
         expect(queryByTitle("weather.icon.sun.title")).not.toBeInTheDocument();
     });

@@ -1,27 +1,28 @@
+import { createPollutionMockData } from "@src/apis/weaget/pollution/__mocks__/pollution.mock";
 import { Meta, StoryObj } from "@storybook/react";
-import { PollutionWidget, type PollutionWidgetProps } from ".";
-import { createPollutionMockData } from "@features/weaget/__mocks__/pollution.mock";
 import { storybookWrapper } from "@utils/wrappers";
+
+import { PollutionWidget, type PollutionWidgetProps } from ".";
 type StoryType = PollutionWidgetProps & { width: number };
 
 const meta: Meta<StoryType> = {
+    args: {
+        pollutionData: createPollutionMockData()["data"],
+        sx: { maxWidth: 500 }
+    },
     argTypes: {
         pollutionData: {
             description: "Pollution data object.",
-            name: "Pollution Data",
-        },
-    },
-    args: {
-        pollutionData: createPollutionMockData()["data"],
-        sx: { maxWidth: 500 },
+            name: "Pollution Data"
+        }
     },
     component: PollutionWidget,
     decorators: [storybookWrapper],
     parameters: {
-        layout: "centered",
+        layout: "centered"
     },
     tags: ["autodocs"],
-    title: "Widgets/Pollution Widget",
+    title: "Widgets/Pollution Widget"
 } satisfies Meta<StoryType>;
 
 export default meta;
@@ -34,16 +35,16 @@ export const Component: Story = {
                 {...args}
             />
         );
-    },
+    }
 };
 
 export const Skeleton: Story = {
     args: {
-        pollutionData: undefined,
+        pollutionData: undefined
     },
     render: (args) => {
         return (
             <PollutionWidget {...args} />
         );
-    },
+    }
 };

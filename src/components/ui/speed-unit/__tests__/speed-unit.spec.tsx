@@ -1,9 +1,10 @@
-import { afterEach, describe, expect, it } from "vitest";
-import { MeasurementScale } from "@src/types/measurement.types";
-import { SpeedUnit } from "./..";
 import { getSpeedSymbol } from "@components/ui/speed-unit/speed-unit.utils";
+import { MeasurementScale } from "@src/types/measurement.types";
 import { testQueryClient } from "@utils/query-client";
 import { withRender } from "@utils/render";
+import { afterEach, describe, expect, it } from "vitest";
+
+import { SpeedUnit } from "./..";
 
 describe("Component: speed-unit", async () => {
     afterEach(() => {
@@ -13,28 +14,28 @@ describe("Component: speed-unit", async () => {
     it.each([
         [1.23, 2, "1.23"],
         [1.23, 1, "1.2"],
-        [1.23, 0, "1"],
+        [1.23, 0, "1"]
     ])("should convert %d with %d d.p. to %s. (m/s => m/s)", (
         input: number,
         decimal: number,
-        expected: string,
+        expected: string
     ) => {
         const settings = { measurementScale: MeasurementScale.METRIC };
-        const { getByText } = withRender(<SpeedUnit value={input} decimals={decimal} />, { settings });
+        const { getByText } = withRender(<SpeedUnit decimals={decimal} value={input} />, { settings });
         expect(getByText(expected)).toBeInTheDocument();
     });
 
     it.each([
         [1.23, 2, "2.75"],
         [1.23, 1, "2.8"],
-        [1.23, 0, "3"],
+        [1.23, 0, "3"]
     ])("should convert %d with %d d.p. to %s. (m/s => mph)", (
         input: number,
         decimal: number,
-        expected: string,
+        expected: string
     ) => {
         const settings = { measurementScale: MeasurementScale.IMPERIAL };
-        const { getByText } = withRender(<SpeedUnit value={input} decimals={decimal} />, { settings });
+        const { getByText } = withRender(<SpeedUnit decimals={decimal} value={input} />, { settings });
         expect(getByText(expected)).toBeInTheDocument();
     });
 
@@ -57,13 +58,13 @@ describe("Utils: speed-unit", async () => {
     describe("Function: getSpeedSymbol", async () => {
         it.each([
             ["m/s", MeasurementScale.METRIC],
-            ["mph", MeasurementScale.IMPERIAL],
+            ["mph", MeasurementScale.IMPERIAL]
         ])(
             "should return %s for measurement scale %s.",
             (expected, measurementScale) => {
                 const result = getSpeedSymbol(measurementScale);
                 expect(result).toEqual(expected);
-            },
+            }
         );
     });
 });

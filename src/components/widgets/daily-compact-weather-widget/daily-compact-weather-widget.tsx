@@ -1,18 +1,19 @@
-import { Box, SxProps } from "@mui/material";
 import { CompactWeatherCard } from "@components/cards/compact-weather-card";
-import Grid from "@mui/material/Grid2";
-import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
-import { StyledButton } from "./daily-compact-weather-widget.styles";
 import { Widget } from "@components/containers/widget/widget";
+import { Box, SxProps } from "@mui/material";
+import Grid from "@mui/material/Grid2";
+import { OneCallWeatherDetails } from "@src/apis/open-weather-map/one-call/one-call.type";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
+
+import { StyledButton } from "./daily-compact-weather-widget.styles";
 
 // List of Weather Card
 export interface DailyCompactWeatherWidgetProps {
-    title?: string;
-    subtitle?: string;
-    weatherData?: OneCallWeatherDetails;
-    location: string;
-    sx?: SxProps;
+    location: string
+    subtitle?: string
+    sx?: SxProps
+    title?: string
+    weatherData?: OneCallWeatherDetails
 }
 
 export default function DailyCompactWeatherWidget(props: DailyCompactWeatherWidgetProps) {
@@ -26,7 +27,7 @@ export default function DailyCompactWeatherWidget(props: DailyCompactWeatherWidg
         rainfallPercentage: dailyWeather.pop,
         timezone: `${props.weatherData?.timezone}`,
         weatherCode: dailyWeather.weather[0].id,
-        weatherDescription: dailyWeather.weather[0].description,
+        weatherDescription: dailyWeather.weather[0].description
     }));
 
     const cards = weatherDetails?.map(dailyWeather => (
@@ -41,20 +42,20 @@ export default function DailyCompactWeatherWidget(props: DailyCompactWeatherWidg
 
     return (
         <Widget
-            title={props.title ?? t("component.widget.dailyCompactWeather.title")}
-            subtitle={props.subtitle ?? t("component.widget.dailyCompactWeather.description")}
-            variant="transparent"
             disableChildrenPadding
+            subtitle={props.subtitle ?? t("component.widget.dailyCompactWeather.description")}
             sx={props.sx}
+            title={props.title ?? t("component.widget.dailyCompactWeather.title")}
+            variant="transparent"
         >
             <Box display="grid" sx={{ width: "100%" }}>
                 <Grid
-                    container
-                    spacing={0.5}
                     component="ol"
-                    width="min(600px, 100%)"
+                    container
                     justifyContent="flex-start !important"
+                    spacing={0.5}
                     sx={{ placeSelf: "center" }}
+                    width="min(600px, 100%)"
                 >
                     {cards}
                 </Grid>

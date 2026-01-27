@@ -1,12 +1,13 @@
-import { Box, Container, Stack, Tooltip } from "@mui/material";
-import { ContainerProps, SxProps } from "@mui/system";
-import { StyledFooter, StyledIconButton } from "./footer.styles";
 import BrushIcon from "@mui/icons-material/Brush";
 import CodeIcon from "@mui/icons-material/Code";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import { useRouter } from "next/navigation";
+import { Box, Container, Stack, Tooltip } from "@mui/material";
+import { ContainerProps, SxProps } from "@mui/system";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import { useRouter } from "next/navigation";
+
+import { StyledFooter, StyledIconButton } from "./footer.styles";
 
 /*
     A very simple footer after many attempts of design .
@@ -15,8 +16,8 @@ import { useSystemTranslation } from "@src/hooks/use-system-translation";
 */
 
 export interface FooterProps {
-    footerProps?: SxProps;
-    containerProps?: ContainerProps;
+    containerProps?: ContainerProps
+    footerProps?: SxProps
 }
 
 export default function Footer(props: FooterProps) {
@@ -28,59 +29,59 @@ export default function Footer(props: FooterProps) {
             hoverColor: "#006400",
             icon: <CodeIcon />,
             link: "https://github.com/dn54321/Weaget",
-            title: "footer.iconButton.sourceCode.title",
+            title: "footer.iconButton.sourceCode.title"
         },
         {
             description: "footer.iconButton.github.description",
             hoverColor: "black",
             icon: <GitHubIcon />,
             link: "https://github.com/dn54321/",
-            title: "footer.iconButton.github.title",
+            title: "footer.iconButton.github.title"
         },
         {
             description: "footer.iconButton.linkedIn.description",
             hoverColor: "#2867B2",
             icon: <LinkedInIcon />,
             link: "https://www.linkedin.com/in/daniel-pham-8bba33193/",
-            title: "footer.iconButton.linkedIn.title",
+            title: "footer.iconButton.linkedIn.title"
         },
         {
             description: "footer.iconButton.icons.description",
             hoverColor: "orange",
             icon: <BrushIcon />,
             link: "/icons",
-            title: "footer.iconButton.icons.title",
-        },
+            title: "footer.iconButton.icons.title"
+        }
     ];
 
     return (
         <StyledFooter sx={{
             fontSize: { sm: "16px", xs: "min(3.5vw, 16px)" },
-            ...props.footerProps,
+            ...props.footerProps
         }}
         >
             <Container maxWidth="md" {...props.containerProps}>
                 <Stack
-                    direction="row"
-                    justifyContent="space-between"
                     alignItems="center"
+                    direction="row"
                     gap="10px"
                     height="80px"
+                    justifyContent="space-between"
                 >
 
                     {/* Copyright Message */}
                     <Box>
-                        <Box py="15px" component="span">
+                        <Box component="span" py="15px">
                             {t("footer.copyright", {
                                 formatParams: {
-                                    year: { year: "numeric" },
+                                    year: { year: "numeric" }
                                 },
-                                year: new Date(),
+                                year: new Date()
                             }) + " "}
                         </Box>
                         <Box sx={{
                             display: { sm: "inline", xs: "block" },
-                            textTransform: "capitalize",
+                            textTransform: "capitalize"
                         }}
                         >
                             {t("footer.reserveNotice")}
@@ -88,16 +89,16 @@ export default function Footer(props: FooterProps) {
                     </Box>
 
                     {/* Links to social media / Icons Page */}
-                    <Stack direction="row" height="fit-content" gap="10px" component="nav">
+                    <Stack component="nav" direction="row" gap="10px" height="fit-content">
                         {footerNavigationItems.map(item => (
                             <StyledIconButton
                                 aria-label={t(item.description)}
-                                onClick={() => router.push(item.link)}
                                 key={item.title}
+                                onClick={() => router.push(item.link)}
                                 sx={{
                                     "&:hover": {
-                                        backgroundColor: item.hoverColor,
-                                    },
+                                        backgroundColor: item.hoverColor
+                                    }
                                 }}
                             >
                                 <Tooltip title={t(item.title)}>{item.icon}</Tooltip>

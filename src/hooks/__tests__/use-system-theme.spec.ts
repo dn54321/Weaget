@@ -1,8 +1,8 @@
-import { act, renderHook } from "@testing-library/react";
-import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
+import { useSystemSettings } from "@src/hooks/use-system-settings";
 import { SystemTheme } from "@src/types/system.types";
+import { act, renderHook } from "@testing-library/react";
 import { testWrapper } from "@utils/wrappers";
-import { useSystemSettings } from "@project/src/hooks/use-system-settings";
+import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
 describe("Hooks - use-system-theme", async () => {
     beforeEach(() => {
@@ -11,7 +11,7 @@ describe("Hooks - use-system-theme", async () => {
             matches: false,
             media: true,
             onchange: null,
-            removeEventListener: vi.fn(),
+            removeEventListener: vi.fn()
         }));
     });
     afterEach(() => {
@@ -22,15 +22,15 @@ describe("Hooks - use-system-theme", async () => {
         test.each(
             [
                 ["light", false],
-                ["dark", true],
-            ],
+                ["dark", true]
+            ]
         )("Theme should be set to %s mode if dark mode is %o during initialisation.", (colourScheme, darkModeInitialisation) => {
             window.matchMedia = vi.fn().mockImplementation(() => ({
                 addEventListener: vi.fn(),
                 matches: darkModeInitialisation,
                 media: true,
                 onchange: null,
-                removeEventListener: vi.fn(),
+                removeEventListener: vi.fn()
             }));
 
             const { result } = renderHook(() => useSystemSettings(), { wrapper: testWrapper });
@@ -40,8 +40,8 @@ describe("Hooks - use-system-theme", async () => {
         test.each(
             [
                 [SystemTheme.LIGHT],
-                [SystemTheme.DARK],
-            ],
+                [SystemTheme.DARK]
+            ]
         )("Should return the correct theme colour when set to %s mode.", async (themeColour: SystemTheme) => {
             const { result } = renderHook(() => useSystemSettings(), { wrapper: testWrapper });
             act(() => {
@@ -53,11 +53,11 @@ describe("Hooks - use-system-theme", async () => {
         test.each(
             [
                 [SystemTheme.LIGHT, SystemTheme.DARK],
-                [SystemTheme.DARK, SystemTheme.LIGHT],
-            ],
+                [SystemTheme.DARK, SystemTheme.LIGHT]
+            ]
         )("Toggling from %s mode should set the theme colour to %s mode.", async (
             oldThemeColour: SystemTheme,
-            newThemeColour: SystemTheme,
+            newThemeColour: SystemTheme
         ) => {
             const { result } = renderHook(() => useSystemSettings(), { wrapper: testWrapper });
 

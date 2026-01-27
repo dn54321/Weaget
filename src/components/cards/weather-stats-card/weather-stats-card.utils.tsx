@@ -1,13 +1,12 @@
-import { CurrentWeatherDetails, DailyWeatherDetails, HourlyWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
-import { mdiThermometerWater, mdiWaterPercent, mdiWeatherCloudy, mdiWeatherPouring, mdiWeatherSnowy, mdiWeatherSunnyAlert, mdiWeatherSunsetDown, mdiWeatherSunsetUp } from "@mdi/js";
-import Air from "@mui/icons-material/Air";
-import { DateTime } from "luxon";
-import Icon from "@mdi/react";
-import React from "react";
 import { SpeedUnit } from "@components/ui/speed-unit";
-import { TFunction } from "i18next";
 import { TempUnit } from "@components/ui/temperature-unit";
 import VolumeUnit from "@components/ui/volume-unit/volume-unit.component";
+import { mdiThermometerWater, mdiWaterPercent, mdiWeatherCloudy, mdiWeatherPouring, mdiWeatherSnowy, mdiWeatherSunnyAlert, mdiWeatherSunsetDown, mdiWeatherSunsetUp } from "@mdi/js";
+import Icon from "@mdi/react";
+import Air from "@mui/icons-material/Air";
+import { CurrentWeatherDetails, DailyWeatherDetails, HourlyWeatherDetails } from "@src/apis/open-weather-map/one-call/one-call.type";
+import { TFunction } from "i18next";
+import { DateTime } from "luxon";
 
 export function getUvLevelTranslationKey(scale: number | undefined) {
     if (scale === undefined) return "";
@@ -19,10 +18,10 @@ export function getUvLevelTranslationKey(scale: number | undefined) {
 }
 
 export function parseWeatherDetailStats(
-    weather: Partial<HourlyWeatherDetails | CurrentWeatherDetails | DailyWeatherDetails>,
+    weather: Partial<CurrentWeatherDetails | DailyWeatherDetails | HourlyWeatherDetails>,
     timezone: string,
     translator: TFunction<"translation", undefined>,
-    locale: string,
+    locale: string
 ) {
     return [
         {
@@ -31,29 +30,29 @@ export function parseWeatherDetailStats(
             statIcon: <Air sx={{ fontSize: "1em" }} />,
             value: weather.windSpeed
                 ? (
-                        <>
-                            <SpeedUnit value={weather.windSpeed} />
-                            {` / ${weather.windDeg}°`}
-                        </>
-                    )
-                : undefined,
+                    <>
+                        <SpeedUnit value={weather.windSpeed} />
+                        {` / ${weather.windDeg}°`}
+                    </>
+                )
+                : undefined
         },
         {
             name: translator("weather.stats.humidity"),
             statIcon: <Icon path={mdiWaterPercent} size="1em" />,
             unit: "%",
-            value: weather.humidity,
+            value: weather.humidity
         },
         {
             name: translator("weather.stats.dewPoint"),
             statIcon: <Icon path={mdiThermometerWater} size="1em" />,
-            value: weather.dewPoint ? <TempUnit value={weather.dewPoint} /> : undefined,
+            value: weather.dewPoint ? <TempUnit value={weather.dewPoint} /> : undefined
         },
         {
             name: translator("weather.stats.clouds"),
             statIcon: <Icon path={mdiWeatherCloudy} size="1em" />,
             unit: "%",
-            value: weather.clouds ?? 0,
+            value: weather.clouds ?? 0
         },
         {
             compactValue: weather.uvi,
@@ -61,51 +60,51 @@ export function parseWeatherDetailStats(
             statIcon: <Icon path={mdiWeatherSunnyAlert} size="1em" />,
             value: weather.uvi
                 ? `${translator(getUvLevelTranslationKey(weather.uvi))} (${weather.uvi})`
-                : undefined,
+                : undefined
         },
         {
             name: translator("weather.stats.sunrise"),
             statIcon: <Icon path={mdiWeatherSunsetUp} size="1em" />,
             value: "sunrise" in weather && typeof weather.sunrise === "object"
                 ? DateTime
-                        .fromJSDate(weather["sunrise"], { zone: timezone })
-                        .setLocale(locale ?? "local")
-                        .toLocaleString(DateTime.TIME_SIMPLE)
-                : undefined,
+                    .fromJSDate(weather["sunrise"], { zone: timezone })
+                    .setLocale(locale ?? "local")
+                    .toLocaleString(DateTime.TIME_SIMPLE)
+                : undefined
         },
         {
             name: translator("weather.stats.sunset"),
             statIcon: <Icon path={mdiWeatherSunsetDown} size="1em" />,
             value: "sunset" in weather && typeof weather.sunset === "object"
                 ? DateTime
-                        .fromJSDate(weather["sunset"], { zone: timezone })
-                        .setLocale(locale ?? "local")
-                        .toLocaleString(DateTime.TIME_SIMPLE)
-                : undefined,
+                    .fromJSDate(weather["sunset"], { zone: timezone })
+                    .setLocale(locale ?? "local")
+                    .toLocaleString(DateTime.TIME_SIMPLE)
+                : undefined
         },
         {
             name: translator("weather.stats.snowfall"),
             statIcon: <Icon path={mdiWeatherSnowy} size="1em" />,
             value: weather.snow
                 ? (
-                        <VolumeUnit
-                            value={typeof weather.snow === "number" ? weather.snow : weather.snow["1h"]!}
-                            decimals={2}
-                        />
-                    )
-                : undefined,
+                    <VolumeUnit
+                        decimals={2}
+                        value={typeof weather.snow === "number" ? weather.snow : weather.snow["1h"]!}
+                    />
+                )
+                : undefined
         },
         {
             name: translator("weather.stats.rainfall"),
             statIcon: <Icon path={mdiWeatherPouring} size="1em" />,
             value: weather.rain
                 ? (
-                        <VolumeUnit
-                            value={typeof weather.rain === "number" ? weather.rain : weather.rain["1h"]!}
-                            decimals={2}
-                        />
-                    )
-                : undefined,
-        },
+                    <VolumeUnit
+                        decimals={2}
+                        value={typeof weather.rain === "number" ? weather.rain : weather.rain["1h"]!}
+                    />
+                )
+                : undefined
+        }
     ];
 }

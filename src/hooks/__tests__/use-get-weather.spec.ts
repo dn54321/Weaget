@@ -1,13 +1,13 @@
-import { afterEach, describe, expect, it, test } from "vitest";
-import { renderHook, waitFor } from "@testing-library/react";
-import { HttpResponse } from "msw";
-import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
-import { mockWeatherHandle } from "@features/weaget/__mocks__/weather.handler";
 import { server } from "@project/vitest-setup";
+import { mockWeatherHandle } from "@src/apis/weaget/weather/__mocks__/weather.handler";
+import { createWeatherMockData } from "@src/apis/weaget/weather/__mocks__/weather.mock";
+import weatherSchema from "@src/apis/weaget/weather/weather.schema";
+import { useGetWeather } from "@src/hooks/use-get-weather";
+import { renderHook, waitFor } from "@testing-library/react";
 import { testQueryClient } from "@utils/query-client";
 import { testWrapper } from "@utils/wrappers";
-import { useGetWeather } from "@src/hooks/use-get-weather";
-import weatherSchema from "@features/weaget/weather/weather.schema";
+import { HttpResponse } from "msw";
+import { afterEach, describe, expect, it, test } from "vitest";
 
 describe("Hooks - use-get-weather", async () => {
     afterEach(() => {
@@ -22,7 +22,7 @@ describe("Hooks - use-get-weather", async () => {
             server.use(mockWeatherHandle(HttpResponse.json(weatherMockData)));
             const { result } = renderHook(
                 () => useGetWeather("mockLocation"),
-                { wrapper: testWrapper },
+                { wrapper: testWrapper }
             );
 
             await waitFor(() => expect(result.current.isSuccess).toBe(true));
@@ -35,7 +35,7 @@ describe("Hooks - use-get-weather", async () => {
             server.use(mockWeatherHandle(HttpResponse.json(weatherMockData)));
             const { result } = renderHook(
                 () => useGetWeather("mockLocation", "mockRegion"),
-                { wrapper: testWrapper },
+                { wrapper: testWrapper }
             );
 
             await waitFor(() => expect(result.current.isSuccess).toBe(true));
@@ -43,17 +43,17 @@ describe("Hooks - use-get-weather", async () => {
         });
 
         test.each([
-            [401], [403], [404], [405], [406], [500], [502], [504],
+            [401], [403], [404], [405], [406], [500], [502], [504]
         ])("hook should throw error upon receiving request with invalid status code (%d).",
             async (statusCode: number) => {
                 const weatherMockData = createWeatherMockData();
                 server.use(mockWeatherHandle(
-                    HttpResponse.json(weatherMockData, { status: statusCode }),
+                    HttpResponse.json(weatherMockData, { status: statusCode })
                 ));
 
                 const { result } = renderHook(
                     () => useGetWeather("mockLocation"),
-                    { wrapper: testWrapper },
+                    { wrapper: testWrapper }
                 );
 
                 await waitFor(() => expect(result.current.isError).toBe(true));

@@ -1,5 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { debounceSearchFunc, throttleSearchFunc } from "@components/ui/search-bar/search-bar.utils";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 describe("Component: search-bar-utils", async () => {
     beforeEach(() => {

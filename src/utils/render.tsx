@@ -1,22 +1,23 @@
-import { Mock, vi } from "vitest";
 import { SettingsStoreContext, SettingsStoreProvider } from "@components/provider/settings-provider";
-import { testOfflineQueryClient, testQueryClient } from "./query-client";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
-import { CssBaseline } from "@mui/material";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { SettingState } from "@src/stores/settings.store";
-import { SystemLocale } from "@project/src/types/system.types";
 import { SystemThemeProvider } from "@components/provider/system-theme-provider";
-import { WidgetState } from "@src/stores/widget.store";
 import { WidgetStoreContext } from "@components/provider/widget-provider";
 import WidgetStoreProvider from "@components/provider/widget-provider/widget-store-provider.component";
+import { CssBaseline } from "@mui/material";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
+import { SettingState } from "@src/stores/settings.store";
+import { WidgetState } from "@src/stores/widget.store";
+import { SystemLocale } from "@src/types/system.types";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { render } from "@testing-library/react";
+import { Mock, vi } from "vitest";
+
+import { testOfflineQueryClient, testQueryClient } from "./query-client";
 
 export interface RenderOptions {
-    settings?: Partial<SettingState>;
-    widgetState?: Partial<WidgetState>;
-    offline?: boolean;
-    probes?: Partial<{ widget: Mock; settings: Mock }>;
+    offline?: boolean
+    probes?: Partial<{ settings: Mock, widget: Mock }>
+    settings?: Partial<SettingState>
+    widgetState?: Partial<WidgetState>
 }
 
 export function withRender(element: React.ReactElement, options?: RenderOptions) {
@@ -45,6 +46,6 @@ export function withRender(element: React.ReactElement, options?: RenderOptions)
                     </SystemThemeProvider>
                 </SettingsStoreProvider>
             </WidgetStoreProvider>
-        </AppRouterCacheProvider>,
+        </AppRouterCacheProvider>
     );
 }

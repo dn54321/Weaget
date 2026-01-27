@@ -1,7 +1,8 @@
-import { PaletteMode, createTheme, responsiveFontSizes, useMediaQuery } from "@mui/material";
-import React from "react";
+import { createTheme, PaletteMode, responsiveFontSizes, useMediaQuery } from "@mui/material";
 import { SystemTheme } from "@src/types/system.types";
 import { getDesignTokens } from "@utils/theme";
+import React from "react";
+
 import { useSettingStore } from "./stores/use-setting-store";
 
 export function useSystemSettings() {

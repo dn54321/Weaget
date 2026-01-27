@@ -1,25 +1,25 @@
 import { convertTemperature, getTemperatureSymbol } from "@components/ui/temperature-unit/temperature-unit.utils";
-import { describe, expect, it } from "vitest";
 import { TemperatureScale } from "@src/types/weather.types";
+import { describe, expect, it } from "vitest";
 
 describe("Component: temperature-unit", async () => {
     describe("convertTemperature", () => {
         it.each([
             [293.15, 20],
-            [293.65, 20.5],
+            [293.65, 20.5]
         ])("should convert %s kelvin temperature to %s celcius.", (
             kelvinTemp,
-            expected,
+            expected
         ) => {
             expect(convertTemperature(TemperatureScale.CELSIUS, kelvinTemp)).toBe(expected);
         });
 
         it.each([
             [266.483, 19.999400000000048], // 20 // rounding error
-            [266.7611, 20.49998000000004], // 20.5 // rounding error
+            [266.7611, 20.49998000000004] // 20.5 // rounding error
         ])("should convert %s kelvin temperature to %s celcius.", (
             kelvinTemp,
-            expected,
+            expected
         ) => {
             expect(convertTemperature(TemperatureScale.FAHRENHEIT, kelvinTemp)).toBe(expected);
         });
@@ -28,10 +28,10 @@ describe("Component: temperature-unit", async () => {
         it.each([
             [TemperatureScale.CELSIUS, "C"],
             [TemperatureScale.FAHRENHEIT, "F"],
-            ["unknown", "K"],
+            ["unknown", "K"]
         ])("given %s temperature scale, %s should be returned as a symbol.", (
             scale,
-            expected,
+            expected
         ) => {
             expect(getTemperatureSymbol(scale as TemperatureScale)).toEqual(expected);
         });

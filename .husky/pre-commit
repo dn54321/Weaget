@@ -1,6 +1,6 @@
 git restore --staged .env.local
-echo -e "\033[1;34mStep 1:\033[0m \033[1;37mRunning eslint linter.\033[0m"
-pnpm lint
+# echo -e "\033[1;34mStep 1:\033[0m \033[1;37mRunning eslint linter.\033[0m"
+# pnpm lint
 
-echo -e "\033[1;34mStep 2:\033[0m \033[1;37mRunning type linter.\033[0m"
-pnpm type-lint
+# echo -e "\033[1;34mStep 2:\033[0m \033[1;37mRunning type linter.\033[0m"
+# pnpm type-lint

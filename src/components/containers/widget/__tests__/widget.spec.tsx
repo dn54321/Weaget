@@ -1,17 +1,17 @@
-import { describe, expect, it } from "vitest";
-import { Box } from "@mui/system";
-import BugReportIcon from "@mui/icons-material/BugReport";
 import { Widget } from "@components/containers/widget/widget";
+import BugReportIcon from "@mui/icons-material/BugReport";
+import { Box } from "@mui/system";
 import { withRender } from "@utils/render";
+import { describe, expect, it } from "vitest";
 
 describe("Component: Widget", () => {
     it("Widget should be able to render with correct title / subtitle.", () => {
-        const { getByText, getByLabelText } = withRender(
+        const { getByLabelText, getByText } = withRender(
             <Widget
-                title="mockTitle"
-                subtitle="subTitle"
                 rightDecorum={<BugReportIcon aria-label="test-icon" />}
-            />,
+                subtitle="subTitle"
+                title="mockTitle"
+            />
         );
         expect(getByText("mockTitle")).toBeInTheDocument();
         expect(getByText("subTitle")).toBeInTheDocument();
@@ -22,7 +22,7 @@ describe("Component: Widget", () => {
         const { getByText } = withRender(
             <Widget title="mockTitle">
                 <Box>mockContent</Box>
-            </Widget>,
+            </Widget>
         );
         expect(getByText("mockTitle")).toBeInTheDocument();
         expect(getByText("mockContent")).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe("Component: Widget", () => {
         const { getByText } = withRender(
             <Widget title="mockTitle" variant="transparent">
                 <Box>mockContent</Box>
-            </Widget>,
+            </Widget>
         );
         expect(getByText("mockTitle")).toBeInTheDocument();
         expect(getByText("mockContent")).toBeInTheDocument();

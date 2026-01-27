@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
 import Logo from "@components/icon/core/logo-icon/logo-icon.component";
 import { withRender } from "@utils/render";
+import { describe, expect, it } from "vitest";
 
 describe("Component: logo-icon", () => {
     it("Widget should be able to render.", () => {

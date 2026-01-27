@@ -1,8 +1,8 @@
-import { describe, expect, it } from "vitest";
 import { LocalisationDropdownButton } from "@components/ui/localisation-dropdown-button/localisation-dropdown-button.component";
-import { SystemLocale } from "@project/src/types/system.types";
+import { SystemLocale } from "@src/types/system.types";
+import { withRender } from "@src/utils/render";
 import userEvent from "@testing-library/user-event";
-import { withRender } from "@project/src/utils/render";
+import { describe, expect, it } from "vitest";
 
 describe("Component: localisation-dropdown-button", async () => {
     it("should display a icon-button with aria-label support", async () => {
@@ -13,7 +13,7 @@ describe("Component: localisation-dropdown-button", async () => {
 
     it("should display a dropdown of options when the button is clicked", async () => {
         const user = userEvent.setup();
-        const { getByLabelText, getAllByRole } = withRender(<LocalisationDropdownButton />);
+        const { getAllByRole, getByLabelText } = withRender(<LocalisationDropdownButton />);
         const button = getByLabelText("component.localisationDropdownButton.chooseLanguage");
 
         await user.click(button);
@@ -27,7 +27,7 @@ describe("Component: localisation-dropdown-button", async () => {
         const { getAllByRole, getByLabelText } = withRender(
             <LocalisationDropdownButton
                 localesFilter={[SystemLocale.ENGLISH, SystemLocale.JAPANESE]}
-            />,
+            />
         );
         const button = getByLabelText("component.localisationDropdownButton.chooseLanguage");
 

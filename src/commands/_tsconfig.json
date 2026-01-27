@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "outDir": "./../../dist/commands",
+        "rootDir": ".",
+        "incremental": true,
+        "declaration": true
+    },
+    "ts-node": {
+      "esm": true
+    }
+    
+  }

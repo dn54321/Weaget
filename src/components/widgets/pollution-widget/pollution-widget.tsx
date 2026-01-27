@@ -1,8 +1,8 @@
-import * as React from "react";
+import { Widget } from "@components/containers/widget/widget";
 import { CircularProgress, SxProps } from "@mui/material";
-import { Iaqi, Pollution } from "@features/apicn-pollution/pollution.types";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
+import { circularProgressClasses } from "@mui/material/CircularProgress";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Table from "@mui/material/Table";
@@ -11,9 +11,9 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Widget } from "@components/containers/widget/widget";
-import { circularProgressClasses } from "@mui/material/CircularProgress";
+import { Iaqi, Pollution } from "@src/apis/apicn/pollution/pollution.types";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import * as React from "react";
 
 /*
     Pollution Card determines the overall
@@ -21,13 +21,13 @@ import { useSystemTranslation } from "@src/hooks/use-system-translation";
 */
 
 interface CircularProgressWithLabelProps {
-    value?: number;
-    loaded: boolean;
+    loaded: boolean
+    value?: number
 }
 
 interface PollutionRow {
-    chemical: JSX.Element;
-    amount: JSX.Element;
+    amount: JSX.Element
+    chemical: JSX.Element
 }
 
 function CircularProgressWithLabel(props: CircularProgressWithLabelProps) {
@@ -36,47 +36,47 @@ function CircularProgressWithLabel(props: CircularProgressWithLabelProps) {
     const circularProgressValue = props.value ?? 0;
     const variant = props.loaded ? "determinate" : "indeterminate";
     return (
-        <Box sx={{ position: "relative" }} width={width} height={width}>
+        <Box height={width} sx={{ position: "relative" }} width={width}>
             <svg width={width}>
                 <defs>
-                    <linearGradient id="my_gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <linearGradient id="my_gradient" x1="0%" x2="0%" y1="0%" y2="100%">
                         <stop offset="0%" stopColor="rgba(184, 74, 202, 1)" />
                         <stop offset="100%" stopColor="rgba(142, 66, 235, 1)" />
                     </linearGradient>
                 </defs>
             </svg>
             <CircularProgress
+                aria-valuenow={undefined}
                 className="absolute-center"
-                thickness={thickness}
-                variant={variant}
-                value={100}
+                role="none"
                 size={width}
                 sx={{ color: "#eee" }}
-                role="none"
-                aria-valuenow={undefined}
+                thickness={thickness}
+                value={100}
+                variant={variant}
             />
             <CircularProgress
-                className="absolute-center"
-                variant={variant}
-                size={width}
-                value={Math.min(circularProgressValue, 300) / 300 * 100}
-                thickness={thickness}
                 aria-busy={props.loaded}
-                aria-valuenow={circularProgressValue}
+                aria-label="Air Quality Index"
                 aria-valuemax={300}
                 aria-valuemin={0}
-                aria-label="Air Quality Index"
+                aria-valuenow={circularProgressValue}
+                className="absolute-center"
+                size={width}
                 sx={{
                     [`& .${circularProgressClasses.circle}`]: {
-                        strokeLinecap: "round",
+                        strokeLinecap: "round"
                     },
                     "svg circle": {
-                        stroke: "url(#my_gradient)",
-                    },
+                        stroke: "url(#my_gradient)"
+                    }
                 }}
+                thickness={thickness}
+                value={Math.min(circularProgressValue, 300) / 300 * 100}
+                variant={variant}
             />
 
-            <Box fontSize="30px" className="absolute-center">
+            <Box className="absolute-center" fontSize="30px">
                 {`${circularProgressValue}`}
             </Box>
         </Box>
@@ -90,23 +90,23 @@ const DotLoader = () => {
             sx={{
                 "&:before,&:after": {
                     height: "5px",
-                    width: "5px",
+                    width: "5px"
                 },
                 "height": "5px",
                 "left": "-9980px",
                 "top": "5px",
-                "width": "5px",
+                "width": "5px"
             }}
         />
     );
 };
 
-function createData(chemical: JSX.Element, amount: JSX.Element) {
-    return { amount, chemical };
+interface PollutionTableProps {
+    rows: Array<PollutionRow>
 }
 
-interface PollutionTableProps {
-    rows: Array<PollutionRow>;
+function createData(chemical: JSX.Element, amount: JSX.Element) {
+    return { amount, chemical };
 }
 
 function PollutionTable(props: PollutionTableProps) {
@@ -114,12 +114,12 @@ function PollutionTable(props: PollutionTableProps) {
     return (
         <TableContainer component={Box}>
             <Table
+                aria-label="simple table"
                 sx={{
                     "*": {
 
-                    },
+                    }
                 }}
-                aria-label="simple table"
             >
                 <TableHead>
                     <TableRow>
@@ -149,7 +149,7 @@ const pollutionLevelTranslationKey = [
     "component.widget.pollution.pollutionLevel.unhealthySensitive",
     "component.widget.pollution.pollutionLevel.unhealthy",
     "component.widget.pollution.pollutionLevel.veryUnhealthy",
-    "component.widget.pollution.pollutionLevel.hazardous",
+    "component.widget.pollution.pollutionLevel.hazardous"
 ];
 const pollutionWarningTranslationKey = [
     "component.widget.pollution.pollutionCaution.good",
@@ -157,7 +157,7 @@ const pollutionWarningTranslationKey = [
     "component.widget.pollution.pollutionCaution.unhealthySensitive",
     "component.widget.pollution.pollutionCaution.unhealthy",
     "component.widget.pollution.pollutionCaution.veryUnhealthy",
-    "component.widget.pollution.pollutionCaution.hazardous",
+    "component.widget.pollution.pollutionCaution.hazardous"
 ];
 
 const stringToTag: Record<string, JSX.Element> = {
@@ -198,7 +198,7 @@ const stringToTag: Record<string, JSX.Element> = {
             SO
             <sub>2</sub>
         </React.Fragment>
-    ),
+    )
 };
 
 // Not Used Yet..
@@ -225,8 +225,8 @@ function aqiRating(aqi: number) {
 const dataOrder: Array<keyof Iaqi> = ["neph", "pm25", "pm10", "o3", "no2", "so2", "co"];
 
 export interface PollutionWidgetProps {
-    pollutionData?: Pollution;
-    sx?: SxProps;
+    pollutionData?: Pollution
+    sx?: SxProps
 }
 
 export default function PollutionWidget(props: PollutionWidgetProps) {
@@ -259,21 +259,21 @@ export default function PollutionWidget(props: PollutionWidgetProps) {
                     {iaqiData.v}
                     {" "}
                     {rating}
-                </>,
+                </>
             ));
         });
     }
 
     return (
-        <Widget title={t("component.widget.pollution.title")} sx={props.sx}>
+        <Widget sx={props.sx} title={t("component.widget.pollution.title")}>
             <Box p="20px" pb="10px">
                 <Stack
-                    direction={{ md: "column", sm: "row", xs: "column" }}
                     alignItems={{ md: "stretch", sm: "center", xs: "stretch" }}
+                    direction={{ md: "column", sm: "row", xs: "column" }}
                     gap={2}
                 >
-                    <Stack direction="row" alignItems="center">
-                        <CircularProgressWithLabel value={props.pollutionData?.aqi} loaded={loaded} />
+                    <Stack alignItems="center" direction="row">
+                        <CircularProgressWithLabel loaded={loaded} value={props.pollutionData?.aqi} />
                         <Box ml="20px" width="max-content">
                             <Box fontSize="16px">{t("component.widget.pollution.airQualityIndex")}</Box>
                             <Box sx={{ color: "text.color" }}>
@@ -287,17 +287,17 @@ export default function PollutionWidget(props: PollutionWidgetProps) {
                 </Stack>
                 { loaded
                     ? (
-                            <>
-                                <Box mt="20px" color="black">{show && <PollutionTable rows={rows} />}</Box>
-                                <Link mt="10px" component="button" onClick={() => { setShow(!show); }} color="text.color">
-                                    {
-                                        show
-                                            ? t("component.widget.pollution.hideAdvancedPollutionDetails")
-                                            : t("component.widget.pollution.showAdvancedPollutionDetails")
-                                    }
-                                </Link>
-                            </>
-                        )
+                        <>
+                            <Box color="black" mt="20px">{show && <PollutionTable rows={rows} />}</Box>
+                            <Link color="text.color" component="button" mt="10px" onClick={() => { setShow(!show); }}>
+                                {
+                                    show
+                                        ? t("component.widget.pollution.hideAdvancedPollutionDetails")
+                                        : t("component.widget.pollution.showAdvancedPollutionDetails")
+                                }
+                            </Link>
+                        </>
+                    )
                     : <Box color="#4682B4" mt="20px">{t("component.widget.pollution.loading")}</Box>}
             </Box>
         </Widget>

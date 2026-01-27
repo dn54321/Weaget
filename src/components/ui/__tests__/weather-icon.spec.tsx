@@ -1,7 +1,7 @@
-import { afterEach, describe, expect, it } from "vitest";
 import { WeatherIcon } from "@components/ui/weather-icon";
 import { testQueryClient } from "@utils/query-client";
 import { withRender } from "@utils/render";
+import { afterEach, describe, expect, it } from "vitest";
 
 describe("Component: weather-icon", async () => {
     afterEach(() => {
@@ -14,7 +14,7 @@ describe("Component: weather-icon", async () => {
     });
 
     it.each(
-        [[200], [300], [500], [600], [700], [800], [801], [802], [803], [804]],
+        [[200], [300], [500], [600], [700], [800], [801], [802], [803], [804]]
     )("should be able to render weather icon with id '%d'.", (weatherId) => {
         withRender(<WeatherIcon id={weatherId} />);
     });

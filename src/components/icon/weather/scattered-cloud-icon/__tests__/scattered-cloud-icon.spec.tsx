@@ -1,6 +1,7 @@
-import { describe, expect, it } from "vitest";
-import { ScatteredCloud } from "..";
 import { withRender } from "@utils/render";
+import { describe, expect, it } from "vitest";
+
+import { ScatteredCloud } from "..";
 
 describe("Component: scattered-cloud-icon", () => {
     it("Widget should be able to render.", () => {
@@ -10,7 +11,7 @@ describe("Component: scattered-cloud-icon", () => {
     });
 
     it("Widget should not display title on decoration.", () => {
-        const { queryByTitle, getByRole } = withRender(<ScatteredCloud decoration />);
+        const { getByRole, queryByTitle } = withRender(<ScatteredCloud decoration />);
         expect(getByRole("img")).toBeInTheDocument();
         expect(queryByTitle("weather.icon.scatteredCloud.title")).not.toBeInTheDocument();
     });

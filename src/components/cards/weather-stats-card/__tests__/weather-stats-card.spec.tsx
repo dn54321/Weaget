@@ -1,27 +1,28 @@
-import { createWeatherCurrentMockData, createWeatherDailyMockData, createWeatherHourlyMockData } from "@features/weaget/__mocks__/weather.mock";
-import { describe, expect, it } from "vitest";
 import { getUvLevelTranslationKey, parseWeatherDetailStats } from "@components/cards/weather-stats-card/weather-stats-card.utils";
 import BugReportIcon from "@mui/icons-material/BugReport";
-import { HourlyWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
-import { WeatherStatsCard } from "./..";
+import { HourlyWeatherDetails } from "@src/apis/open-weather-map/one-call/one-call.type";
+import { createWeatherCurrentMockData, createWeatherDailyMockData, createWeatherHourlyMockData } from "@src/apis/weaget/weather/__mocks__/weather.mock";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import { testWrapper } from "@src/utils/wrappers";
 import { renderHook } from "@testing-library/react";
-import { testWrapper } from "@project/src/utils/wrappers";
-import { useSystemTranslation } from "@project/src/hooks/use-system-translation";
 import { withRender } from "@utils/render";
+import { describe, expect, it } from "vitest";
+
+import { WeatherStatsCard } from "./..";
 
 describe("Component: Weather Stats Card", () => {
     it("should render be able to render a stat.", () => {
-        const { getByText, getByLabelText } = withRender(
+        const { getByLabelText, getByText } = withRender(
             <WeatherStatsCard stats={[
                 {
                     compactValue: "mock-compact",
                     name: "mockStat",
                     statIcon: <BugReportIcon aria-label="test-icon" />,
                     unit: "mm",
-                    value: 20,
-                },
+                    value: 20
+                }
             ]}
-            />,
+            />
         );
         expect(getByText("mockStat")).toBeInTheDocument();
         expect(getByText("20mm")).toBeInTheDocument();
@@ -29,16 +30,16 @@ describe("Component: Weather Stats Card", () => {
     });
 
     it("should render be able to render a stat without unit.", () => {
-        const { getByText, getByLabelText } = withRender(
+        const { getByLabelText, getByText } = withRender(
             <WeatherStatsCard stats={[
                 {
                     compactValue: "mock-compact",
                     name: "mockStat",
                     statIcon: <BugReportIcon aria-label="test-icon" />,
-                    value: 20,
-                },
+                    value: 20
+                }
             ]}
-            />,
+            />
         );
 
         expect(getByText("mockStat")).toBeInTheDocument();
@@ -53,10 +54,10 @@ describe("Component: Weather Stats Card", () => {
                     compactValue: undefined,
                     name: "mockStat",
                     statIcon: <BugReportIcon aria-label="test-icon" />,
-                    value: undefined,
-                },
+                    value: undefined
+                }
             ]}
-            />,
+            />
         );
 
         expect(() => getByText("mockStat")).toThrow();
@@ -69,7 +70,7 @@ describe("Component: Weather Stats Card", () => {
             [3, "weather.uvIndex.moderate"],
             [6, "weather.uvIndex.high"],
             [8, "weather.uvIndex.veryHigh"],
-            [11, "weather.uvIndex.extreme"],
+            [11, "weather.uvIndex.extreme"]
         ])("UV Index of %d should output warning \"%s\"",
             (uvIndex: number | undefined, expectedText: string | undefined) => {
                 expect(getUvLevelTranslationKey(uvIndex)).toBe(expectedText);
@@ -83,17 +84,17 @@ describe("Component: Weather Stats Card", () => {
             ["hourly weather w/ snow", { ...createWeatherHourlyMockData(), snow: 1 }],
             ["daily weather", createWeatherDailyMockData()],
             ["current weather", createWeatherCurrentMockData()],
-            ["empty object", {}],
+            ["empty object", {}]
         ])("should be able to parse %s.", (
             _: string,
-            data: object,
+            data: object
         ) => {
             const { result } = renderHook(() => useSystemTranslation(), { wrapper: testWrapper });
             expect(() => parseWeatherDetailStats(
                 data as HourlyWeatherDetails,
                 "Australia/Sydney",
                 result.current.t,
-                result.current.locale,
+                result.current.locale
             )).not.toThrow();
         });
     });

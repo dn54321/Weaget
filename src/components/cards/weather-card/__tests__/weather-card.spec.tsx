@@ -1,12 +1,13 @@
-import { WeatherCard, WeatherCardProps } from "./..";
-import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
-import { DateTime } from "luxon";
-import React from "react";
-import { TemperatureScale } from "@src/types/weather.types";
-import { createOpenWeatherWeatherMockData } from "@features/open-weather-map-one-call/__mocks__/oneCall.mock";
 import { faker } from "@faker-js/faker";
+import { createOpenWeatherWeatherMockData } from "@src/apis/open-weather-map/one-call/__mocks__/one-call.mock";
+import { TemperatureScale } from "@src/types/weather.types";
 import { testQueryClient } from "@utils/query-client";
 import { withRender } from "@utils/render";
+import { DateTime } from "luxon";
+import React from "react";
+import { afterEach, beforeEach, describe, expect, it, test, vi } from "vitest";
+
+import { WeatherCard, WeatherCardProps } from "./..";
 
 describe("Component: Weather Card", () => {
     let cardProps: WeatherCardProps;
@@ -21,7 +22,7 @@ describe("Component: Weather Card", () => {
             rainfallPercentage: faker.number.float({ fractionDigits: 2, max: 1, min: 0.1 }),
             timezone: faker.location.timeZone(),
             weatherCode: weather.id,
-            weatherDescription: weather.description,
+            weatherDescription: weather.description
         };
 
         weatherCard = (<WeatherCard {...cardProps} />);
@@ -42,7 +43,7 @@ describe("Component: Weather Card", () => {
     test.each([
         ["today", 0],
         ["tomorrow", 1],
-        ["Jan 03", 2],
+        ["Jan 03", 2]
     ]) (
         "Compact Weather Cards must display %s when offset %d days from 1st of Jan.",
         (dateString: string, offset: number) => {
@@ -51,7 +52,7 @@ describe("Component: Weather Card", () => {
             vi.setSystemTime(currentMockDate.toJSDate());
             const { getByText } = withRender(<WeatherCard {...cardProps} date={cardDate.toJSDate()} />);
             expect(getByText(dateString)).toBeInTheDocument();
-        },
+        }
     );
 
     it("Compact Weather Cards must contain the rain percentage if defined.", () => {

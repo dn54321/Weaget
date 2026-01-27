@@ -1,9 +1,10 @@
-import { LogoIconStyle, Text } from "./logo-icon.styles";
 import Box from "@mui/material/Box";
-import { BoxProps } from "@mui/system";
-import { Quicksand } from "next/font/google";
 import Stack from "@mui/material/Stack";
+import { BoxProps } from "@mui/system";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import { Quicksand } from "next/font/google";
+
+import { LogoIconStyle, Text } from "./logo-icon.styles";
 /*
     Official Logo of the Weaget Website
 */
@@ -11,11 +12,11 @@ import { useSystemTranslation } from "@src/hooks/use-system-translation";
 const quickSandFont = Quicksand({
     display: "swap",
     subsets: ["latin"],
-    weight: "600",
+    weight: "600"
 });
 
 export interface LogoProps {
-    hideShadow?: boolean;
+    hideShadow?: boolean
 }
 
 export default function Logo(props: BoxProps & LogoProps) {
@@ -24,21 +25,21 @@ export default function Logo(props: BoxProps & LogoProps) {
     return (
         <Box
             {...rest}
+            aria-label={`${t("webapp.name")} ${t("general.logo")}`}
             role="img"
             title={`${t("webapp.name")} ${t("general.logo")}`}
-            aria-label={`${t("webapp.name")} ${t("general.logo")}`}
         >
-            <Stack direction="row" alignItems="center">
+            <Stack alignItems="center" direction="row">
                 <LogoIconStyle sx={{
                     ...(hideShadow && {
                         "&:after": { filter: "none" },
-                        "&:before": { filter: "none" },
-                    }),
+                        "&:before": { filter: "none" }
+                    })
                 }}
                 />
                 <Text className={quickSandFont.className}>
-                    <Box component="span" color="lightblue">{t("webapp.logoFirst")}</Box>
-                    <Box component="span" color="lightpink">{t("webapp.logoSecond")}</Box>
+                    <Box color="lightblue" component="span">{t("webapp.logoFirst")}</Box>
+                    <Box color="lightpink" component="span">{t("webapp.logoSecond")}</Box>
                 </Text>
             </Stack>
         </Box>

@@ -1,15 +1,15 @@
-import { WidgetState, createWidgetStore } from "@src/stores/widget.store";
+import { createWidgetStore, WidgetState } from "@src/stores/widget.store";
 import React from "react";
 import { createContext } from "react";
 
 export interface WidgetProviderProps {
-    widgetState?: Partial<WidgetState>;
-    children: React.ReactNode;
+    children: React.ReactNode
+    widgetState?: Partial<WidgetState>
 }
 
 export type WidgetStoreApi = ReturnType<typeof createWidgetStore>;
-export const WidgetStoreContext = createContext<WidgetStoreApi | undefined>(
-    undefined,
+export const WidgetStoreContext = createContext<undefined | WidgetStoreApi>(
+    undefined
 );
 
 export default function WidgetStoreProvider(props: WidgetProviderProps) {

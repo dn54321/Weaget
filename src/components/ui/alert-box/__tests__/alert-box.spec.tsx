@@ -1,7 +1,8 @@
-import { describe, expect, it, vi } from "vitest";
-import { AlertBox } from "./..";
 import { fireEvent } from "@testing-library/react";
 import { withRender } from "@utils/render";
+import { describe, expect, it, vi } from "vitest";
+
+import { AlertBox } from "./..";
 
 describe("Component: alert-box", () => {
     it("should render be able to render an alert.", () => {
@@ -14,12 +15,12 @@ describe("Component: alert-box", () => {
                         id: "mockId",
                         message: "mockMessage",
                         type: "success",
-                        unclosable: false,
-                    },
+                        unclosable: false
+                    }
                 ]}
                 removeAlert={vi.fn()}
 
-            />,
+            />
         );
 
         expect(getByText("mockMessage")).toBeInTheDocument();
@@ -27,7 +28,7 @@ describe("Component: alert-box", () => {
 
     it("should call the removeAlert function when removing an alert.", () => {
         const deleteMessageMock = vi.fn();
-        const { getByText, getByLabelText } = withRender(
+        const { getByLabelText, getByText } = withRender(
             <AlertBox
                 alerts={[
                     {
@@ -36,11 +37,11 @@ describe("Component: alert-box", () => {
                         id: "mockId",
                         message: "mockMessage",
                         type: "success",
-                        unclosable: false,
-                    },
+                        unclosable: false
+                    }
                 ]}
                 removeAlert={deleteMessageMock}
-            />,
+            />
         );
 
         expect(getByText("mockMessage")).toBeInTheDocument();
@@ -52,7 +53,6 @@ describe("Component: alert-box", () => {
         const deleteMessageMock = vi.fn();
         const { getByText, queryByText } = withRender(
             <AlertBox
-                maxAlerts={1}
                 alerts={[
                     {
                         active: true,
@@ -60,7 +60,7 @@ describe("Component: alert-box", () => {
                         id: "mockId",
                         message: "messageA",
                         type: "success",
-                        unclosable: false,
+                        unclosable: false
                     },
                     {
                         active: true,
@@ -68,11 +68,12 @@ describe("Component: alert-box", () => {
                         id: "mockId",
                         message: "messageB",
                         type: "success",
-                        unclosable: false,
-                    },
+                        unclosable: false
+                    }
                 ]}
+                maxAlerts={1}
                 removeAlert={deleteMessageMock}
-            />,
+            />
         );
         expect(queryByText("messageA")).not.toBeInTheDocument();
         expect(getByText("messageB")).toBeInTheDocument();

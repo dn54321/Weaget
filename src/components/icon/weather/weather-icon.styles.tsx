@@ -1,12 +1,13 @@
-import { Box } from "@mui/system";
-import { WeatherParticleProps } from "./weather-icon.types";
 import { styled } from "@mui/material";
+import { Box } from "@mui/system";
+
+import { WeatherParticleProps } from "./weather-icon.types";
 
 export const WeatherIconContainer = styled(Box) ({
     height: "1em",
     position: "relative",
     userSelect: "none",
-    width: "1em",
+    width: "1em"
 });
 
 export const Sun = styled(Box)<WeatherParticleProps>(props => ({
@@ -19,7 +20,7 @@ export const Sun = styled(Box)<WeatherParticleProps>(props => ({
     position: "absolute",
     top: props.top ? props.top : "50%",
     transform: "translate(-50%, -50%)",
-    width: "1em",
+    width: "1em"
 }));
 
 export const Moon = styled(Box)<WeatherParticleProps>(props => ({
@@ -32,7 +33,7 @@ export const Moon = styled(Box)<WeatherParticleProps>(props => ({
     position: "absolute",
     top: props.top ?? "50%",
     transform: "translate(-50%, -50%)",
-    width: "1em",
+    width: "1em"
 }));
 
 export const Bolt = styled(Box)<WeatherParticleProps>(props => ({
@@ -44,7 +45,7 @@ export const Bolt = styled(Box)<WeatherParticleProps>(props => ({
         left: `calc(${props.left ?? "50%"} - 0.2em)`,
         top: `calc(${props.top ?? "50%"} + 0.4em)`,
         transform: "translate(-50%, -50%) rotate(40deg)",
-        transformOrigin: "center",
+        transformOrigin: "center"
     },
     "&:before": {
         borderBottom: "0.7em solid #fada5e",
@@ -54,7 +55,7 @@ export const Bolt = styled(Box)<WeatherParticleProps>(props => ({
         left: `calc(${props.left ?? "50%"} + 0.2em)`,
         top: `calc(${props.top ?? "50%"} - 0.4em)`,
         transform: "translate(-50%, -50%) rotate(40deg)",
-        transformOrigin: "center",
+        transformOrigin: "center"
     },
     "&:before,&:after": {
         boxSizing: "border-box",
@@ -63,8 +64,8 @@ export const Bolt = styled(Box)<WeatherParticleProps>(props => ({
         filter: "drop-shadow(0px 0px 2px #eee)",
         height: "0px",
         position: "absolute",
-        width: "0px",
-    },
+        width: "0px"
+    }
 }));
 
 export const Cloud = styled(Box)<WeatherParticleProps>(props => ({
@@ -74,7 +75,7 @@ export const Cloud = styled(Box)<WeatherParticleProps>(props => ({
     filter: "drop-shadow(0px 0px 2em #eee)",
     height: props.height ? props.height : "0.2em",
     position: "absolute",
-    transform: "translate(-50%, -50%)",
+    transform: "translate(-50%, -50%)"
 }));
 
 /* Currently Not Used */
@@ -103,7 +104,7 @@ export const Cloud = styled(Box)<WeatherParticleProps>(props => ({
 // }));
 
 export const GreyCloud = styled(Cloud) (() => ({
-    backgroundColor: "#c9c9c9",
+    backgroundColor: "#c9c9c9"
 }));
 
 export const Rain = styled(Box)<WeatherParticleProps>(props => ({
@@ -113,17 +114,17 @@ export const Rain = styled(Box)<WeatherParticleProps>(props => ({
     filter: "drop-shadow(0px 0px 2em #eee)",
     height: "0.08em",
     position: "absolute",
-    transform: "translate(-50%, -50%) rotate(50deg)",
+    transform: "translate(-50%, -50%) rotate(50deg)"
 }));
 
 export const Snow1 = styled(Box)<WeatherParticleProps>(props => ({
     "&:after": {
         transform: "translate(-50%, -50%) rotate(calc(var(--angle) + 90deg))",
-        transformOrigin: "center",
+        transformOrigin: "center"
     },
     "&:before": {
         transform: "translate(-50%, -50%) rotate(var(--angle))",
-        transformOrigin: "center",
+        transformOrigin: "center"
     },
     "&:before,&:after": {
         backgroundColor: "var(--snowColor)",
@@ -136,19 +137,19 @@ export const Snow1 = styled(Box)<WeatherParticleProps>(props => ({
         left: `calc(${props.left ?? "50%"})`,
         position: "absolute",
         top: `calc(${props.top ?? "50%"})`,
-        width: props.width ?? "var(--snowWidth)",
+        width: props.width ?? "var(--snowWidth)"
     },
     "--angle": (props.angle ?? 0) + "deg",
     "--snowColor": "#2caab6",
     "--snowHeight": "0.05em",
-    "--snowWidth": "0.3em",
+    "--snowWidth": "0.3em"
 }));
 
 export const Snow2 = (props: WeatherParticleProps) => {
     return (
         <>
-            <Snow1 top={props.top} left={props.left} height={props.height} />
-            <Snow1 angle="45" top={props.top} left={props.left} height={props.height} filter="brightness(130%)" />
+            <Snow1 height={props.height} left={props.left} top={props.top} />
+            <Snow1 angle="45" filter="brightness(130%)" height={props.height} left={props.left} top={props.top} />
         </>
     );
 };

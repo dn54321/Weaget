@@ -1,5 +1,13 @@
 import { ZodError } from "zod";
 
+export function createNextResponseError(message: string, statusCode: number) {
+    const errorId = crypto.randomUUID();
+    return Response.json({
+        id: errorId,
+        message: message
+    }, { status: statusCode });
+}
+
 export function extractQueryParams(url: string) {
     const { searchParams } = new URL(url);
     return Object.fromEntries(searchParams);
@@ -13,7 +21,7 @@ export function handleNextResponseError(err: Error, message: string) {
         return Response.json({
             errors: err.issues,
             id: errorId,
-            message: errorMessage,
+            message: errorMessage
         }, { status: 400 });
     }
 
@@ -21,14 +29,6 @@ export function handleNextResponseError(err: Error, message: string) {
     const errorMessage = message;
     return Response.json({
         id: errorId,
-        message: errorMessage,
+        message: errorMessage
     }, { status: 500 });
-}
-
-export function createNextResponseError(message: string, statusCode: number) {
-    const errorId = crypto.randomUUID();
-    return Response.json({
-        id: errorId,
-        message: message,
-    }, { status: statusCode });
 }

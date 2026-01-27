@@ -1,16 +1,16 @@
-import { SettingState, createSettingsStore } from "@src/stores/settings.store";
+import { createSettingsStore, SettingState } from "@src/stores/settings.store";
 import React from "react";
 import { createContext } from "react";
 
 export interface SettingProviderProps {
-    settings?: Partial<SettingState>;
-    children: React.ReactNode;
-    temporary?: boolean;
+    children: React.ReactNode
+    settings?: Partial<SettingState>
+    temporary?: boolean
 }
 
 export type SettingStoreApi = ReturnType<typeof createSettingsStore>;
 export const SettingsStoreContext = createContext<SettingStoreApi | undefined>(
-    undefined,
+    undefined
 );
 
 export default function SettingsStoreProvider(props: SettingProviderProps) {

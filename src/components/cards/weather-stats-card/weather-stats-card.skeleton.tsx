@@ -1,10 +1,11 @@
 import { Box, Card, Skeleton, Stack, SxProps } from "@mui/material";
+
 import { CardUnorderedList } from "./weather-stats-card.styles";
 
 export interface WeatherStatsCardSkeletonProps {
-    statsCount?: number;
-    transparent?: boolean;
-    sx?: SxProps;
+    statsCount?: number
+    sx?: SxProps
+    transparent?: boolean
 }
 
 export default function WeatherStatsCardSkeleton(props: WeatherStatsCardSkeletonProps) {
@@ -20,20 +21,20 @@ export default function WeatherStatsCardSkeleton(props: WeatherStatsCardSkeleton
                 {
                     Array(statsCount).fill(0).map((_, idx) => (
                         <Stack
-                            direction="row"
                             component="li"
+                            direction="row"
                             key={idx}
                             sx={{
                                 margin: "10px",
-                                width: "150px",
+                                width: "150px"
                             }}
                         >
-                            <Box width="40px" height="40px">
-                                <Skeleton variant="rectangular" width={40} height={40} />
+                            <Box height="40px" width="40px">
+                                <Skeleton height={40} variant="rectangular" width={40} />
                             </Box>
                             <Box ml="10px">
-                                <Skeleton variant="text" width="90px" sx={{ lineHeight: 1.25 }} />
-                                <Skeleton variant="text" width="60px" sx={{ lineHeight: 1.25 }} />
+                                <Skeleton sx={{ lineHeight: 1.25 }} variant="text" width="90px" />
+                                <Skeleton sx={{ lineHeight: 1.25 }} variant="text" width="60px" />
                             </Box>
                         </Stack>
                     ))

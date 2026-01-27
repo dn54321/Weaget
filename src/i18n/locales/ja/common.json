@@ -139,6 +139,10 @@
       "hourlyWeatherStats": "時間ごとの気象統計",
       "collapse": "アコーディオンを折りたたんで天気の詳細を非表示にします",
       "expand": "アコーディオンを展開してすべての天気の詳細を表示します"
+    },
+    "navbar": {
+      "openSearchBar": "検索バーを開く",
+      "goBacktoNavbar": "ナビゲーションバーに戻る"
     }
   },
   "weather": {
@@ -228,6 +232,9 @@
         "description": "雲を伴う稲妻。",
         "title": "雷雨"
       }
+    },
+    "error": {
+      "fetchFailed": "天気データの取得中にエラーが発生しました。一部の要素が応答しない可能性があります。"
     }
   },
   "language": {
@@ -281,9 +288,6 @@
   "theme": {
     "darkTheme": "ダークテーマ",
     "lightTheme": "ライトテーマ"
-  },
-  "directions": {
-    "goBack": "戻る"
   },
   "general": {
     "logo": "ロゴ"

@@ -1,10 +1,11 @@
-import * as math from "@src/utils/math";
 import { Box } from "@mui/system";
-import { MeasurementScale } from "@src/types/measurement.types";
-import React from "react";
-import { convertSpeedMeasurement } from "./speed-unit.utils";
 import { useSettingStore } from "@src/hooks/stores/use-setting-store";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import { MeasurementScale } from "@src/types/measurement.types";
+import * as math from "@src/utils/math";
+import React from "react";
+
+import { convertSpeedMeasurement } from "./speed-unit.utils";
 
 /*
      SpeedUnit
@@ -16,9 +17,9 @@ import { useSystemTranslation } from "@src/hooks/use-system-translation";
 */
 
 interface MeasurementUnitProps {
-    decimals?: number;
-    symbol?: boolean;
-    value: number;
+    decimals?: number
+    symbol?: boolean
+    value: number
 }
 
 export function getSymbol(temperatureScale: string) {
@@ -32,7 +33,7 @@ export function getSymbol(temperatureScale: string) {
                     sx={{
                         position: "relative",
                         top: "-0.5em",
-                        verticalAlign: "top",
+                        verticalAlign: "top"
                     }}
                 >
                     -1

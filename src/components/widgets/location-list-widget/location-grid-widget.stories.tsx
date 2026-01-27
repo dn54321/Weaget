@@ -1,42 +1,43 @@
-import { LocationListWidget, type LocationListWidgetProps } from ".";
+import { createNearbyLocationMockData } from "@src/apis/weaget/nearby-location/__mocks__/nearby-location.mock";
 import { Meta, StoryObj } from "@storybook/react";
-import { createNearbyLocationMockData } from "@features/weaget/__mocks__/nearby-location.mock";
 import { storybookWrapper } from "@utils/wrappers";
+
+import { LocationListWidget, type LocationListWidgetProps } from ".";
 type StoryType = LocationListWidgetProps & { width: number };
 
 const meta: Meta<StoryType> = {
+    args: {
+        locationData: createNearbyLocationMockData({ count: 8 }),
+        width: 400
+    },
     argTypes: {
         locationData: {
             description: "Location data object.",
-            name: "Location Data",
+            name: "Location Data"
         },
         width: {
             control: {
                 max: 1000,
                 min: 0,
                 step: 1,
-                type: "range",
+                type: "range"
             },
             defaultValue: 400,
             description: "Card width.",
             name: "Width",
-            type: { name: "number", required: false },
-        },
-    },
-    args: {
-        locationData: createNearbyLocationMockData({ count: 8 }),
-        width: 400,
+            type: { name: "number", required: false }
+        }
     },
     component: LocationListWidget,
     decorators: [storybookWrapper],
     parameters: {
         layout: "centered",
         nextjs: {
-            appDirectory: true,
-        },
+            appDirectory: true
+        }
     },
     tags: ["autodocs"],
-    title: "Widgets/Location List Widget",
+    title: "Widgets/Location List Widget"
 } satisfies Meta<StoryType>;
 
 export default meta;
@@ -49,16 +50,16 @@ export const Component: Story = {
             <LocationListWidget
                 {...props}
                 sx={{
-                    width: width,
+                    width: width
                 }}
             />
         );
-    },
+    }
 };
 
 export const Skeleton: Story = {
     args: {
-        locationData: undefined,
+        locationData: undefined
     },
     render: (args) => {
         const { width, ...props } = args;
@@ -66,9 +67,9 @@ export const Skeleton: Story = {
             <LocationListWidget
                 {...props}
                 sx={{
-                    width: width,
+                    width: width
                 }}
             />
         );
-    },
+    }
 };

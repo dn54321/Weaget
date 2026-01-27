@@ -1,5 +1,5 @@
-import { AlertMessage } from "@src/hooks/use-alert";
 import { faker } from "@faker-js/faker";
+import { AlertMessage } from "@src/hooks/use-alert";
 
 export function createOpenWeatherAlertMessageMockData(): AlertMessage {
     return {
@@ -8,6 +8,6 @@ export function createOpenWeatherAlertMessageMockData(): AlertMessage {
         id: faker.lorem.lines(),
         message: faker.lorem.lines(),
         type: faker.helpers.arrayElement(["success", "info", "warning", "error"]),
-        unclosable: faker.datatype.boolean(),
+        unclosable: faker.datatype.boolean()
     };
 }

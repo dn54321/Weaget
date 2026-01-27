@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./built",
+    "outDir": "./dist",
     "allowJs": true,
     "target": "ESNext",
     "lib": [
@@ -11,9 +11,9 @@
     "skipLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
     "incremental": true,
     "esModuleInterop": true,
+    "declaration": true,
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
@@ -21,38 +21,47 @@
     "emitDecoratorMetadata": false,
     "experimentalDecorators": false,
     "jsx": "preserve",
-    "baseUrl": ".",
+    "rootDir": "src",
     "paths": {
-      "@components/*": ["./src/components/*"],
-      "@errors/*": ["./src/errors/*"],
-      "@features/*": ["./src/features/*"],
-      "@services/*": ["./src/services/*"],
-      "@slices/*": ["./src/slices/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@api/*": ["./pages/api/*"],
-      "@styles/*": ["./styles/*"],
-      "@public/*": ["./public/*"],
-      "@app/*": ["./pages/app/*"],
-      "@src/*": ["./src/*"],
-      "@project/*": ["./*"],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@errors/*": [
+        "./src/errors/*"
+      ],
+      "@collections/*": [
+        "./src/collections/*"
+      ],
+      "@services/*": [
+        "./src/features/*"
+      ],
+      "@slices/*": [
+        "./src/slices/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@app/*": [
+        "./src/app/*"
+      ],
+      "@src/*": [
+        "./src/*"
+      ]
     },
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "noEmit": true
   },
   "exclude": [
     "node_modules",
-    "build"
+    "dist"
   ],
   "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts", 
-    "next.config.js", "src/i18n/i18next-scanner.config.js", 
-    "vitest-setup.ts"
+    "src/**/*",
+    ".next/types/**/*.ts"
   ]
 }

@@ -1,5 +1,5 @@
+import { getOptions } from "@src/i18n/settings";
 import { describe, expect, it } from "vitest";
-import { getOptions } from "@project/src/i18n/settings";
 
 describe("i18n Settings", async () => {
     it("should have getOptions function return an object", () => {
@@ -11,7 +11,7 @@ describe("i18n Settings", async () => {
         const result = getOptions("testLng", "testNs");
         expect(result).toMatchObject({
             lng: "testLng",
-            ns: "testNs",
+            ns: "testNs"
         });
     });
 });

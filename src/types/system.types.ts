@@ -1,19 +1,19 @@
-export enum SystemTheme {
-    DARK = "dark",
-    LIGHT = "light",
-    SYSTEM = "system",
+export enum SystemLanguage {
+    CHINESE = "chinese",
+    ENGLISH = "english",
+    JAPANESE = "japanese",
+    KOREAN = "korean"
 }
 
 export enum SystemLocale {
+    CHINESE = "zh",
     ENGLISH = "en",
     JAPANESE = "ja",
-    KOREAN = "ko",
-    CHINESE = "zh",
+    KOREAN = "ko"
 }
 
-export enum SystemLanguage {
-    ENGLISH = "english",
-    JAPANESE = "japanese",
-    KOREAN = "korean",
-    CHINESE = "chinese",
+export enum SystemTheme {
+    DARK = "dark",
+    LIGHT = "light",
+    SYSTEM = "system"
 }

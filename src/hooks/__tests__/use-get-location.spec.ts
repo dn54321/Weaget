@@ -1,13 +1,13 @@
-import { afterEach, describe, expect, it, test } from "vitest";
-import { renderHook, waitFor } from "@testing-library/react";
-import { HttpResponse } from "msw";
-import { createLocationLookupMock } from "@features/weaget/__mocks__/location-lookup.mock";
-import locationLookupSchema from "@features/weaget/location-lookup/location-lookup.schema";
-import { mockLocationLookupHandle } from "@features/weaget/__mocks__/location-lookup.handler";
 import { server } from "@project/vitest-setup";
+import { mockLocationLookupHandle } from "@src/apis/weaget/location-lookup/__mocks__/location-lookup.handler";
+import { createLocationLookupMock } from "@src/apis/weaget/location-lookup/__mocks__/location-lookup.mock";
+import locationLookupSchema from "@src/apis/weaget/location-lookup/location-lookup.schema";
+import { useGetLocation } from "@src/hooks/use-get-location";
+import { renderHook, waitFor } from "@testing-library/react";
 import { testQueryClient } from "@utils/query-client";
 import { testWrapper } from "@utils/wrappers";
-import { useGetLocation } from "@src/hooks/use-get-location";
+import { HttpResponse } from "msw";
+import { afterEach, describe, expect, it, test } from "vitest";
 
 describe("Hooks - use-get-location", async () => {
     afterEach(() => {
@@ -22,7 +22,7 @@ describe("Hooks - use-get-location", async () => {
             server.use(mockLocationLookupHandle(HttpResponse.json(locationLookupMockData)));
             const { result } = renderHook(
                 () => useGetLocation("mockLocation"),
-                { wrapper: testWrapper },
+                { wrapper: testWrapper }
             );
 
             await waitFor(() => expect(result.current.isSuccess).toBe(true));
@@ -35,7 +35,7 @@ describe("Hooks - use-get-location", async () => {
             server.use(mockLocationLookupHandle(HttpResponse.json(locationLookupMockData)));
             const { result } = renderHook(
                 () => useGetLocation("mockLocation", "mockRegion"),
-                { wrapper: testWrapper },
+                { wrapper: testWrapper }
             );
 
             await waitFor(() => expect(result.current.isSuccess).toBe(true));
@@ -43,17 +43,17 @@ describe("Hooks - use-get-location", async () => {
         });
 
         test.each([
-            [401], [403], [404], [405], [406], [500], [502], [504],
+            [401], [403], [404], [405], [406], [500], [502], [504]
         ])("hook should return throw error upon receiving request with invalid status code. (%d)",
             async (statusCode: number) => {
                 const locationLookupMockData = createLocationLookupMock();
                 server.use(mockLocationLookupHandle(
-                    HttpResponse.json(locationLookupMockData, { status: statusCode }),
+                    HttpResponse.json(locationLookupMockData, { status: statusCode })
                 ));
 
                 const { result } = renderHook(
                     () => useGetLocation("mockLocation"),
-                    { wrapper: testWrapper },
+                    { wrapper: testWrapper }
                 );
 
                 await waitFor(() => expect(result.current.isError).toBe(true));

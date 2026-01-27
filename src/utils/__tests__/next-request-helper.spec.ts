@@ -1,15 +1,15 @@
-import { describe, expect, it } from "vitest";
 import { extractQueryParams } from "@utils/next-request-helper";
+import { describe, expect, it } from "vitest";
 
 describe("Utils - next-request-helper", () => {
     describe("extractQueryParams", () => {
         it.each([
             ["https://www.example.com?lat=1.1234&lng=2.2345", { lat: "1.1234", lng: "2.2345" }],
             ["https://www.example.com", {}],
-            ["https://www.examp.com?str=abc&num=123", { num: "123", str: "abc" }],
+            ["https://www.examp.com?str=abc&num=123", { num: "123", str: "abc" }]
         ])("Url %s should have query params %o.", (
             url: string,
-            result: Record<string, string>,
+            result: Record<string, string>
         ) => {
             expect(extractQueryParams(url)).toEqual(result);
         });

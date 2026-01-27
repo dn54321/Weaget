@@ -1,36 +1,23 @@
 import "@testing-library/jest-dom/vitest";
-import { setupServer } from "msw/node";
-import { apicnPollutionHandler } from "./src/features/apicn-pollution/__mocks__/pollution.handler";
-import { geonamesNearbyLocationHandler } from "./src/features/geonames-nearby-search/__mocks__/nearby-location.handler";
-import { googleLocationAutoCompleteHandler } from "./src/features/google-geocode/__mocks__/location-auto-complete.handler";
-import { googleLocationLookupHandler } from "./src/features/google-geocode/__mocks__/location-lookup.handler";
-import { ipinfoCurrentLocationHandler } from "./src/features/ipinfo-current-location/__mocks__/current-location.handler";
-import { openWeatherOneCallHandler } from "./src/features/open-weather-map-one-call/__mocks__/onecall.handler";
-import { autoCompleteHandler } from "./src/features/weaget/__mocks__/auto-complete.handler";
-import { currentLocationHandler } from "./src/features/weaget/__mocks__/current-location.handler";
-import { locationLookupHandler } from "./src/features/weaget/__mocks__/location-lookup.handler";
-import { nearbyLocationHandler } from "./src/features/weaget/__mocks__/nearby-location.handler";
-import { pollutionHandler } from "./src/features/weaget/__mocks__/pollution.handler";
-import { weatherHandler } from "./src/features/weaget/__mocks__/weather.handler";
 import { afterEach, vi } from "vitest";
+
 import { cleanup } from "@testing-library/react";
+
+import { mockApicnApiHandler } from "./src/apis/apicn/__mocks__/apicn.handler";
+import { mockGeonameApiHandler } from "./src/apis/geonames/__mocks__/geonames.handler";
+import { mockGoogleApiHandler } from "./src/apis/google/__mocks__/google.handler";
+import { mockIpinfoApiHandler } from "./src/apis/ipinfo/__mocks__/ipinfo.handler";
+import { mockOpenWeatherMapApiHandler } from "./src/apis/open-weather-map/__mocks__/open-weather-map.handler";
+import { setupServer } from "msw/node";
 import { useState } from "react";
 
 // Mock every endpoint possible.
 export const server = setupServer(
-    ...apicnPollutionHandler,
-    ...geonamesNearbyLocationHandler,
-    ...googleLocationAutoCompleteHandler,
-    ...googleLocationLookupHandler,
-    ...ipinfoCurrentLocationHandler,
-    ...openWeatherOneCallHandler,
-
-    ...autoCompleteHandler,
-    ...nearbyLocationHandler,
-    ...currentLocationHandler,
-    ...locationLookupHandler,
-    ...pollutionHandler,
-    ...weatherHandler,
+    ...mockApicnApiHandler,
+    ...mockGeonameApiHandler,
+    ...mockGoogleApiHandler,
+    ...mockIpinfoApiHandler,
+    ...mockOpenWeatherMapApiHandler,
 );
 
 server.listen();

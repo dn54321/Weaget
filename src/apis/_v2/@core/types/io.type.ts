@@ -1,0 +1,1 @@
+export type Io<I, O> = (input: I) => O;

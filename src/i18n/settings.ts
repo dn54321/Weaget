@@ -13,6 +13,6 @@ export function getOptions(lng = DEFAULT_LOCALE, ns = defaultNS) {
         lng,
         ns,
         // debug: true,
-        supportedLngs: languages,
+        supportedLngs: languages
     };
 }

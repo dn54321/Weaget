@@ -1,14 +1,14 @@
 import { SxProps } from "@mui/system";
 
 export interface WeatherIconProps {
-    decoration?: boolean;
+    decoration?: boolean
 }
 
-export type WeatherParticleProps = {
-    left?: string;
-    top?: string;
-    height?: string;
-    filter?: string;
-    width?: string;
-    angle?: string;
-} & SxProps;
+export type WeatherParticleProps = SxProps & {
+    angle?: string
+    filter?: string
+    height?: string
+    left?: string
+    top?: string
+    width?: string
+};

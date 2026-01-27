@@ -1,9 +1,10 @@
-import { beforeAll, describe, expect, it } from "vitest";
-import { Pollution } from "@features/apicn-pollution/pollution.types";
-import { PollutionWidget } from "./..";
-import { createApicnPollutionResultMockData } from "@features/apicn-pollution/__mocks__/pollution.mock";
+import { createApicnPollutionResultMockData } from "@src/apis/apicn/pollution/__mocks__/pollution.mock";
+import { Pollution } from "@src/apis/apicn/pollution/pollution.types";
 import userEvent from "@testing-library/user-event";
 import { withRender } from "@utils/render";
+import { beforeAll, describe, expect, it } from "vitest";
+
+import { PollutionWidget } from "./..";
 
 describe("Component: pollution-widget", async () => {
     let pollutionData: Pollution;
@@ -13,7 +14,7 @@ describe("Component: pollution-widget", async () => {
 
     it("should contain a title.", () => {
         const { getByText } = withRender(
-            <PollutionWidget pollutionData={pollutionData} />,
+            <PollutionWidget pollutionData={pollutionData} />
         );
         expect(getByText("component.widget.pollution.title")).toBeInTheDocument();
     });
@@ -25,18 +26,18 @@ describe("Component: pollution-widget", async () => {
             ["component.widget.pollution.pollutionLevel.unhealthySensitive", 110],
             ["component.widget.pollution.pollutionLevel.unhealthy", 160],
             ["component.widget.pollution.pollutionLevel.veryUnhealthy", 210],
-            ["component.widget.pollution.pollutionLevel.hazardous", 310],
-        ],
+            ["component.widget.pollution.pollutionLevel.hazardous", 310]
+        ]
     )("should display '%s' air quality index when aqi is %d.", (
         quality: string,
-        aqi: number,
+        aqi: number
     ) => {
         const { getByText } = withRender(
             <PollutionWidget pollutionData={{
                 ...pollutionData,
-                aqi,
+                aqi
             }}
-            />,
+            />
         );
 
         expect(getByText(quality)).toBeInTheDocument();
@@ -45,8 +46,8 @@ describe("Component: pollution-widget", async () => {
 
     it("should have a button that shows more pollution stats.", async () => {
         const user = userEvent.setup();
-        const { getByText, getAllByRole } = withRender(
-            <PollutionWidget pollutionData={pollutionData} />,
+        const { getAllByRole, getByText } = withRender(
+            <PollutionWidget pollutionData={pollutionData} />
         );
         const openButton = getByText("component.widget.pollution.showAdvancedPollutionDetails");
         await user.click(openButton);
@@ -58,7 +59,7 @@ describe("Component: pollution-widget", async () => {
 
     it("should show skeleton when pollution data is loading.", () => {
         const { getByText } = withRender(
-            <PollutionWidget pollutionData={undefined} />,
+            <PollutionWidget pollutionData={undefined} />
         );
 
         expect(getByText("component.widget.pollution.loading")).toBeInTheDocument();
@@ -69,9 +70,9 @@ describe("Component: pollution-widget", async () => {
         const { getAllByRole, getByText } = withRender(
             <PollutionWidget pollutionData={{
                 ...pollutionData,
-                iaqi: {},
+                iaqi: {}
             }}
-            />,
+            />
         );
 
         const openButton = getByText("component.widget.pollution.showAdvancedPollutionDetails");

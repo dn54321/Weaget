@@ -1,10 +1,10 @@
-import { Box, Card, CardContent, Stack, Typography } from "@mui/material/";
-import { BoxProps, SxProps, keyframes, styled } from "@mui/system";
-import { CurrentWeatherDetails, DailyWeatherDetails, OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
-import { DateTime } from "luxon";
 import { TempUnit } from "@components/ui/temperature-unit";
-import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import { Box, Card, CardContent, Stack, Typography } from "@mui/material/";
+import { BoxProps, keyframes, styled, SxProps } from "@mui/system";
+import { CurrentWeatherDetails, DailyWeatherDetails, OneCallWeatherDetails } from "@src/apis/open-weather-map/one-call/one-call.type";
 import { useWidgetStore } from "@src/hooks/stores/use-widget-store";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import { DateTime } from "luxon";
 
 const CLOUD_COLOR = "white";
 const RAIN_CLOUD_COLOR = "#c9c9c9";
@@ -35,7 +35,7 @@ const snow = keyframes`
 const Scene = styled(Box)(() => ({
     animation: `${move} 100s infinite ease-in-out`,
     position: "absolute",
-    width: "1px",
+    width: "1px"
 }));
 
 const Cloud = (props: BoxProps & { rain?: boolean }) => {
@@ -53,7 +53,7 @@ const Cloud = (props: BoxProps & { rain?: boolean }) => {
                 "position": "absolute",
                 "transform": "translate(-50%,-50%)",
                 "width": "4em",
-                "zIndex": "2",
+                "zIndex": "2"
             }}
             />
         </Scene>
@@ -66,14 +66,14 @@ const Sun = styled(Box)(() => ({
         height: "2em",
         left: "1em",
         top: "5em",
-        width: "2em",
+        width: "2em"
     },
     "&:before,&:after": {
         backgroundColor: "rgba(255, 255, 255, .2)",
         boxShadow: "0 0 .1em 0 rgba(255, 255, 255, .3) inset, -.1em -.1em 0 .2em rgba(255, 255, 255, .1)",
         content: "''",
         display: "inline-block",
-        position: "absolute",
+        position: "absolute"
     },
     "background": "linear-gradient(120deg, #FFE5B4, #FFEB3B)",
     "borderRadius": "4em",
@@ -84,7 +84,7 @@ const Sun = styled(Box)(() => ({
     "position": "absolute",
     "right": "0px",
     "transform": "translate(-20%, -20%)",
-    "width": "8em",
+    "width": "8em"
 }));
 
 const Rain = (props: BoxProps & { delay: string }) => {
@@ -99,7 +99,7 @@ const Rain = (props: BoxProps & { delay: string }) => {
                 height: "0.7em",
                 position: "absolute",
                 transform: "translate(-50%,-50%) rotate(20deg)",
-                width: "0.1em",
+                width: "0.1em"
             }}
             >
             </Box>
@@ -121,62 +121,13 @@ const Snow = (props: BoxProps & { delay: string }) => {
                 opacity: "0.1",
                 position: "absolute",
                 transform: "translate(-50%,-50%) rotate(20deg)",
-                width: "0.3em",
+                width: "0.3em"
             }}
             >
             </Box>
         </Scene>
     );
 };
-
-function RainCloud(props: BoxProps) {
-    return (
-        <>
-            <Rain left={`calc(${props.left} + ${4 / 5 * 1 - 2}em)`} top={props.top} delay="600ms" />
-            <Rain left={`calc(${props.left} + ${4 / 5 * 2 - 2}em)`} top={props.top} delay="600ms" />
-            <Rain left={`calc(${props.left} + ${4 / 5 * 3 - 2}em)`} top={props.top} delay="600ms" />
-            <Rain left={`calc(${props.left} + ${4 / 5 * 4 - 2}em)`} top={props.top} delay="600ms" />
-            <Rain left={`calc(${props.left} + ${4 / 5 * 1 - 2}em)`} top={props.top} delay="300ms" />
-            <Rain left={`calc(${props.left} + ${4 / 5 * 2 - 2}em)`} top={props.top} delay="300ms" />
-            <Rain left={`calc(${props.left} + ${4 / 5 * 3 - 2}em)`} top={props.top} delay="300ms" />
-            <Rain left={`calc(${props.left} + ${4 / 5 * 4 - 2}em)`} top={props.top} delay="300ms" />
-            <Rain left={`calc(${props.left} + ${4 / 5 * 1 - 2}em)`} top={props.top} delay="0ms" />
-            <Rain left={`calc(${props.left} + ${4 / 5 * 2 - 2}em)`} top={props.top} delay="0ms" />
-            <Rain left={`calc(${props.left} + ${4 / 5 * 3 - 2}em)`} top={props.top} delay="0ms" />
-            <Rain left={`calc(${props.left} + ${4 / 5 * 4 - 2}em)`} top={props.top} delay="0ms" />
-            <Cloud {...props} rain />
-        </>
-    );
-}
-
-function SnowCloud(props: BoxProps) {
-    return (
-        <>
-            <Snow left={`calc(${props.left} + ${4 / 5 * 1 - 2}em)`} top={props.top} delay="1200ms" />
-            <Snow left={`calc(${props.left} + ${4 / 5 * 2 - 2}em)`} top={props.top} delay="1900ms" />
-            <Snow left={`calc(${props.left} + ${4 / 5 * 3 - 2}em)`} top={props.top} delay="800ms" />
-            <Snow left={`calc(${props.left} + ${4 / 5 * 4 - 2}em)`} top={props.top} delay="2300ms" />
-            <Snow left={`calc(${props.left} + ${4 / 5 * 1 - 2}em)`} top={props.top} delay="2600ms" />
-            <Snow left={`calc(${props.left} + ${4 / 5 * 2 - 2}em)`} top={props.top} delay="1500ms" />
-            <Snow left={`calc(${props.left} + ${4 / 5 * 3 - 2}em)`} top={props.top} delay="1800ms" />
-            <Snow left={`calc(${props.left} + ${4 / 5 * 4 - 2}em)`} top={props.top} delay="1300ms" />
-            <Snow left={`calc(${props.left} + ${4 / 5 * 1 - 2}em)`} top={props.top} delay="900ms" />
-            <Snow left={`calc(${props.left} + ${4 / 5 * 2 - 2}em)`} top={props.top} delay="300ms" />
-            <Snow left={`calc(${props.left} + ${4 / 5 * 3 - 2}em)`} top={props.top} delay="50ms" />
-            <Snow left={`calc(${props.left} + ${4 / 5 * 4 - 2}em)`} top={props.top} delay="100ms" />
-            <Cloud {...props} />
-        </>
-    );
-}
-
-function Rainy() {
-    return (
-        <>
-            <RainCloud left="75%" top="30%" />
-            <RainCloud left="60%" top="50%" />
-        </>
-    );
-}
 
 function Cloudy() {
     return (
@@ -187,38 +138,11 @@ function Cloudy() {
     );
 }
 
-function Sunny() {
-    return (
-        <>
-            <Sun left={{ md: "65%", sm: "62%", xs: "55%" }} top={{ sm: "0%", xs: "20%" }} />
-        </>
-    );
-}
-
-function ScatteredClouds() {
-    return (
-        <>
-            <Sun left={{ md: "65%", sm: "62%", xs: "55%" }} top={{ sm: "0%", xs: "20%" }} />
-            <Cloud left="77%" top="40%" fontSize="0.7em" />
-            <Cloud left="67%" top="60%" fontSize="0.7em" />
-        </>
-    );
-}
-
 function FewClouds() {
     return (
         <>
             <Sun left={{ md: "65%", sm: "62%", xs: "55%" }} top={{ sm: "0%", xs: "20%" }} />
-            <Cloud left="65%" top="65%" fontSize="0.5em" height="4em" />
-        </>
-    );
-}
-
-function Snowy() {
-    return (
-        <>
-            <SnowCloud left="75%" top="30%" />
-            <SnowCloud left="60%" top="50%" />
+            <Cloud fontSize="0.5em" height="4em" left="65%" top="65%" />
         </>
     );
 }
@@ -230,7 +154,7 @@ function getBackgroundColor(id: number) {
     if (200 <= id && id < 600) return stormy;
     else if (600 <= id && id < 700) return snowy;
     return cloudy;
-};
+}
 
 function getBackgroundIcon(id: number): JSX.Element {
     switch (id) {
@@ -246,64 +170,121 @@ function getBackgroundIcon(id: number): JSX.Element {
         case 804: return (<Cloudy />);
         default: return (id % 100) ? getBackgroundIcon(id - (id % 100)) : <Cloudy />;
     }
+}
+
+function RainCloud(props: BoxProps) {
+    return (
+        <>
+            <Rain delay="600ms" left={`calc(${props.left} + ${4 / 5 * 1 - 2}em)`} top={props.top} />
+            <Rain delay="600ms" left={`calc(${props.left} + ${4 / 5 * 2 - 2}em)`} top={props.top} />
+            <Rain delay="600ms" left={`calc(${props.left} + ${4 / 5 * 3 - 2}em)`} top={props.top} />
+            <Rain delay="600ms" left={`calc(${props.left} + ${4 / 5 * 4 - 2}em)`} top={props.top} />
+            <Rain delay="300ms" left={`calc(${props.left} + ${4 / 5 * 1 - 2}em)`} top={props.top} />
+            <Rain delay="300ms" left={`calc(${props.left} + ${4 / 5 * 2 - 2}em)`} top={props.top} />
+            <Rain delay="300ms" left={`calc(${props.left} + ${4 / 5 * 3 - 2}em)`} top={props.top} />
+            <Rain delay="300ms" left={`calc(${props.left} + ${4 / 5 * 4 - 2}em)`} top={props.top} />
+            <Rain delay="0ms" left={`calc(${props.left} + ${4 / 5 * 1 - 2}em)`} top={props.top} />
+            <Rain delay="0ms" left={`calc(${props.left} + ${4 / 5 * 2 - 2}em)`} top={props.top} />
+            <Rain delay="0ms" left={`calc(${props.left} + ${4 / 5 * 3 - 2}em)`} top={props.top} />
+            <Rain delay="0ms" left={`calc(${props.left} + ${4 / 5 * 4 - 2}em)`} top={props.top} />
+            <Cloud {...props} rain />
+        </>
+    );
+}
+
+function Rainy() {
+    return (
+        <>
+            <RainCloud left="75%" top="30%" />
+            <RainCloud left="60%" top="50%" />
+        </>
+    );
+}
+
+function ScatteredClouds() {
+    return (
+        <>
+            <Sun left={{ md: "65%", sm: "62%", xs: "55%" }} top={{ sm: "0%", xs: "20%" }} />
+            <Cloud fontSize="0.7em" left="77%" top="40%" />
+            <Cloud fontSize="0.7em" left="67%" top="60%" />
+        </>
+    );
+}
+
+function SnowCloud(props: BoxProps) {
+    return (
+        <>
+            <Snow delay="1200ms" left={`calc(${props.left} + ${4 / 5 * 1 - 2}em)`} top={props.top} />
+            <Snow delay="1900ms" left={`calc(${props.left} + ${4 / 5 * 2 - 2}em)`} top={props.top} />
+            <Snow delay="800ms" left={`calc(${props.left} + ${4 / 5 * 3 - 2}em)`} top={props.top} />
+            <Snow delay="2300ms" left={`calc(${props.left} + ${4 / 5 * 4 - 2}em)`} top={props.top} />
+            <Snow delay="2600ms" left={`calc(${props.left} + ${4 / 5 * 1 - 2}em)`} top={props.top} />
+            <Snow delay="1500ms" left={`calc(${props.left} + ${4 / 5 * 2 - 2}em)`} top={props.top} />
+            <Snow delay="1800ms" left={`calc(${props.left} + ${4 / 5 * 3 - 2}em)`} top={props.top} />
+            <Snow delay="1300ms" left={`calc(${props.left} + ${4 / 5 * 4 - 2}em)`} top={props.top} />
+            <Snow delay="900ms" left={`calc(${props.left} + ${4 / 5 * 1 - 2}em)`} top={props.top} />
+            <Snow delay="300ms" left={`calc(${props.left} + ${4 / 5 * 2 - 2}em)`} top={props.top} />
+            <Snow delay="50ms" left={`calc(${props.left} + ${4 / 5 * 3 - 2}em)`} top={props.top} />
+            <Snow delay="100ms" left={`calc(${props.left} + ${4 / 5 * 4 - 2}em)`} top={props.top} />
+            <Cloud {...props} />
+        </>
+    );
+}
+
+function Snowy() {
+    return (
+        <>
+            <SnowCloud left="75%" top="30%" />
+            <SnowCloud left="60%" top="50%" />
+        </>
+    );
+};
+
+function Sunny() {
+    return (
+        <>
+            <Sun left={{ md: "65%", sm: "62%", xs: "55%" }} top={{ sm: "0%", xs: "20%" }} />
+        </>
+    );
 };
 
 const Container = styled(Card)(() => ({
     boxShadow: "0 0 .3em -.03em #fff",
     color: "white",
     height: "320px",
-    position: "relative",
+    position: "relative"
 }));
 
 const High = styled(Box)(() => ({
     display: "inline",
-    fontSize: "1em",
+    fontSize: "1em"
 }));
 
 const Low = styled(Box)(({ theme }) => ({
     color: theme.palette.grey[200],
     display: "inline",
-    fontSize: "0.5em",
+    fontSize: "0.5em"
 }));
 
 export interface WeatherDisplayWidgetProps {
-    weatherData?: OneCallWeatherDetails;
-    location?: string;
-    sx?: SxProps;
+    location?: string
+    sx?: SxProps
+    weatherData?: OneCallWeatherDetails
 }
 
 export interface WeatherTemperatureDisplayProps {
-    weather: DailyWeatherDetails | CurrentWeatherDetails | undefined;
-}
-
-export function WeatherTemperatureDisplay(props: WeatherTemperatureDisplayProps) {
-    if (props.weather === undefined) {
-        return;
-    }
-
-    if (typeof (props.weather.temp) === "number") {
-        return (<Box fontSize="4em" mt="0.2em"><TempUnit value={props.weather.temp} symbol /></Box>);
-    }
-
-    if (props.weather.temp.max && props.weather.temp.min) {
-        return (
-            <Box fontSize="4em" mt="0.2em">
-                <High><TempUnit value={props.weather.temp.max} /></High>
-                <Low><TempUnit value={props.weather.temp.min} /></Low>
-            </Box>
-        );
-    }
+    weather: CurrentWeatherDetails | DailyWeatherDetails | undefined
 }
 
 export default function WeatherDisplayWidget(props: WeatherDisplayWidgetProps) {
     const focusedWeather = useWidgetStore(state => state.focusedWeather) ?? props.weatherData?.current;
     const timezone = props.weatherData?.timezone;
-    const { t, locale } = useSystemTranslation();
+    const { locale, t } = useSystemTranslation();
     const weatherUpdated = focusedWeather
         ? DateTime
-                .fromJSDate(focusedWeather?.dt, { zone: timezone })
-                .setLocale(locale)
-                .toLocaleString(DateTime.DATETIME_MED)
+            .fromJSDate(focusedWeather?.dt, { zone: timezone })
+            .setLocale(locale)
+            .toLocaleString(DateTime.DATETIME_MED)
         : t("component.widget.weatherDisplay.fetchingDetails");
 
     const weatherCode = focusedWeather?.weather[0]?.id ?? 0;
@@ -333,12 +314,12 @@ export default function WeatherDisplayWidget(props: WeatherDisplayWidgetProps) {
                         <Box fontSize="1em" sx={{ textTransform: "capitalize" }}><b>{weatherDescription}</b></Box>
                     </Box>
                     <Box
-                        position="relative"
-                        width="100%"
                         height="100%"
+                        position="relative"
                         sx={{
-                            fontSize: { md: "4em", sm: "3em", xs: "2em" },
+                            fontSize: { md: "4em", sm: "3em", xs: "2em" }
                         }}
+                        width="100%"
                     >
                         {getBackgroundIcon(weatherCode)}
                     </Box>
@@ -346,4 +327,23 @@ export default function WeatherDisplayWidget(props: WeatherDisplayWidgetProps) {
             </CardContent>
         </Container>
     );
+}
+
+export function WeatherTemperatureDisplay(props: WeatherTemperatureDisplayProps) {
+    if (props.weather === undefined) {
+        return;
+    }
+
+    if (typeof (props.weather.temp) === "number") {
+        return (<Box fontSize="4em" mt="0.2em"><TempUnit symbol value={props.weather.temp} /></Box>);
+    }
+
+    if (props.weather.temp.max && props.weather.temp.min) {
+        return (
+            <Box fontSize="4em" mt="0.2em">
+                <High><TempUnit value={props.weather.temp.max} /></High>
+                <Low><TempUnit value={props.weather.temp.min} /></Low>
+            </Box>
+        );
+    }
 }

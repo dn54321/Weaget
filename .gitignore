@@ -17,7 +17,7 @@ coverage
 /out/
 
 # production
-/build
+/dist
 /built
 /false
 
@@ -49,3 +49,8 @@ yarn-error.log*
 # Others
 .vscode
 *storybook.log
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

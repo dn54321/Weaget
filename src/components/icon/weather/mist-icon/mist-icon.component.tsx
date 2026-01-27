@@ -1,6 +1,6 @@
 import { GreyCloud, Sun, WeatherIconContainer } from "@components/icon/weather/weather-icon.styles";
-import { BoxProps } from "@mui/system";
 import { WeatherIconProps } from "@components/icon/weather/weather-icon.types";
+import { BoxProps } from "@mui/system";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
 
 export function Mist(props: BoxProps & WeatherIconProps) {
@@ -14,10 +14,10 @@ export function Mist(props: BoxProps & WeatherIconProps) {
             role="img"
         >
             <Sun fontSize="0.7em" top="50%" />
-            <GreyCloud width="0.8em" top="75%" left="50%" sx={{ backgroundColor: "#fff", opacity: "0.8" }} />
-            <GreyCloud width="0.6em" top="50%" left="65%" sx={{ backgroundColor: "#fff", opacity: "0.8" }} />
-            <GreyCloud width="0.6em" top="55%" left="35%" sx={{ backgroundColor: "#fff", opacity: "0.8" }} />
-            <GreyCloud width="0.7em" top="65%" left="60%" sx={{ backgroundColor: "#fff", opacity: "0.8" }} />
+            <GreyCloud left="50%" sx={{ backgroundColor: "#fff", opacity: "0.8" }} top="75%" width="0.8em" />
+            <GreyCloud left="65%" sx={{ backgroundColor: "#fff", opacity: "0.8" }} top="50%" width="0.6em" />
+            <GreyCloud left="35%" sx={{ backgroundColor: "#fff", opacity: "0.8" }} top="55%" width="0.6em" />
+            <GreyCloud left="60%" sx={{ backgroundColor: "#fff", opacity: "0.8" }} top="65%" width="0.7em" />
         </WeatherIconContainer>
     );
 }

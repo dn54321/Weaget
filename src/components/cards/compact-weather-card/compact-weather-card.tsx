@@ -1,9 +1,10 @@
-import { Box, SxProps } from "@mui/material";
-import { High, Low, PaperContainer } from "./compact-weather-card.styles";
-import { DateTime } from "luxon";
 import { TempUnit } from "@components/ui/temperature-unit";
 import { WeatherIcon } from "@components/ui/weather-icon";
+import { Box, SxProps } from "@mui/material";
 import { useSystemSettings } from "@src/hooks/use-system-settings";
+import { DateTime } from "luxon";
+
+import { High, Low, PaperContainer } from "./compact-weather-card.styles";
 /*
     Compact weather card list is a grid containing simplified weather cards.
     Each weather card is a square box that contains:
@@ -19,14 +20,14 @@ import { useSystemSettings } from "@src/hooks/use-system-settings";
 // Styles
 
 export interface CompactWeatherCardProps {
-    date: Date;
-    timezone: string;
-    weatherCode: number;
-    rainfallPercentage: number;
-    maxTemperature: number;
-    minTemperature: number;
-    sx?: SxProps;
-    locale?: string;
+    date: Date
+    locale?: string
+    maxTemperature: number
+    minTemperature: number
+    rainfallPercentage: number
+    sx?: SxProps
+    timezone: string
+    weatherCode: number
 }
 
 // Compact weather card

@@ -1,14 +1,24 @@
 import { FetchError } from "@errors/fetch-error";
-import { NearbyLocation } from "@features/weaget/nearby-location/nearby-location.types";
-import { nearbyLocationSchema } from "@features/weaget/nearby-location/nearby-location.schema";
+import { nearbyLocationSchema } from "@src/apis/weaget/nearby-location/nearby-location.schema";
+import { NearbyLocation } from "@src/apis/weaget/nearby-location/nearby-location.types";
 import { useQuery } from "@tanstack/react-query";
 
+export function useGetNearbyLocation(lat?: number, lng?: number, lang?: string) {
+    return useQuery<Array<NearbyLocation>>({
+        enabled: Boolean(lat !== undefined && lng !== undefined),
+        queryFn: () => fetchNearbyLocations(lat, lng, lang),
+        queryKey: ["location-nearby-search", lat, lng, lang],
+        retry: 0,
+        staleTime: Infinity
+    });
+}
+
 async function fetchNearbyLocations(lat?: number, lng?: number, lang: string = "local") {
-    const url = `/api/location/nearby-search`;
+    const url = "/api/location/nearby-search";
     const queryParams = new URLSearchParams({
         lang: `${lang}`,
         lat: `${lat}`,
-        lng: `${lng}`,
+        lng: `${lng}`
     });
     const data = await fetch(`${url}?${queryParams}`)
         .then(async (data) => {
@@ -18,14 +28,4 @@ async function fetchNearbyLocations(lat?: number, lng?: number, lang: string = "
         });
 
     return nearbyLocationSchema.parse(data);
-}
-
-export function useGetNearbyLocation(lat?: number, lng?: number, lang?: string) {
-    return useQuery<Array<NearbyLocation>>({
-        enabled: Boolean(lat !== undefined && lng !== undefined),
-        queryFn: () => fetchNearbyLocations(lat, lng, lang),
-        queryKey: ["location-nearby-search", lat, lng, lang],
-        retry: 0,
-        staleTime: Infinity,
-    });
 }

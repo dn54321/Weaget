@@ -1,18 +1,18 @@
-import { DateTime } from "luxon";
-import { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
-import { SxProps } from "@mui/material";
 import { WeatherStatsCard } from "@components/cards/weather-stats-card";
-import { Widget } from "@components/containers/widget/widget";
 import { parseWeatherDetailStats } from "@components/cards/weather-stats-card/weather-stats-card.utils";
-import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import { Widget } from "@components/containers/widget/widget";
+import { SxProps } from "@mui/material";
+import { OneCallWeatherDetails } from "@src/apis/open-weather-map/one-call/one-call.type";
 import { useWidgetStore } from "@src/hooks/stores/use-widget-store";
+import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import { DateTime } from "luxon";
 export interface WeatherStatWidgetProps {
-    weatherData?: OneCallWeatherDetails;
-    sx?: SxProps;
+    sx?: SxProps
+    weatherData?: OneCallWeatherDetails
 }
 
 export default function WeatherStatWidget(props: WeatherStatWidgetProps) {
-    const { t, locale } = useSystemTranslation();
+    const { locale, t } = useSystemTranslation();
     const focusedWeather = useWidgetStore(state => state.focusedWeather) ?? props.weatherData?.current;
     const timezone = props.weatherData?.timezone;
     const updatedTimestamp = DateTime
@@ -21,10 +21,10 @@ export default function WeatherStatWidget(props: WeatherStatWidgetProps) {
 
     return (
         <Widget
-            title={t("component.widget.weatherStat.title")}
-            rightDecorum={updatedTimestamp.toLocaleString(DateTime.DATE_MED)}
             disableChildrenPadding
+            rightDecorum={updatedTimestamp.toLocaleString(DateTime.DATE_MED)}
             sx={props.sx}
+            title={t("component.widget.weatherStat.title")}
         >
             {
                 focusedWeather

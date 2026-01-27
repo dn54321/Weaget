@@ -1,13 +1,13 @@
-import { afterEach, describe, expect, it, test } from "vitest";
+import { server } from "@project/vitest-setup";
+import { mockCurrentLocationHandle } from "@src/apis/weaget/current-location/__mocks__/current-location.handler";
+import { createCurrentLocationMockData } from "@src/apis/weaget/current-location/__mocks__/current-location.mock";
+import weagetCurrentLocationSchema from "@src/apis/weaget/current-location/current-location.schema";
 import { queryCurrentLocation, useGetCurrentLocation } from "@src/hooks/use-get-current-location";
 import { renderHook, waitFor } from "@testing-library/react";
-import { HttpResponse } from "msw";
-import { createCurrentLocationMockData } from "@features/weaget/__mocks__/current-location.mock";
-import { mockCurrentLocationHandle } from "@features/weaget/__mocks__/current-location.handler";
-import { server } from "@project/vitest-setup";
 import { testQueryClient } from "@utils/query-client";
 import { testWrapper } from "@utils/wrappers";
-import weagetCurrentLocationSchema from "@features/weaget/current-location/current-location.schema";
+import { HttpResponse } from "msw";
+import { afterEach, describe, expect, it, test } from "vitest";
 
 describe("Hooks - use-get-current-location", async () => {
     afterEach(() => {
@@ -22,7 +22,7 @@ describe("Hooks - use-get-current-location", async () => {
             server.use(mockCurrentLocationHandle(HttpResponse.json(currentLocationMockData)));
             const { result } = renderHook(
                 () => useGetCurrentLocation(),
-                { wrapper: testWrapper },
+                { wrapper: testWrapper }
             );
 
             await waitFor(() => expect(result.current.isSuccess).toBe(true));
@@ -30,15 +30,15 @@ describe("Hooks - use-get-current-location", async () => {
         });
 
         test.each([
-            [401], [403], [404], [405], [406], [500], [502], [504],
+            [401], [403], [404], [405], [406], [500], [502], [504]
         ])("should throw error on invalid status code %i.", async (statusCode: number) => {
             const currentLocationMockData = createCurrentLocationMockData();
             server.use(mockCurrentLocationHandle(
-                HttpResponse.json(currentLocationMockData, { status: statusCode }),
+                HttpResponse.json(currentLocationMockData, { status: statusCode })
             ));
             const { result } = renderHook(
                 () => useGetCurrentLocation(),
-                { wrapper: testWrapper },
+                { wrapper: testWrapper }
             );
 
             await waitFor(() => expect(result.current.isError).toBe(true));
@@ -55,11 +55,11 @@ describe("Hooks - use-get-current-location", async () => {
         });
 
         test.each([
-            [401], [403], [404], [405], [406], [500], [502], [504],
+            [401], [403], [404], [405], [406], [500], [502], [504]
         ])("should throw error on invalid status code %i.", async (statusCode: number) => {
             const currentLocationMockData = createCurrentLocationMockData();
             server.use(mockCurrentLocationHandle(
-                HttpResponse.json(currentLocationMockData, { status: statusCode }),
+                HttpResponse.json(currentLocationMockData, { status: statusCode })
             ));
             await expect(queryCurrentLocation(testQueryClient)).rejects.toThrow();
         });

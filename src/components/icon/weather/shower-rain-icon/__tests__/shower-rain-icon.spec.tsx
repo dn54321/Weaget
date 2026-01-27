@@ -1,6 +1,7 @@
-import { describe, expect, it } from "vitest";
-import { ShowerRain } from "..";
 import { withRender } from "@utils/render";
+import { describe, expect, it } from "vitest";
+
+import { ShowerRain } from "..";
 
 describe("Component: shower-rain-icon", () => {
     it("Widget should be able to render.", () => {
@@ -10,7 +11,7 @@ describe("Component: shower-rain-icon", () => {
     });
 
     it("Widget should not display title on decoration.", () => {
-        const { queryByTitle, getByRole } = withRender(<ShowerRain decoration />);
+        const { getByRole, queryByTitle } = withRender(<ShowerRain decoration />);
         expect(getByRole("img")).toBeInTheDocument();
         expect(queryByTitle("weather.icon.showerRain.title")).not.toBeInTheDocument();
     });

@@ -1,34 +1,35 @@
-import { AppBar, Box, Container, Divider, IconButton, Link, MenuItem, Select, SelectChangeEvent, ToggleButton, ToggleButtonGroup, Toolbar } from "@mui/material";
-import { Icon, OutlinedLogo } from "./navbar.styles";
-import { NSXContainer, SXContainer } from "@styles/globals";
-import { SystemLocale, SystemTheme } from "@src/types/system.types";
+import { LocalisationDropdownButton } from "@components/ui/localisation-dropdown-button/localisation-dropdown-button.component";
+import { SearchBar } from "@components/ui/search-bar";
+import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import CloseIcon from "@mui/icons-material/Close";
-import Dialog from "@mui/material/Dialog";
-import { LocalisationDropdownButton } from "@components/ui/localisation-dropdown-button/localisation-dropdown-button.component";
-import { MeasurementScale } from "@src/types/measurement.types";
 import MenuIcon from "@mui/icons-material/Menu";
-import NextLink from "next/link";
-import React, { useState } from "react";
-import { SearchBar } from "@components/ui/search-bar";
 import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { AppBar, Box, Container, Divider, IconButton, Link, MenuItem, Select, SelectChangeEvent, ToggleButton, ToggleButtonGroup, Toolbar } from "@mui/material";
+import Dialog from "@mui/material/Dialog";
 import Slide from "@mui/material/Slide";
-import { TemperatureScale } from "@src/types/weather.types";
-import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
 import { TransitionProps } from "@mui/material/transitions";
 import { useSettingStore } from "@src/hooks//stores/use-setting-store";
 import { useSystemSettings } from "@src/hooks/use-system-settings";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
+import { MeasurementScale } from "@src/types/measurement.types";
+import { SystemLocale, SystemTheme } from "@src/types/system.types";
+import { TemperatureScale } from "@src/types/weather.types";
+import { NSXContainer, SXContainer } from "@styles/globals";
+import NextLink from "next/link";
+import React, { useState } from "react";
 
-export interface NavbarStateProp {
-    mobileBurgerFn?: () => void;
-    setState: (state: NavbarStates) => void;
-}
+import { Icon, OutlinedLogo } from "./navbar.styles";
 
 export enum NavbarStates {
     DEFAULT = "default",
-    SEARCH = "search",
+    SEARCH = "search"
+}
+
+export interface NavbarStateProp {
+    mobileBurgerFn?: () => void
+    setState: (state: NavbarStates) => void
 }
 
 // Default Navbar seen normally on every device
@@ -40,24 +41,24 @@ function DefaultNavbar(props: NavbarStateProp) {
             {
                 props.mobileBurgerFn
                     ? (
-                            <IconButton
-                                aria-label="open menu"
-                                onClick={props.mobileBurgerFn}
-                                sx={{
-                                    display: { md: "none", xs: "grid" },
-                                    height: "50px",
-                                    mr: "15px",
-                                    placeItems: "center",
-                                    width: "50px",
-                                }}
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                        )
+                        <IconButton
+                            aria-label="open menu"
+                            onClick={props.mobileBurgerFn}
+                            sx={{
+                                display: { md: "none", xs: "grid" },
+                                height: "50px",
+                                mr: "15px",
+                                placeItems: "center",
+                                width: "50px"
+                            }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                    )
                     : ""
             }
             <Link component={NextLink} href="/"><OutlinedLogo fontSize="25px" hideShadow /></Link>
-            <NSXContainer ml="60px" width="100%" alignItems="center">
+            <NSXContainer alignItems="center" ml="60px" width="100%">
                 <SearchBar maxWidth="400px" />
                 <Box className="seperator" ml="auto" />
                 <LocalisationDropdownButton />
@@ -65,13 +66,13 @@ function DefaultNavbar(props: NavbarStateProp) {
             </NSXContainer>
             <SXContainer ml="auto">
                 <Icon
-                    color="inherit"
                     aria-label={t("component.navbar.openSearchBar")}
+                    color="inherit"
                     onClick={() => props.setState(NavbarStates.SEARCH)}
                 >
                     <SearchIcon sx={{ fontSize: "1.2em" }} />
                 </Icon>
-                <Icon color="inherit" aria-label="settings" sx={{ ml: "4px" }} onClick={() => setDialog(true)}>
+                <Icon aria-label="settings" color="inherit" onClick={() => setDialog(true)} sx={{ ml: "4px" }}>
                     <SettingsIcon sx={{ fontSize: "1.2em" }} />
                 </Icon>
             </SXContainer>
@@ -86,10 +87,10 @@ function SearchNavbar(props: NavbarStateProp) {
     return (
         <>
             <IconButton
-                title={t("component.navbar.goBacktoNavbar")}
                 aria-label={t("component.navbar.goBacktoNavbar")}
-                sx={{ color: "white", mr: "20px" }}
                 onClick={() => props.setState(NavbarStates.DEFAULT)}
+                sx={{ color: "white", mr: "20px" }}
+                title={t("component.navbar.goBacktoNavbar")}
             >
                 <ArrowBackIosNewIcon />
             </IconButton>
@@ -101,25 +102,46 @@ function SearchNavbar(props: NavbarStateProp) {
 // Settings Dialogue to modify TEMP/MEAS context
 const dialogueTransition = React.forwardRef(function Transition(
     props: TransitionProps & {
-        children: React.ReactElement;
+        children: React.ReactElement
     },
-    ref: React.Ref<unknown>,
+    ref: React.Ref<unknown>
 ) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
+export interface NavbarProps {
+    mobileBurgerFn?: () => void
+}
 // Dialogue
 export interface SettingsDialogProps {
-    setDialog: (setOpen: boolean) => void;
-    open: boolean;
+    open: boolean
+    setDialog: (setOpen: boolean) => void
 }
+
+export default function Navbar(props: NavbarProps) {
+    const [navStateID, setNavStateID] = useState(NavbarStates.DEFAULT);
+    const navState = {
+        [NavbarStates.DEFAULT]: <DefaultNavbar mobileBurgerFn={props.mobileBurgerFn} setState={setNavStateID} />,
+        [NavbarStates.SEARCH]: <SearchNavbar setState={setNavStateID} />
+    };
+    return (
+        <AppBar sx={{ zIndex: theme => theme.zIndex.drawer + 1 }}>
+            <Container maxWidth="lg">
+                <Toolbar disableGutters sx={{ height: "80px" }} variant="dense">
+                    {navState[navStateID]}
+                </Toolbar>
+            </Container>
+        </AppBar>
+    );
+}
+
 function SettingsDialog(props: SettingsDialogProps) {
     const { t } = useSystemTranslation();
     const temperatureScale = useSettingStore(state => state.temperatureScale);
     const measurementScale = useSettingStore(state => state.measurementScale);
     const setTemperatureScale = useSettingStore(state => state.setTemperatureScale);
     const setMeasurementScale = useSettingStore(state => state.setMeasurementScale);
-    const { themeColour, toggleTheme, locale, setLocale } = useSystemSettings();
+    const { locale, setLocale, themeColour, toggleTheme } = useSystemSettings();
     const handleClose = () => {
         props.setDialog(false);
     };
@@ -127,23 +149,23 @@ function SettingsDialog(props: SettingsDialogProps) {
     const deltaTemp = (_: React.MouseEvent, v: TemperatureScale) => setTemperatureScale(v);
     const deltaMeas = (_: React.MouseEvent, v: MeasurementScale) => setMeasurementScale(v);
     const languageNames = new Intl.DisplayNames(["en"], {
-        type: "language",
+        type: "language"
     });
 
     return (
         <Dialog
             fullScreen
-            open={props.open}
             onClose={handleClose}
+            open={props.open}
             TransitionComponent={dialogueTransition}
         >
             <AppBar sx={{ position: "relative" }}>
                 <Toolbar>
                     <IconButton
-                        edge="start"
-                        color="inherit"
-                        onClick={handleClose}
                         aria-label="close"
+                        color="inherit"
+                        edge="start"
+                        onClick={handleClose}
                         sx={{ position: "absolute" }}
                     >
                         <CloseIcon />
@@ -159,20 +181,20 @@ function SettingsDialog(props: SettingsDialogProps) {
                 sx={{
                     "& .MuiToggleButton-root.Mui-selected": {
                         "&:hover": {
-                            backgroundColor: "primary.dark",
+                            backgroundColor: "primary.dark"
                         },
                         "backgroundColor": "primary.dark",
-                        "color": "white",
+                        "color": "white"
                     },
                     "& .MuiToggleButton-root:hover": {
                         backgroundColor: "primary.light",
                         boxShadow: 2,
-                        color: "white",
-                    },
+                        color: "white"
+                    }
                 }}
             >
                 <Box sx={{ m: "5px" }}><b>{t("settings.temperatureScale")}</b></Box>
-                <ToggleButtonGroup value={temperatureScale} onChange={deltaTemp} exclusive>
+                <ToggleButtonGroup exclusive onChange={deltaTemp} value={temperatureScale}>
                     <ToggleButton value={TemperatureScale.CELSIUS}>
                         {t("temperature.celsius.text")}
                         {" (°C)"}
@@ -184,7 +206,7 @@ function SettingsDialog(props: SettingsDialogProps) {
                 </ToggleButtonGroup>
                 <Divider sx={{ mt: "15px" }} />
                 <Box sx={{ m: "5px" }}><b>{t("settings.measurementScale")}</b></Box>
-                <ToggleButtonGroup value={measurementScale} onChange={deltaMeas} exclusive>
+                <ToggleButtonGroup exclusive onChange={deltaMeas} value={measurementScale}>
                     <ToggleButton value={MeasurementScale.METRIC}>
                         {t("measurement.metric")}
                         {" (M/S)"}
@@ -196,21 +218,21 @@ function SettingsDialog(props: SettingsDialogProps) {
                 </ToggleButtonGroup>
                 <Divider sx={{ mt: "15px" }} />
                 <Box sx={{ m: "5px" }}><b>{t("settings.themeColor")}</b></Box>
-                <ToggleButtonGroup value={themeColour} onChange={toggleTheme} exclusive>
+                <ToggleButtonGroup exclusive onChange={toggleTheme} value={themeColour}>
                     <ToggleButton value={SystemTheme.DARK}>{t("theme.darkTheme")}</ToggleButton>
                     <ToggleButton value={SystemTheme.LIGHT}>{t("theme.lightTheme")}</ToggleButton>
                 </ToggleButtonGroup>
                 <Divider sx={{ mt: "15px" }} />
                 <Box sx={{ m: "5px" }}><b>{t("settings.locale")}</b></Box>
                 <Select
-                    value={locale}
-                    onChange={(event: SelectChangeEvent) => setLocale(event.target.value as SystemLocale)}
                     displayEmpty
+                    onChange={(event: SelectChangeEvent) => setLocale(event.target.value as SystemLocale)}
+                    value={locale}
                 >
                     {Object.values(SystemLocale).map(currentLocale => (
                         <MenuItem
-                            value={currentLocale}
                             key={currentLocale}
+                            value={currentLocale}
                         >
                             {t(`language.${languageNames.of(currentLocale)?.toLowerCase()}`)}
                         </MenuItem>
@@ -218,26 +240,5 @@ function SettingsDialog(props: SettingsDialogProps) {
                 </Select>
             </Box>
         </Dialog>
-    );
-}
-
-export interface NavbarProps {
-    mobileBurgerFn?: () => void;
-}
-
-export default function Navbar(props: NavbarProps) {
-    const [navStateID, setNavStateID] = useState(NavbarStates.DEFAULT);
-    const navState = {
-        [NavbarStates.DEFAULT]: <DefaultNavbar setState={setNavStateID} mobileBurgerFn={props.mobileBurgerFn} />,
-        [NavbarStates.SEARCH]: <SearchNavbar setState={setNavStateID} />,
-    };
-    return (
-        <AppBar sx={{ zIndex: theme => theme.zIndex.drawer + 1 }}>
-            <Container maxWidth="lg">
-                <Toolbar variant="dense" sx={{ height: "80px" }} disableGutters>
-                    {navState[navStateID]}
-                </Toolbar>
-            </Container>
-        </AppBar>
     );
 }
