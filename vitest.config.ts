@@ -1,12 +1,12 @@
-import react from "@vitejs/plugin-react";
 import { coverageConfigDefaults, defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
     plugins: [react(), tsconfigPaths()],
     test: {
         coverage: {
-            provider: "istanbul", // properly covers type files
+            provider: "v8", // properly covers type files
             exclude: [
                 "**/__mocks__/**",
                 "**/*.stories.tsx",

@@ -12,7 +12,7 @@ async function fetchNearbyLocations(lat?: number, lng?: number, lang: string = "
     });
     const data = await fetch(`${url}?${queryParams}`)
         .then(async (data) => {
-            const result = await data.json();
+            const result = await data.clone().json();
             if (!data.ok) throw new FetchError(data, result.message);
             return result;
         });

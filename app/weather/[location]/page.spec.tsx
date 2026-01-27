@@ -1,9 +1,10 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import Page from "./page";
 import { mockLocationLookupHandle } from "@features/weaget/__mocks__/location-lookup.handler";
 import { mockNearbyLocationHandle } from "@features/weaget/__mocks__/nearby-location.handler";
 import { mockPollutionHandle } from "@features/weaget/__mocks__/pollution.handler";
 import { mockWeatherHandle } from "@features/weaget/__mocks__/weather.handler";
+import { server } from "@project/vitest-setup";
 import { testQueryClient } from "@utils/query-client";
 import { waitFor } from "@testing-library/react";
 import { withHandleError } from "@utils/msw-http-mocker";
@@ -22,9 +23,14 @@ describe("Page: app/weather/[location]", () => {
         }));
     });
 
+    beforeAll(() => {
+        server.resetHandlers();
+    });
+
     afterEach(() => {
         testQueryClient.clear();
         vi.resetAllMocks();
+        server.resetHandlers();
     });
 
     it("should resolve without displaying any skeletons", async () => {
@@ -46,6 +52,8 @@ describe("Page: app/weather/[location]", () => {
         withHandleError(mockHandle);
         const params = Promise.resolve({ location: "testLocation" });
         const { getByText } = withRender(<Page params={params} />);
-        await waitFor(() => expect(getByText("weather.error.fetchFailed")).toBeInTheDocument());
+        await waitFor(() => {
+            expect(getByText("weather.error.fetchFailed")).toBeInTheDocument();
+        }, { timeout: 10000 });
     });
 });

@@ -15,7 +15,7 @@ export async function getPollutionByCoord(lat: number, lng: number): Promise<Api
         throw new Error(`[Pollution Service] Could not fetch pollution. (lat: ${lat}, lon: ${lng})`);
     }
 
-    const data = await response.json();
+    const data = await response.clone().json();
     const pollutionModel = apicnPollutionSchema.parse(data);
     return pollutionModel;
 }

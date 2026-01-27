@@ -6,7 +6,7 @@ export function extractQueryParams(url: string) {
 }
 
 export function handleNextResponseError(err: Error, message: string) {
-    console.error(err);
+    console.error(err.toString());
     if (err instanceof ZodError) {
         const errorId = crypto.randomUUID();
         const errorMessage = "Failed to meet API requirements.";

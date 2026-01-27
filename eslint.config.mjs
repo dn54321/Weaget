@@ -13,6 +13,15 @@ export default tseslint.config(
     tseslint.configs.recommended,
     stylistic.configs["recommended-flat"],
     {
+        ignores: [
+            "node_modules/",
+            "dist/",
+            "coverage",
+            "**/.*",
+            "playwright-report/",
+        ],
+    },
+    {
         name: "ESLint Config - nextjs",
         plugins: {
             "@next/next": pluginNext,
@@ -25,11 +34,6 @@ export default tseslint.config(
         },
     },
     {
-        ignores: [
-            "node_modules/",
-            "dist/",
-            "coverage",
-        ],
         plugins: {
             "@dword-design/import-alias": preferAlias,
             "@stylistic": stylistic,

@@ -1,20 +1,20 @@
 import "@testing-library/jest-dom/vitest";
-import { setupServer } from "msw/node";
+import { afterEach, vi } from "vitest";
 import { apicnPollutionHandler } from "./src/features/apicn-pollution/__mocks__/pollution.handler";
+import { autoCompleteHandler } from "./src/features/weaget/__mocks__/auto-complete.handler";
+import { cleanup } from "@testing-library/react";
+import { currentLocationHandler } from "./src/features/weaget/__mocks__/current-location.handler";
 import { geonamesNearbyLocationHandler } from "./src/features/geonames-nearby-search/__mocks__/nearby-location.handler";
 import { googleLocationAutoCompleteHandler } from "./src/features/google-geocode/__mocks__/location-auto-complete.handler";
 import { googleLocationLookupHandler } from "./src/features/google-geocode/__mocks__/location-lookup.handler";
 import { ipinfoCurrentLocationHandler } from "./src/features/ipinfo-current-location/__mocks__/current-location.handler";
-import { openWeatherOneCallHandler } from "./src/features/open-weather-map-one-call/__mocks__/onecall.handler";
-import { autoCompleteHandler } from "./src/features/weaget/__mocks__/auto-complete.handler";
-import { currentLocationHandler } from "./src/features/weaget/__mocks__/current-location.handler";
 import { locationLookupHandler } from "./src/features/weaget/__mocks__/location-lookup.handler";
 import { nearbyLocationHandler } from "./src/features/weaget/__mocks__/nearby-location.handler";
+import { openWeatherOneCallHandler } from "./src/features/open-weather-map-one-call/__mocks__/onecall.handler";
 import { pollutionHandler } from "./src/features/weaget/__mocks__/pollution.handler";
-import { weatherHandler } from "./src/features/weaget/__mocks__/weather.handler";
-import { afterEach, vi } from "vitest";
-import { cleanup } from "@testing-library/react";
+import { setupServer } from "msw/node";
 import { useState } from "react";
+import { weatherHandler } from "./src/features/weaget/__mocks__/weather.handler";
 
 // Mock every endpoint possible.
 export const server = setupServer(
@@ -57,7 +57,7 @@ vi.mock("next/font/google", () => ({
 
 // BUG: use is not recognised by react-testing-library.
 vi.mock("react", async importOriginal => ({
-    ...await importOriginal<typeof import("react")>(),
+    ...await importOriginal(),
     use: (obj: Promise<object>) => {
         const [effect, setEffect] = useState<object | undefined>(obj);
         obj.then(resolved => setEffect(resolved));
@@ -67,7 +67,7 @@ vi.mock("react", async importOriginal => ({
 
 vi.mock("react-i18next", async importOriginal => ({
     // this mock makes sure any components using the translate hook can use it without a warning being shown
-    ...await importOriginal<typeof import("react-i18next")>(),
+    ...await importOriginal(),
     useTranslation: () => {
         return {
             i18n: {
@@ -114,7 +114,6 @@ if (process.env.LOG && process.env.LOG.toLowerCase() === "basic") {
 // Verbose Logging
 if (process.env.LOG && process.env.LOG.toLowerCase() === "standard") {
     server.events.on("response:mocked", async ({ request, response }) => {
-        const data = await response.json();
         console.log(
             "%s %s received %s %s",
             request.method,
@@ -130,7 +129,8 @@ if (process.env.LOG && process.env.LOG.toLowerCase() === "verbose") {
     server.events.on("response:mocked", async ({ request, requestId, response }) => {
         const data = await response.json();
         console.log(
-            "%s %s received %s %s %s",
+            "[%s] %s %s received %s %s %s",
+            requestId,
             request.method,
             request.url,
             response.status,

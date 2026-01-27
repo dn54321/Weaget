@@ -20,21 +20,45 @@
     "isolatedModules": true,
     "emitDecoratorMetadata": false,
     "experimentalDecorators": false,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["./src/components/*"],
-      "@errors/*": ["./src/errors/*"],
-      "@features/*": ["./src/features/*"],
-      "@services/*": ["./src/services/*"],
-      "@slices/*": ["./src/slices/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@api/*": ["./pages/api/*"],
-      "@styles/*": ["./styles/*"],
-      "@public/*": ["./public/*"],
-      "@app/*": ["./pages/app/*"],
-      "@src/*": ["./src/*"],
-      "@project/*": ["./*"],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@errors/*": [
+        "./src/errors/*"
+      ],
+      "@features/*": [
+        "./src/features/*"
+      ],
+      "@services/*": [
+        "./src/services/*"
+      ],
+      "@slices/*": [
+        "./src/slices/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@api/*": [
+        "./pages/api/*"
+      ],
+      "@styles/*": [
+        "./styles/*"
+      ],
+      "@public/*": [
+        "./public/*"
+      ],
+      "@app/*": [
+        "./pages/app/*"
+      ],
+      "@src/*": [
+        "./src/*"
+      ],
+      "@project/*": [
+        "./*"
+      ]
     },
     "plugins": [
       {
@@ -51,8 +75,10 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts", 
-    "next.config.js", "src/i18n/i18next-scanner.config.js", 
-    "vitest-setup.ts"
+    ".next/types/**/*.ts",
+    "next.config.js",
+    "src/i18n/i18next-scanner.config.js",
+    "vitest-setup.ts",
+    ".next/dev/types/**/*.ts"
   ]
 }

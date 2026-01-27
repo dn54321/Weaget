@@ -1,5 +1,6 @@
 import "@src/i18n/i18n";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
+import { CacheProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
 import { QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
@@ -8,7 +9,14 @@ import type { StoryContext } from "@storybook/react";
 import { SystemLocale } from "@project/src/types/system.types";
 import { SystemThemeProvider } from "@components/provider/system-theme-provider";
 import WidgetStoreProvider from "@components/provider/widget-provider/widget-store-provider.component";
+import createCache from "@emotion/cache";
 import { testQueryClient } from "./query-client";
+
+const cache = createCache({
+    key: "test",
+    prepend: true,
+});
+
 export const storybookWrapper = (Story: React.ElementType, context: StoryContext) => {
     return (
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
@@ -34,7 +42,7 @@ export const storybookWrapper = (Story: React.ElementType, context: StoryContext
 
 export const testWrapper = (props: { children: React.ReactNode }) => {
     return (
-        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+        <CacheProvider value={cache}>
             <WidgetStoreProvider>
                 <SettingsStoreProvider>
                     <SystemThemeProvider>
@@ -43,6 +51,6 @@ export const testWrapper = (props: { children: React.ReactNode }) => {
                     </SystemThemeProvider>
                 </SettingsStoreProvider>
             </WidgetStoreProvider>
-        </AppRouterCacheProvider>
+        </CacheProvider>
     );
 };

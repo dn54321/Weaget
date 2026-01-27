@@ -3,6 +3,7 @@ import { HourlyWeatherStripWidget } from "./..";
 import type { OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { createWeatherMockData } from "@features/weaget/__mocks__/weather.mock";
 import userEvent from "@testing-library/user-event";
+import { waitFor } from "@testing-library/react";
 import { withRender } from "@utils/render";
 
 describe("Component: hourly-weather-card-widget", async () => {
@@ -27,15 +28,16 @@ describe("Component: hourly-weather-card-widget", async () => {
 
     it("should be expandable.", async () => {
         const user = userEvent.setup();
-        const { getAllByTestId, getByRole } = withRender(
+        const { getAllByTestId, getByRole, queryByRole } = withRender(
             <HourlyWeatherStripWidget weatherData={weatherData} />,
         );
-
         const accordion = getAllByTestId("ExpandMoreIcon")[0];
         await user.click(accordion);
+        waitFor(() => expect(getByRole("button", { expanded: true })).toBeInTheDocument());
         expect(getByRole("button", { expanded: true })).toBeInTheDocument();
         await user.click(accordion);
-        expect(() => getByRole("button", { expanded: true })).toThrow();
+        waitFor(() => expect(queryByRole("button", { expanded: true })).not.toBeInTheDocument());
+        expect(queryByRole("button", { expanded: true })).not.toBeInTheDocument();
     });
 
     it("should show another 12 weather strips when going to the next page.",

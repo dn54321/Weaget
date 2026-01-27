@@ -77,6 +77,7 @@ describe("Component: search-bar", async () => {
         const { getByTestId } = withRender(<SearchBar />);
 
         const currentLocationButton = getByTestId("MyLocationIcon");
+        await waitFor(() => expect(currentLocationButton).not.toBeDisabled());
         await user.click(currentLocationButton);
         expect(mocks.mockRouterPush).toHaveBeenCalledWith(`/weather/${currentLocationMock.city}`);
     });
@@ -89,6 +90,7 @@ describe("Component: search-bar", async () => {
         const { getByTestId, getByText } = withRender(<SearchBar />);
 
         const currentLocationButton = getByTestId("MyLocationIcon");
+        await waitFor(() => expect(currentLocationButton).not.toBeDisabled());
         await user.click(currentLocationButton);
         expect(getByText("component.searchBar.error.invalidCurrentLocation")).toBeInTheDocument();
     });

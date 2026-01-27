@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Stack, Typography } from "@mui/material/";
+import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import type { BoxProps, SxProps } from "@mui/system";
 import type { CurrentWeatherDetails, DailyWeatherDetails, OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
 import { keyframes, styled } from "@mui/system";

@@ -9,7 +9,7 @@ async function fetchCurrentLocation() {
     const url = `/api/location`;
     return await fetch(url)
         .then(async (data) => {
-            const result = await data.json();
+            const result = await data.clone().json();
             if (!data.ok) throw new FetchError(data, result.message);
             return result;
         })

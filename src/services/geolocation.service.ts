@@ -34,7 +34,7 @@ export async function getLocationDetails(location: string, region?: string, lang
         throw new Error(`[Location Service] Could not fetch location data. (loc: ${location}, reg: ${region}, lang: ${lang})`);
     }
 
-    const data = await response.json();
+    const data = await response.clone().json();
 
     if (data.status !== "OK" && data.status !== "ZERO_RESULTS") {
         throw new Error(`[Location Service] Could not fetch location data. Invalid Google Geocode API key.`);
@@ -56,7 +56,7 @@ export async function getLocationDetailsByIp(ip: string, retry = true): Promise<
         throw new Error(`[Location Service] Could not fetch location data. (ip: '${ip}')`);
     }
 
-    const data = await response.json();
+    const data = await response.clone().json();
 
     // Local development
     if (data.bogon && retry) {
@@ -91,12 +91,12 @@ export async function getNearbyLocationDetails(
         throw new Error(`[Location Service] Could not fetch nearby location data.  (lat: '${lat}', lng: '${lng}', lang: '${lang}')`);
     }
 
-    const data = await response.json();
+    const data = await response.clone().json();
     try {
         return geonamesNearbyLocationSchema.parse(data);
     }
     catch (err) {
-        revalidateTag("geonames::nearby-search");
+        revalidateTag("geonames::nearby-search", { expire: 0 });
         throw err;
     }
 }
@@ -124,6 +124,6 @@ export async function getLocationAutocompleteSuggestions(
         throw new Error(`[Location Service] Could not fetch location suggestions.  (input: '${input}')`);
     }
 
-    const data = await response.json();
+    const data = await response.clone().json();
     return googleLocationAutoCompleteSchema.parse(data);
 }

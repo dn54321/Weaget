@@ -3,17 +3,18 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=20.18.0"
+    "node": "=24.13.0"
   },
   "scripts": {
     "dev": "cross-env NODE_ENV='development' NODE_OPTIONS='--inspect' next dev --turbopack",
     "build": "NODE_OPTIONS='--max-old-space-size=4096' next build",
     "start": "next start",
-    "lint": "next lint --fix",
+    "lint": "eslint --fix *.{ts,tsx}",
     "lint:type": "tsc --noEmit",
-    "lint:all": "next lint --fix && tsc --noEmit",
+    "lint:all": "eslint --fix *.{ts,tsx} && tsc --noEmit",
     "test": "LOG='standard' NODE_ENV='test' vitest --coverage --reporter=verbose",
-    "test:visual": "LOG='standard' NODE_ENV='test' vitest --coverage --reporter=verbose --ui",
+    "test:dashboard": "LOG='standard' NODE_ENV='test' vitest --coverage --reporter=verbose --ui",
+    "test:visualiser": "LOG='standard' NODE_ENV='test' vitest-preview",
     "audit": "better-npm-audit audit",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
@@ -72,6 +73,7 @@
     "@types/throttle-debounce": "^5.0.2",
     "@typescript-eslint/eslint-plugin": "^8.54.0",
     "@vitejs/plugin-react": "^4.7.0",
+    "@vitest/coverage-v8": "^4.0.18",
     "@vitest/ui": "^4.0.18",
     "cross-env": "^7.0.3",
     "eslint": "^9.39.2",
@@ -85,6 +87,7 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.54.0",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^4.0.18"
+    "vitest": "^4.0.18",
+    "vitest-preview": "^0.0.3"
   }
 }

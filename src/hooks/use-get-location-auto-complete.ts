@@ -9,7 +9,7 @@ async function fetchAutoComplete(input: string, params?: AutoCompleteQueryParams
     const queryParams = new URLSearchParams({ input, ...params });
     return await fetch(`${url}?${queryParams}`)
         .then(async (data) => {
-            const result = await data.json();
+            const result = await data.clone().json();
             if (!data.ok) throw new FetchError(data, result.message);
             return result;
         })

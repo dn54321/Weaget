@@ -22,7 +22,7 @@ export async function getWeatherByCoords(lat: number, lng: number, lang?: string
         throw new Error(`[Weather Service] Could not fetch weather by coords. (lat: ${lat}, lon: ${lng})`);
     }
 
-    const data = await response.json();
+    const data = await response.clone().json();
     return oneCallWeatherDetailsSchema.parse(data);
 }
 
