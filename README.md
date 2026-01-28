@@ -65,8 +65,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 | Command | Description |
 | --- | --- |
 | `pnpm test` | Runs all test cases and reveals coverage. |
-| `pnpm lint` | Reports and fixes the linting errors. |
-| `pnpm type-lint` | Reports any type errors generated from typescript. |
+| `pnpm lint:all` | Reports and fixes most linting errors. |
 | `pnpm storybook` | Provides a visual library of most of the components. |
 
 ## Upcoming Features

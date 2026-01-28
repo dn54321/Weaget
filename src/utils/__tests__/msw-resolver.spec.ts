@@ -1,12 +1,15 @@
 import { HttpResponse, http } from "msw";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
 import { server } from "@project/vitest-setup";
 import { withSearchParams } from "@utils/msw-resolver";
 
 describe("Utils - msw-resolver", async () => {
+    beforeAll(() => server.listen());
     afterEach(() => {
         server.resetHandlers();
     });
+    afterAll(() => server.close());
+
     it("should follow if query params predicate is satisified.", async () => {
         server.use(
             http.get("/test", withSearchParams(
@@ -19,7 +22,7 @@ describe("Utils - msw-resolver", async () => {
         expect(data).toMatchObject({ test: "mockMessage" });
     });
 
-    it("should fail if url has no query params.", async () => {
+    it("should fail if url has no query", async () => {
         server.use(
             http.get("/test", withSearchParams(
                 params => params.has("anotherMockQuery"),
