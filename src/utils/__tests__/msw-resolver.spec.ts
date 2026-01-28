@@ -1,15 +1,12 @@
 import { HttpResponse, http } from "msw";
-import { afterAll, afterEach, beforeAll, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import { server } from "@project/vitest-setup";
 import { withSearchParams } from "@utils/msw-resolver";
 
 describe("Utils - msw-resolver", async () => {
-    beforeAll(() => server.listen());
     afterEach(() => {
         server.resetHandlers();
     });
-    afterAll(() => server.close());
-
     it("should follow if query params predicate is satisified.", async () => {
         server.use(
             http.get("/test", withSearchParams(
@@ -22,16 +19,22 @@ describe("Utils - msw-resolver", async () => {
         expect(data).toMatchObject({ test: "mockMessage" });
     });
 
-    it("should fail if url has no query", async () => {
+    it("should ignore url that uses withSearchParams if no params are provided.", async () => {
         server.use(
-            http.get("/test", withSearchParams(
+            http.get("/api/test", withSearchParams(
                 params => params.has("anotherMockQuery"),
                 () => HttpResponse.json({ test: "anotherMockMessage" }),
             )),
+            http.all("/api/*", () => HttpResponse.json({ test: "fallback message" })),
         );
 
-        const response = await fetch("/test");
-        expect(response.status).toBe(404);
+        const response = await fetch("/api/test");
+        const data = await response.json();
+        expect(data).toMatchObject({ test: "fallback message" });
+
+        const response2 = await fetch("/api/test?anotherMockQuery=true");
+        const data2 = await response2.json();
+        expect(data2).toMatchObject({ test: "anotherMockMessage" });
     });
 
     it("should fail if query params predicate is not satisified.", async () => {
