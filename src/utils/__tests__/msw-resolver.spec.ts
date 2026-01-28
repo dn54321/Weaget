@@ -19,6 +19,18 @@ describe("Utils - msw-resolver", async () => {
         expect(data).toMatchObject({ test: "mockMessage" });
     });
 
+    it("should fail if url has no query params.", async () => {
+        server.use(
+            http.get("/test", withSearchParams(
+                params => params.has("anotherMockQuery"),
+                () => HttpResponse.json({ test: "anotherMockMessage" }),
+            )),
+        );
+
+        const response = await fetch("/test");
+        expect(response.status).toBe(404);
+    });
+
     it("should fail if query params predicate is not satisified.", async () => {
         server.use(
             http.get("https://test.com", withSearchParams(

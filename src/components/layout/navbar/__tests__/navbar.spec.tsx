@@ -9,7 +9,6 @@ import { testQueryClient } from "@utils/query-client";
 import { useMobileScreen } from "@project/src/utils/resize-window";
 import userEvent from "@testing-library/user-event";
 import { withRender } from "@utils/render";
-
 describe("Component: navbar", () => {
     beforeEach(() => {
         vi.mock("next/navigation", () => ({
@@ -36,11 +35,11 @@ describe("Component: navbar", () => {
     });
 
     it("should have access to settings by clicking the settings icon in mobile view.", async () => {
+        useMobileScreen();
         const user = userEvent.setup();
-        fireEvent(window, new Event("resize"));
         const { getByRole, getByText } = withRender(<Navbar />);
-        const settingsButton = getByRole("button", { name: /settings/i });
-        await user.click(settingsButton);
+        await user.click(getByRole("button", { name: /settings/i }));
+
         expect(getByText("settings.measurementScale")).toBeInTheDocument();
         expect(getByText("settings.temperatureScale")).toBeInTheDocument();
         expect(getByText("settings.themeColor")).toBeInTheDocument();
@@ -56,21 +55,24 @@ describe("Component: navbar", () => {
     });
 
     it("should have access to the search bar in mobile view.", async () => {
+        useMobileScreen();
+
         const user = userEvent.setup();
-        fireEvent(window, new Event("resize"));
         const { getByRole, getByPlaceholderText } = withRender(<Navbar />);
-        const settingsButton = getByRole("button", { name: "component.searchBar.search" });
+        const settingsButton = getByRole("button", { name: "component.navbar.openSearchBar" });
         await user.click(settingsButton);
         expect(getByPlaceholderText("component.searchBar.placeholder")).toBeInTheDocument();
     });
 
     it("should be able to close the search bar in mobile view.", async () => {
-        const user = userEvent.setup();
         useMobileScreen();
-        const { getByRole, getByLabelText } = withRender(<Navbar />);
+
+        const user = userEvent.setup();
+        const { queryByRole, getByRole, getByLabelText } = withRender(<Navbar />);
         await user.click(getByRole("button", { name: "component.navbar.openSearchBar" }));
+        expect(queryByRole("button", { name: "component.navbar.openSearchBar" })).not.toBeInTheDocument();
         await user.click(getByLabelText("component.navbar.goBacktoNavbar"));
-        expect(getByRole("button", { name: "component.searchBar.search" })).toBeInTheDocument();
+        expect(getByRole("button", { name: "component.navbar.openSearchBar" })).toBeInTheDocument();
     });
 
     describe("when the mobile menu is open", async () => {

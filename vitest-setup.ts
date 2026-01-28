@@ -1,5 +1,6 @@
 import "@testing-library/jest-dom/vitest";
 import { afterEach, vi } from "vitest";
+import { createElement, useState } from "react";
 import { apicnPollutionHandler } from "./src/features/apicn-pollution/__mocks__/pollution.handler";
 import { autoCompleteHandler } from "./src/features/weaget/__mocks__/auto-complete.handler";
 import { cleanup } from "@testing-library/react";
@@ -13,7 +14,6 @@ import { nearbyLocationHandler } from "./src/features/weaget/__mocks__/nearby-lo
 import { openWeatherOneCallHandler } from "./src/features/open-weather-map-one-call/__mocks__/onecall.handler";
 import { pollutionHandler } from "./src/features/weaget/__mocks__/pollution.handler";
 import { setupServer } from "msw/node";
-import { useState } from "react";
 import { weatherHandler } from "./src/features/weaget/__mocks__/weather.handler";
 
 // Mock every endpoint possible.
@@ -78,21 +78,14 @@ vi.mock("react-i18next", async importOriginal => ({
     },
 }));
 
-// Required to make react-charts pass.
-// https://github.com/jsdom/jsdom/issues/3368
-global.ResizeObserver = class ResizeObserver {
-    observe() {
-        // do nothing
-    }
-
-    unobserve() {
-        // do nothing
-    }
-
-    disconnect() {
-        // do nothing
-    }
-};
+// Hides vitest warnings about Recharts ResponsiveContainer
+vi.mock("recharts", async (importOriginal) => {
+    const originalModule = (await importOriginal()) as Record<string, unknown>;
+    return {
+        ...originalModule,
+        ResponsiveContainer: () => createElement("div"),
+    };
+});
 
 const originalConsoleError = console.error;
 const jsDomCssError = "Error: Could not parse CSS stylesheet";

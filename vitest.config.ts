@@ -6,13 +6,13 @@ export default defineConfig({
     plugins: [react(), tsconfigPaths()],
     test: {
         coverage: {
-            provider: "v8", // properly covers type files
+            provider: "istanbul",
             exclude: [
                 "**/__mocks__/**",
                 "**/*.stories.tsx",
                 "**/*.styles.tsx",
                 ...coverageConfigDefaults.exclude,
-                "src/utils/wrappers.tsx", // Used only for tests and development
+                "src/utils/wrappers.tsx",
             ],
             include: [
                 "src/**/*.{ts,tsx}",
@@ -27,7 +27,7 @@ export default defineConfig({
             },
         },
         css: true,
-        environment: "jsdom",
+        environment: "happy-dom",
         setupFiles: ["vitest-setup.ts"],
     },
 });
