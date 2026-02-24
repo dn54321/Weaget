@@ -4,15 +4,9 @@ import { SystemTheme } from "@src/types/system.types";
 import { testWrapper } from "@utils/wrappers";
 import { useSystemSettings } from "@project/src/hooks/use-system-settings";
 
-describe("Hooks - use-system-theme", async () => {
+describe("Hooks - use-system-settings", async () => {
     beforeEach(() => {
-        window.matchMedia = vi.fn().mockImplementation(() => ({
-            addEventListener: vi.fn(),
-            matches: false,
-            media: true,
-            onchange: null,
-            removeEventListener: vi.fn(),
-        }));
+        localStorage.clear();
     });
     afterEach(() => {
         vi.resetAllMocks();
@@ -21,18 +15,11 @@ describe("Hooks - use-system-theme", async () => {
     describe("useSystemTheme", async () => {
         test.each(
             [
-                ["light", false],
-                ["dark", true],
+                ["light"],
+                ["dark"],
             ],
-        )("Theme should be set to %s mode if dark mode is %o during initialisation.", (colourScheme, darkModeInitialisation) => {
-            window.matchMedia = vi.fn().mockImplementation(() => ({
-                addEventListener: vi.fn(),
-                matches: darkModeInitialisation,
-                media: true,
-                onchange: null,
-                removeEventListener: vi.fn(),
-            }));
-
+        )("Theme should be set to %s mode if set in local storage.", (colourScheme) => {
+            localStorage.setItem("mui-mode", colourScheme);
             const { result } = renderHook(() => useSystemSettings(), { wrapper: testWrapper });
             expect(result.current.themeColour).toEqual(colourScheme);
         });

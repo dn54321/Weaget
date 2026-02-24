@@ -42,7 +42,7 @@ export default function LocationListWidget(props: LocationListWidgetProps) {
                             <ListItemText
                                 primary={locationString}
                                 sx={{
-                                    color: "text.color",
+                                    color: "text.secondary",
                                 }}
                             />
                         </ListItemButton>

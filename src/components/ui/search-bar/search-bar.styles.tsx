@@ -1,5 +1,6 @@
-import { Box, styled } from "@mui/system";
 import { IconButton, InputBase, Paper } from "@mui/material";
+import { Box } from "@mui/system";
+import { styled } from "@mui/material/styles";
 
 export const MagnifyIconButtonContainer = styled(IconButton)({
     color: "gray",
@@ -31,14 +32,14 @@ export const FieldBox = styled(InputBase)(({ theme }) => ({
     "&:focus": {
         outline: "none !important",
     },
-    "color": theme.palette.text.primary,
+    // "color": theme.vars.palette.text.primary,
     "padding": "5px 5px 0px 10px",
     "textOverflow": "hidden",
     "width": "100%",
 }));
 
 export const SuggestionText = styled(Box)(({ theme }) => ({
-    borderBottom: `1px solid ${theme.palette.divider}`,
+    borderBottom: `1px solid ${theme.vars.palette.divider}`,
     padding: "5px 10px",
     userSelect: "none",
 }));

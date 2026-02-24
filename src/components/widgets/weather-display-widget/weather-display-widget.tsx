@@ -1,9 +1,10 @@
 import { Box, Card, CardContent, Stack, Typography } from "@mui/material";
 import type { BoxProps, SxProps } from "@mui/system";
 import type { CurrentWeatherDetails, DailyWeatherDetails, OneCallWeatherDetails } from "@features/open-weather-map-one-call/oneCall.type";
-import { keyframes, styled } from "@mui/system";
 import { DateTime } from "luxon";
 import { TempUnit } from "@components/ui/temperature-unit";
+import { keyframes } from "@mui/system";
+import { styled } from "@mui/material/styles";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
 import { useWidgetStore } from "@src/hooks/stores/use-widget-store";
 
@@ -262,7 +263,7 @@ const High = styled(Box)(() => ({
 }));
 
 const Low = styled(Box)(({ theme }) => ({
-    color: theme.palette.grey[200],
+    color: theme.vars.palette.grey[200],
     display: "inline",
     fontSize: "0.5em",
 }));

@@ -277,7 +277,7 @@ export default function PollutionWidget(props: PollutionWidgetProps) {
                         <CircularProgressWithLabel value={props.pollutionData?.aqi} loaded={loaded} />
                         <Box ml="20px" width="max-content">
                             <Box fontSize="16px">{t("component.widget.pollution.airQualityIndex")}</Box>
-                            <Box sx={{ color: "text.color" }}>
+                            <Box sx={{ color: "text.secondary" }}>
                                 {props.pollutionData?.aqi
                                     ? t(pollutionLevelTranslationKey[aqRating])
                                     : <Box ml="20px"><DotLoader /></Box>}
@@ -290,7 +290,7 @@ export default function PollutionWidget(props: PollutionWidgetProps) {
                     ? (
                             <>
                                 <Box mt="20px" color="black">{show && <PollutionTable rows={rows} />}</Box>
-                                <Link mt="10px" component="button" onClick={() => { setShow(!show); }} color="text.color">
+                                <Link mt="10px" component="button" onClick={() => { setShow(!show); }} color="text.secondary">
                                     {
                                         show
                                             ? t("component.widget.pollution.hideAdvancedPollutionDetails")

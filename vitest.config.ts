@@ -28,6 +28,7 @@ export default defineConfig({
         },
         css: true,
         environment: "happy-dom",
+        globals: true,
         setupFiles: ["vitest-setup.ts"],
     },
 });

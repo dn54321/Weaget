@@ -2,7 +2,6 @@ import { SettingsStoreContext, SettingsStoreProvider } from "@components/provide
 import { testOfflineQueryClient, testQueryClient } from "./query-client";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { CacheProvider } from "@emotion/react";
-import { CssBaseline } from "@mui/material";
 import type { Mock } from "vitest";
 import { QueryClientProvider } from "@tanstack/react-query";
 import type { SettingState } from "@src/stores/settings.store";
@@ -31,13 +30,16 @@ export function withRender(element: React.ReactElement, options?: RenderOptions)
         prepend: true,
     });
 
+    if (settings.theme) {
+        localStorage.setItem("mui-mode", settings.theme);
+    }
+
     return render(
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
             <WidgetStoreProvider widgetState={options?.widgetState}>
                 <SettingsStoreProvider settings={settings} temporary>
                     <CacheProvider value={cache}>
                         <SystemThemeProvider>
-                            <CssBaseline />
                             <QueryClientProvider client={query}>{element}</QueryClientProvider>
                             <WidgetStoreContext.Consumer>
                                 {(state) => {

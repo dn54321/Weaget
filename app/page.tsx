@@ -10,7 +10,7 @@ import { SearchBar } from "@components/ui/search-bar";
 import { SettingsFab } from "@components/ui/settings-fab";
 import Stack from "@mui/material/Stack";
 import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
-import styled from "@mui/system/styled";
+import { styled } from "@mui/material/styles";
 import { useAlert } from "@src/hooks/use-alert";
 import { useEffect } from "react";
 import { useGetCurrentLocation } from "@src/hooks/use-get-current-location";
@@ -54,7 +54,7 @@ const Section = styled(Container)(({ theme }) => ({
 
 const SearchContainer = styled("main")(({ theme }) => ({
     alignItems: "center",
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.vars.palette.primary.main,
     display: "flex",
     flexDirection: "column",
     height: "400px",
@@ -62,7 +62,7 @@ const SearchContainer = styled("main")(({ theme }) => ({
 }));
 
 const PageDivider = styled(Box)(({ theme }) => ({
-    backgroundColor: theme.palette.divider,
+    backgroundColor: theme.vars.palette.divider,
     height: "50px",
 }));
 

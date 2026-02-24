@@ -24,7 +24,7 @@ export const High = styled(Box)(() => ({
 }));
 
 export const Low = styled(Box)(({ theme }) => ({
-    color: theme.palette.grey?.[200],
+    color: theme.vars.palette.grey?.[200],
     display: "inline",
 }));
 
@@ -40,10 +40,10 @@ export const CardContainer = styled(Card)(({ theme }) => ({
         fontSize: "16px",
         padding: "10px 5px",
     },
-    "backgroundColor": theme.palette.primary.light,
+    "backgroundColor": theme.vars.palette.primary.light,
     "borderRadius": "10px",
     "boxShadow": theme.shadows?.[3],
-    "color": theme.palette.primary.contrastText,
+    "color": theme.vars.palette.primary.contrastText,
     "minWidth": "120px",
     "width": "100%",
 }));

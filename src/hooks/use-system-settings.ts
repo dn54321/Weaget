@@ -1,28 +1,35 @@
-import { createTheme, responsiveFontSizes, useMediaQuery } from "@mui/material";
-import type { PaletteMode } from "@mui/material";
-import React from "react";
 import { SystemTheme } from "@src/types/system.types";
-import { getDesignTokens } from "@utils/theme";
+import { theme as systemTheme } from "@utils/theme";
+import { useColorScheme } from "@mui/material";
 import { useSettingStore } from "./stores/use-setting-store";
 
 export function useSystemSettings() {
-    const storeThemeColour = useSettingStore(state => state.theme);
-    const setThemeColour = useSettingStore(state => state.setTheme);
-    const toggleTheme = useSettingStore(state => state.toggleTheme);
+    // const storeThemeColour = useSettingStore(state => state.theme);
     const locale = useSettingStore(state => state.locale);
     const setLocale = useSettingStore(state => state.setLocale);
-    const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-    let themeColour = storeThemeColour;
+    const { mode, setMode, systemMode } = useColorScheme();
+    // let themeColour = storeThemeColour;
 
-    if (storeThemeColour === SystemTheme.SYSTEM) {
-        themeColour = prefersDarkMode ? SystemTheme.DARK : SystemTheme.LIGHT;
-    }
+    // if (storeThemeColour === SystemTheme.SYSTEM) {
+    //     themeColour = prefersDarkMode ? SystemTheme.DARK : SystemTheme.LIGHT;
+    // }
 
-    const theme = React.useMemo(
-        () => {
-            return responsiveFontSizes(createTheme((getDesignTokens(themeColour as PaletteMode))));
+    const theme = systemTheme;
+
+    const toggleTheme = () => {
+        if (mode === SystemTheme.LIGHT) {
+            setMode("dark");
         }
-        , [themeColour]);
+        else if (mode === SystemTheme.DARK) {
+            setMode("light");
+        }
+        else if (systemMode === SystemTheme.LIGHT) {
+            setMode("dark");
+        }
+        else if (systemMode === SystemTheme.DARK) {
+            setMode("light");
+        }
+    };
 
-    return { locale, setLocale, setThemeColour, theme, themeColour, toggleTheme };
+    return { locale, setLocale, setThemeColour: setMode, theme, themeColour: mode, toggleTheme };
 }

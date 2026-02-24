@@ -85,12 +85,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
     - Allows for the implementation of rate limiting to prevent API abuse.
 
 ## Known Issues
-- **Dark Mode Flicker**: Setting the system theme to dark mode causes the UI to flicker for first time renders which impacts the UX for users with slower network speeds.
-
-    - This is a known issue in Material UI and the fix is still highly experimental and thus has not been implemented in this project yet.
-    - Ref: 
-        - https://mui.com/material-ui/experimental-api/css-theme-variables/overview/
-
 - **Performance and SEO**: Currently, we cannot take advantage of SSR, loading all JS scripts in the client which negatively impacts the performance and SEO of the website.
     - Our styling css-in-js (emotion) library recommended by Material UI doesn't currently support server side rendering, but this will be changed with zero run-time Pigment CSS when it gets integrated in Material UI v6.
     - Ref: 

@@ -39,7 +39,7 @@ const Accordion = (props: AccordionProps) => {
             slotProps={{ transition: { timeout: 0, unmountOnExit: true } }}
             expanded={props.expanded}
             onChange={props.onChange}
-            sx={{ backgroundColor: "initial", color: "text.color" }}
+            sx={{ backgroundColor: "initial", color: "text.secondary" }}
         >
             {props.children}
         </MuiAccordion>

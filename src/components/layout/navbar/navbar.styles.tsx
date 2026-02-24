@@ -9,8 +9,8 @@ export const OutlinedLogo = styled(Logo)(() => ({
 
 export const Icon = styled(IconButton)(({ theme }) => ({
     "&:hover": {
-        backgroundColor: theme.palette.primary.light,
+        backgroundColor: theme.vars.palette.primary.light,
     },
-    "border": `1px solid ${theme.palette.primary.light}`,
+    "border": `1px solid ${theme.vars.palette.primary.light}`,
     "borderRadius": "15px",
 }));

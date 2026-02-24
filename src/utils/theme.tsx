@@ -1,7 +1,8 @@
 "use client";
+import type {} from "@mui/material/themeCssVarsAugmentation";
 import NextLink from "next/link";
-import type { PaletteMode } from "@mui/material";
 import { Roboto } from "next/font/google";
+import { createTheme } from "@mui/material/styles";
 import { forwardRef } from "react";
 import { red } from "@mui/material/colors";
 
@@ -17,7 +18,61 @@ const roboto = Roboto({
 });
 
 // Create a theme instance.
-export const getDesignTokens = (mode: PaletteMode) => ({
+export const theme = createTheme({
+    cssVariables: {
+        colorSchemeSelector: "class",
+    },
+    colorSchemes: {
+        light: {
+            palette: {
+                background: {
+                    default: "#efefef",
+                },
+                error: {
+                    main: red.A400,
+                },
+                primary: {
+                    contrastText: "#fff",
+                    dark: "#005684",
+                    light: "#46B4AF",
+                    main: "#4682B4",
+                },
+                secondary: {
+                    contrastText: "#fff",
+                    dark: "#00834c",
+                    light: "#7be7a7",
+                    main: "#46b478",
+                },
+                text: {
+                    primary: "#000",
+                    secondary: "#005684",
+                },
+            },
+        },
+        dark: {
+            palette: {
+                error: {
+                    main: red.A400,
+                },
+                primary: {
+                    contrastText: "#fff",
+                    dark: "#04292d",
+                    light: "rgb(54, 76, 79)",
+                    main: "#042023",
+                },
+                secondary: {
+                    contrastText: "#fff",
+                    dark: "#00834c",
+                    light: "#7be7a7",
+                    main: "#46b478",
+                },
+                text: {
+                    primary: "#fff",
+                    secondary: "rgba(255,255,255,0.7)",
+                },
+            },
+        },
+    },
     breakpoints: {
         values: {
             lg: 1200,
@@ -41,55 +96,6 @@ export const getDesignTokens = (mode: PaletteMode) => ({
             },
         },
     },
-    palette: {
-        mode,
-        ...(mode === "light"
-            ? {
-                    background: {
-                        default: "#efefef",
-                    },
-                    error: {
-                        main: red.A400,
-                    },
-                    primary: {
-                        contrastText: "#fff",
-                        dark: "#005684",
-                        light: "#46B4AF",
-                        main: "#4682B4",
-                    },
-                    secondary: {
-                        contrastText: "#fff",
-                        dark: "#00834c",
-                        light: "#7be7a7",
-                        main: "#46b478",
-                    },
-                    text: {
-                        color: "#005684",
-                        primary: "#000",
-                    },
-                }
-            : {
-                    error: {
-                        main: red.A400,
-                    },
-                    primary: {
-                        contrastText: "#fff",
-                        dark: "#04292d",
-                        light: "rgb(54, 76, 79)",
-                        main: "#042023",
-                    },
-                    secondary: {
-                        contrastText: "#fff",
-                        dark: "#00834c",
-                        light: "#7be7a7",
-                        main: "#46b478",
-                    },
-                    text: {
-                        color: "#8AA3A8",
-                    },
-                }),
-    },
-
     typography: {
         fontFamily: roboto.style.fontFamily,
     },

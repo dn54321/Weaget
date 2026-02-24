@@ -63,10 +63,12 @@ function MyLocationButtonIcon(props: { setErrorMessage: (errMessage: SearchError
         <Tooltip title={t("component.searchBar.useCurrentLocation")}>
             <span>
                 <IconButton
+                    aria-label={t("component.searchBar.useCurrentLocation")}
                     color="primary"
                     type="button"
                     onClick={() => redirectCurrentWeatherLocation()}
                     disabled={currentLocationQuery.isLoading}
+
                     sx={{
                         color: "gray",
                         margin: "0px 10px",

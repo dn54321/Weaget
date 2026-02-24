@@ -1,8 +1,8 @@
-import { styled } from "@mui/system";
+import { styled } from "@mui/material/styles";
 
 export const StatContainerListItem = styled("li")(({ theme }) => ({
     "& div:nth-of-type(2)": {
-        color: theme.palette.text.color,
+        color: theme.vars.palette.text.secondary,
         gridColumn: "2",
     },
     "& div:nth-of-type(3)": {
@@ -11,7 +11,7 @@ export const StatContainerListItem = styled("li")(({ theme }) => ({
         gridRow: "2",
     },
     "& svg:nth-of-type(1)": {
-        color: theme.palette.primary.light,
+        color: theme.vars.palette.primary.light,
         fontSize: "2em",
         gridColumn: "1",
         gridRow: "1 / 3",

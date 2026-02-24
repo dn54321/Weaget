@@ -4,10 +4,6 @@ import type { BoxProps } from "@mui/system";
 import { Quicksand } from "next/font/google";
 import Stack from "@mui/material/Stack";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
-/*
-    Official Logo of the Weaget Website
-*/
-
 const quickSandFont = Quicksand({
     display: "swap",
     subsets: ["latin"],
