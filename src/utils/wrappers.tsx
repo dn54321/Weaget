@@ -1,11 +1,11 @@
 import "@src/i18n/i18n";
+import { SystemLocale, SystemTheme } from "@project/src/types/system.types";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { CacheProvider } from "@emotion/react";
 import { QueryClientProvider } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect } from "react";
 import { SettingsStoreProvider } from "@components/provider/settings-provider";
 import type { StoryContext } from "@storybook/react";
-import { SystemLocale } from "@project/src/types/system.types";
 import { SystemThemeProvider } from "@components/provider/system-theme-provider";
 import WidgetStoreProvider from "@components/provider/widget-provider/widget-store-provider.component";
 import createCache from "@emotion/cache";
@@ -17,15 +17,26 @@ const cache = createCache({
 });
 
 export const storybookWrapper = (Story: React.ElementType, context: StoryContext) => {
+    const { measurementScale, temperatureScale, theme } = context.globals;
+    const key = `${measurementScale}-${temperatureScale}-${theme}`;
+
+    useEffect(() => {
+        if ([SystemTheme.DARK, SystemTheme.LIGHT].includes(theme)) {
+            document.body.classList.remove(SystemTheme.DARK, SystemTheme.LIGHT);
+            document.body.classList.add(theme);
+        }
+    }, [theme]);
+
     return (
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
             <WidgetStoreProvider>
                 <SettingsStoreProvider
                     temporary
+                    key={key}
                     settings={{
-                        measurementScale: context.globals.measurementScale,
-                        temperatureScale: context.globals.temperatureScale,
-                        theme: context.globals.theme,
+                        measurementScale: measurementScale,
+                        temperatureScale: temperatureScale,
+                        theme: theme,
                         locale: SystemLocale.ENGLISH,
                     }}
                 >

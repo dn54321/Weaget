@@ -1,16 +1,15 @@
 import "three-dots/dist/three-dots.css";
 import "@styles/globals.css";
-import { MeasurementScale } from "@project/src/types/measurement.types";
 import type { Preview } from "@storybook/react";
-import { SystemTheme } from "@project/src/types/system.types";
-import { TemperatureScale } from "@project/src/types/weather.types";
+import { SystemTheme } from "@src/types/system.types";
+import { MeasurementScale } from "@src/types/measurement.types";
+import { TemperatureScale } from "@src/types/weather.types";
 
 const preview: Preview = {
     globalTypes: {
         theme: {
             description: "System Theme",
             defaultValue: SystemTheme.SYSTEM,
-
             toolbar: {
                 title: "Theme",
                 icon: "circlehollow",
