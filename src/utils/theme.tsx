@@ -1,7 +1,6 @@
 "use client";
 import type {} from "@mui/material/themeCssVarsAugmentation";
 import NextLink from "next/link";
-import { Roboto } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
 import { forwardRef } from "react";
 import { red } from "@mui/material/colors";
@@ -9,12 +8,6 @@ import { red } from "@mui/material/colors";
 const LinkBehaviour = forwardRef(function LinkBehaviour(props, ref) {
     // @ts-expect-error - https://github.com/mui/material-ui/issues/27593
     return <NextLink ref={ref} {...props} />;
-});
-
-const roboto = Roboto({
-    display: "swap",
-    subsets: ["latin"],
-    weight: ["300", "400", "500", "700"],
 });
 
 // Create a theme instance.
@@ -97,6 +90,6 @@ export const theme = createTheme({
         },
     },
     typography: {
-        fontFamily: roboto.style.fontFamily,
+        fontFamily: "var(--font-roboto), sans-serif",
     },
 });

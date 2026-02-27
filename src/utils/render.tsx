@@ -60,3 +60,12 @@ export function withRender(element: React.ReactElement, options?: RenderOptions)
         </AppRouterCacheProvider>,
     );
 }
+
+export async function withAsyncRender<T>(
+    Component: (props: T) => Promise<React.ReactElement>,
+    props: T,
+    options?: RenderOptions,
+) {
+    const ResolvedComponent = await Component(props);
+    return withRender(ResolvedComponent, options);
+}

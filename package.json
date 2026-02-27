@@ -51,6 +51,7 @@
     "recharts": "2.14.1",
     "three-dots": "^0.3.2",
     "throttle-debounce": "^5.0.2",
+    "typescript-cookie": "^1.0.6",
     "use-sync-external-store": "^1.6.0",
     "zod": "^3.25.76",
     "zustand": "^5.0.10"
@@ -89,5 +90,11 @@
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^4.0.18",
     "vitest-preview": "^0.0.3"
-  }
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions"
+  ]
 }

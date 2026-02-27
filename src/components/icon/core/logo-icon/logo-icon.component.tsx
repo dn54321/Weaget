@@ -1,14 +1,8 @@
 import { LogoIconStyle, Text } from "./logo-icon.styles";
 import Box from "@mui/material/Box";
 import type { BoxProps } from "@mui/system";
-import { Quicksand } from "next/font/google";
 import Stack from "@mui/material/Stack";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
-const quickSandFont = Quicksand({
-    display: "swap",
-    subsets: ["latin"],
-    weight: "600",
-});
 
 export interface LogoProps {
     hideShadow?: boolean;
@@ -32,7 +26,7 @@ export default function Logo(props: BoxProps & LogoProps) {
                     }),
                 }}
                 />
-                <Text className={quickSandFont.className}>
+                <Text sx={{ fontFamily: "var(--font-quicksand)" }}>
                     <Box component="span" color="lightblue">{t("webapp.logoFirst")}</Box>
                     <Box component="span" color="lightpink">{t("webapp.logoSecond")}</Box>
                 </Text>

@@ -87,6 +87,18 @@ vi.mock("recharts", async (importOriginal) => {
     };
 });
 
+const mockCookies = {
+    get: vi.fn(),
+    set: vi.fn(),
+    delete: vi.fn(),
+    has: vi.fn(),
+    getAll: vi.fn(),
+};
+
+vi.mock("next/dist/server/request/cookies", () => ({
+    cookies: () => mockCookies,
+}));
+
 const originalConsoleError = console.error;
 const jsDomCssError = "Error: Could not parse CSS stylesheet";
 console.error = (...params: Array<string>) => {
