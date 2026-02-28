@@ -11,7 +11,7 @@ import MyLocationIcon from "@mui/icons-material/MyLocation";
 import React, { useEffect, useRef, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { queryLocation } from "@src/hooks/use-get-location";
-import { useGetCurrentLocation } from "@src/hooks/use-get-current-location";
+import { useGetCurrentLocationByIp } from "@src/hooks/use-get-current-location";
 import { useGetLocationAutoComplete } from "@src/hooks/use-get-location-auto-complete";
 import { useRouter } from "next/navigation";
 import { useSystemTranslation } from "@src/hooks/use-system-translation";
@@ -46,7 +46,7 @@ function MagnifyIconButton() {
 
 function MyLocationButtonIcon(props: { setErrorMessage: (errMessage: SearchErrorI18NKey) => void }) {
     const router = useRouter();
-    const currentLocationQuery = useGetCurrentLocation();
+    const currentLocationQuery = useGetCurrentLocationByIp();
     const { t } = useSystemTranslation();
 
     function redirectCurrentWeatherLocation() {
@@ -121,7 +121,7 @@ export function SuggestionBox(props: { children: React.ReactNode; listprops: Rea
 };
 
 export default function SearchBar(props: BoxProps) {
-    const currentLocationQuery = useGetCurrentLocation();
+    const currentLocationQuery = useGetCurrentLocationByIp();
     const { t } = useSystemTranslation();
     const coords = `${currentLocationQuery.data?.lat},${currentLocationQuery.data?.lng}`;
     const [searchQuery, setQuery] = useGetLocationAutoComplete("", coords);

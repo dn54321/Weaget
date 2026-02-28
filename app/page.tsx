@@ -13,7 +13,7 @@ import { ThemeToggleButton } from "@components/ui/theme-toggle-button";
 import { styled } from "@mui/material/styles";
 import { useAlert } from "@src/hooks/use-alert";
 import { useEffect } from "react";
-import { useGetCurrentLocation } from "@src/hooks/use-get-current-location";
+import { useGetCurrentLocationByIp } from "@src/hooks/use-get-current-location";
 import { useGetNearbyLocation } from "@src/hooks/use-get-nearby-location";
 import { useGetWeather } from "@src/hooks/use-get-weather";
 import { useSystemSettings } from "@src/hooks/use-system-settings";
@@ -57,13 +57,15 @@ const SearchContainer = styled("main")(({ theme }) => ({
     backgroundColor: theme.vars.palette.primary.main,
     display: "flex",
     flexDirection: "column",
-    height: "400px",
-    justifyContent: "center",
+    padding: "clamp(50px, 10vw, 100px) 0px clamp(30px,5vw, 60px)",
 }));
 
 const PageDivider = styled(Box)(({ theme }) => ({
     backgroundColor: theme.vars.palette.divider,
-    height: "50px",
+    height: "10px",
+    [theme.breakpoints.up("md")]: {
+        height: "50px",
+    },
 }));
 
 const ResponsiveLogo = styled(Logo)(({ theme }) => ({
@@ -93,7 +95,7 @@ const PaddedSearchBar = () => (
 export default function Home() {
     const { locale } = useSystemSettings();
     const { t } = useSystemTranslation();
-    const currentLocationQuery = useGetCurrentLocation();
+    const currentLocationQuery = useGetCurrentLocationByIp();
     const weatherQuery = useGetWeather(currentLocationQuery.data?.city);
     const locationQuery = useGetNearbyLocation(currentLocationQuery.data?.lat, currentLocationQuery.data?.lng, locale);
     const location = `${currentLocationQuery.data?.city}, ${currentLocationQuery.data?.region}, ${currentLocationQuery.data?.country}`;
@@ -156,7 +158,10 @@ export default function Home() {
                                         />
                                         <LocationGridWidget
                                             locationData={locationQuery.data}
-                                            sx={{ maxWidth: "550px" }}
+                                            sx={{
+                                                maxWidth: "550px",
+                                                display: { xs: "none", sm: "block" },
+                                            }}
                                         />
                                     </>
                                 )

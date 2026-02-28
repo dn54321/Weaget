@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, test } from "vitest";
-import { queryCurrentLocation, useGetCurrentLocation } from "@src/hooks/use-get-current-location";
+import { queryCurrentLocationByIp, useGetCurrentLocationByIp } from "@src/hooks/use-get-current-location";
 import { renderHook, waitFor } from "@testing-library/react";
 import { HttpResponse } from "msw";
 import { createCurrentLocationMockData } from "@features/weaget/__mocks__/current-location.mock";
@@ -21,7 +21,7 @@ describe("Hooks - use-get-current-location", async () => {
             const parsedMockData = weagetCurrentLocationSchema.parse(currentLocationMockData);
             server.use(mockCurrentLocationHandle(HttpResponse.json(currentLocationMockData)));
             const { result } = renderHook(
-                () => useGetCurrentLocation(),
+                () => useGetCurrentLocationByIp(),
                 { wrapper: testWrapper },
             );
 
@@ -37,7 +37,7 @@ describe("Hooks - use-get-current-location", async () => {
                 HttpResponse.json(currentLocationMockData, { status: statusCode }),
             ));
             const { result } = renderHook(
-                () => useGetCurrentLocation(),
+                () => useGetCurrentLocationByIp(),
                 { wrapper: testWrapper },
             );
 
@@ -50,7 +50,7 @@ describe("Hooks - use-get-current-location", async () => {
             const currentLocationMockData = createCurrentLocationMockData();
             const parsedMockData = weagetCurrentLocationSchema.parse(currentLocationMockData);
             server.use(mockCurrentLocationHandle(HttpResponse.json(currentLocationMockData)));
-            const currentLocation = await queryCurrentLocation();
+            const currentLocation = await queryCurrentLocationByIp();
             expect(currentLocation).toEqual(parsedMockData);
         });
 
@@ -61,7 +61,7 @@ describe("Hooks - use-get-current-location", async () => {
             server.use(mockCurrentLocationHandle(
                 HttpResponse.json(currentLocationMockData, { status: statusCode }),
             ));
-            await expect(queryCurrentLocation(testQueryClient)).rejects.toThrow();
+            await expect(queryCurrentLocationByIp(testQueryClient)).rejects.toThrow();
         });
     });
 });

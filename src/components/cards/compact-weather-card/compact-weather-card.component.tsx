@@ -5,19 +5,6 @@ import type { SxProps } from "@mui/material";
 import { TempUnit } from "@components/ui/temperature-unit";
 import { WeatherIcon } from "@components/ui/weather-icon";
 import { useSystemSettings } from "@src/hooks/use-system-settings";
-/*
-    Compact weather card list is a grid containing simplified weather cards.
-    Each weather card is a square box that contains:
-        Name
-        Icon
-        Rain Information (If Applicable)
-        Temp High, Temp Low
-
-    This component is to provide basic weather information and a button that
-    leads to more weather details on the user's request.
-*/
-
-// Styles
 
 export interface CompactWeatherCardProps {
     date: Date;
@@ -30,7 +17,16 @@ export interface CompactWeatherCardProps {
     locale?: string;
 }
 
-// Compact weather card
+/**
+ * Compact weather card is a smaller version of the weather card.
+ * It displays the weekday, weather icon, and the max and min temperatures.
+ *
+ * @param props - The properties of the compact weather card,
+ * including date, timezone, weather code, rainfall percentage,
+ * max and min temperatures, and optional styling and locale.
+ *
+ * @returns A React element representing the compact weather card.
+ */
 export default function CompactWeatherCard(props: CompactWeatherCardProps) {
     const { locale } = useSystemSettings();
     const date = DateTime

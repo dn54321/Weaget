@@ -1,5 +1,6 @@
 import { CompactWeatherCard, type CompactWeatherCardProps } from ".";
 import type { Meta, StoryObj } from "@storybook/react";
+import type { SkeletonProps } from "@mui/material";
 import { faker } from "@faker-js/faker";
 import { openWeatherTypes } from "@features/open-weather-map-one-call/oneCall.utils";
 import { storybookWrapper } from "@utils/wrappers";
@@ -85,7 +86,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Component: Story = {
-    render: (args) => {
+    render: (args: StoryType) => {
         const { weatherType, ...props } = args;
         const weatherDetails = openWeatherTypes.find(
             openWeatherType => openWeatherType.main === weatherType,
@@ -97,5 +98,11 @@ export const Component: Story = {
                 weatherCode={weatherDetails.id}
             />
         );
+    },
+};
+
+export const Skeleton: StoryObj<SkeletonProps> = {
+    args: {
+        skeleton: true,
     },
 };

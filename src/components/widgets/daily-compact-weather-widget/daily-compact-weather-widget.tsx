@@ -20,21 +20,23 @@ export default function DailyCompactWeatherWidget(props: DailyCompactWeatherWidg
     const { t } = useSystemTranslation();
     if (!props.weatherData) return null;
 
-    const weatherDetails = props.weatherData?.daily?.map(dailyWeather => ({
-        date: dailyWeather.dt,
-        maxTemperature: dailyWeather.temp.max,
-        minTemperature: dailyWeather.temp.min,
-        rainfallPercentage: dailyWeather.pop,
-        timezone: `${props.weatherData?.timezone}`,
-        weatherCode: dailyWeather.weather[0].id,
-        weatherDescription: dailyWeather.weather[0].description,
-    }));
+    const weatherDetails = props.weatherData
+        ? props.weatherData.daily?.map(dailyWeather => ({
+            date: dailyWeather.dt,
+            maxTemperature: dailyWeather.temp.max,
+            minTemperature: dailyWeather.temp.min,
+            rainfallPercentage: dailyWeather.pop,
+            timezone: `${props.weatherData?.timezone}`,
+            weatherCode: dailyWeather.weather[0].id,
+            weatherDescription: dailyWeather.weather[0].description,
+        }))
+        : Array(8).fill({ skeleton: true });
 
     const cards = weatherDetails?.map(dailyWeather => (
         <Grid
             component="li"
-            key={dailyWeather.date.getTime()}
-            size={{ sm: 3, xs: 4 }}
+            key={dailyWeather.date?.getTime() ?? Math.random()}
+            size={{ sm: 3, xs: 3 }}
         >
             <CompactWeatherCard {...dailyWeather} />
         </Grid>

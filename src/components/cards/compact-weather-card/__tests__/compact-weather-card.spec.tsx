@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import CompactWeatherCard from "@components/cards/compact-weather-card/compact-weather-card";
-import type { CompactWeatherCardProps } from "@components/cards/compact-weather-card/compact-weather-card";
+import CompactWeatherCard from "@components/cards/compact-weather-card/compact-weather-card.component";
+import type { CompactWeatherCardProps } from "@components/cards/compact-weather-card/compact-weather-card.component";
 import { DateTime } from "luxon";
 import React from "react";
 import { TemperatureScale } from "@src/types/weather.types";

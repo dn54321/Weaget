@@ -31,9 +31,9 @@ function Entry(props: EntryProps) {
                         color: "text.primary",
                         display: "grid",
                         fontSize: "1em",
-                        height: "60px",
                         placeItems: "center",
                         textAlign: "center",
+                        height: "60px",
                     }}
                     onClick={() => redirect(props)}
                 >
@@ -55,9 +55,9 @@ export interface LocationGridWidgetProps {
 export default function LocationGridWidget(props: LocationGridWidgetProps) {
     const { t } = useSystemTranslation();
     if (!props.locationData) return null;
-    const locations = props.locationData.map(loc => (
-        <Entry key={loc.name + loc.state + loc.country} {...loc} />
-    ));
+    const locations = props.locationData
+        .map(loc => (<Entry key={loc.name + loc.state + loc.country} {...loc} />))
+        .slice(0, 8);
     return (
         <Widget
             title={props.title ?? t("component.widget.locationGrid.title")}

@@ -5,7 +5,7 @@ import { queryClient } from "@utils/query-client";
 import { useQuery } from "@tanstack/react-query";
 import weagetCurrentLocationSchema from "@features/weaget/current-location/current-location.schema";
 
-async function fetchCurrentLocation() {
+async function fetchCurrentLocationByIp() {
     const url = `/api/location`;
     return await fetch(url)
         .then(async (data) => {
@@ -16,17 +16,17 @@ async function fetchCurrentLocation() {
         .then(data => weagetCurrentLocationSchema.parse(data));
 }
 
-export function useGetCurrentLocation() {
+export function useGetCurrentLocationByIp() {
     return useQuery<IpinfoGeocode>({
-        queryFn: () => fetchCurrentLocation(),
+        queryFn: () => fetchCurrentLocationByIp(),
         queryKey: ["current-location"],
         retry: 0,
     });
 }
 
-export async function queryCurrentLocation(client: QueryClient = queryClient) {
+export async function queryCurrentLocationByIp(client: QueryClient = queryClient) {
     return await client.ensureQueryData<IpinfoGeocode>({
-        queryFn: () => fetchCurrentLocation(),
+        queryFn: () => fetchCurrentLocationByIp(),
         queryKey: [],
     });
 }

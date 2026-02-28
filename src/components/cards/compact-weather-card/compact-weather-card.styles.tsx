@@ -14,10 +14,13 @@ export const Low = styled(Box)(({ theme }) => ({
 
 export const PaperContainer = styled(Paper)(({ theme }) => ({
     alignItems: "center",
-    aspectRatio: "1",
     color: theme.vars.palette.text.primary,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     position: "relative",
+    padding: "5px 0px",
+    [theme.breakpoints.up("sm")]: {
+        aspectRatio: "1",
+    },
 }));
