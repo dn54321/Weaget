@@ -18,7 +18,13 @@ export default function Logo(props: BoxProps & LogoProps) {
             title={`${t("webapp.name")} ${t("general.logo")}`}
             aria-label={`${t("webapp.name")} ${t("general.logo")}`}
         >
-            <Stack direction="row" alignItems="center">
+            <Stack
+                direction="row"
+                alignItems="center"
+                sx={{
+                    caretColor: "transparent",
+                }}
+            >
                 <LogoIconStyle sx={{
                     ...(hideShadow && {
                         "&:after": { filter: "none" },
